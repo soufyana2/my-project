@@ -1,0 +1,1 @@
+[2025-12-18 04:37:55] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"ea30207","url":"/myproject/wordpress/register.php?logged_out=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8088/myproject/wordpress/filter.php?categurie=filter"}

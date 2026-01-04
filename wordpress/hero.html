@@ -1,0 +1,311 @@
+<style>
+    /* ===== Base ===== */
+    :root {
+        /* 
+           قم بتغيير الرقم أدناه (80px) ليتناسب مع ارتفاع الهيدر (القائمة العلوية) في موقعك 
+           إذا كانت القائمة تغطي جزءاً كبيراً، زد الرقم (مثلاً 100px أو 120px)
+        */
+        --header-height-offset: 60px; 
+    }
+
+    .announcement-bar {
+        background-color: black;
+        color: white;
+        padding: 0.5rem 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 20;
+        font-size: 0.875rem;
+        font-family: 'Cairo', sans-serif;
+        
+        /* === التعديل الأساسي هنا === */
+        /* هذا السطر يدفع الشريط للأسفل حتى لا يختفي خلف الهيدر */
+        margin-top: var(--header-height-offset); 
+    }
+
+    .announcement-scroll-wrapper {
+        display: flex;
+        width: fit-content;
+        animation: scroll-rtl 40s linear infinite;
+        will-change: transform;
+    }
+
+    .announcement-scroll-item {
+        white-space: nowrap;
+        padding-left: 2rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    @keyframes scroll-rtl {
+        0% { transform: translateX(0); }
+        100% { transform: translateX(-50%); }
+    }
+
+    /* قسم Hero */
+    #hero-section {
+        background-image: linear-gradient(to left, 
+                                          rgba(255, 255, 255, 0.7), 
+                                          rgba(200, 169, 90, 0.7));
+        min-height: 60vh;
+        max-height: 80vh;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+        color: white;
+        font-family: 'Cairo', sans-serif;
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* إصلاح التابلت */
+    @media (min-width: 768px) and (max-width: 1023px) {
+          :root {
+            /* زدنا الرقم من 60 إلى 90 (أو 100) ليتناسب مع التابلت */
+            --header-height-offset: 90px; 
+        }
+        #hero-section {
+            width: 100vw;
+            max-width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            transform: translateX(0);
+            overflow: hidden !important;
+        }
+        body, html {
+            overflow-x: hidden !important;
+        }
+    }
+
+    /* الشاشات الكبيرة */
+    @media (min-width: 1024px) {
+         :root {
+            /* هنا نضع الـ 100px التي عملت معك بشكل ممتاز على الكمبيوتر */
+            --header-height-offset: 100px; 
+        }
+.announcement-bar {
+        background-color: black;
+        color: white;
+        padding: 0.5rem 0;
+        overflow: hidden;
+        position: relative;
+        z-index: 20;
+        font-size: 0.875rem;
+        font-family: 'Cairo', sans-serif;
+        /* هذا السطر يأخذ القيمة المتغيرة حسب حجم الشاشة */
+        margin-top: var(--header-height-offset); 
+    }
+        #hero-section {
+            min-height: 90vh;
+            max-height: 100vh;
+            width: 100%;
+            max-width: 100%;
+        }
+
+    }
+
+    .hero-background-video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        z-index: 0;
+        transform: translateX(-50%) translateY(-50%);
+        object-fit: cover;
+    }
+
+    .hero-video-overlay {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1;
+    }
+
+    .hero-content-wrapper {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 100%;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .hero-inner-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 100%;
+    }
+
+    @media (min-width: 1024px) {
+        .hero-inner-container {
+            flex-direction: row;
+            justify-content: center;
+        }
+        .hero-left-side {
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+        }
+        .hero-right-side {
+            display: none;
+        }
+    }
+
+    .hero-left-side {
+        padding: 1rem;
+        color: white;
+    }
+
+    .hero-title {
+        font-family: 'Playfair Display', serif;
+        font-size: 1.75rem;
+        line-height: 2rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+    }
+    @media (min-width: 640px) {
+        .hero-title {
+            font-size: 2rem;
+            line-height: 2.25rem;
+        }
+    }
+    @media (min-width: 768px) {
+        .hero-title {
+            font-size: 2.5rem;
+            line-height: 1.1;
+        }
+    }
+    @media (min-width: 1024px) {
+        .hero-title {
+            font-size: 3rem;
+        }
+    }
+
+    .hero-paragraph {
+        font-family: 'Cairo', sans-serif;
+        font-size: 1rem;
+        line-height: 1.6rem;
+        margin-bottom: 2rem;
+    }
+    @media (min-width: 640px) {
+        .hero-paragraph {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+    }
+    @media (min-width: 768px) {
+        .hero-paragraph {
+            font-size: 1.25rem;
+        }
+    }
+
+    .hero-button {
+        background-color: transparent;
+        border: 2px solid white;
+        color: white;
+        padding: 0.75rem 2rem;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+        z-index: 1;
+        font-family: 'Playfair Display', serif;
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+        .hero-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: -1;
+        }
+        .hero-button:hover::before {
+            transform: translateX(0%);
+        }
+        .hero-button:hover {
+            color: #C8A95A;
+            border-color: #C8A95A;
+        }
+    }
+</style>
+
+<!-- شريط الإعلانات -->
+<!-- تمت إضافة margin-top عبر CSS لإظهاره أسفل الهيدر -->
+<div class="announcement-bar">
+    <noscript>
+        <div style="white-space: nowrap; padding-left: 2rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>شحن مجاني لجميع الطلبات!</span> <span role="img" aria-label="fire">🔥</span>
+            <span>اقتَنِ منتجاتك المفضلة، وتمتع بخصم مذهل بنسبة 70٪ على المنتج السابع!!</span> <span role="img" aria-label="discount">🏷️</span>
+        </div>
+    </noscript>
+    <div class="announcement-scroll-wrapper" id="scrollWrapper">
+        <div class="announcement-scroll-item">
+            <span>شحن مجاني لجميع الطلبات!</span> <span role="img" aria-label="fire">🔥</span>
+            <span>اقتَنِ منتجاتك المفضلة، وتمتع بخصم مذهل بنسبة 70٪ على المنتج السابع!!</span> <span role="img" aria-label="discount">🏷️</span>
+        </div>
+    </div>
+</div>
+
+<!-- قسم Hero -->
+<section id="hero-section">
+    <video autoplay muted loop playsinline class="hero-background-video">
+        <source src="https://soufyana2.github.io/my-videos/hero2.mp4" type="video/mp4">
+        متصفحك لا يدعم وسم الفيديو.
+    </video>
+
+    <div class="hero-video-overlay"></div>
+
+    <div class="hero-content-wrapper">
+        <div class="hero-inner-container">
+            <div class="hero-left-side">
+                <h1 class="hero-title">استكشفوا عالم الإكسسوارات  والفخامة</h1>
+                <p class="hero-paragraph">
+                    غوصوا في عالم من الروائح الآسرة والإكسسوارات الراقية التي تعكس شخصيتكم المتميزة وتمنحكم لمسة من الأناقة في كل تفصيل.
+                </p>
+                <a href="filter.php?categurie=filter"><button class="hero-button">تسوق الآن</button></a>
+            </div>
+            <div class="hero-right-side"></div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const wrapper = document.getElementById('scrollWrapper');
+        if(wrapper) {
+            const item = wrapper.querySelector('.announcement-scroll-item');
+            if(item) {
+                const content = item.innerHTML;
+                // تكرار العنصر لضمان استمرار الحركة بسلاسة
+                for (let i = 0; i < 2; i++) { 
+                    const clone = document.createElement('div');
+                    clone.classList.add('announcement-scroll-item');
+                    clone.innerHTML = content;
+                    wrapper.appendChild(clone);
+                }
+            }
+        }
+    });
+</script>

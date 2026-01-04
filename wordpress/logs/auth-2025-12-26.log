@@ -1,0 +1,1 @@
+[2025-12-26 23:34:13] auth.INFO: User logged-out successfully. {"user_id":133,"username":"soufyan","ip":"127.0.0.1"} {"uid":"b5cf349","url":"/myproject/wordpress/logout.php","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8088/myproject/wordpress/product.php?id=128"}

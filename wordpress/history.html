@@ -1,0 +1,387 @@
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#f5f5f4',      // لون خلفية البطاقات (stone-200)
+                        'secondary': '#E0E0E0',    // لون خلفية جزء المعلومات (رمادي فاتح)
+                        'accent': '#3A3A3A',        // لون فحمي داكن وراقي للسعر
+                        'text-dark': '#212121',     // أسود ناعم للنصوص الرئيسية
+                        'text-light': '#5A5A5A',    // رمادي معتدل للنصوص الثانوية
+                        'card-one-bg': '#F5F5F5',
+                        'card-two-bg': '#E0E0E0',
+                        'card-three-bg': '#D3D3D3',
+                        'section-bg-light-grey': '#F9F9F9',
+                        'body-bg': '#f0f2f5', // أضف لون خلفية الجسم ليكون معرفًا مركزيًا
+                    },
+                    fontFamily: {
+                        professional: ['Lato', 'sans-serif'], // Added a professional font for categories
+                        arabic: ['Cairo', 'sans-serif'], // Added Cairo for Arabic text
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+  
+        /* هذا لجعل Playfair Display هو الخط الافتراضي لمعظم العناوين */
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* فئة مخصصة لعنوان "our Products" ليكون مختلفًا */
+        .our-products-title-font {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .attractive-text {
+            font-family: 'Cairo', sans-serif; /* استخدام Cairo للنص الجذاب */
+            line-height: 1.6;
+            font-size: 1.15rem; /* حجم الخط الأصلي */
+            font-weight: bold; /* Make paragraph text bold */
+            color: black; /* Make paragraph text black */
+        }
+        .btn-discover {
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            background-color: transparent;
+            border: 2px solid black;
+            color: black;
+            padding: 0.8rem 1.8rem;
+            font-weight: bold;
+            overflow: hidden;
+            transition: color 0.4s ease-in-out, border-color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+            z-index: 1;
+            display: inline-block;
+        }
+        /* Hover effect for desktop only */
+        @media (min-width: 768px) {
+            .btn-discover::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background-color: transparent; /* Dark blue background on hover */
+                z-index: -1;
+                transform: scale(0); /* Start hidden, scale from center */
+                transform-origin: center;
+                transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1); /* Smooth scaling */
+            }
+            .btn-discover::after { /* Smoke/spread effect */
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                width: 0;
+                height: 0;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3); /* Light color for smoke/spread effect */
+                opacity: 0;
+                transform: translate(-50%, -50%) scale(0);
+                transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+                z-index: -1;
+            }
+            .btn-discover:hover {
+                color: #C8A95A;
+                border-color: #C8A95A; /* Keep dark blue border on hover */
+                background-color: transparent; /* Background handled by ::before */
+            }
+            .btn-discover:hover::before {
+                transform: scale(1); /* Reveal dark blue background */
+            }
+            .btn-discover:hover::after {
+                transform: translate(-50%, -50%) scale(2.5); /* Spread out */
+                opacity: 1;
+            }
+        }
+
+
+        /* Skeleton loader styles */
+        .skeleton {
+            background: linear-gradient(-90deg, #e2e8f0 0%, #cbd5e1 50%, #e2e8f0 100%);
+            animation: pulse 3s infinite ease-in-out; /* Increased animation duration */
+            width: 100%;
+            height: 100%;
+            position: absolute; /* Position absolutely to stack with image */
+            top: 0;
+            left: 0;
+            z-index: 2; /* Ensure skeleton is above the image initially */
+        }
+        /* To make skeleton hide with a fade-out */
+        .skeleton.hidden {
+            opacity: 0;
+            transition: opacity 0.5s ease-out;
+            pointer-events: none; /* Make it unclickable when hidden */
+        }
+        @keyframes pulse {
+            0% {
+                background-color: #e2e8f0;
+            }
+            50% {
+                background-color: #cbd5e1;
+            }
+            100% {
+                background-color: #e2e8f0;
+            }
+        }
+        
+        /* The actual image */
+      /* ابحث عن هذا الجزء في الـ CSS وقم بتحديثه */
+.lazy-image {
+    opacity: 1 !important; /* كما اتفقنا لإظهارها فوراً */
+    z-index: 10 !important;
+    transition: opacity 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+    
+    /* التغيير هنا: بدلاً من cover نستخدم contain */
+    object-fit: contain; 
+    
+    border-radius: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+        .lazy-image.loaded {
+            opacity: 1; /* Fully visible when loaded */
+        }
+
+
+     /* ابحث عن هذا الجزء في الـ CSS وقم بتحديثه */
+.history-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    /* إضافة لون خلفية شفاف أو متناسب مع الصورة حتى لا تظهر الفراغات بشكل سيء */
+    background-color: transparent; 
+}
+
+        /* Fade-in effect for section contents */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Add delays for children */
+        .fade-in-section.is-visible .section-title { transition-delay: 0.1s; }
+        .fade-in-section.is-visible .history-image-wrapper { transition-delay: 0.3s; }
+        .fade-in-section.is-visible .history-content { transition-delay: 0.5s; }
+
+
+        /* Mobile styles */
+        @media (max-width: 767px) {
+            .history-section {
+                padding: 1rem 0.5rem;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .history-image-wrapper {
+                display: block;
+                width: calc(100% - 2rem); /* Full width with slight padding */
+                height: 200px; /* Smaller fixed height for mobile image */
+                margin: 1rem auto; /* Center image with some vertical margin */
+            }
+            /* عنوان our Products */
+            .our-products-title-font {
+                font-size: 1.8rem; /* حجم مناسب للموبايل */
+                margin-bottom: 0.5rem;
+                margin-top: 1rem;
+            }
+            .attractive-text {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                max-width: 95%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .btn-discover {
+                padding: 0.6rem 1.4rem;
+                font-size: 0.9rem;
+                margin: 1rem auto;
+            }
+            .content-wrapper { /* Ensure content is stacked on mobile */
+                flex-direction: column;
+            }
+            .history-content {
+                width: 100%; /* Full width for text content on mobile */
+            }
+        }
+
+        /* Desktop styles */
+        @media (min-width: 768px) {
+            .history-section {
+                padding-top: 3rem;
+                padding-bottom: 3rem;
+                flex-direction: column;
+                align-items: center;
+            }
+            /* عنوان our Products */
+            .our-products-title-font {
+                font-size: 2.5rem; /* حجم مناسب لسطح المكتب */
+                margin-bottom: 1.8rem;
+            }
+            .content-wrapper {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 2rem;
+                max-width: 1000px;
+                width: 100%;
+            }
+            .history-image-wrapper {
+                flex-shrink: 0;
+                width: 350px; /* Fixed width for image */
+                height: 500px; /* Increased height for better تناسق */
+                max-width: none;
+                margin-bottom: 0;
+                display: block;
+            }
+            .history-content {
+                width: 400px; /* Reduced width for text content */
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: flex-start;
+                text-align: right; /* Changed to right for RTL */
+            }
+            .attractive-text {
+                font-size: 1.1rem;
+                max-width: 100%;
+                margin-bottom: 1.5rem;
+            }
+            /* Medium screen adjustments for desktop */
+            @media (max-width: 1023px) and (min-width: 768px) {
+                 .history-image-wrapper {
+                    width: 300px;
+                    height: 450px;
+                }
+                .history-content {
+                    width: 380px;
+                }
+            }
+        }
+    </style>
+    
+
+
+<section class="history-section py-16 bg-transparent flex flex-col items-center fade-in-section">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+        <!-- Section Title -->
+       <div class="flex justify-center items-center mb-10 mx-auto">
+            <h2 class="text-4xl font-bold text-text-dark our-products-title-font">من نحن</h2>
+        </div>
+        <!-- Combined Content Wrapper for Image and Text (Responsive) -->
+        <div class="content-wrapper w-full flex flex-col md:flex-row items-center justify-center">
+            <!-- Image Wrapper (Responsive) -->
+            <div class="history-image-wrapper relative z-10 md:order-1"> <!-- Image remains first for RTL layout on desktop -->
+                <div class="skeleton"></div> <!-- Skeleton for image -->
+                <img data-src="https://res.cloudinary.com/dmakzfsc4/image/upload/v1765688538/Jewellry_Social_Proof_Ad_1_m3sh1z.jpg" alt="منتجاتنا" class="lazy-image" loading="lazy">
+            </div>
+
+            <!-- Text Content and Button -->
+            <div class="history-content text-gray-700 relative z-10 mt-8 md:mt-0 md:mr-8 md:order-2"> <!-- Text remains second for RTL layout on desktop -->
+ <p class="attractive-text mb-8">
+    <span style="color:#C8A95A;">إكسسوارات وعُطُور عبدالوهاب</span>
+    <br><br>
+    نحن متجر متخصص في العُطُور   والإكسسوارات الراقية للسيدات والرجال، نقدم تجربة تسوق تجمع بين الجودة، الذوق الرفيع، والخدمة الموثوقة.
+    <br><br>
+    نحرص على اختيار أفضل المنتجات والتصاميم لتناسب جميع الأذواق والمناسبات، مع توفير تجربة شراء سهلة وآمنة وخدمة عملاء مميزة.
+    <br><br>
+    ثقتكم هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل.
+</p>
+
+
+                <div class="text-right w-full flex justify-center md:justify-center"> <!-- Button justified right -->
+                   <a href="contact-us.html">
+                    <button class="btn-discover text-lg">
+                        اتصل الآن
+                    </button></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Function to load actual images
+            function loadImage(img) {
+                const placeholder = img.previousElementSibling; // Get the skeleton placeholder
+                const originalSrc = img.dataset.src;
+
+                // Create a new Image object to pre-load
+                const actualImage = new Image();
+                actualImage.src = originalSrc;
+                
+                actualImage.onload = () => {
+                    // Introduce a slight delay to allow skeleton animation to be perceived
+                    setTimeout(() => {
+                        img.src = originalSrc; // Set the actual image source
+                        img.classList.add('loaded'); // Add loaded class for fade-in effect via CSS transition
+                        
+                        // Hide the skeleton after image is fully loaded and visible
+                        if (placeholder) {
+                            // Introduce a delay to hide skeleton after image fade-in starts
+                            setTimeout(() => {
+                                placeholder.classList.add('hidden'); // This will trigger CSS opacity transition
+                            }, 500); // 500ms delay to allow image fade-in to be noticeable
+                        }
+                        img.removeAttribute('data-src'); // Remove data-src to prevent re-loading
+                    }, 1000); // 1000ms (1 second) delay before image starts fading in
+                };
+
+                actualImage.onerror = () => {
+                    console.error("Failed to load image:", originalSrc);
+                    // Hide skeleton even if image fails to load
+                    for (const section of document.querySelectorAll('.fade-in-section')) {
+                        fadeInObserver.observe(section);
+                    }
+                    if (placeholder) {
+                        placeholder.classList.add('hidden');
+                    }
+                    img.classList.add('loaded'); // Attempt to show the image container, even if broken
+                    img.removeAttribute('data-src');
+                };
+            }
+
+            // Lazy load images if IntersectionObserver is supported
+            if ('IntersectionObserver' in window) {
+                let observer = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            loadImage(entry.target);
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1 }); // Trigger when 10% of the image is visible
+
+                document.querySelectorAll('img[data-src]').forEach(function(img) {
+                    observer.observe(img);
+                });
+            } else {
+                // Fallback for browsers that do not support IntersectionObserver
+                document.querySelectorAll('img[data-src]').forEach(function(img) {
+                    loadImage(img);
+                });
+            }
+
+            // Intersection Observer for fade-in sections
+            const fadeInObserver = new IntersectionObserver(function(entries, observer) {
+                entries.forEach(function(entry) {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 }); // Trigger when 20% of the section is visible
+
+            document.querySelectorAll('.fade-in-section').forEach(function(section) {
+                fadeInObserver.observe(section);
+            });
+        });
+    </script>

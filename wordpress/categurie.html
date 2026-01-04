@@ -1,0 +1,133 @@
+<script>
+    tailwind.config = {
+        theme: {
+            extend: {
+                fontFamily: {
+                    cairo: ['Cairo', 'sans-serif'],
+                },
+                screens: {
+                    'md': '768px',
+                }
+            }
+        }
+    }
+</script>
+
+<style>
+    /* Animation classes */
+    .cat-card-hidden {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        will-change: opacity, transform;
+    }
+    
+    .cat-card-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* Hide scrollbar */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+</style>
+
+<section id="categories-section" class="font-cairo flex flex-col items-center py-6 bg-transparent !mb-0 md:!mb-0">
+
+    <!-- Title -->
+    <h2 class="text-3xl md:text-4xl font-bold text-text-dark mb-6 md:mb-8 cat-card-hidden text-center">
+        التصنيفات
+    </h2>
+
+    <!-- 
+       Container: 
+       1. justify-center: Centers items on mobile and desktop
+       2. flex-wrap (optional on mobile if you want rows, but keep overflow-x-auto if you want scroll safe)
+          Since you have 4 items, they likely fit centered. 
+    -->
+    <div class="flex justify-center flex-wrap md:flex-wrap gap-4 md:gap-10 w-full max-w-5xl px-4 pb-4">
+
+        <!-- Card 1: Perfumes -->
+        <a href="filter.php?category=عطور" 
+           class="cat-card-hidden group flex flex-col items-center cursor-pointer">
+            <!-- 
+                Outer Circle:
+                1. border-gray-300: Professional grey border
+                2. p-1: Adds padding so image is smaller inside
+                3. w-16 h-16: Small size
+            -->
+            <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
+                <!-- 
+                   Inner Image:
+                   1. rounded-full: Ensures image shape follows container
+                   2. Zoom effect on hover
+                -->
+                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out md:group-hover:scale-110"
+                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/download_1_tw7vsv.jpg');">
+                </div>
+            </div>
+            <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">عطور</span>
+        </a>
+
+        <!-- Card 2: Accessories -->
+        <a href="filter.php?category=الإكسسوارات" 
+           class="cat-card-hidden group flex flex-col items-center cursor-pointer">
+            <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
+                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out md:group-hover:scale-110"
+                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/couple_rings_accessories_jewelry_siyu1e.jpg');">
+                </div>
+            </div>
+            <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">إكسسوارات</span>
+        </a>
+
+        <!-- Card 3: Watches -->
+        <a href="filter.php?category=ساعات" 
+           class="cat-card-hidden group flex flex-col items-center cursor-pointer">
+            <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
+                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out md:group-hover:scale-110"
+                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/Rolex_rvn3as.jpg');">
+                </div>
+            </div>
+            <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">ساعات</span>
+        </a>
+
+        <!-- Card 4: Packs -->
+        <a href="filter.php?category=باقات وعروض" 
+           class="cat-card-hidden group flex flex-col items-center cursor-pointer">
+            <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
+                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out md:group-hover:scale-110"
+                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/Black_Friday_Poster_with_Shiny_Balloons_and_Confetti_on_White_Background_vector_illustration_smeagorl_8584397___Stockfresh_y0v5up.jpg');">
+                </div>
+            </div>
+            <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">عُروض</span>
+        </a>
+
+    </div>
+</section>
+
+<!-- Script for Animation on Scroll -->
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const hiddenElements = entry.target.querySelectorAll('.cat-card-hidden');
+                    hiddenElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('cat-card-visible');
+                        }, index * 150);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        const section = document.getElementById('categories-section');
+        if (section) observer.observe(section);
+    });
+</script>

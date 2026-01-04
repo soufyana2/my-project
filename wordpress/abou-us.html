@@ -1,0 +1,145 @@
+<!-- Start of Slider Section -->
+<style>
+  /* Local styles for the slider section */
+  .slider-section-container {
+    width: 100%;
+    /* 1. إلغاء الحشو الداخلي والمسافات الزائدة */
+    padding: 0; 
+    margin-top: 10px;
+    margin-bottom: 0;
+    
+    /* 2. تحديد ارتفاع ثابت وصغير للقسم بالكامل لمنع أي فراغ سفلي */
+    height: 60px; 
+    
+    background-color: transparent; /* يمكنك تغيير اللون أو جعله transparent */
+    display: flex;
+    align-items: center; /* توسيط المحتوى عمودياً */
+    overflow: hidden;
+  }
+
+  .slider-section-container .swiper {
+    width: 100%;
+    height: 100%; /* يأخذ نفس ارتفاع الحاوية */
+    padding: 0;
+  }
+
+  .slider-section-container .swiper-wrapper {
+    align-items: center; /* ضمان توسيط الشرائح */
+  }
+
+  .slider-section-container .swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: auto; /* مهم جداً لعدم تمدد الشريحة */
+  }
+
+  /* 3. التحكم في حجم الصور لتبقى صغيرة (Small SVG logos) */
+  .slider-section-container .swiper-slide img {
+    /* عرض تلقائي للحفاظ على الأبعاد */
+    width: auto; 
+    
+    /* ارتفاع أقصى صغير جداً لتبقى اللوجوهات ناعمة */
+    max-height: 35px; 
+    
+    object-fit: contain;
+    /* إلغاء أي هوامش للصورة */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* تصغير إضافي للموبايل لضمان عدم وجود فراغات */
+  @media (max-width: 768px) {
+    .slider-section-container {
+      height: 50px; /* ارتفاع أقل للموبايل */
+    }
+    .slider-section-container .swiper-slide img {
+      max-height: 25px; /* لوجوهات أصغر للموبايل */
+    }
+  }
+</style>
+
+<!-- Swiper CSS (External link should ideally be in the <head> of the main document) -->
+<!-- If your main page's head doesn't have it, you can place this here, but it's less optimal. -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+<div class="slider-section-container" >
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+
+      
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo2_tvjddo.png" alt="hugo boss logo" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo3_gj2ztk.png" alt="Tiffany & Co. logo" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo4_jayicd.png" alt="Gucci logo" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo5_lkwwil.png" alt="Chanel logo" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo6_ysrebx.png" alt="Balenciaga logo" />
+      </div>
+      <div class="swiper-slide">
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo7_payslx.png" alt="Michael kors logo" />
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Swiper JS (External link should ideally be at the end of the <body> of the main document) -->
+<!-- If your main page's body doesn't have it, you can place this here, but it's less optimal. -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+<script>
+  // Initialize Swiper for this section
+  const swiper = new Swiper(".mySwiper", {
+    loop: true,
+    freeMode: false,
+    speed: 4000,
+    autoplay: {
+      delay: 0,
+      disableOnInteraction: false,
+      reverseDirection: false, // Ensures left-to-right scroll
+    },
+    allowTouchMove: false,
+    grabCursor: false,
+    mousewheel: false,
+    keyboard: false,
+    direction: 'horizontal', // Explicitly set direction to horizontal
+
+    // Added breakpoints for responsive slidesPerView and spaceBetween
+    breakpoints: {
+      // when window width is >= 320px (very small phones)
+      320: {
+        slidesPerView: 2,
+        spaceBetween: 15 // Smaller space for very small screens
+      },
+      // when window width is >= 480px (larger phones)
+      480: {
+        slidesPerView: 3,
+        spaceBetween: 25 // Slightly more space
+      },
+      // when window width is >= 768px (tablets)
+      768: {
+        slidesPerView: 4,
+        spaceBetween: 30 // Moderate space
+      },
+      // when window width is >= 1024px (laptops/desktops)
+      1024: {
+        slidesPerView: 5,
+        spaceBetween: 40 // Original space
+      }
+    }
+  });
+
+  // Removed the custom updateSlides function as Swiper's breakpoints handle it now.
+  // If you had more complex logic, you might keep a simplified version.
+  // window.addEventListener("resize", updateSlides); // Also remove the event listener
+</script>
+<!-- End of Slider Section -->

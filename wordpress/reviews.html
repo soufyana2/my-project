@@ -1,0 +1,300 @@
+<style>
+    /* --- Colors --- */
+    .text-gold { color: #C8A95A; }
+    .bg-gold { background-color: #C8A95A; }
+    .text-text-dark { color: #1a1a1a; }
+
+    /* 
+       --- NEW BUTTON STYLE (Matched from your file) --- 
+       Class: .btn-discover
+    */
+    .btn-discover {
+        position: relative;
+        font-family: 'Playfair Display', serif; /* Or your preferred font */
+        background-color: transparent;
+        border: 2px solid black;
+        color: black;
+        padding: 0.8rem 1.8rem; /* Exact size matched */
+        font-weight: bold;
+        overflow: hidden;
+        transition: color 0.4s ease-in-out, border-color 0.4s ease-in-out, background-color 0.4s ease-in-out;
+        z-index: 1;
+        display: inline-block;
+        text-align: center;
+        cursor: pointer;
+    }
+
+    /* Hover effect (Desktop only) */
+    @media (min-width: 768px) {
+        .btn-discover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: transparent; 
+            z-index: -1;
+            transform: scale(0);
+            transform-origin: center;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+        .btn-discover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0);
+            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            z-index: -1;
+        }
+        .btn-discover:hover {
+            color: #C8A95A;
+            border-color: #C8A95A;
+            background-color: transparent;
+        }
+        .btn-discover:hover::before {
+            transform: scale(1);
+        }
+        .btn-discover:hover::after {
+            transform: translate(-50%, -50%) scale(2.5);
+            opacity: 1;
+        }
+    }
+
+    /* 
+       --- SKELETON STYLE (Matched from your file) --- 
+    */
+    .skeleton-loader {
+        background: linear-gradient(-90deg, #e2e8f0 0%, #cbd5e1 50%, #e2e8f0 100%);
+        animation: pulse 3s infinite ease-in-out;
+        position: absolute;
+        inset: 0;
+        z-index: 50;
+        transition: opacity 0.5s ease;
+    }
+    @keyframes pulse {
+        0% { background-color: #e2e8f0; }
+        50% { background-color: #cbd5e1; }
+        100% { background-color: #e2e8f0; }
+    }
+
+    /* --- Navigation Buttons (Switch Icons) --- */
+    .nav-btn {
+        background-color: #000000;
+        color: #ffffff;
+        border: none;
+        width: 45px;
+        height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        opacity: 0; 
+        pointer-events: auto; 
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    .loaded .nav-btn { opacity: 1; }
+    .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; background-color: #333333; }
+    @media (hover: hover) {
+        .nav-btn:hover:not(:disabled) {
+            background-color: #333333; 
+            transform: translateY(-2px);
+        }
+    }
+
+    /* --- Animations --- */
+    .reveal-section { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+    .reveal-section.active { opacity: 1; transform: translateY(0); }
+</style>
+
+<section class="w-full py-16 px-4 reveal-section flex flex-col items-center" id="main-section">
+    
+    <!-- Title -->
+    <h2 class="text-4xl font-bold text-text-dark mb-12 text-center">
+        آراء عملائنا
+    </h2>
+
+    <!-- 
+        Main Container 
+        Matched layout logic: flex-col-reverse on mobile, row on tablet+
+    -->
+    <div class="flex flex-col-reverse md:flex-row items-center justify-center gap-8 md:gap-8 lg:gap-12 w-full">
+        
+        <!-- 
+            RIGHT SIDE (Text) 
+            Matched Dimensions: 
+            - Tablet: w-[380px]
+            - Desktop: w-[400px]
+        -->
+        <div class="flex flex-col items-center text-center space-y-5 w-full md:w-[380px] lg:w-[400px]">
+            <div class="w-full flex flex-col items-center">
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">أرقامنا تتحدث عن تميزنا</h2>
+                <div class="h-1 w-20 bg-gold mx-auto rounded-full"></div>
+                
+                <p class="text-gray-500 text-sm mt-4 max-w-md leading-relaxed font-bold">
+                    نحن وجهتكم الأولى للأناقة، نقدم أرقى العطور والإكسسوارات التي تضفي لمسة من الفخامة على إطلالتكم اليومية، مع ضمان الجودة والأصالة في كل قطعة.
+                </p>
+            </div>
+
+            <div class="flex flex-row justify-center gap-4 md:gap-8 w-full">
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center flex-row-reverse text-gray-800">
+                        <span class="text-lg font-bold text-gold ml-1">+</span>
+                        <span class="text-3xl font-extrabold">600</span>
+                    </div>
+                    <p class="text-gray-500 font-semibold text-xs mt-1">عميل سعيد</p>
+                </div>
+                <div class="flex flex-col items-center border-r border-l border-gray-200 px-6 md:px-8">
+                    <div class="flex items-center flex-row-reverse text-gray-800">
+                        <span class="text-lg font-bold text-gold ml-1">+</span>
+                        <span class="text-3xl font-extrabold">100</span>
+                    </div>
+                    <p class="text-gray-500 font-semibold text-xs mt-1">منتجات متنوعة </p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="flex items-center flex-row-reverse text-gray-800">
+                        <span class="text-lg font-bold text-gold ml-1">+</span>
+                        <span id="exp-number" class="text-3xl font-extrabold" data-target="7">0</span>
+                    </div>
+                    <p class="text-gray-500 font-semibold text-xs mt-1">سنوات تميز</p>
+                </div>
+            </div>
+
+            <!-- BUTTON: Using the matched .btn-discover class -->
+            <div class="w-full flex justify-center pt-2">
+                <a href="about-us.html" class="btn-discover"> تعرف علينا الآن</a>
+            </div>
+        </div>
+
+        <!-- 
+            LEFT SIDE (Card)
+            Matched Dimensions:
+            - Mobile: w-[300px] h-[320px] (Professional small size)
+            - Tablet: w-[300px] h-[450px] (Matched from your file)
+            - Desktop: w-[350px] h-[500px] (Matched from your file)
+        -->
+        <div class="relative w-[300px] h-[320px] md:w-[300px] md:h-[450px] lg:w-[350px] lg:h-[500px] bg-white rounded-none overflow-hidden flex-shrink-0" id="card-container">
+            
+            <div id="skeleton" class="skeleton-loader"></div>
+
+            <div id="image-slider" class="absolute inset-0 z-10 hidden">
+                <img src="https://rewimg-eu.kwcdn.com/review-image/2066d90972/76f164cc-89ff-4587-8994-87f0c8a4920d.jpeg?imageMogr2/auto-orient%7CimageView2/2/w/816/q/70/format/avif" 
+                     alt="صورة ريفيو عميل - طقم إكسسوارات" loading="lazy"
+                     class="slider-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-100">
+                
+                <img src="https://rewimg-eu.kwcdn.com/review-image/20237f7514/69861fcb-c2d3-4023-ac3c-1c064893c661.jpeg?imageMogr2/auto-orient%7CimageView2/2/w/816/q/70/format/avif0" 
+                     alt="صورة ريفيو عميل - تغليف العطر" loading="lazy"
+                     class="slider-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+                
+                <img src="https://rewimg-eu.kwcdn.com/review-image/20add70156/2c7c9596-a8f1-4a5c-845e-ec303dc40cbf.jpeg?imageMogr2/auto-orient%7CimageView2/2/w/816/q/70/format/avif" 
+                     alt="صورة ريفيو عميل - ساعة يد أنيقة" loading="lazy"
+                     class="slider-img absolute inset-0 w-full h-full object-cover transition-opacity duration-500 opacity-0">
+            </div>
+
+            <!-- BUTTONS: Icons Swapped -->
+            <div class="absolute bottom-0 right-0 z-20 flex items-center justify-end p-4 gap-2 pointer-events-none">
+                <!-- Swapped Icon: RIGHT Arrow -->
+                <button id="btn-prev" class="nav-btn" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </button>
+                
+                <!-- Swapped Icon: LEFT Arrow -->
+                <button id="btn-next" class="nav-btn" disabled>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+                    </svg>
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- JS Logic (Unchanged) -->
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const section = document.getElementById('main-section');
+        const skeleton = document.getElementById('skeleton');
+        const cardContainer = document.getElementById('card-container');
+        const imageContainer = document.getElementById('image-slider');
+        const btnNext = document.getElementById('btn-next');
+        const btnPrev = document.getElementById('btn-prev');
+        
+        const images = document.querySelectorAll('.slider-img');
+        let currentIndex = 0;
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    startCounter();
+                    setTimeout(() => {
+                        skeleton.style.opacity = '0';
+                        setTimeout(() => { 
+                            skeleton.style.display = 'none';
+                            imageContainer.classList.remove('hidden'); 
+                            cardContainer.classList.add('loaded');
+                            updateSlider();
+                        }, 500);
+                    }, 2000); 
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        if(section) observer.observe(section);
+
+        function updateSlider() {
+            images.forEach((img, index) => {
+                if (index === currentIndex) {
+                    img.classList.remove('opacity-0');
+                    img.classList.add('opacity-100');
+                } else {
+                    img.classList.remove('opacity-100');
+                    img.classList.add('opacity-0');
+                }
+            });
+            btnPrev.disabled = (currentIndex === 0);
+            btnNext.disabled = (currentIndex === images.length - 1);
+        }
+
+        btnNext.onclick = () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateSlider();
+            }
+        };
+        btnPrev.onclick = () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateSlider();
+            }
+        };
+
+        function startCounter() {
+            const counter = document.getElementById('exp-number');
+            const target = +counter.getAttribute('data-target');
+            let count = 0;
+            const update = () => {
+                if (count < target) {
+                    count++;
+                    counter.innerText = count;
+                    setTimeout(update, 100);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+            update();
+        }
+    });
+</script>

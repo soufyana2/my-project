@@ -1,0 +1,39 @@
+{
+    "name": "johnpbloch/wordpress-project",
+    "description": "WordPress project with Composer",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://wpackagist.org"
+        }
+    ],
+    "require": {
+        "php": ">=7.4",
+        "johnpbloch/wordpress": "^6.0",
+        "automattic/woocommerce": "*",
+        "wpackagist-plugin/woocommerce": "*",
+        "vlucas/phpdotenv": "^5.0",
+        "monolog/monolog": "^3.9",
+        "phpmailer/phpmailer": "*",
+        "geoip2/geoip2": "^3.3"
+    },
+    "extra": {
+        "wordpress-install-dir": "wordpress",
+        "installer-paths": {
+            "wordpress/wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+            "wordpress/wp-content/mu-plugins/{$name}/": ["type:wordpress-muplugin"],
+            "wordpress/wp-content/themes/{$name}/": ["type:wordpress-theme"]
+        }
+    },
+    "scripts": {
+        "post-root-package-install": [
+            "php -r \"copy('.env.example', '.env');\""
+        ]
+    },
+    "config": {
+        "allow-plugins": {
+            "composer/installers": true,
+            "johnpbloch/wordpress-core-installer": true
+        }
+    }
+}

@@ -1,0 +1,177 @@
+<style>
+    /* --- Fonts --- */
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+    /* --- Colors --- */
+    .text-gold { color: #C8A95A; }
+    .border-gold { border-color: #C8A95A; }
+    .bg-black-footer { background-color: #000000; } /* Pure Black */
+    
+    /* --- Typography --- */
+    .font-cairo { font-family: 'Cairo', sans-serif; }
+    .font-playfair { font-family: 'Playfair Display', serif; }
+
+    /* --- Footer Link Styling --- */
+    .footer-link {
+        color: #d1d5db; /* Light Gray */
+        transition: all 0.3s ease;
+        display: inline-block;
+        text-decoration: none;
+    }
+    .footer-link:hover {
+        color: #C8A95A; /* Gold on Hover */
+    }
+
+    /* Desktop Hover Animation only */
+    @media (min-width: 768px) {
+        .footer-link:hover {
+            transform: translateX(-5px); /* Slide left on desktop RTL */
+        }
+    }
+
+    /* --- Subscribe Input --- */
+    .footer-input {
+        background-color: transparent;
+        border: none;
+        border-bottom: 1px solid #4b5563;
+        color: white;
+        width: 100%;
+        max-width: 300px; /* Limit width on mobile */
+        padding: 10px 0;
+        outline: none;
+        transition: border-color 0.3s ease;
+        text-align: center; /* Center text on mobile */
+    }
+    .footer-input:focus {
+        border-color: #C8A95A;
+    }
+    .footer-input::placeholder {
+        color: #6b7280;
+    }
+    
+    /* Input Alignment on Desktop */
+    @media (min-width: 768px) {
+        .footer-input { text-align: right; }
+    }
+
+    /* --- Subscribe Button --- */
+    .btn-footer {
+        font-family: 'Cairo', sans-serif;
+        background-color: transparent;
+        border: 1px solid #ffffff;
+        color: #ffffff;
+        padding: 0.6rem 1.5rem;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    
+    @media (hover: hover) {
+        .btn-footer:hover {
+            border-color: #C8A95A;
+            color: #C8A95A;
+            background-color: rgba(200, 169, 90, 0.1);
+        }
+    }
+
+    /* --- Studio Link --- */
+    .studio-link {
+        color: #C8A95A;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    }
+    .studio-link:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<!-- Footer Section -->
+<footer class="bg-black-footer text-white pt-16 pb-8 border-t border-gray-900" dir="rtl">
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Grid Layout -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12 text-center md:text-right">
+            
+            <!-- Column 1: Brand Info -->
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <!-- 
+                   UPDATED LOGO SIZE: 
+                   - text-xl (Small on Mobile)
+                   - md:text-2xl (Small/Professional on Desktop)
+                   - Fits perfectly in column/flex
+                -->
+               <!-- UPDATED LOGO: Fixed small size on Desktop (md:text-xl) -->
+ <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">
+نبذة عنا                </h4>
+                
+                <p class="font-cairo text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
+                    نقدم أرقى الساعات  والإكسسوارات الفاخرة التي تعكس ذوقك الرفيع. الجودة والأصالة هما عنواننا الدائم.
+                </p>
+            </div>
+
+            <!-- Column 2: Quick Links -->
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">
+                    روابط سريعة
+                </h4>
+                <ul class="space-y-2 font-cairo text-sm w-full">
+                    <li><a href="index.php?categurie=index" class="footer-link">الرئيسية</a></li>
+                    <li><a href="filter.php?categurie=filter" class="footer-link">منتجاتنا</a></li>
+                    <li><a href="about-us.html" class="footer-link">من نحن</a></li>
+                    <li><a href="contact-us.html" class="footer-link">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 3: Legal & Help -->
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">
+                    المساعدة والسياسات
+                </h4>
+                <ul class="space-y-2 font-cairo text-sm w-full">
+                    <li><a href="privacy-policy.html" class="footer-link">سياسة الخصوصية</a></li>
+                    <li><a href="dmca.html" class="footer-link">حقوق الملكية (DMCA)</a></li>
+                    <li><a href="contact-us.html" class="footer-link">الأسئلة الشائعة</a></li>
+                </ul>
+            </div>
+
+            <!-- Column 4: Newsletter -->
+            <div class="flex flex-col items-center md:items-start space-y-4">
+                <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">
+                    النشرة البريدية
+                </h4>
+                <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">
+                    اشترك الآن للحصول على آخر العروض والأخبار الحصرية.
+                </p>
+                <form class="flex flex-col items-center md:items-start w-full">
+                    <input type="email" placeholder="أدخل بريدك الإلكتروني" class="footer-input font-cairo mb-2">
+                    <button type="button" class="btn-footer">
+                        اشترك
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <!-- Separator Line -->
+        <div class="border-t border-gray-900 w-full mb-8"></div>
+
+        <!-- Bottom Bar -->
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
+            
+            <!-- Copyright (Arabic) -->
+ <p class="font-cairo text-gray-500 text-sm order-2 md:order-1">
+  إكسسوارات عبدالوهاب © 2025 جميع الحقوق محفوظة
+</p>
+
+            <!-- Developer Credit (English - LTR) -->
+            <div class="font-playfair text-white text-sm order-1 md:order-2" dir="ltr">
+                Designed by : <a href="www.primestore.ma" class="studio-link">Primestore.ma </a>
+            </div>
+
+        </div>
+    </div>
+</footer>

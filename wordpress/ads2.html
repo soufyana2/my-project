@@ -1,0 +1,95 @@
+<style>
+    .ad-section {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out;
+        cursor: pointer;
+         background-size: cover !important;
+    background-position: left !important;
+    }
+
+    .skeleton {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: loading 1.5s infinite forwards;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+    }
+
+    @keyframes loading {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .ad-section img {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    .ad-section.show-content {
+        opacity: 1;
+    }
+</style>
+
+<!-- 
+    UPDATES:
+    1. Removed 'lg:w-[95%]' and 'max-w-7xl' -> Now 100% width on big screens.
+    2. Changed 'lg:h-48' to 'lg:h-80' -> Taller on big screens.
+    3. Kept 'max-w-sm' and 'h-32' -> Mobile remains unchanged.
+-->
+<section id="adStoreSection" 
+   class="ad-section bg-gray-100 w-full max-w-sm sm:max-w-full lg:h-80 h-32
+          mx-auto flex items-center justify-center text-white overflow-hidden relative shadow-sm border border-gray-200 mt-8 mb-8">
+   
+   <!-- Skeleton Element -->
+   <div id="skeletonLoader" class="skeleton"></div>
+
+   <img data-src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1766465668/Jewelry_Brand_-_Artboard_2_gfie26.jpg" 
+        alt="Store Ad Banner" 
+        class="object-cover w-full h-full absolute inset-0">
+   <noscript>
+       <div style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1766465668/Jewelry_Brand_-_Artboard_2_gfie26.jpg');" 
+            class="object-cover w-full h-full absolute inset-0"></div>
+   </noscript>
+   <h2 class="text-xl lg:text-3xl font-bold text-center p-4 relative z-10"></h2>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const adSection = document.getElementById('adStoreSection');
+        const skeletonLoader = document.getElementById('skeletonLoader');
+        const adImage = adSection.querySelector('img');
+        const delayTime = 3000; 
+
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!adImage.src) { 
+                        observer.unobserve(adSection); 
+                        
+                        setTimeout(() => {
+                            adImage.src = adImage.dataset.src;
+                        }, delayTime);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 100px 0px' 
+        });
+
+        imageObserver.observe(adSection);
+
+        adImage.onload = () => {
+            adSection.style.backgroundImage = 'url(' + adImage.src + ')';
+            skeletonLoader.style.opacity = '0';
+            skeletonLoader.style.transition = 'opacity 0.5s ease-in-out';
+            adSection.classList.add('show-content');
+        };
+    });
+</script>

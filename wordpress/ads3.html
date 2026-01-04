@@ -1,0 +1,98 @@
+<style>
+    /* Renamed .custom-banner-wrapper to .unique-banner-wrapper */
+    .unique-banner-wrapper {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out;
+        cursor: pointer;
+    }
+
+    /* Renamed .shim-loader to .unique-shim-loader */
+    .unique-shim-loader {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: uniqueShimmer 1.5s infinite forwards; /* Renamed animation */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+    }
+
+    /* Renamed @keyframes customShimmer to @keyframes uniqueShimmer */
+    @keyframes uniqueShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .unique-banner-wrapper img {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    /* Renamed .reveal-banner to .unique-reveal-banner */
+    .unique-banner-wrapper.unique-reveal-banner {
+        opacity: 1;
+    }
+</style>
+
+<!-- 
+    UPDATES:
+    1. ID changed to 'uniqueBannerArea'
+    2. Class changed to 'unique-banner-wrapper'
+-->
+<section id="uniqueBannerArea" 
+   class="unique-banner-wrapper bg-gray-100 w-full max-w-sm sm:max-w-full lg:h-80 h-32
+          mx-auto flex items-center justify-center text-white overflow-hidden relative shadow-sm border border-gray-200 mt-8 mb-8">
+   
+   <!-- Skeleton Element (ID changed to 'uniqueShim', Class changed to 'unique-shim-loader') -->
+   <div id="uniqueShim" class="unique-shim-loader"></div>
+
+   <img data-src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765151066/Jewelry_Etsy_Banner_Deisgn_1_ognhzj.jpg" 
+        alt="Store Ad Banner" 
+        class="object-cover w-full h-full absolute inset-0">
+   <noscript>
+       <div style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765151066/Jewelry_Etsy_Banner_Deisgn_1_ognhzj.jpg');" 
+            class="object-cover w-full h-full absolute inset-0"></div>
+   </noscript>
+   <h2 class="text-xl lg:text-3xl font-bold text-center p-4 relative z-10"></h2>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Variable names and ID selectors changed to prevent conflicts
+        const uniqBannerContainer = document.getElementById('uniqueBannerArea');
+        const uniqLoaderShim = document.getElementById('uniqueShim');
+        const uniqBannerImg = uniqBannerContainer.querySelector('img');
+        const uniqLoadDelayMs = 3000; 
+
+        const uniqBannerObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!uniqBannerImg.src) { 
+                        observer.unobserve(uniqBannerContainer); 
+                        
+                        setTimeout(() => {
+                            uniqBannerImg.src = uniqBannerImg.dataset.src;
+                        }, uniqLoadDelayMs);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 100px 0px' 
+        });
+
+        uniqBannerObserver.observe(uniqBannerContainer);
+
+        uniqBannerImg.onload = () => {
+            uniqBannerContainer.style.backgroundImage = 'url(' + uniqBannerImg.src + ')';
+            uniqLoaderShim.style.opacity = '0';
+            uniqLoaderShim.style.transition = 'opacity 0.5s ease-in-out';
+            // Added the new class name 'unique-reveal-banner'
+            uniqBannerContainer.classList.add('unique-reveal-banner');
+        };
+    });
+</script>

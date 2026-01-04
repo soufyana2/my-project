@@ -1,0 +1,99 @@
+<style>
+    /* Renamed .ad-section to .custom-banner-wrapper */
+    .custom-banner-wrapper {
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out, background-image 0.5s ease-in-out;
+        cursor: pointer;
+    }
+
+    /* Renamed .skeleton to .shim-loader */
+    .shim-loader {
+        background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+        background-size: 200% 100%;
+        animation: customShimmer 1.5s infinite forwards; /* Renamed animation */
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 20;
+    }
+
+    /* Renamed @keyframes loading to @keyframes customShimmer */
+    @keyframes customShimmer {
+        0% { background-position: -200% 0; }
+        100% { background-position: 200% 0; }
+    }
+
+    .custom-banner-wrapper img {
+        opacity: 0;
+        transition: opacity 0.5s ease-in-out;
+    }
+
+    /* Renamed .show-content to .reveal-banner */
+    .custom-banner-wrapper.reveal-banner {
+        opacity: 1;
+    }
+</style>
+
+<!-- 
+    UPDATES:
+    1. Removed 'lg:w-[95%]' and 'max-w-7xl' (Now 100% width on big screens).
+    2. Changed 'lg:h-48' to 'lg:h-80' (Taller on big screens).
+    3. Kept 'h-32' and 'max-w-sm' (No change to small screens).
+-->
+<section id="secondaryBannerArea" 
+   class="custom-banner-wrapper bg-gray-100 w-full max-w-sm sm:max-w-full lg:h-80 h-32
+          mx-auto flex items-center justify-center text-white overflow-hidden relative shadow-sm border border-gray-200 mt-8 mb-8">
+   
+   <!-- Skeleton Element (ID changed) -->
+   <div id="secondaryShim" class="shim-loader"></div>
+
+   <img data-src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1766467634/Jewellery_Store_1_wqegkl.jpg" 
+        alt="Store Ad Banner" 
+        class="object-cover w-full h-full absolute inset-0">
+   <noscript>
+       <div style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1766467634/Jewellery_Store_1_wqegkl.jpg');" 
+            class="object-cover w-full h-full absolute inset-0"></div>
+   </noscript>
+   <h2 class="text-xl lg:text-3xl font-bold text-center p-4 relative z-10"></h2>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Variable names and ID selectors changed to match new HTML
+        const bannerContainer = document.getElementById('secondaryBannerArea');
+        const loaderShim = document.getElementById('secondaryShim');
+        const bannerImg = bannerContainer.querySelector('img');
+        const loadDelayMs = 3000; 
+
+        const bannerObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    if (!bannerImg.src) { 
+                        observer.unobserve(bannerContainer); 
+                        
+                        setTimeout(() => {
+                            bannerImg.src = bannerImg.dataset.src;
+                        }, loadDelayMs);
+                    }
+                }
+            });
+        }, {
+            rootMargin: '0px 0px 100px 0px' 
+        });
+
+        bannerObserver.observe(bannerContainer);
+
+        bannerImg.onload = () => {
+            bannerContainer.style.backgroundImage = 'url(' + bannerImg.src + ')';
+            loaderShim.style.opacity = '0';
+            loaderShim.style.transition = 'opacity 0.5s ease-in-out';
+            // Added the new class name 'reveal-banner'
+            bannerContainer.classList.add('reveal-banner');
+        };
+    });
+</script>
