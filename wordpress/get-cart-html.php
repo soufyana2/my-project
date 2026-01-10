@@ -36,7 +36,7 @@ if ($user_id) {
 
 if (empty($items)) {
     echo '<div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
-            <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" class="w-24 h-24 mx-auto opacity-80 mb-4 animate-pulse">
+            <img src="https://cdn-icons-png.flaticon.com/512/11329/11329060.png" class="w-24 h-24 mx-auto opacity-80 mb-4 animate-pulse empty-cart-icon-fix">
             <h3 style="font-family: \'Cairo\'; font-weight: 700;" class="text-xl mb-2">سلة التسوق فارغة</h3>
           </div>';
     exit;

@@ -1,2 +1,4 @@
 [2026-01-10 18:56:49] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"abedba2","url":"/register.php?timeout=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/"}
 [2026-01-10 20:32:40] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"b4a5064","url":"/register.php?timeout=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/"}
+[2026-01-10 23:38:24] security.INFO: CSRF token regenerated. {"reason":"expired","ip":"127.0.0.1"} {"uid":"93beaab","url":"/filter.php","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/index.php"}
+[2026-01-10 23:48:34] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"61dab86","url":"/register.php?timeout=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/index.php"}

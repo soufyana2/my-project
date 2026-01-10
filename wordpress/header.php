@@ -564,6 +564,10 @@ border-bottom: 1px solid #f1f5f9 !important;
     transform: translateZ(0); /* تفعيل تسريع الهاردوير لمنع الرعشة */
     backface-visibility: hidden;
     background-color: transparent !important; /* ضمان عدم وجود خلفية بيضاء */
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
 }
         /* ===== SCROLLBAR STYLES ===== */
         .cart-products::-webkit-scrollbar,
