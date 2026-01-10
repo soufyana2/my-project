@@ -283,7 +283,7 @@ ob_end_flush();
             transition: none; 
         }
 
-        @media (hover: hover) {
+        @media (hover: hover) and (min-width: 1024px) {
             .btn-primary-pro:not(:disabled):hover { background-color: #000; }
             .btn-primary-pro:not(:disabled):hover::after { animation: shine 0.75s ease-in-out forwards; }
         }
@@ -348,7 +348,7 @@ ob_end_flush();
                 </button>
 
                 <div class="mt-6 pt-6 border-t border-gray-100 text-center">
-                    <a href="register.php" class="font-bold hover:underline transition-all" style="color:#C8A95A; font-size: 0.95rem;">العودة إلى تسجيل الدخول</a>
+                    <a href="register.php" class="font-bold lg:hover:underline transition-all" style="color:#C8A95A; font-size: 0.95rem;">العودة إلى تسجيل الدخول</a>
                 </div>
             </form>
         </div>

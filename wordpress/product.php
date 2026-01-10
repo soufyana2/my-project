@@ -534,7 +534,9 @@ function get_color_hex($color_name) {
             min-width: 0;
         }
         .breadcrumb-links a { color: #ddd; text-decoration: none; transition: color 0.2s; white-space: nowrap; }
-        .breadcrumb-links a:hover { color: #fff; }
+        @media (min-width: 1024px) {
+            .breadcrumb-links a:hover { color: #fff; }
+        }
         .breadcrumb-separator {  font-size: 1rem; color: #aaa; flex-shrink: 0; }
         
         .breadcrumb-current { 
@@ -590,7 +592,7 @@ function get_color_hex($color_name) {
 
         /* Wishlist Inline */
         .wishlist-inline-btn { background: transparent; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; padding: 0; color: #ccc; transition: color 0.2s; }
-        @media (hover: hover) { .wishlist-inline-btn:hover { color: #ff4b4b; } }
+        @media (hover: hover) and (min-width: 1024px) { .wishlist-inline-btn:hover { color: #ff4b4b; } }
       /* أضف هذا لضمان ظهور الأيقونة الفارغة */
 /* الحالة الافتراضية (عندما لا يكون المنتج في المفضلة) */
 .wishlist-inline-btn .icon-empty { 
@@ -613,7 +615,7 @@ function get_color_hex($color_name) {
         .gallery-row { display: flex; gap: 10px; flex-wrap: nowrap; overflow-x: auto; scroll-behavior: smooth; justify-content: flex-start; padding-bottom: 5px; scrollbar-width: none; width: 100%; margin: 0 30px; }
         .gallery-row::-webkit-scrollbar { display: none; }
         .gallery-item { flex: 0 0 auto; width: 82px; height: 82px; background-size: cover; background-position: center; cursor: pointer; border: 2px solid #eee; transition: 0.2s; background-color: #fff; position: relative; overflow: hidden; }
-        @media (hover: hover) { .gallery-item:hover { border-color: #000; } }
+        @media (hover: hover) and (min-width: 1024px) { .gallery-item:hover { border-color: #000; } }
         .gallery-item.active { border-color: #C8A95A; border-width: 2px; }
         .scroll-arrow { position: absolute; background: none; border: none; color: #000; cursor: pointer; z-index: 5; padding: 0; height: 100%; display: flex; align-items: center; justify-content: center; width: 25px; transition: opacity 0.3s, transform 0.2s; }
         .scroll-arrow.disabled { opacity: 0.2; pointer-events: none; filter: grayscale(100%); }
@@ -664,12 +666,16 @@ function get_color_hex($color_name) {
         .color-wrapper { flex: 1; max-width: 250px; min-width: 150px; position: relative; }
 
         .custom-select-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; height: 45px; background: #fff; border: 1px solid #ddd; padding: 0 15px; cursor: pointer; font-family: 'Tajawal', sans-serif; font-weight: 700; font-size: 0.95rem; transition: all 0.2s; user-select: none; }
-        .custom-select-trigger:hover { border-color: #999; }
+        @media (min-width: 1024px) {
+            .custom-select-trigger:hover { border-color: #999; }
+        }
         .custom-select-options { position: absolute; top: 100%; left: 0; right: 0; background: #fff; border: 1px solid #ddd; border-top: none; z-index: 50; display: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1); max-height: 250px; overflow-y: auto; }
         .custom-select-options.open { display: block; }
         .custom-option { display: flex; align-items: center; gap: 10px; padding: 12px 15px; cursor: pointer; transition: background 0.2s; border-bottom: 1px solid #f5f5f5; }
         .custom-option:last-child { border-bottom: none; }
-        .custom-option:hover { background-color: #f9f9f9; }
+        @media (min-width: 1024px) {
+            .custom-option:hover { background-color: #f9f9f9; }
+        }
         .custom-option.selected { background-color: #FCFAF7; color: #C8A95A; }
         .dropdown-color-dot { width: 20px; height: 20px; border-radius: 50% !important; border: 1px solid rgba(0,0,0,0.1); flex-shrink: 0; }
 
@@ -686,7 +692,7 @@ function get_color_hex($color_name) {
         .btn-whatsapp { background-color: #25D366; color: white; width: 100%; padding: 15px; border: none; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px; flex: 1; }
         
         @media (min-width: 1024px) { .actions-row { max-width: 480px; } }
-        @media (hover: hover) { .btn-cart:hover { color: #C8A95A; } .btn-whatsapp:hover { background-color: #128C7E; } }
+        @media (hover: hover) and (min-width: 1024px) { .btn-cart:hover { color: #C8A95A; } .btn-whatsapp:hover { background-color: #128C7E; } }
 
       /* Trust Badges Row (has background) */
 .trust-badges-row {

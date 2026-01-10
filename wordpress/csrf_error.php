@@ -40,17 +40,17 @@ http_response_code(403);
 
             <div class="space-y-3">
                 <a href="register.php" 
-                   class="block w-full bg-blue-600 hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 transform hover:scale-105 shadow-md">
+                   class="block w-full bg-blue-600 lg:hover:bg-blue-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 transform lg:hover:scale-105 shadow-md">
                     ↶ العودة إلى صفحة التسجيل
                 </a>
                 
                 <a href="javascript:location.reload()" 
-                   class="block w-full bg-gray-600 hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 shadow-md">
+                   class="block w-full bg-gray-600 lg:hover:bg-gray-700 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 shadow-md">
                     🔄 إعادة تحميل الصفحة
                 </a>
                 
                 <button onclick="clearCacheAndReload()" 
-                   class="block w-full bg-orange-500 hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 shadow-md">
+                   class="block w-full bg-orange-500 lg:hover:bg-orange-600 text-white py-3 px-6 rounded-lg font-medium transition-all duration-200 shadow-md">
                     🧹 مسح الذاكرة وإعادة التحميل
                 </button>
             </div>
@@ -58,7 +58,7 @@ http_response_code(403);
             <!-- Technical Details (for debugging) -->
             <div class="mt-8 pt-6 border-t border-gray-200">
                 <details class="text-right">
-                    <summary class="text-sm text-gray-600 cursor-pointer hover:text-gray-800">
+                    <summary class="text-sm text-gray-600 cursor-pointer lg:hover:text-gray-800">
                         التفاصيل التقنية (للمطورين)
                     </summary>
                     <div class="mt-2 p-3 bg-gray-100 rounded-lg text-xs text-gray-700 text-right dir-ltr">
@@ -74,7 +74,7 @@ http_response_code(403);
         <!-- Footer -->
         <div class="bg-gray-100 py-4 px-6 text-center">
             <p class="text-xs text-gray-600">
-                إذا استمرت المشكلة، يرجى <a href="#" class="text-blue-600 hover:underline">الاتصال بالدعم الفني</a>
+                إذا استمرت المشكلة، يرجى <a href="#" class="text-blue-600 lg:hover:underline">الاتصال بالدعم الفني</a>
             </p>
         </div>
     </div>

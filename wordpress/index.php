@@ -435,7 +435,7 @@ include 'header.php';
             font-family: 'Lato', sans-serif; /* Professional font for category */
         }
 /* هذا يضمن أن تأثير اللمس يعمل فقط على الكمبيوتر والتابلت الكبير */
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
     .product-card .wishlist-icon:hover {
         color: #ff4b4b !important;
         border-color: #ff4b4b !important;

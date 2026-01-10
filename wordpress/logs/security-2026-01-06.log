@@ -1,0 +1,2 @@
+[2026-01-06 00:50:57] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"51894ab","url":"/register.php?logged_out=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/filter.php?categurie=%D8%B3%D8%A7%D8%B9%D8%A7%D8%AA"}
+[2026-01-06 00:51:16] security.INFO: Turnstile verification successful. {"ip":"127.0.0.1"} {"uid":"80e2b3f","url":"/register.php","ip":"::1","http_method":"POST","server":"localhost","referrer":"http://localhost:8000/register.php?logged_out=1"}

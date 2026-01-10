@@ -381,7 +381,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 /* --- Hover Logic (Desktop Only) --- */
     /* هذا الكود يضمن أن الهوفر يعمل فقط على الأجهزة التي بها ماوس */
-    @media (hover: hover) {
+    @media (hover: hover) and (min-width: 1024px) {
         /* هوفر زر التحقق */
         .submit-button:not(:disabled):hover {
             background-color: #333;
@@ -416,10 +416,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         cursor: pointer;
         padding: 0;
         transition: color 0.2s ease-in-out;
-    }
-    .resend-link:hover {
-        color: #000000; 
-        text-decoration: underline;
     }
     .resend-link:disabled {
         color: #9ca3af;

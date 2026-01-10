@@ -159,7 +159,6 @@ if (!isset($_SESSION['csrf_token'])) {
     }
     @media (min-width: 764px) and (max-width: 1023px) {
         .breadcrumb-header { margin-top: 80px; padding: 30px 0; }
-        .wishlist-icon:hover { color: #ff4b4b !important; border-color: #ff4b4b !important; }
     }
     @media (max-width: 763px) {
         .breadcrumb-header { margin-top: 60px; padding: 20px 0; } 
@@ -318,9 +317,7 @@ if (!isset($_SESSION['csrf_token'])) {
 }
 
 /* Hover & Checked */
-.size-option-label:hover .size-box,
 .size-option-label input:checked + .size-box,
-.volume-option-label:hover .volume-box,
 .volume-option-label input:checked + .volume-box {
     border-color: #C8A95A;
     color: #C8A95A;
@@ -329,20 +326,38 @@ if (!isset($_SESSION['csrf_token'])) {
     /* professional highlight instead of bold */
 }
 
+@media (min-width: 1024px) {
+    .size-option-label:hover .size-box,
+    .volume-option-label:hover .volume-box {
+        border-color: #C8A95A;
+        color: #C8A95A;
+        background-color: rgba(200, 169, 90, 0.05);
+    }
+}
+
 
     .size-option-label, .volume-option-label { margin: 3px; cursor: pointer; position: relative; }
     .size-option-label input, .volume-option-label input { position: absolute; opacity: 0; width: 0; height: 0; }
     
     /* Hover and Checked states for BOTH Size and Volume */
-    .size-option-label:hover .size-box, 
     .size-option-label input:checked + .size-box,
-    .volume-option-label:hover .volume-box, 
     .volume-option-label input:checked + .volume-box { 
         border-color: #C8A95A; 
         color: #C8A95A; 
         font-weight: bold; 
         border-width: 2px;
         background-color: transparent; /* لضمان نفس الخلفية */
+    }
+
+    @media (min-width: 1024px) {
+        .size-option-label:hover .size-box, 
+        .volume-option-label:hover .volume-box { 
+            border-color: #C8A95A; 
+            color: #C8A95A; 
+            font-weight: bold; 
+            border-width: 2px;
+            background-color: transparent; /* لضمان نفس الخلفية */
+        }
     }
     /* === END SIZE & VOLUME STYLING === */
 

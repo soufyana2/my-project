@@ -46,16 +46,17 @@ if (!isset($_SESSION['csrf_token'])) {
     .font-cairo { font-family: 'Cairo', sans-serif; }
     .font-playfair { font-family: 'Playfair Display', serif; }
     .footer-link { color: #d1d5db; transition: all 0.3s ease; display: inline-block; text-decoration: none; }
-    .footer-link:hover { color: #C8A95A; }
-    @media (min-width: 768px) { .footer-link:hover { transform: translateX(-5px); } }
+    @media (min-width: 1024px) {
+        .footer-link:hover { color: #C8A95A; transform: translateX(-5px); }
+    }
     .footer-input { background-color: transparent; border: none; border-bottom: 1px solid #4b5563; color: white; width: 100%; max-width: 300px; padding: 10px 0; outline: none; transition: border-color 0.3s ease; text-align: center; }
     .footer-input:focus { border-color: #C8A95A; }
     .footer-input::placeholder { color: #6b7280; }
     @media (min-width: 768px) { .footer-input { text-align: right; } }
     .btn-footer { font-family: 'Cairo', sans-serif; background-color: transparent; border: 1px solid #ffffff; color: #ffffff; padding: 0.6rem 1.5rem; font-weight: bold; transition: all 0.3s ease; cursor: pointer; margin-top: 1rem; font-size: 0.9rem; }
-    @media (hover: hover) { .btn-footer:hover { border-color: #C8A95A; color: #C8A95A; background-color: rgba(200, 169, 90, 0.1); } }
+    @media (hover: hover) and (min-width: 1024px) { .btn-footer:hover { border-color: #C8A95A; color: #C8A95A; background-color: rgba(200, 169, 90, 0.1); } }
     .studio-link { color: #C8A95A; text-decoration: none; font-weight: bold; transition: all 0.3s ease; }
-    .studio-link:hover { text-decoration: underline; }
+    @media (min-width: 1024px) { .studio-link:hover { text-decoration: underline; } }
 </style>
 
 <footer class="bg-black-footer text-white pt-16 pb-8 border-t border-gray-900" dir="rtl">

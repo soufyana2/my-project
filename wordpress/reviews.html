@@ -25,7 +25,7 @@
     }
 
     /* Hover effect (Desktop only) */
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         .btn-discover::before {
             content: '';
             position: absolute;
@@ -102,7 +102,7 @@
     }
     .loaded .nav-btn { opacity: 1; }
     .nav-btn:disabled { opacity: 0.3; cursor: not-allowed; background-color: #333333; }
-    @media (hover: hover) {
+    @media (hover: hover) and (min-width: 1024px) {
         .nav-btn:hover:not(:disabled) {
             background-color: #333333; 
             transform: translateY(-2px);

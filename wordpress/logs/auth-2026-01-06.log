@@ -1,0 +1,1 @@
+[2026-01-06 00:50:57] auth.INFO: User logged-out successfully. {"user_id":134,"username":"admin","ip":"127.0.0.1"} {"uid":"2695b5d","url":"/logout.php","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/filter.php?categurie=%D8%B3%D8%A7%D8%B9%D8%A7%D8%AA"}

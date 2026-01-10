@@ -457,7 +457,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
             transition: none;
         }
 
-       @media (hover: hover) {
+       @media (hover: hover) and (min-width: 1024px) {
     
     .btn-visitor:hover {
         background-color: #000000; 
@@ -621,9 +621,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                 <div class="flex items-center justify-between mt-3">
                     <label class="flex items-center gap-2 cursor-pointer select-none">
                         <input type="checkbox" name="remember_me" class="gold-checkbox transition"> 
-                        <span class="text-base text-gray-700 hover:text-black transition-colors font-medium">تذكرني</span>
+                        <span class="text-base text-gray-700 lg:hover:text-black transition-colors font-medium">تذكرني</span>
                     </label>
-                    <a href="forgot_password.php" class="text-base text-gray-700 hover:text-black transition-colors font-medium">نسيت كلمة المرور؟</a>
+                    <a href="forgot_password.php" class="text-base text-gray-700 lg:hover:text-black transition-colors font-medium">نسيت كلمة المرور؟</a>
                 </div>
 
                 <input type="hidden" name="cf-turnstile-response" class="turnstile-response-input" value="">
@@ -637,7 +637,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 
                 <p class="text-center text-base text-gray-700 mt-8">
                     ليس لديك حساب؟ 
-                    <a href="#" onclick="switchAuth('loginForm', 'signupForm'); return false;" class="font-bold hover:underline transition-all" style="color:#C8A95A;">إنشاء حساب جديد</a>
+                    <a href="#" onclick="switchAuth('loginForm', 'signupForm'); return false;" class="font-bold lg:hover:underline transition-all" style="color:#C8A95A;">إنشاء حساب جديد</a>
                 </p>
             </form>
         </div>
@@ -697,7 +697,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 
                 <p class="text-center text-base text-gray-700 mt-8">
                     لديك حساب بالفعل؟ 
-                    <a href="#" onclick="switchAuth('signupForm', 'loginForm'); return false;" class="font-bold hover:underline transition-all" style="color:#C8A95A;">تسجيل الدخول</a>
+                    <a href="#" onclick="switchAuth('signupForm', 'loginForm'); return false;" class="font-bold lg:hover:underline transition-all" style="color:#C8A95A;">تسجيل الدخول</a>
                 </p>
             </form>
         </div>

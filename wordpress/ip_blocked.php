@@ -113,14 +113,16 @@
             transition: 0.5s;
         }
 
-        .state-active:hover::before {
-            left: 100%;
-        }
+        @media (min-width: 1024px) {
+            .state-active:hover::before {
+                left: 100%;
+            }
 
-        .state-active:hover {
-            background-color: #111;
-            transform: translateY(-2px);
-            border-color: #C8A95A; /* Slight gold border on hover */
+            .state-active:hover {
+                background-color: #111;
+                transform: translateY(-2px);
+                border-color: #C8A95A; /* Slight gold border on hover */
+            }
         }
 
         /* Icon Animation */
@@ -132,8 +134,10 @@
             transition: transform 0.3s ease;
         }
         
-        .state-active:hover .icon-box {
-            transform: translateX(-5px);
+        @media (min-width: 1024px) {
+            .state-active:hover .icon-box {
+                transform: translateX(-5px);
+            }
         }
 
         /* Fade Animation */

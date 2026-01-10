@@ -18,13 +18,9 @@
         display: inline-block;
         text-decoration: none;
     }
-    .footer-link:hover {
-        color: #C8A95A; /* Gold on Hover */
-    }
-
-    /* Desktop Hover Animation only */
-    @media (min-width: 768px) {
+    @media (min-width: 1024px) {
         .footer-link:hover {
+            color: #C8A95A; /* Gold on Hover */
             transform: translateX(-5px); /* Slide left on desktop RTL */
         }
     }
@@ -68,7 +64,7 @@
         font-size: 0.9rem;
     }
     
-    @media (hover: hover) {
+    @media (hover: hover) and (min-width: 1024px) {
         .btn-footer:hover {
             border-color: #C8A95A;
             color: #C8A95A;
@@ -83,8 +79,10 @@
         font-weight: bold;
         transition: all 0.3s ease;
     }
-    .studio-link:hover {
-        text-decoration: underline;
+    @media (min-width: 1024px) {
+        .studio-link:hover {
+            text-decoration: underline;
+        }
     }
 </style>
 

@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'johnpbloch/wordpress-project',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '05ab90e365e304f3e4584760c826b45496d42732',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -83,9 +83,9 @@
             'dev_requirement' => false,
         ),
         'johnpbloch/wordpress-project' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '05ab90e365e304f3e4584760c826b45496d42732',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

@@ -255,21 +255,11 @@ background-color: #ffffff;
             cursor: pointer;
         }
 
-        .icon-button:hover {
-            color: #C8A95A;
-        }
-
         .btn-professional {
             background: linear-gradient(135deg, #C8A95A, #d4b882);
             border: 1px solid rgba(200, 169, 90, 0.3);
             box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.2);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .btn-professional:hover {
-            background: linear-gradient(135deg, #d4b882, #C8A95A);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(200, 169, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
         }
 
         .btn-whatsappp {
@@ -279,8 +269,20 @@ background-color: #ffffff;
  font-weight: bold;
       }
 
-        .btn-whatsappp:hover {
-           background-color: #128C7E;
+        @media (min-width: 1024px) {
+            .icon-button:hover {
+                color: #C8A95A;
+            }
+
+            .btn-professional:hover {
+                background: linear-gradient(135deg, #d4b882, #C8A95A);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px rgba(200, 169, 90, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+
+            .btn-whatsappp:hover {
+               background-color: #128C7E;
+            }
         }
 
         /* ===== BADGE STYLES ===== */
@@ -327,11 +329,6 @@ border-bottom: 1px solid #f1f5f9 !important;
     align-items: center;
 }
 
-        .nav-link:hover {
-            color: #C8A95A !important;
-            background: rgba(200, 169, 90, 0.05) !important;
-        }
-
         .nav-link.active {
             color: #C8A95A!important;
             background: rgba(200, 169, 90, 0.1)!important ;
@@ -349,9 +346,19 @@ border-bottom: 1px solid #f1f5f9 !important;
             transition: width 0.3s ease !important;
         }
 
-        .nav-link:hover::after,
         .nav-link.active::after {
             width: 60%!important;
+        }
+
+        @media (min-width: 1024px) {
+            .nav-link:hover {
+                color: #C8A95A !important;
+                background: rgba(200, 169, 90, 0.05) !important;
+            }
+
+            .nav-link:hover::after {
+                width: 60%!important;
+            }
         }
 
         /* ===== LOGO STYLES ===== */
@@ -419,10 +426,12 @@ border-bottom: 1px solid #f1f5f9 !important;
             transition: all 0.3s ease;
         }
 
-        .mobile-nav-link:hover {
-            color: #C8A95A;
-            background: rgba(200, 169, 90, 0.05);
-            padding-left: 32px;
+        @media (min-width: 1024px) {
+            .mobile-nav-link:hover {
+                color: #C8A95A;
+                background: rgba(200, 169, 90, 0.05);
+                padding-left: 32px;
+            }
         }
 
         /* ===== SIDEBAR STYLES ===== */
@@ -518,11 +527,13 @@ border-bottom: 1px solid #f1f5f9 !important;
             padding: 12px;
         }
 
-        .product-card-professional:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(200, 169, 90, 0.1);
-            border-color: rgba(200, 169, 90, 0.2);
-            cursor: pointer;
+        @media (min-width: 1024px) {
+            .product-card-professional:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 15px 35px rgba(15, 23, 42, 0.1), 0 5px 15px rgba(200, 169, 90, 0.1);
+                border-color: rgba(200, 169, 90, 0.2);
+                cursor: pointer;
+            }
         }
 
       .remove-product-icon {
@@ -571,9 +582,11 @@ border-bottom: 1px solid #f1f5f9 !important;
             box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
         }
 
-        .cart-products::-webkit-scrollbar-thumb:hover,
-        .wishlist-products::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, #d4b882, #C8A95A);
+        @media (min-width: 1024px) {
+            .cart-products::-webkit-scrollbar-thumb:hover,
+            .wishlist-products::-webkit-scrollbar-thumb:hover {
+                background: linear-gradient(to bottom, #d4b882, #C8A95A);
+            }
         }
 
         /* ===== SEARCH STYLES ===== */
@@ -734,9 +747,11 @@ border-bottom: 1px solid #f1f5f9 !important;
             transition: color 0.3s ease;
         }
 
-        .full-screen-search-icon:hover,
-        .full-screen-close-icon:hover {
-            color: #C8A95A;
+        @media (min-width: 1024px) {
+            .full-screen-search-icon:hover,
+            .full-screen-close-icon:hover {
+                color: #C8A95A;
+            }
         }
 
         /* ===== UTILITY STYLES ===== */
@@ -744,29 +759,16 @@ border-bottom: 1px solid #f1f5f9 !important;
             overflow: hidden;
         }
 
-        .quantity-minus:hover,
-        .quantity-plus:hover {
-            background: #f1f5f9;
-            color: #475569;
-        }
-
-        .add-to-cart-btn:hover {
-            background: #f1f5f9;
-            color: #475569;
-        }
-
-        /* Disable hover effects on mobile screens for quantity and add-to-cart buttons */
-        @media (max-width: 768px) {
-
+        @media (min-width: 1024px) {
             .quantity-minus:hover,
             .quantity-plus:hover {
-                background: var(--surface-hover) !important;
-                color: var(--text-secondary) !important;
+                background: #f1f5f9;
+                color: #475569;
             }
 
             .add-to-cart-btn:hover {
-                background: var(--surface-hover) !important;
-                color: var(--text-secondary) !important;
+                background: #f1f5f9;
+                color: #475569;
             }
         }
 
@@ -1051,9 +1053,11 @@ border-bottom: 1px solid #f1f5f9 !important;
 }
 
 /* تثبيت اللون عند الهوفر (الذهبي) */
-#currency-dropdown-btn:hover, 
-#language-dropdown-btn:hover {
-    color: #C8A95A !important;
+@media (min-width: 1024px) {
+    #currency-dropdown-btn:hover, 
+    #language-dropdown-btn:hover {
+        color: #C8A95A !important;
+    }
 }
 
 /* التأكد من ثبات حجم الأيقونة (السهم) */
@@ -1082,11 +1086,18 @@ border-bottom: 1px solid #f1f5f9 !important;
 }
 
 /* Hover & Focus */
-.header-account-btn:hover,
 .header-account-btn:focus {
     background-color: var(--accent-color, #C8A95A) !important;
     color: #fff !important;
     border-color: var(--accent-color, #C8A95A) !important;
+}
+
+@media (min-width: 1024px) {
+    .header-account-btn:hover {
+        background-color: var(--accent-color, #C8A95A) !important;
+        color: #fff !important;
+        border-color: var(--accent-color, #C8A95A) !important;
+    }
 }
 /* الستايل الافتراضي للروابط (يمنع ظهور لونين في التابلت) */
 .nav-link.active {
@@ -1130,7 +1141,7 @@ border-bottom: 1px solid #f1f5f9 !important;
                     <!-- Currency Dropdown -->
                     <div class="relative group hidden md:block" style="direction: ltr;">
                         <!-- لاحظ أننا أضفنا gap-2 وحذفنا ml-2 من الأيقونة -->
-<button id="currency-dropdown-btn" class="icon-button w-auto px-3 h-9 flex items-center justify-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+<button id="currency-dropdown-btn" class="icon-button w-auto px-3 h-9 flex items-center justify-center gap-2 text-sm font-semibold text-text-secondary lg:hover:text-accent transition-colors duration-200">
     <span id="selected-currency">MAD</span>
     <i id="currency-chevron" class="ph ph-caret-down text-xs transition-transform duration-200"></i>
 </button>
@@ -1145,7 +1156,7 @@ border-bottom: 1px solid #f1f5f9 !important;
                     <!-- Language Dropdown -->
                     <div class="relative group hidden md:block" style="direction: ltr;">
                        <!-- لاحظ أننا أضفنا gap-2 وحذفنا mr-2 و ml-2 من الصور والأيقونات -->
-<button id="language-dropdown-btn" class="icon-button w-auto px-3 h-9 flex items-center justify-center gap-2 text-sm font-semibold text-text-secondary hover:text-accent transition-colors duration-200">
+<button id="language-dropdown-btn" class="icon-button w-auto px-3 h-9 flex items-center justify-center gap-2 text-sm font-semibold text-text-secondary lg:hover:text-accent transition-colors duration-200">
     <img id="language-flag-icon" src="https://flagcdn.com/w40/ma.png" alt="Flag" class="w-5 h-3 object-cover shadow-sm">
     <span id="selected-language">AR</span>
     <i id="language-chevron" class="ph ph-caret-down text-xs transition-transform duration-200"></i>
@@ -1199,26 +1210,26 @@ border-bottom: 1px solid #f1f5f9 !important;
 class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-right border border-border overflow-hidden">                            <!-- Removed My Orders and Wishlist buttons -->
                                     <?php if ($isLoggedIn): ?>
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
 <i class="ph ph-user mr-3"style="margin-left: 5px;"></i> ملفي الشخصي
                             </a>
                             <a href="#"
-                                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                                class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
                                 <i class="ph ph-question mr-3 flex-shrink-0"style="margin-left: 5px;"></i>
                                 <span class="whitespace-nowrap">المساعدة والدعم </span>
                             </a>
                             <div class="border-t border-border my-1"></div>
-                           <a href="logout.php" class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                           <a href="logout.php" class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
     <i class="ph ph-sign-out mr-3" style="margin-left: 5px;"></i> 
     تسجيل الخروج
 </a>
                             <?php else: ?>
                                <a href="register.php"
-                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
                 <i class="ph ph-lock mr-3" style="margin-left: 5px;"></i> تسجيل الدخول
               </a>
               <a href="register.php"
-                class="block px-4 py-2 text-sm text-text-secondary hover:bg-surface-hover hover:text-accent flex items-center">
+                class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
                 <i class="ph ph-user mr-3" style="margin-left: 5px;"></i> إنشاء حساب
               </a>
                 <?php endif; ?>
@@ -1355,7 +1366,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
           </div>
       </div>
       <button id="close-wishlist"
-          class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+          class="text-text-secondary lg:hover:text-accent focus:outline-none transition-all duration-200 lg:hover:scale-110 p-1.5 rounded-lg lg:hover:bg-surface-hover">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
               stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -1377,7 +1388,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <div class="space-y-3 w-full max-w-xs font-sans">
                 <a href="register.php" class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2 group">
                     <span>تسجيل الدخول</span>
-                    <i class="ph ph-sign-in text-lg group-hover:translate-x-1 transition-transform"></i>
+                    <i class="ph ph-sign-in text-lg lg:group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
         </div>
@@ -1428,7 +1439,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
   <?php if ($isLoggedIn): ?>
   <div class="p-8 border-t border-border bg-gradient-to-r from-surface-elevated to-surface flex-shrink-0">
       <div class="space-y-3">
-         <button id="add-all-wishlist-to-cart" onclick="addAllWishlistToCart()" class="w-full btn-professional text-white py-4 font-bold text-base uppercase tracking-wider flex items-center justify-center gap-3 shadow-lg hover:shadow-accent/40 transition-all duration-300">
+         <button id="add-all-wishlist-to-cart" onclick="addAllWishlistToCart()" class="w-full btn-professional text-white py-4 font-bold text-base uppercase tracking-wider flex items-center justify-center gap-3 shadow-lg lg:hover:shadow-accent/40 transition-all duration-300">
     <span>إضافة الكل للسلة</span>
     <i class="ph ph-bag-plus text-xl"></i>
 </button>
@@ -1454,7 +1465,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 </div>
             </div>
             <button id="close-cart"
-                class="text-text-secondary hover:text-accent focus:outline-none transition-all duration-200 hover:scale-110 p-1.5 rounded-lg hover:bg-surface-hover">
+                class="text-text-secondary lg:hover:text-accent focus:outline-none transition-all duration-200 lg:hover:scale-110 p-1.5 rounded-lg lg:hover:bg-surface-hover">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                     stroke="currentColor" stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
