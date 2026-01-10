@@ -35,6 +35,7 @@ if (empty($_SESSION['csrf_token'])) {
       font-family: 'Cairo', sans-serif !important;
       margin: 0 !important;
       padding: 0 !important;
+      padding-top: var(--header-offset, 0px) !important;
       direction: rtl !important;
     }
 
@@ -151,6 +152,8 @@ if (empty($_SESSION['csrf_token'])) {
 
 <body>
 
+<?php include 'header.php'; ?>
+
   <!-- Header -->
   <header class="ms-section-transparent py-8 ms-mobile-py ms-reveal">
     <div class="container mx-auto px-4 text-center">
@@ -198,8 +201,8 @@ if (empty($_SESSION['csrf_token'])) {
         <!-- Image & Info Section -->
         <div class="w-full lg:w-5/12 space-y-8 ms-reveal">
           <div class="overflow-hidden border border-gray-100" style="height: 450px !important;">
-            <img src="https://i.pinimg.com/736x/9b/d9/a0/9bd9a0f0b49529376fb270b78474498d.jpg" 
-                 alt="Abdelwahab Accessories" 
+            <img src="public/images/contact%20logo.png" 
+                 alt="Contact logo" 
                  class="w-full h-full object-cover" 
                  loading="lazy">
           </div>
@@ -269,6 +272,8 @@ if (empty($_SESSION['csrf_token'])) {
     </div>
   </section>
 
+  <?php include 'footer.php'; ?>
+
   <script>
     // وظيفة الأسئلة الشائعة
     function toggleFaq(btn) {
@@ -302,6 +307,16 @@ if (empty($_SESSION['csrf_token'])) {
 
     // برمجة الإرسال (AJAX) - الربط مع Backend
     document.addEventListener('DOMContentLoaded', function () {
+      function offsetForHeader() {
+        const header = document.querySelector('.header-modern');
+        if (!header) return;
+        document.documentElement.style.setProperty('--header-offset', `${header.offsetHeight}px`);
+      }
+
+      offsetForHeader();
+      window.addEventListener('resize', offsetForHeader);
+      window.addEventListener('load', offsetForHeader);
+
       reveal();
       window.addEventListener("scroll", reveal);
 

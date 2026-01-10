@@ -1,0 +1,2 @@
+[2026-01-10 18:56:49] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"abedba2","url":"/register.php?timeout=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/"}
+[2026-01-10 20:32:40] security.INFO: CSRF token regenerated. {"reason":"not_set","ip":"127.0.0.1"} {"uid":"b4a5064","url":"/register.php?timeout=1","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/"}

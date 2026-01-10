@@ -13,6 +13,8 @@ try {
 } catch (Exception $e) { /* تجاهل الخطأ إذا كان محملاً مسبقاً */ }
 
 require_once 'functions.php'; // هذا الملف يحتوي على secure_session_start() التي تشغل الـ Remember me
+manage_csrf_token();
+$whatsapp_number = $_ENV['whatsapp_number'] ?? '212000000000';
 
 // الآن بعد تشغيل الوظائف، نتحقق من تسجيل الدخول
 $isLoggedIn = isset($_SESSION['user_id']);
@@ -1172,7 +1174,7 @@ border-bottom: 1px solid #f1f5f9 !important;
                 <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0" style="direction: ltr;">
                                   <!-- logo 1-->
 
-                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="STORE Logo" class="h-12 w-auto">
+                <img src="public/images/logo.png" alt="STORE Logo" class="h-12 w-auto object-contain">
                     <div class="hidden sm:block">
                         <a href="index.php">
                         <div class="logo-text">Abdelwahab</div>
@@ -1308,7 +1310,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 <div class="flex items-center space-x-3">
                             <!-- logo 2 -->
 
-                    <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="DJELLABTI Logo" class="h-10 w-auto">
+                    <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-10 w-auto object-contain">
                     <div>
                         <a href="index.php">
                         <div class="logo-text text-lg">Abdolwahab</div>
@@ -1359,7 +1361,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
       <div class="flex items-center">
         <!-- logo 3 -->
 
-          <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+          <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
           <div>
               <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
               <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
@@ -1458,7 +1460,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             class="flex items-center justify-between p-8 border-b border-border  from-surface-elevated to-surface flex-shrink-0" style="direction: ltr;background: #ffffff !important;">
             <div class="flex items-center">
                 <!-- logo 4 -->
-                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="DJELLABTI Logo" class="h-12 w-auto mr-4">
+                <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
                 <div>
                     <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
                     <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>
@@ -1601,23 +1603,32 @@ onclick="buyCartViaWhatsapp()">
         // ===== UTILITY FUNCTIONS =====
         function closeAllMenus() {
             // Close all menus and sidebars
-            elements.mobileMenu.classList.remove('active');
-            elements.cartSidebar.classList.remove('active');
-            elements.wishlistSidebar.classList.remove('active');
-            elements.fullScreenSearch.classList.remove('active');
-            elements.overlay.classList.remove('active');
+            if (elements.mobileMenu) elements.mobileMenu.classList.remove('active');
+            if (elements.cartSidebar) elements.cartSidebar.classList.remove('active');
+            if (elements.wishlistSidebar) elements.wishlistSidebar.classList.remove('active');
+            if (elements.fullScreenSearch) elements.fullScreenSearch.classList.remove('active');
+            if (elements.overlay) elements.overlay.classList.remove('active');
 
             // Restore body scroll
-            elements.body.classList.remove('no-scroll');
-            elements.body.style.overflow = '';
+            if (elements.body) {
+                elements.body.classList.remove('no-scroll');
+                elements.body.style.overflow = '';
+            }
 
             // Close dropdowns and reset chevrons
-            closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
-            closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
-            closeDropdown(elements.authDropdownMenu);
+            if (elements.currencyDropdownMenu) {
+                closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+            }
+            if (elements.languageDropdownMenu) {
+                closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
+            }
+            if (elements.authDropdownMenu) {
+                closeDropdown(elements.authDropdownMenu);
+            }
         }
 
         function closeDropdown(menu, chevron = null) {
+            if (!menu) return;
             menu.classList.add('opacity-0', 'scale-95', 'invisible');
             menu.classList.remove('opacity-100', 'scale-100', 'visible');
             if (chevron) {
@@ -1627,6 +1638,7 @@ onclick="buyCartViaWhatsapp()">
 
         function openDropdown(menu, chevron = null) {
             closeAllMenus();
+            if (!menu) return;
             menu.classList.remove('opacity-0', 'scale-95', 'invisible');
             menu.classList.add('opacity-100', 'scale-100', 'visible');
             if (chevron) {
@@ -1635,6 +1647,7 @@ onclick="buyCartViaWhatsapp()">
         }
 
         function animateItems(container, selector) {
+            if (!container) return;
             const items = container.querySelectorAll(selector);
             items.forEach((item, index) => {
                 item.style.opacity = '0';
@@ -1650,6 +1663,7 @@ onclick="buyCartViaWhatsapp()">
         // ===== MENU FUNCTIONS =====
         function openCart() {
             closeAllMenus();
+            if (!elements.cartSidebar || !elements.overlay || !elements.body) return;
             elements.cartSidebar.classList.add('active');
             elements.overlay.classList.add('active');
             elements.body.classList.add('no-scroll');
@@ -1658,6 +1672,7 @@ onclick="buyCartViaWhatsapp()">
 
         function openWishlist() {
             closeAllMenus();
+            if (!elements.wishlistSidebar || !elements.overlay || !elements.body) return;
             elements.wishlistSidebar.classList.add('active');
             elements.overlay.classList.add('active');
             elements.body.classList.add('no-scroll');
@@ -1666,6 +1681,7 @@ onclick="buyCartViaWhatsapp()">
 
         function openMobileMenu() {
             closeAllMenus();
+            if (!elements.mobileMenu || !elements.overlay || !elements.body) return;
             elements.mobileMenu.classList.add('active');
             elements.overlay.classList.add('active');
             elements.body.classList.add('no-scroll');
@@ -1673,12 +1689,16 @@ onclick="buyCartViaWhatsapp()">
 
         function openFullScreenSearch() {
             closeAllMenus();
+            if (!elements.fullScreenSearch || !elements.body) return;
             elements.fullScreenSearch.classList.add('active');
             elements.body.classList.add('no-scroll');
-            elements.fullScreenSearchInput.focus();
+            if (elements.fullScreenSearchInput) {
+                elements.fullScreenSearchInput.focus();
+            }
         }
 
         function closeFullScreenSearch() {
+            if (!elements.fullScreenSearch || !elements.body) return;
             elements.fullScreenSearch.classList.remove('active');
             elements.body.classList.remove('no-scroll');
             elements.body.style.overflow = '';
@@ -1687,17 +1707,21 @@ onclick="buyCartViaWhatsapp()">
         // ===== EVENT LISTENERS =====
 
         // Cart Events
-        elements.cartBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            openCart();
-        });
+        if (elements.cartBtn) {
+            elements.cartBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openCart();
+            });
+        }
 
-        elements.closeCart.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeAllMenus();
-        });
+        if (elements.closeCart) {
+            elements.closeCart.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllMenus();
+            });
+        }
 
         // Wishlist Events
         if (elements.wishlistBtn) {
@@ -1708,90 +1732,113 @@ onclick="buyCartViaWhatsapp()">
             });
         }
 
-        elements.closeWishlist.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeAllMenus();
-        });
+        if (elements.closeWishlist) {
+            elements.closeWishlist.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllMenus();
+            });
+        }
 
         // Mobile Menu Events
-        elements.mobileMenuBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            openMobileMenu();
-        });
+        if (elements.mobileMenuBtn) {
+            elements.mobileMenuBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openMobileMenu();
+            });
+        }
 
-        elements.closeMobileMenu.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeAllMenus();
-        });
+        if (elements.closeMobileMenu) {
+            elements.closeMobileMenu.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllMenus();
+            });
+        }
 
         // Search Events
-        elements.desktopSearchBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            openFullScreenSearch();
-        });
+        if (elements.desktopSearchBtn) {
+            elements.desktopSearchBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                openFullScreenSearch();
+            });
+        }
 
-        elements.fullScreenCloseSearch.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeFullScreenSearch();
-        });
+        if (elements.fullScreenCloseSearch) {
+            elements.fullScreenCloseSearch.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeFullScreenSearch();
+            });
+        }
 
         // Dropdown Events
-        elements.currencyDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (elements.currencyDropdownMenu.classList.contains('visible')) {
-                closeAllMenus();
-            } else {
-                openDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
-            }
-        });
+        if (elements.currencyDropdownBtn && elements.currencyDropdownMenu) {
+            elements.currencyDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (elements.currencyDropdownMenu.classList.contains('visible')) {
+                    closeAllMenus();
+                } else {
+                    openDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+                }
+            });
+        }
 
-        elements.languageDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (elements.languageDropdownMenu.classList.contains('visible')) {
-                closeAllMenus();
-            } else {
-                openDropdown(elements.languageDropdownMenu, elements.languageChevron);
-            }
-        });
+        if (elements.languageDropdownBtn && elements.languageDropdownMenu) {
+            elements.languageDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (elements.languageDropdownMenu.classList.contains('visible')) {
+                    closeAllMenus();
+                } else {
+                    openDropdown(elements.languageDropdownMenu, elements.languageChevron);
+                }
+            });
+        }
 
-        elements.authDropdownBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            if (elements.authDropdownMenu.classList.contains('visible')) {
-                closeAllMenus();
-            } else {
-                openDropdown(elements.authDropdownMenu);
-            }
-        });
+        if (elements.authDropdownBtn && elements.authDropdownMenu) {
+            elements.authDropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (elements.authDropdownMenu.classList.contains('visible')) {
+                    closeAllMenus();
+                } else {
+                    openDropdown(elements.authDropdownMenu);
+                }
+            });
+        }
 
         // Overlay Events
-        elements.overlay.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            closeAllMenus();
-        });
+        if (elements.overlay) {
+            elements.overlay.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                closeAllMenus();
+            });
+        }
 
         // Prevent sidebar content clicks from closing
-        [elements.cartSidebar, elements.wishlistSidebar, elements.mobileMenu].forEach(element => {
+        [elements.cartSidebar, elements.wishlistSidebar, elements.mobileMenu].filter(Boolean).forEach(element => {
             element.addEventListener('click', (e) => {
                 e.stopPropagation();
             });
         });
 
         // Full-screen search events
-        elements.fullScreenSearch.querySelector('.full-screen-search-content').addEventListener('click', (e) => {
-            e.stopPropagation();
-        });
-
-        elements.fullScreenSearch.addEventListener('click', (e) => {
-            if (e.target === elements.fullScreenSearch) {
-                closeFullScreenSearch();
+        if (elements.fullScreenSearch) {
+            const searchContent = elements.fullScreenSearch.querySelector('.full-screen-search-content');
+            if (searchContent) {
+                searchContent.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
             }
-        });
+
+            elements.fullScreenSearch.addEventListener('click', (e) => {
+                if (e.target === elements.fullScreenSearch) {
+                    closeFullScreenSearch();
+                }
+            });
+        }
 
         // ===== DROPDOWN FUNCTIONALITY =====
 
@@ -1855,18 +1902,24 @@ onclick="buyCartViaWhatsapp()">
         // Click Outside Dropdowns
         document.addEventListener('click', (e) => {
             // Close currency dropdown if click is outside
-            if (!elements.currencyDropdownBtn.contains(e.target) && !elements.currencyDropdownMenu.contains(e.target)) {
-                closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+            if (elements.currencyDropdownBtn && elements.currencyDropdownMenu) {
+                if (!elements.currencyDropdownBtn.contains(e.target) && !elements.currencyDropdownMenu.contains(e.target)) {
+                    closeDropdown(elements.currencyDropdownMenu, elements.currencyChevron);
+                }
             }
 
             // Close language dropdown if click is outside
-            if (!elements.languageDropdownBtn.contains(e.target) && !elements.languageDropdownMenu.contains(e.target)) {
-                closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
+            if (elements.languageDropdownBtn && elements.languageDropdownMenu) {
+                if (!elements.languageDropdownBtn.contains(e.target) && !elements.languageDropdownMenu.contains(e.target)) {
+                    closeDropdown(elements.languageDropdownMenu, elements.languageChevron);
+                }
             }
 
             // Close auth dropdown if click is outside
-            if (!elements.authDropdownBtn.contains(e.target) && !elements.authDropdownMenu.contains(e.target)) {
-                closeDropdown(elements.authDropdownMenu);
+            if (elements.authDropdownBtn && elements.authDropdownMenu) {
+                if (!elements.authDropdownBtn.contains(e.target) && !elements.authDropdownMenu.contains(e.target)) {
+                    closeDropdown(elements.authDropdownMenu);
+                }
             }
         });
 
@@ -1874,7 +1927,7 @@ onclick="buyCartViaWhatsapp()">
         document.addEventListener('DOMContentLoaded', () => {
             // Initialize language display
             const initialSelectedLangOption = document.querySelector('.language-option .selected-check')?.closest('.language-option');
-            if (initialSelectedLangOption) {
+            if (initialSelectedLangOption && elements.selectedLanguageSpan) {
                 const lang = initialSelectedLangOption.dataset.lang;
                 const flagUrl = initialSelectedLangOption.dataset.flag;
                 const name = initialSelectedLangOption.querySelector('span')?.textContent || lang;
@@ -1907,6 +1960,7 @@ const searchInput = document.querySelector('.full-screen-search-input');
 const searchBtn = document.querySelector('.full-screen-search-icon');
 
 function triggerSearch() {
+    if (!searchInput) return;
     const query = searchInput.value.trim();
     if (query !== "") {
         // الاحترافية: التوجه لصفحة الفلتر مع مسح أي تصنيفات قديمة لضمان دقة البحث
@@ -1914,17 +1968,21 @@ function triggerSearch() {
     }
 }
 
-searchBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    triggerSearch();
-});
-
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+if (searchBtn) {
+    searchBtn.addEventListener('click', (e) => {
         e.preventDefault();
         triggerSearch();
-    }
-});
+    });
+}
+
+if (searchInput) {
+    searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            triggerSearch();
+        }
+    });
+}
 window.toggleWishlist = function(btn, e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
 

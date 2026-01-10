@@ -409,6 +409,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
             transition: color 0.3s;
             font-weight: 500;
         }
+        .password-field { position: relative; }
+        .password-input { padding-inline-end: 2.75rem; }
+        .password-toggle {
+            position: absolute;
+            top: 50%;
+            inset-inline-end: 0.5rem;
+            transform: translateY(-50%);
+            width: 2rem;
+            height: 2rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9999px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.9);
+            color: #6b7280;
+            transition: all 0.2s ease;
+        }
+        .password-toggle:hover {
+            background: #f3f4f6;
+            color: #111827;
+            border-color: #e5e7eb;
+        }
+        .password-toggle:focus-visible {
+            outline: 2px solid #C8A95A;
+            outline-offset: 2px;
+        }
+        .password-toggle svg { width: 18px; height: 18px; }
+        .password-toggle .icon-eye-off { display: none; }
+        .password-toggle[data-visible="true"] .icon-eye { display: none; }
+        .password-toggle[data-visible="true"] .icon-eye-off { display: block; }
+        .password-toggle[data-visible="true"] { color: #C8A95A; }
 
         /* --- VISITOR BUTTON UPDATES --- */
         .btn-visitor {
@@ -565,7 +597,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="شعار عبدالوهاب للعطور - Abdolwahab Parfums Logo" class="logo-img">
+            <img src="public/images/logo.png" alt="شعار عبدالوهاب للعطور - Abdolwahab Parfums Logo" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
                 <span class="logo-sub">Accessories & Parfums</span>
@@ -613,8 +645,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                         <input name="login_input" id="login-username" type="text" class="custom-input" placeholder="اسم المستخدم أو البريد الإلكتروني">
                     </div>
 
-                    <div>
-                        <input name="password" id="login-password" type="password" class="custom-input" placeholder="كلمة المرور">
+                    <div class="password-field">
+                        <input name="password" id="login-password" type="password" class="custom-input password-input" placeholder="كلمة المرور">
+                        <button type="button" class="password-toggle" aria-label="Show password" aria-pressed="false" data-visible="false">
+                            <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3l18 18"></path>
+                                <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83"></path>
+                                <path d="M9.88 4.24A10.94 10.94 0 0 1 12 4c6.5 0 10 8 10 8a18.26 18.26 0 0 1-2.62 3.93"></path>
+                                <path d="M6.1 6.1C3.53 8.22 2 12 2 12s3.5 6 10 6a10.94 10.94 0 0 0 5.76-1.62"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -682,8 +726,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                         <input name="email" id="signup-email" type="email" class="custom-input" placeholder="البريد الإلكتروني">
                     </div>
 
-                    <div>
-                        <input name="password" id="signup-password" type="password" class="custom-input" placeholder="كلمة المرور">
+                    <div class="password-field">
+                        <input name="password" id="signup-password" type="password" class="custom-input password-input" placeholder="كلمة المرور">
+                        <button type="button" class="password-toggle" aria-label="Show password" aria-pressed="false" data-visible="false">
+                            <svg class="icon-eye" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6-10-6-10-6z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>
+                            <svg class="icon-eye-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M3 3l18 18"></path>
+                                <path d="M10.58 10.58a2 2 0 0 0 2.83 2.83"></path>
+                                <path d="M9.88 4.24A10.94 10.94 0 0 1 12 4c6.5 0 10 8 10 8a18.26 18.26 0 0 1-2.62 3.93"></path>
+                                <path d="M6.1 6.1C3.53 8.22 2 12 2 12s3.5 6 10 6a10.94 10.94 0 0 0 5.76-1.62"></path>
+                            </svg>
+                        </button>
                     </div>
                 </div>
 
@@ -887,6 +943,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 
     document.getElementById('form-login').addEventListener('submit', (e) => handleAuth(e, 'form-login', 'login-error-box', 'login-error-msg', 'login-timer-msg', 'loginSubmitBtn'));
     document.getElementById('form-signup').addEventListener('submit', (e) => handleAuth(e, 'form-signup', 'signup-error-box', 'signup-error-msg', 'signup-timer-msg', 'signupSubmitBtn'));
+
+    document.querySelectorAll('.password-toggle').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const field = btn.closest('.password-field');
+            const input = field ? field.querySelector('input') : null;
+            if (!input) return;
+            const willShow = input.type === 'password';
+            input.type = willShow ? 'text' : 'password';
+            btn.dataset.visible = String(willShow);
+            btn.setAttribute('aria-pressed', String(willShow));
+            btn.setAttribute('aria-label', willShow ? 'Hide password' : 'Show password');
+            input.focus();
+        });
+    });
 
 </script>
 </body>

@@ -154,7 +154,7 @@
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764704473/logoeraser_f2puji.png" alt="Abdolwahab Logo" class="logo-img">
+            <img src="public/images/logo.png" alt="Abdolwahab Logo" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
                 <span class="logo-sub">PARFUMS & ACCESSORIES</span>

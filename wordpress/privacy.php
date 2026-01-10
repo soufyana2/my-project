@@ -1,0 +1,245 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+?>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Preconnect & SEO -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <title>سياسة الخصوصية | Abdelwahab Accessories & Parfums</title>
+  <meta name="description" content="سياسة الخصوصية لمتجر Abdelwahab Accessories & Parfums - نلتزم بحماية بياناتكم الشخصية.">
+
+  <!-- Tailwind & Fonts -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ms-gold: #C8A95A !important;
+      --ms-black: #000000 !important;
+      --ms-border: #e2e8f0 !important;
+    }
+
+    body {
+      background-color: #ffffff !important;
+      font-family: 'Cairo', sans-serif !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      padding-top: var(--header-offset, 0px) !important;
+      direction: rtl !important;
+      color: #333;
+    }
+
+    .ms-section-transparent {
+      background-color: transparent !important;
+    }
+
+    /* تأثيرات الظهور */
+    .ms-reveal {
+      opacity: 0 !important;
+      transform: translateY(20px) !important;
+      transition: all 0.8s ease !important;
+    }
+
+    .ms-reveal.ms-active {
+      opacity: 1 !important;
+      transform: translateY(0) !important;
+    }
+
+    .ms-dot-black {
+      width: 6px !important;
+      height: 6px !important;
+      background-color: #000000 !important;
+      border-radius: 50% !important;
+      display: inline-block;
+      margin-left: 10px;
+    }
+
+    .ms-policy-card {
+      border-right: 3px solid var(--ms-gold);
+      padding-right: 20px;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      color: var(--ms-black);
+      font-weight: 700;
+      margin-bottom: 15px;
+      font-size: 1.25rem;
+    }
+
+    p, li {
+      line-height: 1.8;
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    /* تحسين العرض في الجوال */
+    @media (max-width: 768px) {
+      .ms-mobile-py { padding-top: 2rem !important; padding-bottom: 2rem !important; }
+      h1 { font-size: 1.5rem !important; }
+    }
+  </style>
+</head>
+
+<body>
+
+<?php include 'header.php'; ?>
+
+  <!-- Header -->
+  <header class="ms-section-transparent py-12 ms-mobile-py ms-reveal">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-2xl md:text-3xl font-black text-black mb-4">سياسة <span style="color:var(--ms-gold) !important;">الخصوصية</span></h1>
+      <p class="text-gray-500 text-sm md:text-base">لمتجر Abdelwahab Accessories & Parfums</p>
+      <div class="w-20 h-1 bg-black mx-auto mt-4"></div>
+    </div>
+  </header>
+
+  <!-- Main Content Area -->
+  <main class="ms-section-transparent pb-20">
+    <div class="container mx-auto px-4 max-w-4xl">
+      
+      <!-- Intro Section -->
+      <section class="ms-reveal mb-12 text-center">
+        <p class="bg-gray-50 p-6 rounded-lg border border-gray-100 italic">
+          نحن في <span class="font-bold text-black">Abdelwahab Accessories & Parfums</span> نحترم خصوصية عملائنا ونلتزم بحماية بياناتهم الشخصية. توضح سياسة الخصوصية هذه كيفية جمع المعلومات واستخدامها وحمايتها عند استخدامك لمتجرنا الإلكتروني داخل المملكة المغربية.
+        </p>
+      </section>
+
+      <!-- Policy Points -->
+      <div class="space-y-10">
+        
+        <!-- 1 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>1. المعلومات التي نقوم بجمعها</h2>
+          <p>عند استخدامك لمتجرنا، قد نقوم بجمع المعلومات التالية:</p>
+          <ul class="mt-3 space-y-2">
+            <li><div class="ms-dot-black"></div>الاسم، البريد الإلكتروني، ورقم الهاتف.</li>
+            <li><div class="ms-dot-black"></div>معلومات الطلبات والشراء وعنوان الشحن داخل المغرب.</li>
+            <li><div class="ms-dot-black"></div>بيانات تسجيل الدخول (بشكل مشفّر).</li>
+            <li><div class="ms-dot-black"></div>أي معلومات ترسل عبر نموذج "اتصل بنا" أو واتساب.</li>
+          </ul>
+          <p class="mt-3 font-bold text-red-600 text-sm">⚠️ لا نقوم بجمع أو تخزين معلومات الدفع البنكية، حيث يتم الدفع عند الاستلام فقط.</p>
+        </div>
+
+        <!-- 2 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>2. إنشاء الحساب وتسجيل الدخول</h2>
+          <p>يتيح المتجر إنشاء حساب باستخدام البريد الإلكتروني، وتسجيل الدخول عبر رمز تحقق، مع إمكانية استعادة كلمة المرور وتغييرها. نلتزم باتخاذ إجراءات أمنية قوية لحماية الحسابات.</p>
+        </div>
+
+        <!-- 3 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>3. كيفية استخدام المعلومات</h2>
+          <p>نستخدم بياناتك من أجل معالجة الطلبات وتنفيذها، التواصل معك بخصوص طلبيتك، تحسين تجربة المستخدم، الرد على الاستفسارات، ولأغراض التسويق (عند موافقتك).</p>
+        </div>
+
+        <!-- 4 & 5 -->
+        <div class="ms-reveal grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="ms-policy-card">
+            <h2>4. الشراء عبر واتساب</h2>
+            <p>عند الشراء عبر واتساب، نستخدم اسمك ورقم هاتفك للتواصل معك وإتمام الطلب فقط.</p>
+          </div>
+          <div class="ms-policy-card">
+            <h2>5. الشحن والتوصيل</h2>
+            <p>الشحن محلي فقط داخل المغرب، ونستخدم بيانات العنوان ورقم الهاتف للتوصيل لجميع مدن المملكة.</p>
+          </div>
+        </div>
+
+        <!-- 6 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>6. ملفات تعريف الارتباط (Cookies)</h2>
+          <p>نستخدم الكوكيز لتذكرك عند زيارة المتجر وتحسين الأداء. يمكنك تعطيلها من إعدادات متصفحك، لكن قد يؤثر ذلك على بعض وظائف الموقع.</p>
+        </div>
+
+        <!-- 7 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>7. أدوات التتبع والتحليل</h2>
+          <p>نستخدم Google Analytics و Facebook Pixel لفهم سلوك الزوار وتحسين تجربة التسوق. هذه الأدوات تجمع بيانات غير شخصية وفق سياساتها الخاصة.</p>
+        </div>
+
+        <!-- 8 & 9 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>8. مشاركة المعلومات</h2>
+          <p>نحن لا نبيع ولا نؤجر بياناتك الشخصية. نشاركها فقط مع شركات الشحن (للتوصيل) أو خدمات التحليل (بشكل غير مباشر) في حدود الضرورة.</p>
+        </div>
+
+        <div class="ms-reveal ms-policy-card">
+          <h2>9. حماية البيانات</h2>
+          <p>نلتزم باتخاذ جميع الإجراءات التقنية المناسبة لحماية بياناتك من الاختراق، التعديل، أو الوصول غير المصرح به.</p>
+        </div>
+
+        <!-- 10 & 11 -->
+        <div class="ms-reveal grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="ms-policy-card">
+            <h2>10. العمر القانوني</h2>
+            <p>يُشترط أن يكون عمر المستخدم 18 سنة أو أكثر لإجراء عمليات الشراء من المتجر.</p>
+          </div>
+          <div class="ms-policy-card">
+            <h2>11. حقوق المستخدم</h2>
+            <p>يحق لك طلب معرفة بياناتك، تصحيحها، حذفها، أو إلغاء حسابك في أي وقت عبر التواصل معنا.</p>
+          </div>
+        </div>
+
+        <!-- 12 & 13 -->
+        <div class="ms-reveal ms-policy-card">
+          <h2>12. وسائل التواصل</h2>
+          <p>لأي استفسار بخصوص بياناتك، يمكنك التواصل معنا عبر بريد نموذج "اتصل بنا" أو رقم الواتساب الرسمي للمتجر.</p>
+        </div>
+
+        <div class="ms-reveal ms-policy-card">
+          <h2>13. التعديلات</h2>
+          <p>نحتفظ بالحق في تعديل سياسة الخصوصية في أي وقت، وسيتم نشر التحديثات على هذه الصفحة.</p>
+        </div>
+
+      </div>
+
+      <!-- Footer Action -->
+      <div class="ms-reveal mt-20 text-center border-t border-gray-100 pt-10">
+        <a href="contact.php" class="inline-block px-8 py-3 border-2 border-black font-bold hover:text-[#C8A95A] hover:border-[#C8A95A] transition-all">
+          العودة لصفحة الاتصال
+        </a>
+      </div>
+
+    </div>
+  </main>
+
+  <?php include 'footer.php'; ?>
+
+  <script>
+    // وظيفة التحريك عند السكرول (نفس المعتمدة في صفحة الاتصال)
+    function reveal() {
+      document.querySelectorAll(".ms-reveal").forEach(el => {
+        if (el.getBoundingClientRect().top < window.innerHeight - 50) {
+          el.classList.add("ms-active");
+        }
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+      function offsetForHeader() {
+        const header = document.querySelector('.header-modern');
+        if (!header) return;
+        document.documentElement.style.setProperty('--header-offset', `${header.offsetHeight}px`);
+      }
+
+      offsetForHeader();
+      window.addEventListener('resize', offsetForHeader);
+      window.addEventListener('load', offsetForHeader);
+
+      reveal();
+      window.addEventListener("scroll", reveal);
+    });
+  </script>
+
+</body>
+
+</html>

@@ -303,7 +303,7 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765686271/wmremove-transformed_2_1_roya1b.jpg" alt="شعار عبدالوهاب للعطور" class="logo-img">
+            <img src="public/images/logo.png" alt="شعار عبدالوهاب للعطور" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
                 <span class="logo-sub">Accessories & Parfums</span>

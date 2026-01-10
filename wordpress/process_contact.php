@@ -5,6 +5,32 @@ session_start();
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    header('Content-Type: text/html; charset=UTF-8');
+    ?>
+    <!DOCTYPE html>
+    <html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Contact Processing</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+    </head>
+    <body>
+        <?php include 'header.php'; ?>
+
+        <main class="max-w-3xl mx-auto px-4 py-16">
+            <h1 class="text-2xl font-bold mb-4">Contact Processing</h1>
+            <p class="text-gray-600">This endpoint handles contact form submissions.</p>
+        </main>
+
+        <?php include 'footer.php'; ?>
+    </body>
+    </html>
+    <?php
+    exit;
+}
+
 header('Content-Type: application/json');
 
 try {

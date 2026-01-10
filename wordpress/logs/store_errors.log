@@ -224,3 +224,4 @@
 [2026-01-07T01:38:02.229543+01:00] wc_store.WARNING: Could not retrieve ID for category: عطور. Error: JSON ERROR: Syntax error [] []
 [2026-01-07T01:38:02.679514+01:00] wc_store.WARNING: Could not retrieve ID for category: ساعات. Error: JSON ERROR: Syntax error [] []
 [2026-01-07T01:38:03.130884+01:00] wc_store.ERROR: WooCommerce API Error (HTTP) fetching Featured Products: JSON ERROR: Syntax error [] []
+[2026-01-10T20:29:02.468923+01:00] wc_store.WARNING: Could not retrieve ID for category: عطور. Error: cURL Error: Operation timed out after 30010 milliseconds with 0 bytes received [] []
