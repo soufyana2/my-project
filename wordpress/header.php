@@ -436,6 +436,17 @@ border-bottom: 1px solid #f1f5f9 !important;
             }
         }
 
+        /* ===== MOBILE SETTINGS (LANGUAGE/CURRENCY) ===== */
+        .mobile-menu .mobile-settings label,
+        .mobile-menu .mobile-settings select,
+        .mobile-menu .mobile-settings option {
+            color: #000000 !important;
+        }
+
+        .mobile-menu .mobile-settings select {
+            border-color: #000000 !important;
+        }
+
         /* ===== SIDEBAR STYLES ===== */
         .cart-sidebar,
         .wishlist-sidebar {
@@ -736,7 +747,7 @@ border-bottom: 1px solid #f1f5f9 !important;
             flex-grow: 1;
             padding: 15px 20px;
             border: none;
-            border-radius: 8px;
+            border-radius: 8px !important;
             background-color: #f1f5f9;
             font-size: 1.25rem;
             color: #0f172a;
@@ -756,7 +767,7 @@ border-bottom: 1px solid #f1f5f9 !important;
         .full-screen-close-icon {
             background: transparent;
             border: none;
-            color: #475569;
+            color: #000000 !important;
             cursor: pointer;
             font-size: 1.5rem;
             padding: 10px;
@@ -766,7 +777,7 @@ border-bottom: 1px solid #f1f5f9 !important;
         @media (min-width: 1024px) {
             .full-screen-search-icon:hover,
             .full-screen-close-icon:hover {
-                color: #C8A95A;
+                color: #000000 !important;
             }
         }
 
@@ -903,7 +914,7 @@ border-bottom: 1px solid #f1f5f9 !important;
 
             .full-screen-search-icon:hover,
             .full-screen-close-icon:hover {
-                color: #475569;
+                color: #000000 !important;
             }
 
             .quantity-minus:hover,
@@ -1338,7 +1349,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
         </div>
 
         <!-- Mobile Settings -->
-        <div class="p-6 border-b border-gray-200" style="direction: rtl;">
+        <div class="p-6 border-b border-gray-200 mobile-settings" style="direction: rtl;">
             <div class="space-y-4">
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">العملة</label>
