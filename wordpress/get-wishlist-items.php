@@ -26,7 +26,7 @@ $stmt->execute([$_SESSION['user_id']]);
 $ids = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
 if (empty($ids)) {
-    echo '<div class="text-center py-20"><img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" class="w-20 mx-auto opacity-50 mb-4"><h3 class="text-gray-500 font-bold">مفضلتك فارغة حالياً</h3></div>';
+    echo '<div class="text-center py-20"><img src="public/images/empty%20wishlist.png" class="w-20 mx-auto opacity-50 mb-4 empty-menu-icon"><h3 class="text-gray-500 font-bold">مفضلتك فارغة حالياً</h3></div>';
 } else {
     try {
         $products = $woocommerce->get('products', ['include' => $ids]);

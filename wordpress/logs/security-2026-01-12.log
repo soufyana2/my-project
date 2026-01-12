@@ -1,0 +1,1 @@
+[2026-01-12 19:05:52] security.INFO: CSRF token regenerated. {"reason":"expired","ip":"127.0.0.1"} {"uid":"e880efb","url":"/index.php","ip":"::1","http_method":"GET","server":"localhost","referrer":"http://localhost:8000/privacy.php"}

@@ -569,6 +569,16 @@ border-bottom: 1px solid #f1f5f9 !important;
     border-radius: 0 !important;
     padding: 0 !important;
 }
+.empty-menu-icon {
+    object-fit: contain;
+    display: block;
+}
+.cart-sidebar .empty-cart-image {
+    width: 96px;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
         /* ===== SCROLLBAR STYLES ===== */
         .cart-products::-webkit-scrollbar,
         .wishlist-products::-webkit-scrollbar {
@@ -1387,7 +1397,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
         <!-- حالة المستخدم غير مسجل الدخول -->
         <div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <div class="mb-6">
-                <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4">        
+                <img src="public/images/empty%20wishlist.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
                 <h3 class="font-playfair font-bold text-xl text-text-primary mb-2">قائمة المفضلة فارغة</h3>
                 <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضف منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
             </div>
@@ -1433,7 +1443,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <?php else: ?>
                 <!-- حالة القائمة فارغة للمسجلين -->
                 <div class="text-center py-20">
-                    <img src="https://cdn-icons-png.flaticon.com/512/4076/4076549.png" class="w-20 mx-auto opacity-50 mb-4">
+                    <img src="public/images/empty%20wishlist.png" class="w-20 mx-auto opacity-50 mb-4 empty-menu-icon">
                     <h3 class="text-gray-500 font-bold">مفضلتك فارغة حالياً</h3>
                 </div>
             <?php endif; ?>
