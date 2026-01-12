@@ -469,10 +469,9 @@ function get_color_hex($color_name) {
         <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-    
-    <title> <?php echo htmlspecialchars($data['name']);?> - Abodlwahab Accssories & Parfums </title>
-        <link rel="icon" type="image/png" href="images/lgicon.png">
-    <script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
+  <title> <?php echo htmlspecialchars($data['name']);?> - Abodlwahab Accssories & Parfums </title>
+<script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -817,6 +816,7 @@ function get_color_hex($color_name) {
         height: 55px;
     }
             .cat-stock-row { gap: 10px; font-size: 0.8rem; }
+            .cat-stock-row .main-product-wishlist { margin-bottom: 2px; padding: 0; }
         }
 
   @media (max-width: 500px) {

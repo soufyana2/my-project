@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>يرجى الانتظار | Abdolwahab Accessories</title>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
+  <title>يرجى الانتظار | Abdolwahab Accessories</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -154,7 +155,7 @@
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="public/images/logo.png" alt="Abdolwahab Logo" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="Abdolwahab Logo" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
                 <span class="logo-sub">PARFUMS & ACCESSORIES</span>

@@ -15,6 +15,7 @@ if (empty($_SESSION['csrf_token'])) {
   <!-- Preconnect & SEO -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
   <title>اتصل بنا | Abdelwahab Accessories</title>
   <meta name="description" content="تواصل مع Abdelwahab Accessories لاستفساراتكم حول الجلابة المغربية والإكسسوارات.">
 
@@ -201,7 +202,7 @@ if (empty($_SESSION['csrf_token'])) {
         <!-- Image & Info Section -->
         <div class="w-full lg:w-5/12 space-y-8 ms-reveal">
           <div class="overflow-hidden border border-gray-100" style="height: 450px !important;">
-            <img src="public/images/contact%20logo.png" 
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" 
                  alt="Contact logo" 
                  class="w-full h-full object-cover" 
                  loading="lazy">

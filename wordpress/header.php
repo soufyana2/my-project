@@ -1231,7 +1231,7 @@ border-bottom: 1px solid #f1f5f9 !important;
                 <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0" style="direction: ltr;">
                                   <!-- logo 1-->
 
-                <img src="public/images/logo.png" alt="STORE Logo" class="h-12 w-auto object-contain">
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="STORE Logo" class="h-12 w-auto object-contain">
                     <div class="hidden sm:block">
                         <a href="index.php">
                         <div class="logo-text">Abdelwahab</div>
@@ -1367,7 +1367,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 <div class="flex items-center space-x-3">
                             <!-- logo 2 -->
 
-                    <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-10 w-auto object-contain">
+                    <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-10 w-auto object-contain">
                     <div>
                         <a href="index.php">
                         <div class="logo-text text-lg">Abdolwahab</div>
@@ -1418,7 +1418,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
       <div class="flex items-center">
         <!-- logo 3 -->
 
-          <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
+          <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
           <div>
               <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
               <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
@@ -1440,7 +1440,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
         <!-- حالة المستخدم غير مسجل الدخول -->
         <div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <div class="mb-6">
-                <img src="public/images/empty%20wishlist.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
                 <h3 class="font-playfair font-bold text-xl text-text-primary mb-2">قائمة المفضلة فارغة</h3>
                 <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضف منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
             </div>
@@ -1486,7 +1486,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <?php else: ?>
                 <!-- حالة القائمة فارغة للمسجلين -->
                 <div class="text-center py-20">
-                    <img src="public/images/empty%20wishlist.png" class="w-20 mx-auto opacity-50 mb-4 empty-menu-icon">
+                    <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" class="w-20 mx-auto opacity-50 mb-4 empty-menu-icon">
                     <h3 class="text-gray-500 font-bold">مفضلتك فارغة حالياً</h3>
                 </div>
             <?php endif; ?>
@@ -1517,7 +1517,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             class="flex items-center justify-between p-8 border-b border-border  from-surface-elevated to-surface flex-shrink-0" style="direction: ltr;background: #ffffff !important;">
             <div class="flex items-center">
                 <!-- logo 4 -->
-                <img src="public/images/logo.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
                 <div>
                     <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
                     <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>

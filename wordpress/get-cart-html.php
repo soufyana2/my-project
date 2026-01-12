@@ -36,7 +36,7 @@ if ($user_id) {
 
 if (empty($items)) {
     echo '<div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
-            <img src="public/images/empty%20cart.png" class="empty-cart-image mx-auto opacity-80 mb-4 animate-pulse empty-cart-icon-fix empty-menu-icon">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/empty_cart_abbrh8.png" class="empty-cart-image mx-auto opacity-80 mb-4 animate-pulse empty-cart-icon-fix empty-menu-icon">
             <h3 style="font-family: \'Cairo\'; font-weight: 700;" class="text-xl mb-2">سلة التسوق فارغة</h3>
           </div>';
     exit;

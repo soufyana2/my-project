@@ -241,11 +241,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <title>Abdolwahab Accssories & Parfums - login </title>
-    <link rel="icon" type="image/png" href="">
-
-    <script src="https://cdn.tailwindcss.com"></script>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
+  <title>Abdolwahab Accssories & Parfums - login </title>
+<script src="https://cdn.tailwindcss.com"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
@@ -597,7 +595,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="public/images/logo.png" alt="شعار عبدالوهاب للعطور - Abdolwahab Parfums Logo" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للعطور - Abdolwahab Parfums Logo" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
                 <span class="logo-sub">Accessories & Parfums</span>

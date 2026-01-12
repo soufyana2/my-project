@@ -13,6 +13,7 @@ if (session_status() === PHP_SESSION_NONE) {
   <!-- Preconnect & SEO -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
   <title>سياسة الخصوصية | Abdelwahab Accessories & Parfums</title>
   <meta name="description" content="سياسة الخصوصية لمتجر Abdelwahab Accessories & Parfums - نلتزم بحماية بياناتكم الشخصية.">
 

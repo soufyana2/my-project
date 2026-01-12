@@ -319,7 +319,8 @@ function renderSkeletonCards($count) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- 1. العنوان المحسن: يحتوي على اسم المتجر + الكلمات المفتاحية الرئيسية -->
-    <title>عبد الوهاب للعطور والإكسسوارات | تسوق أفضل العطور والساعات في المغرب</title>
+<link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
+  <title>عبد الوهاب للعطور والإكسسوارات | تسوق أفضل العطور والساعات في المغرب</title>
     
     <!-- 2. وصف دقيق وجذاب يحتوي كلمات بحثية -->
     <meta name="description" content="تسوق أونلاين من عبد الوهاب للإكسسوارات والعطور. اكتشف تشكيلة واسعة من العطور الفاخرة، الساعات الأنيقة، والهدايا المميزة بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
@@ -332,9 +333,7 @@ function renderSkeletonCards($count) {
     <link rel="canonical" href="https://your-domain.com/index.php" />
 
     <!-- 5. Favicon -->
-    <link rel="icon" type="image/png" href="images/lgicon.png">
-
-    <!-- 6. Open Graph (للظهور باحترافية على فيسبوك، واتساب، وتويتر) -->
+<!-- 6. Open Graph (للظهور باحترافية على فيسبوك، واتساب، وتويتر) -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="عبد الوهاب للعطور والإكسسوارات - فخامة وأناقة" />
     <meta property="og:description" content="اكتشف مجموعتنا الحصرية من العطور والساعات. جودة عالية وأسعار تنافسية." />
