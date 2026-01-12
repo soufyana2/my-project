@@ -242,7 +242,7 @@ background-color: #ffffff;
 }
 /* ضمان ظهور أيقونة الحذف بشكل صحيح */
 .remove-product-icon.active {
-    color: #ef4444 !important;
+    color: #000000 !important;
     opacity: 1 !important;
     visibility: visible !important;
 }
@@ -566,6 +566,10 @@ border-bottom: 1px solid #f1f5f9 !important;
     font-size: 12px;
     cursor: pointer;
     z-index: 10;
+    background: transparent !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    transition: background-color 0.3s ease, color 0.3s ease !important;
     
     /* هام جداً: حذفنا opacity و visibility من هنا ليعمل الهوفر */
     /* opacity: 1;      <-- حذف */
@@ -693,6 +697,20 @@ border-bottom: 1px solid #f1f5f9 !important;
     border-radius: 50% !important;
 }
 
+#close-wishlist,
+#close-cart {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+#close-wishlist:focus,
+#close-cart:focus,
+#close-wishlist:focus-visible,
+#close-cart:focus-visible {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
 
 
 /* 4. توحيد هوفر روابط قائمة المستخدم */
@@ -716,7 +734,14 @@ border-bottom: 1px solid #f1f5f9 !important;
     }
 
     /* هوفر أزرار الإغلاق */
-    #close-wishlist:hover, #close-cart:hover, #close-mobile-menu:hover {
+    #close-wishlist:hover,
+    #close-cart:hover {
+        background-color: #f1f5f9 !important;
+        color: #000000 !important;
+        transform: none !important;
+    }
+
+    #close-mobile-menu:hover {
         background-color: #f1f5f9 !important;
         color: #ef4444 !important;
         transform: rotate(90deg);
@@ -738,9 +763,9 @@ border-bottom: 1px solid #f1f5f9 !important;
 
     /* هوفر زر الحذف (Trash) داخل القائمة */
     .remove-product-icon:hover {
-        background-color: #ef4444 !important;
-        color: white !important;
-        transform: scale(1.1) !important;
+        background-color: #f1f5f9 !important;
+        color: #000000 !important;
+        transform: none !important;
     }
 }
         .full-screen-search-input {
@@ -930,9 +955,16 @@ border-bottom: 1px solid #f1f5f9 !important;
 
             #close-cart:hover,
             #close-wishlist:hover {
-                color: #64748b;
+                color: #000000;
                 transform: none;
-                background: transparent;
+                background: #f1f5f9;
+            }
+
+            .cart-sidebar .remove-product-icon:hover,
+            .wishlist-sidebar .remove-product-icon:hover {
+                background-color: #f1f5f9 !important;
+                color: #000000 !important;
+                transform: none !important;
             }
 
             .mobile-nav-link:hover {
