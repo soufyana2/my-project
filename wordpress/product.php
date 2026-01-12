@@ -794,6 +794,8 @@ function get_color_hex($color_name) {
             .faq-question { font-size: 0.8rem !important; padding: 15px 0; }
             .tabs-nav { width: 100%; justify-content: space-between; }
             .tab-btn { flex: 1; text-align: center; padding: 15px 5px; }
+            #desc .tab-text h3 { margin-right: 12px; }
+            #desc .tab-text p { margin-left: 12px; margin-right: 12px; }
             .actions-row { flex-direction: column; }
             
             .qty-color-row { gap: 10px; flex-direction: row; }
