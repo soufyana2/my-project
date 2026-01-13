@@ -1081,6 +1081,11 @@ border-bottom: 1px solid #f1f5f9 !important;
             font-size: 0.8rem;
         }
 
+        .cart-sidebar .cart-qty-controls,
+        .cart-sidebar .cart-qty-controls .cart-qty-btn {
+            border-radius: 9999px !important;
+        }
+
         .cart-menu {
             transform: translateX(100%);
             transition: transform 0.3s ease;

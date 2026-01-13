@@ -84,10 +84,10 @@ foreach ($items as $item):
             <div class="flex flex-wrap gap-1.5 my-2"><?= $attr_display ?></div>
             <div class="flex justify-between items-end mt-auto">
                 <span class="font-bold text-base text-accent" style="color: #C8A95A;"><?= $p->price ?> د.م</span>
-                <div class="flex items-center bg-gray-50 rounded-full p-1" style="direction: ltr; gap: 8px; border: 1px solid #f1f5f9;">
-                    <button onclick="updateCart(<?= $item['product_id'] ?>, 'update', <?= $item['quantity'] + 1 ?>, <?= $item['variation_id'] ?>, '<?= addslashes($item['attributes']) ?>')" class="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600">+</button>
+                <div class="cart-qty-controls flex items-center bg-gray-50 rounded-full p-1" style="direction: ltr; gap: 8px; border: 1px solid #f1f5f9;">
+                    <button onclick="updateCart(<?= $item['product_id'] ?>, 'update', <?= $item['quantity'] + 1 ?>, <?= $item['variation_id'] ?>, '<?= addslashes($item['attributes']) ?>')" class="cart-qty-btn w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600">+</button>
                     <span class="text-xs font-bold text-gray-800"><?= $item['quantity'] ?></span>
-                    <button onclick="updateCart(<?= $item['product_id'] ?>, 'update', <?= $item['quantity'] - 1 ?>, <?= $item['variation_id'] ?>, '<?= addslashes($item['attributes']) ?>')" class="w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600">-</button>
+                    <button onclick="updateCart(<?= $item['product_id'] ?>, 'update', <?= $item['quantity'] - 1 ?>, <?= $item['variation_id'] ?>, '<?= addslashes($item['attributes']) ?>')" class="cart-qty-btn w-7 h-7 rounded-full bg-white shadow-sm flex items-center justify-center text-gray-600">-</button>
                 </div>
             </div>
         </div>

@@ -4,27 +4,31 @@
   .slider-section-container {
     width: 100%;
     /* 1. إلغاء الحشو الداخلي والمسافات الزائدة */
-    padding: 0; 
+    padding: 0;
     margin-top: 10px;
     margin-bottom: 0;
-    
+
     /* 2. تحديد ارتفاع ثابت وصغير للقسم بالكامل لمنع أي فراغ سفلي */
-    height: 60px; 
-    
-    background-color: transparent; /* يمكنك تغيير اللون أو جعله transparent */
+    height: 60px;
+
+    background-color: transparent;
+    /* يمكنك تغيير اللون أو جعله transparent */
     display: flex;
-    align-items: center; /* توسيط المحتوى عمودياً */
+    align-items: center;
+    /* توسيط المحتوى عمودياً */
     overflow: hidden;
   }
 
   .slider-section-container .swiper {
     width: 100%;
-    height: 100%; /* يأخذ نفس ارتفاع الحاوية */
+    height: 100%;
+    /* يأخذ نفس ارتفاع الحاوية */
     padding: 0;
   }
 
   .slider-section-container .swiper-wrapper {
-    align-items: center; /* ضمان توسيط الشرائح */
+    align-items: center;
+    /* ضمان توسيط الشرائح */
   }
 
   .slider-section-container .swiper-slide {
@@ -32,17 +36,18 @@
     justify-content: center;
     align-items: center;
     height: 100%;
-    width: auto; /* مهم جداً لعدم تمدد الشريحة */
+    width: auto;
+    /* مهم جداً لعدم تمدد الشريحة */
   }
 
   /* 3. التحكم في حجم الصور لتبقى صغيرة (Small SVG logos) */
   .slider-section-container .swiper-slide img {
     /* عرض تلقائي للحفاظ على الأبعاد */
-    width: auto; 
-    
+    width: auto;
+
     /* ارتفاع أقصى صغير جداً لتبقى اللوجوهات ناعمة */
-    max-height: 35px; 
-    
+    max-height: 35px;
+
     object-fit: contain;
     /* إلغاء أي هوامش للصورة */
     margin: 0;
@@ -52,10 +57,13 @@
   /* تصغير إضافي للموبايل لضمان عدم وجود فراغات */
   @media (max-width: 768px) {
     .slider-section-container {
-      height: 50px; /* ارتفاع أقل للموبايل */
+      height: 50px;
+      /* ارتفاع أقل للموبايل */
     }
+
     .slider-section-container .swiper-slide img {
-      max-height: 25px; /* لوجوهات أصغر للموبايل */
+      max-height: 25px;
+      /* لوجوهات أصغر للموبايل */
     }
   }
 </style>
@@ -64,28 +72,34 @@
 <!-- If your main page's head doesn't have it, you can place this here, but it's less optimal. -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-<div class="slider-section-container" >
+<div class="slider-section-container">
   <div class="swiper mySwiper">
     <div class="swiper-wrapper">
 
-      
+
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="hugo boss logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo2_tvjddo.png"
+          alt="hugo boss logo" />
       </div>
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="Tiffany & Co. logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo3_gj2ztk.png"
+          alt="Tiffany & Co. logo" />
       </div>
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="Gucci logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973897/logo4_jayicd.png"
+          alt="Gucci logo" />
       </div>
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="Chanel logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo5_lkwwil.png"
+          alt="Chanel logo" />
       </div>
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="Balenciaga logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo6_ysrebx.png"
+          alt="Balenciaga logo" />
       </div>
       <div class="swiper-slide">
-        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/contact_logo_tx3liw.png" alt="Michael kors logo" />
+        <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764973898/logo7_payslx.png"
+          alt="Michael kors logo" />
       </div>
 
     </div>
