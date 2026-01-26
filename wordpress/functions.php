@@ -497,7 +497,7 @@ function check_remember_me($pdo) {
     }
     $cookie_data = base64_decode($_COOKIE['remember_token'], true);
     if (!$cookie_data || substr_count($cookie_data, ':') !== 1) {
-        setcookie('remember_token', '', time() - 3600, '/', '', false, true);
+        setcookie('remember_token', '', time() - 3600, '/', '', true, true);
         return false;
     }
     list($selector, $validator) = explode(':', $cookie_data, 2);

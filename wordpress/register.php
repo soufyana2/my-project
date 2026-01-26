@@ -7,8 +7,8 @@ error_reporting(E_ALL);
 session_set_cookie_params([
     'path' => '/',
     'domain' => '',
-    'secure' => false,
-    'httponly' => false,
+    'secure' => true,
+    'httponly' => true,
     'samesite' => 'lax'
 ]);
 
