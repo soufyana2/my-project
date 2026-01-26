@@ -93,7 +93,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <body>
 
-<?php include '../header.php'; ?>
+<?php include 'header.php'; ?>
 
   <!-- Header -->
   <header class="ms-section-transparent py-12 ms-mobile-py ms-reveal">
@@ -213,7 +213,7 @@ if (session_status() === PHP_SESSION_NONE) {
     </div>
   </main>
 
-<?php include '../footer.php'; ?>
+<?php include 'footer.php'; ?>
 
   <script>
     // وظيفة التحريك عند السكرول (نفس المعتمدة في صفحة الاتصال)

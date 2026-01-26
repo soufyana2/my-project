@@ -25,7 +25,7 @@ try {
 }
 require_once 'functions.php'; // هذا الملف يحتوي على secure_session_start() التي تشغل الـ Remember me
 manage_csrf_token();
-$whatsapp_number = $_ENV['whatsapp_number'] ?? '212000000000';
+$whatsapp_number = $_ENV['whatsapp_number'] ?? '212634229259';
 
 // الآن بعد تشغيل الوظائف، نتحقق من تسجيل الدخول
 $isLoggedIn = isset($_SESSION['user_id']);

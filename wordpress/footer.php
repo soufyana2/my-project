@@ -68,8 +68,8 @@ if (!isset($_SESSION['csrf_token'])) {
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">المساعدة والسياسات</h4>
                 <ul class="space-y-2 font-cairo text-sm w-full">
-                    <li><a href="/my-project/wordpress/contact/privacy.php" class="footer-link">سياسة الخصوصية</a></li>
-                    <li><a href="/my-project/wordpress/contact/contact.php" class="footer-link">اتصل بنا</a></li>
+                    <li><a href="privacy.php" class="footer-link">سياسة الخصوصية</a></li>
+                    <li><a href="contact.php" class="footer-link">اتصل بنا</a></li>
                 </ul>
             </div>
 

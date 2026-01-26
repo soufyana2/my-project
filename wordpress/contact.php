@@ -153,7 +153,7 @@ if (empty($_SESSION['csrf_token'])) {
 
 <body>
 
-<?php include '../header.php'; ?>
+<?php include 'header.php'; ?>
 
   <!-- Header -->
   <header class="ms-section-transparent py-8 ms-mobile-py ms-reveal">
@@ -273,7 +273,7 @@ if (empty($_SESSION['csrf_token'])) {
     </div>
   </section>
 
-<?php include '../footer.php'; ?>
+<?php include 'footer.php'; ?>
 
   <script>
     // وظيفة الأسئلة الشائعة

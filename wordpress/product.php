@@ -46,7 +46,7 @@ try {
     // خطأ في تحميل ملف البيئة
 }
 // جلب رقم الواتساب من البيئة (أو وضع افتراضي إذا لم يوجد)
-$whatsapp_number = $_ENV['whatsapp_number'] ?? '212000000000';
+$whatsapp_number = $_ENV['whatsapp_number'] ?? '212634229259';
 
 // التأكد من وجود مجلد للسجلات (Logs)
 $log_dir = __DIR__ . '/logs';

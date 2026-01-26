@@ -39,14 +39,10 @@ try {
     // بما أننا داخل projects/contact، سنصعد درجة واحدة للأعلى
     $basePath = realpath(__DIR__ . '/..'); 
 
-    // استدعاء ملفات المشروع الأساسية باستخدام المسار الحقيقي
-    if (!file_exists($basePath . '/db.php')) throw new Exception("الملف db.php غير موجود في $basePath");
-    if (!file_exists($basePath . '/functions.php')) throw new Exception("الملف functions.php غير موجود في $basePath");
-    if (!file_exists($basePath . '/vendor/autoload.php')) throw new Exception("مجلد vendor غير موجود. قم بتشغيل composer install");
-
-    require_once $basePath . '/db.php';
-    require_once $basePath . '/functions.php';
-    require_once $basePath . '/vendor/autoload.php';
+  
+    require_once 'db.php';
+    require_once 'functions.php';
+    require_once 'vendor/autoload.php';
 
     // تحميل إعدادات البريد
     if (file_exists($basePath . '/keys.env')) {

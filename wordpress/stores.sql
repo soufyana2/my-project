@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 04, 2026 at 09:00 PM
+-- Generation Time: Jan 26, 2026 at 10:45 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -40,6 +40,19 @@ CREATE TABLE `blocked_ips` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `contact_attempts`
+--
+
+CREATE TABLE `contact_attempts` (
+  `id` int(11) NOT NULL,
+  `ip_address` varchar(45) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `attempt_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `ip_attemptss`
 --
 
@@ -66,12 +79,11 @@ CREATE TABLE `login_attempts` (
   `id` int(11) NOT NULL,
   `ip` varchar(45) NOT NULL,
   `login_input` varchar(255) NOT NULL,
-  `device_fingerprint` varchar(255) NOT NULL,
-  `attempts` int(11) UNSIGNED NOT NULL DEFAULT 0,
-  `last_attempt` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `locked_until` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `updated_at` int(10) UNSIGNED NOT NULL DEFAULT 0,
-  `country_code` varchar(2) DEFAULT NULL
+  `device_fingerprint` varchar(64) NOT NULL,
+  `attempts` int(11) DEFAULT 0,
+  `last_attempt` int(11) NOT NULL,
+  `locked_until` int(11) DEFAULT 0,
+  `updated_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -90,13 +102,6 @@ CREATE TABLE `login_logs` (
   `detail` text DEFAULT NULL,
   `created_at` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `login_logs`
---
-
-INSERT INTO `login_logs` (`id`, `ip`, `login_input`, `user_id`, `device_fingerprint`, `action`, `detail`, `created_at`) VALUES
-(1027, '105.155.33.10', 'soufyan', 133, '7ad2262698a094d54783d32649c8e3e6d84a694275978f745653038c36c3305a', 'login', 'Success', 1767460866);
 
 -- --------------------------------------------------------
 
@@ -213,13 +218,14 @@ CREATE TABLE `registration_logs` (
 --
 
 CREATE TABLE `remember_tokens` (
-  `id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `selector` char(20) NOT NULL,
-  `hashed_token` char(255) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `user_id` int(10) UNSIGNED NOT NULL,
+  `selector` char(16) NOT NULL,
+  `hashed_token` varchar(255) NOT NULL,
+  `expires_at` datetime NOT NULL,
   `ip` varchar(45) NOT NULL,
-  `expires_at` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -241,12 +247,13 @@ CREATE TABLE `subscribers` (
 --
 
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(100) NOT NULL,
-  `email` varchar(150) NOT NULL,
+  `id` int(10) UNSIGNED NOT NULL,
+  `username` varchar(50) NOT NULL,
+  `email` varchar(191) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `created_at` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -258,20 +265,12 @@ CREATE TABLE `user_cart` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
+  `variation_id` int(11) DEFAULT NULL,
   `quantity` int(11) DEFAULT 1,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `variation_id` int(11) DEFAULT 0,
-  `attributes` text DEFAULT NULL
+  `selected_size` varchar(50) DEFAULT NULL,
+  `selected_color` varchar(50) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `user_cart`
---
-
-INSERT INTO `user_cart` (`id`, `user_id`, `product_id`, `quantity`, `created_at`, `variation_id`, `attributes`) VALUES
-(67, 133, 128, 1, '2026-01-04 04:49:59', 0, ''),
-(68, 133, 151, 1, '2026-01-04 04:49:59', 0, ''),
-(69, 133, 182, 1, '2026-01-04 04:50:00', 0, '');
 
 -- --------------------------------------------------------
 
@@ -299,6 +298,14 @@ ALTER TABLE `blocked_ips`
   ADD UNIQUE KEY `idx_expiry` (`expiry`);
 
 --
+-- Indexes for table `contact_attempts`
+--
+ALTER TABLE `contact_attempts`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_ip_address` (`ip_address`),
+  ADD KEY `idx_attempt_time` (`attempt_time`);
+
+--
 -- Indexes for table `ip_attemptss`
 --
 ALTER TABLE `ip_attemptss`
@@ -312,7 +319,8 @@ ALTER TABLE `ip_attemptss`
 --
 ALTER TABLE `login_attempts`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `login_ip_fingerprint_unique` (`login_input`,`ip`,`device_fingerprint`);
+  ADD KEY `ip` (`ip`,`login_input`),
+  ADD KEY `device_fingerprint` (`device_fingerprint`);
 
 --
 -- Indexes for table `login_logs`
@@ -366,7 +374,8 @@ ALTER TABLE `registration_logs`
 --
 ALTER TABLE `remember_tokens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
+  ADD UNIQUE KEY `idx_selector` (`selector`),
+  ADD KEY `idx_user_id` (`user_id`);
 
 --
 -- Indexes for table `subscribers`
@@ -380,7 +389,8 @@ ALTER TABLE `subscribers`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `username` (`username`,`email`);
+  ADD UNIQUE KEY `idx_email` (`email`),
+  ADD UNIQUE KEY `idx_username` (`username`);
 
 --
 -- Indexes for table `user_cart`
@@ -393,7 +403,8 @@ ALTER TABLE `user_cart`
 --
 ALTER TABLE `user_wishlist`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_item` (`user_id`,`product_id`);
+  ADD UNIQUE KEY `user_product` (`user_id`,`product_id`),
+  ADD UNIQUE KEY `user_product_unique` (`user_id`,`product_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -406,98 +417,94 @@ ALTER TABLE `blocked_ips`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
+-- AUTO_INCREMENT for table `contact_attempts`
+--
+ALTER TABLE `contact_attempts`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `ip_attemptss`
 --
 ALTER TABLE `ip_attemptss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2467;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2498;
 
 --
 -- AUTO_INCREMENT for table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=492;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1028;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1051;
 
 --
 -- AUTO_INCREMENT for table `otp_attemptsssss`
 --
 ALTER TABLE `otp_attemptsssss`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=760;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=768;
 
 --
 -- AUTO_INCREMENT for table `otp_logs`
 --
 ALTER TABLE `otp_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2179;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2196;
 
 --
 -- AUTO_INCREMENT for table `password_resets`
 --
 ALTER TABLE `password_resets`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT for table `password_reset_attempts`
 --
 ALTER TABLE `password_reset_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=82;
 
 --
 -- AUTO_INCREMENT for table `registration_attempts`
 --
 ALTER TABLE `registration_attempts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=281;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=287;
 
 --
 -- AUTO_INCREMENT for table `registration_logs`
 --
 ALTER TABLE `registration_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=421;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=434;
 
 --
 -- AUTO_INCREMENT for table `remember_tokens`
 --
 ALTER TABLE `remember_tokens`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=126;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `subscribers`
 --
 ALTER TABLE `subscribers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user_cart`
 --
 ALTER TABLE `user_cart`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `user_wishlist`
 --
 ALTER TABLE `user_wishlist`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=248;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `remember_tokens`
---
-ALTER TABLE `remember_tokens`
-  ADD CONSTRAINT `remember_tokens_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=190;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
