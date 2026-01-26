@@ -3,17 +3,13 @@ require_once 'db.php';
 require_once 'functions.php';
 
 header('Content-Type: application/json');
+error_reporting(0); 
 
-// دالة موحدة للرد لضمان تجديد التوكن والكابتشا دائماً
 function send_final_response($status, $message) {
-    // توليد توكن جديد للعملية القادمة لضمان التزامن
     $new_token = generate_csrf_token(); 
-    
-    // حفظ الجلسة فوراً قبل إرسال الرد للمتصفح
     if (session_status() === PHP_SESSION_ACTIVE) {
         session_write_close();
     }
-
     echo json_encode([
         'status' => $status,
         'message' => $message,
@@ -37,7 +33,7 @@ if (!$email) {
     send_final_response('error', 'البريد الإلكتروني المدخل غير صحيح.');
 }
 
-// 3. فحص الـ Rate Limit (من config.php)
+// 3. فحص الـ Rate Limit
 $config = include('config.php');
 $limits = $config['rate_limits']['subscribe'];
 $ip = getClientIP();
@@ -51,18 +47,14 @@ try {
         $time_passed = time() - $row['last_attempt'];
         $current_attempts = ($time_passed > $limits['interval']) ? 0 : $row['attempts'];
         if ($current_attempts >= $limits['attempts']) {
-            send_final_response('error', 'لقد تجاوزت حد المحاولات المسموح به (3 محاولات في الساعة).');
+            send_final_response('error', 'لقد تجاوزت حد المحاولات المسموح به.');
         }
     }
 } catch (PDOException $e) {}
 
-// 4. التحقق من كابتشا Turnstile (توكن الكابتشا صالح لمرة واحدة فقط)
-$turnstile_token = $_POST['cf-turnstile-response'] ?? '';
-if (empty($turnstile_token) || !validate_turnstile_response($turnstile_token)) {
-    send_final_response('error', 'فشل تحقق الأمان (Captcha). يرجى المحاولة مرة أخرى.');
-}
+// تم حذف خطوة التحقق من الكابتشا (Turnstile) هنا لتبسيط العملية
 
-// 5. تسجيل زيادة المحاولات في الـ Rate Limit
+// 5. تسجيل زيادة المحاولات
 try {
     $stmt = $pdo->prepare("INSERT INTO ip_attemptss (ip, action_type, attempts, last_attempt, updated_at) 
         VALUES (?, 'subscribe', 1, UNIX_TIMESTAMP(), NOW()) 
@@ -75,7 +67,6 @@ try {
 
 // 6. تنفيذ عملية الاشتراك
 try {
-    // هل الإيميل موجود مسبقاً؟
     $stmt = $pdo->prepare("SELECT id FROM subscribers WHERE email = ? LIMIT 1");
     $stmt->execute([$email]);
     if ($stmt->rowCount() > 0) {
@@ -83,7 +74,6 @@ try {
         send_final_response('success', 'أنت مشترك بالفعل في قائمتنا البريدية.');
     }
 
-    // إدخال جديد (يدعم الزوار والمسجلين)
     $stmt = $pdo->prepare("INSERT INTO subscribers (email, ip_address, created_at) VALUES (?, ?, NOW())");
     $stmt->execute([$email, $ip]);
 

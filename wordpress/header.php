@@ -5,13 +5,24 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
 // 2. تحميل ملف apikeys.env (نحتاجها لتعريف WooCommerce Client)
+
 try {
-    if (file_exists(__DIR__ . '/apikeys.env')) {
-        $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
+
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+    if (file_exists($root . '/.env')) {
+        $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists($root . '/apikeys.env')) {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
         $dotenv->load();
     }
-} catch (Exception $e) { /* تجاهل الخطأ إذا كان محملاً مسبقاً */ }
-
+} catch (Exception $e) {
+    // خطأ في تحميل ملف البيئة
+}
 require_once 'functions.php'; // هذا الملف يحتوي على secure_session_start() التي تشغل الـ Remember me
 manage_csrf_token();
 $whatsapp_number = $_ENV['whatsapp_number'] ?? '212000000000';
@@ -38,20 +49,19 @@ elseif ($currentScript == 'filter.php') {
         elseif ($urlCategory == 'باقات وعروض') $activeCategory = 'pack';
     }
 }
-
-// 4. منطق المفضلة (Wishlist) المطور - نظام الكاش السريع
+// 4. منطق المفضلة (Wishlist) المطور
 $wishlistProductsData = [];
 $wishlistCount = 0;
+$user_wishlist_ids = []; // توحيد الاسم تماماً
 
 if ($isLoggedIn) {
-    // جلب الـ IDs من قاعدة البيانات (دائماً سريعة)
+    // جلب المعرفات من الداتابيز
     $stmt = $pdo->prepare("SELECT product_id FROM user_wishlist WHERE user_id = ? ORDER BY id DESC");
     $stmt->execute([$_SESSION['user_id']]);
-    $wishlistIds = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    $wishlistCount = count($wishlistIds);
+    $user_wishlist_ids = $stmt->fetchAll(PDO::FETCH_COLUMN); 
+    $wishlistCount = count($user_wishlist_ids);
 
     if ($wishlistCount > 0) {
-        // إذا كانت البيانات موجودة في الجلسة ولدينا نفس العدد، نستخدمها فوراً
         if (isset($_SESSION['wishlist_cache']) && count($_SESSION['wishlist_cache']) == $wishlistCount) {
             $wishlistProductsData = $_SESSION['wishlist_cache'];
         } else {
@@ -59,12 +69,13 @@ if ($isLoggedIn) {
                 if (!isset($woocommerce)) {
                     $woocommerce = new Automattic\WooCommerce\Client(
                         $_ENV['wordpress_url'], $_ENV['consumer_key'], $_ENV['secret_key'],
-                        ['version' => 'wc/v3', 'verify_ssl' => false, 'timeout' => 10]
+                        ['version' => 'wc/v3', 'verify_ssl' => false, 'timeout' => 15]
                     );
                 }
-                $wishlistProductsData = $woocommerce->get('products', ['include' => $wishlistIds]);
+                // جلب البيانات من WC
+                $wishlistProductsData = $woocommerce->get('products', ['include' => $user_wishlist_ids, 'per_page' => 100]);
                 $wishlistProductsData = json_decode(json_encode($wishlistProductsData), true);
-                $_SESSION['wishlist_cache'] = $wishlistProductsData; // تخزين في الكاش
+                $_SESSION['wishlist_cache'] = $wishlistProductsData;
             } catch (Exception $e) { $wishlistProductsData = []; }
         }
     }
@@ -1021,7 +1032,12 @@ border-bottom: 1px solid #f1f5f9 !important;
                 padding: 5px;
             }
         }
-
+.empty-cart-image {
+    display: block !important;
+    max-width: 150px;
+    height: auto;
+    margin: 0 auto;
+}
         @media (max-width: 480px) {
 
             .wishlist-sidebar .flex-1.overflow-y-auto,
@@ -1183,6 +1199,21 @@ border-bottom: 1px solid #f1f5f9 !important;
         width: 60% !important;
     }
 }
+/* ستايل دائرة التحميل (Spinner) */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.wishlist-spinner-circle {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #C8A95A; /* لونك الذهبي */
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    display: block;
+}
     </style>
 <script src="https://unpkg.com/@phosphor-icons/web"></script>
     <!-- ===== MAIN HEADER ===== -->
@@ -1273,10 +1304,7 @@ border-bottom: 1px solid #f1f5f9 !important;
                         <div id="auth-dropdown-menu"
 class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity-0 scale-95 invisible transition-all duration-200 ease-out origin-top-right border border-border overflow-hidden">                            <!-- Removed My Orders and Wishlist buttons -->
                                     <?php if ($isLoggedIn): ?>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
-<i class="ph ph-user mr-3"style="margin-left: 5px;"></i> ملفي الشخصي
-                            </a>
+                         
                             <a href="#"
                                 class="block px-4 py-2 text-sm text-text-secondary lg:hover:bg-surface-hover lg:hover:text-accent flex items-center">
                                 <i class="ph ph-question mr-3 flex-shrink-0"style="margin-left: 5px;"></i>
@@ -1446,12 +1474,12 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
         <div class="flex-1 flex flex-col items-center justify-center p-8 text-center">
             <div class="mb-6">
                 <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
-                <h3 class="font-playfair font-bold text-xl text-text-primary mb-2">قائمة المفضلة فارغة</h3>
-                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضف منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
+                <h3 class="font-playfair font-bold text-xl text-text-primary mb-2"></h3>
+                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">  </p>
             </div>
             <div class="space-y-3 w-full max-w-xs font-sans">
                 <a href="register.php" class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2 group">
-                    <span>تسجيل الدخول</span>
+                    <span> </span>
                     <i class="ph ph-sign-in text-lg lg:group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
@@ -1543,7 +1571,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
 
             
         </div>
- <?php if ($isLoggedIn): ?>
+ 
         <!-- Cart Footer -->
        <div 
     style="
@@ -1608,7 +1636,6 @@ onclick="buyCartViaWhatsapp()">
 </button>
 
         </div>
-         <?php endif ?>
     </div>
 
     <!-- ===== OVERLAY ===== -->
@@ -1987,6 +2014,10 @@ onclick="buyCartViaWhatsapp()">
 
         // ===== INITIALIZATION =====
         document.addEventListener('DOMContentLoaded', () => {
+            // --- أضف السطرين هنا بضبط ---
+    refreshCartUI();
+    updateWishlistSidebar();
+    // ----------------------------
             // Initialize language display
             const initialSelectedLangOption = document.querySelector('.language-option .selected-check')?.closest('.language-option');
             if (initialSelectedLangOption && elements.selectedLanguageSpan) {
@@ -2043,30 +2074,262 @@ if (searchInput) {
             e.preventDefault();
             triggerSearch();
         }
+    });// المتغيرات العالمية
+let currentCsrfToken = '<?php echo $_SESSION["csrf_token"]; ?>';
+let isRequestPending = false; 
+
+function toggleUILock(lock) {
+    isRequestPending = lock;
+    const sidebars = document.querySelectorAll('.wishlist-sidebar, .cart-sidebar, .overlay');
+    const closeBtns = document.querySelectorAll('#close-wishlist, #close-cart');
+    sidebars.forEach(el => el.style.pointerEvents = lock ? 'none' : 'auto');
+    // إخفاء أزرار الإغلاق تماماً أثناء التحميل لضمان عدم المقاطعة
+    closeBtns.forEach(el => el.style.display = lock ? 'none !important' : 'flex !important');
+    
+ 
+}
+// ================= نظام السلة المطور =================
+// متغيرات للتحكم في العمليات المتتالية
+let cartUpdateTimeout;
+let activeRequests = 0;
+
+
+// 1. إضافة للمنتج (حل مشكلة السلة الفارغة عند الفتح)
+window.addToCart = function(productId, variationId, qty, size, color) {
+    if (isRequestPending) return;
+    toggleUILock(true);
+    
+    // إظهار السايدبار فوراً مع حالة تحميل
+    openCart();
+    const container = document.getElementById('cart-products-container');
+    container.innerHTML = `<div class="flex flex-col items-center justify-center p-20"><div class="wishlist-spinner-circle"></div></div>`;
+
+    const params = new URLSearchParams();
+    params.append('action', 'add');
+    params.append('product_id', productId);
+    params.append('variation_id', variationId);
+    params.append('quantity', qty);
+    params.append('size', size || '');
+    params.append('color', color || '');
+
+    fetch('cart-api.php', { method: 'POST', body: params })
+    .then(r => r.json())
+    .then(data => {
+        if (data.status === 'success') {
+            // ننتظر قليلاً للتأكد من تحديث قاعدة البيانات ثم نجلب البيانات
+            setTimeout(() => refreshCartUI(false), 300);
+        }
+    })
+    .finally(() => toggleUILock(false));
+};
+
+
+window.updateCartQty = function(cartId, change, btn) {
+    // 1. الوصول للعنصر الذي يعرض الرقم
+    const qtySpan = btn.parentElement.querySelector('span');
+    let currentQty = parseInt(qtySpan.innerText);
+    
+    // 2. حساب الكمية الجديدة
+    let newQty = currentQty + change;
+
+    // 3. منع النقصان عن 1 (تجربة مستخدم احترافية)
+    if (newQty < 1) return;
+   // --- الإضافة الأولى هنا ---
+    const whatsappBtn = document.querySelector('.btn-whatsappp');
+    if (whatsappBtn) { whatsappBtn.style.opacity = '0.5'; whatsappBtn.style.pointerEvents = 'none'; }
+    // 4. تحديث الواجهة فوراً (تجربة سريعة جداً)
+    qtySpan.innerText = newQty;
+
+    // 5. نظام التهدئة (Debounce) لإرسال الطلب للسيرفر
+    clearTimeout(cartUpdateTimeout);
+
+    cartUpdateTimeout = setTimeout(() => {
+        const params = new URLSearchParams();
+        params.append('action', 'update_qty');
+        params.append('cart_id', cartId);
+        params.append('new_qty', newQty);
+
+        fetch('cart-api.php', { method: 'POST', body: params })
+        .then(r => r.json())
+        .then(data => {
+            if(data.status === 'success') {
+                // تحديث المجموع النهائي في السفل فقط بدون إعادة تحميل القائمة
+                updateCartTotalOnly();
+            }
+        });
+    }, 500); // ينتظر نصف ثانية بعد آخر ضغطة ليرسل الطلب
+};
+// 3. حذف منتج (حل مشكلة الظهور مجدداً بعد الحذف)
+window.removeFromCart = function(cartId, btn) {
+     // --- أضف هذا السطرين هنا ---
+    const whatsappBtn = document.querySelector('.btn-whatsappp');
+    if (whatsappBtn) { whatsappBtn.style.opacity = '0.5'; whatsappBtn.style.pointerEvents = 'none'; }
+    // ----------------------------
+    const row = btn.closest('.cart-item-row');
+    if (row) {
+        row.style.transition = '0.3s';
+        row.style.opacity = '0';
+        row.style.transform = 'scale(0.9)';
+        setTimeout(() => {
+            row.remove();
+            // إذا فرغت السلة تماماً، أظهر رسالة "فارغة"
+            if (document.querySelectorAll('.cart-item-row').length === 0) {
+                refreshCartUI(false);
+            }
+        }, 300);
+    }
+
+    const params = new URLSearchParams();
+    params.append('action', 'remove');
+    params.append('cart_id', cartId);
+    
+    fetch('cart-api.php', { method: 'POST', body: params })
+    .then(() => {
+        updateCartTotalOnly(); // تحديث المجموع والعداد في الهيدر
+    });
+};
+
+function updateCartTotalOnly() {
+    fetch('get-cart-items.php?v=' + Date.now())
+    .then(r => r.text())
+    .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        const newTotal = doc.getElementById('hidden-cart-total')?.value;
+        if (newTotal) document.getElementById('cart-total').innerText = newTotal;
+        
+        // قراءة العدد الإجمالي الفعلي (مجموع الكميات) من الحقل المخفي
+        const dbCountInput = doc.getElementById('db-cart-total-count');
+        const finalCount = dbCountInput ? parseInt(dbCountInput.value) : 0;
+
+        document.querySelectorAll('.cart-badge').forEach(b => {
+            b.innerText = finalCount;
+            b.style.display = finalCount > 0 ? 'flex' : 'none';
+        });
+
+        // حل مشكلة الجلتش: إذا أصبح العدد 0، نحدث الواجهة فوراً لإظهار رسالة "السلة فارغة"
+        if (finalCount === 0) {
+            const container = document.getElementById('cart-products-container');
+            if (container) container.innerHTML = html; 
+        }
+        
+        const whatsappBtn = document.querySelector('.btn-whatsappp');
+        if (whatsappBtn) { whatsappBtn.style.opacity = '1'; whatsappBtn.style.pointerEvents = 'auto'; }
     });
 }
+// 3. تحديث واجهة السلة (تعطيل زر الواتساب)
+window.refreshCartUI = function(showSpinner = false) {
+    const container = document.getElementById('cart-products-container');
+    const whatsappBtn = document.querySelector('.btn-whatsappp'); // زر الواتساب
+    if (!container) return;
+
+        // --- تعطيل الزر فوراً عند بداية الدالة ---
+    if (whatsappBtn) {
+        whatsappBtn.style.opacity = '0.5';
+        whatsappBtn.style.pointerEvents = 'none';
+    }
+
+    if (showSpinner) {
+        container.innerHTML = `<div class="flex flex-col items-center justify-center p-20"><div class="wishlist-spinner-circle"></div><p class="mt-4 font-bold">جاري التحميل...</p></div>`;
+    }
+    // ... باقي كود Fetch سيقوم بإعادة تفعيل الزر عند النجاح تلقائياً ...
+
+    fetch('get-cart-items.php?v=' + Date.now())
+        .then(r => r.text())
+        .then(html => { 
+            container.innerHTML = html;
+
+            const hiddenTotalInput = document.getElementById('hidden-cart-total');
+            const totalDisplay = document.getElementById('cart-total');
+            if (hiddenTotalInput && totalDisplay) {
+                totalDisplay.innerText = hiddenTotalInput.value;
+            }
+
+            const items = container.querySelectorAll('.cart-item-row');
+            // قراءة العدد من الحقل المخفي القادم من قاعدة البيانات مباشرة
+const dbCountInput = document.getElementById('db-cart-total-count');
+const itemsCount = dbCountInput ? parseInt(dbCountInput.value) : items.length;
+
+            // --- التحكم في زر الواتساب ---
+            if (whatsappBtn) {
+                if (itemsCount === 0) {
+                    whatsappBtn.style.opacity = '0.5';
+                    whatsappBtn.style.pointerEvents = 'none'; // تعطيل الضغط
+                } else {
+                    whatsappBtn.style.opacity = '1';
+                    whatsappBtn.style.pointerEvents = 'auto'; // تفعيل الضغط
+                    whatsappBtn.style.filter = 'none';
+                }
+            }
+
+            document.querySelectorAll('.cart-badge').forEach(b => {
+                b.innerText = itemsCount;
+                b.style.display = itemsCount > 0 ? 'flex' : 'none';
+            });
+        });
+};
+// وظيفة الشراء عبر واتساب
+window.buyCartViaWhatsapp = function() {
+    // جلب كل الصفوف التي تحمل كلاس cart-item-row
+    const items = document.querySelectorAll('#cart-products-container .cart-item-row');
+    
+    if (items.length === 0) {
+        alert('Votre panier est actuellement vide !');
+        return;
+    }
+
+    let message = "Bonjour,\n\nJe souhaite commander les articles suivants depuis mon panier chez *abdelwahab accessories* :\n\n";
+    
+    items.forEach((item, index) => {
+        const title = item.querySelector('h4').innerText;
+        const details = item.querySelector('.category-text').innerText; // taille et couleur
+        const price = item.querySelector('.font-bold.text-base.text-gray-900').innerText;
+        const qty = item.querySelector('.px-2.text-sm.font-bold').innerText;
+        const productId = item.getAttribute('data-p-id');
+        const productUrl = window.location.origin + "/product.php?id=" + productId;
+
+        message += `Lien du produit : ${productUrl}\n\n`;
+        message += `${index + 1}. ${title}\n`;
+        message += `   ${details}\n`;
+        message += `   Quantité : ${qty} | Prix : ${price}\n\n`;
+    });
+    
+    const total = document.getElementById('cart-total').innerText;
+    message += `--------------------------\n`;
+    message += `*Total final : ${total}*`;
+    
+    const whatsappUrl = `https://wa.me/<?php echo $whatsapp_number; ?>?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+};
+
+
+
+let wishlistCooldown = false; // متغير للتحكم في الانتظار
 window.toggleWishlist = function(btn, e) {
     if (e) { e.preventDefault(); e.stopPropagation(); }
+    if (isRequestPending) return;
 
     const productId = btn.getAttribute('data-product-id');
-    if (!productId) return;
-
-    // 1. فتح القائمة الجانبية فوراً
-    if (typeof openWishlist === "function") openWishlist();
-
-    // 2. تحديث الحالة البصرية فوراً لكل الأزرار التي تحمل نفس ID المنتج
+    const row = btn.closest('.wishlist-item-row');
+    const isRemoveAction = btn.classList.contains('remove-product-icon') || btn.closest('.remove-product-icon');
+    
     const isCurrentlyActive = btn.classList.contains('active');
-// لكي يتعرف النظام على القلب في صفحة المنتج وفي الكروت معاً
-const allHearts = document.querySelectorAll(`.wishlist-icon[data-product-id="${productId}"], .main-product-wishlist[data-product-id="${productId}"]`);    
-    allHearts.forEach(heart => {
-        if (isCurrentlyActive) {
-            heart.classList.remove('active'); // إزالة اللون الأحمر والأيقونة الممتلئة
-        } else {
-            heart.classList.add('active');    // إضافة اللون الأحمر والأيقونة الممتلئة
-        }
+    
+    // تحديث فوري لجميع القلوب في الصفحة (الرئيسية والسايدبار)
+    document.querySelectorAll(`[data-product-id="${productId}"]`).forEach(heart => {
+        if (isCurrentlyActive) heart.classList.remove('active');
+        else heart.classList.add('active');
     });
 
-    // 3. إرسال الطلب للسيرفر لتحديث قاعدة البيانات
+    if (row && isRemoveAction) {
+        row.style.opacity = '0.3';
+    }
+
+    const isLoggedIn = <?php echo (isset($isLoggedIn) && $isLoggedIn) ? 'true' : 'false'; ?>;
+    if (!isLoggedIn) { window.location.href = 'register.php'; return; }
+
+    toggleUILock(true);
     const params = new URLSearchParams();
     params.append('product_id', productId);
 
@@ -2075,247 +2338,96 @@ const allHearts = document.querySelectorAll(`.wishlist-icon[data-product-id="${p
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: params
     })
-    .then(response => response.json())
+    .then(r => r.json())
     .then(data => {
-         if (data.status === 'need_login') {
-        window.location.href = 'register.php'; // توجيه المستخدم إذا لم يكن مسجلاً
-        return;
-    }
-        if (data.status === 'success' || data.status === 'added' || data.status === 'removed') {
-            // تحديث عداد الأرقام في الهيدر
-            document.querySelectorAll('.wishlist-badge').forEach(badge => {
-                badge.innerText = data.count;
-                badge.style.display = data.count > 0 ? 'flex' : 'none';
+        if (data.status === 'success') {
+            document.querySelectorAll('.wishlist-badge').forEach(b => {
+                b.innerText = data.count;
+                b.style.display = data.count > 0 ? 'flex' : 'none';
             });
 
-            // تحديث محتوى القائمة الجانبية بالبيانات الجديدة من السيرفر
-            if (typeof updateWishlistSidebar === "function") {
-                updateWishlistSidebar();
+            const sidebarCountSpan = document.getElementById('wishlist-sidebar-count-text');
+            if (sidebarCountSpan) sidebarCountSpan.innerText = data.count;
+
+            if (row && isRemoveAction) {
+                row.remove(); 
+                if (data.count === 0) updateWishlistSidebar(false);
+            } else {
+                // عند الإضافة: نحدث السايدبار فوراً ليظهر المنتج وتختفي رسالة "فارغة"
+                updateWishlistSidebar(false);
             }
         }
     })
-    .catch(err => console.error('Error:', err));
+    .finally(() => toggleUILock(false));
 };
-
-// دالة تحديث محتوى القائمة الجانبية
-window.updateWishlistSidebar = function(isAdding = false) {
+window.updateWishlistSidebar = function(showSpinner = false) {
     const container = document.getElementById('wishlist-items-container');
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('close-wishlist');
+    if (!container) return;
 
-    // قفل الضغط على الخلفية وزر الإغلاق أثناء التحميل
-    if (overlay) overlay.style.setProperty('pointer-events', 'none', 'important');
-    if (closeBtn) closeBtn.style.setProperty('pointer-events', 'none', 'important');
-    
-    if (container) {
-        // إظهار الدائرة التي سيتم تحريكها بواسطة كود الـ CSS أعلاه
-        container.innerHTML = `
-            <div style="display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; padding: 120px 20px !important; width: 100% !important; text-align: center !important;">
-                <div class="wishlist-spinner-circle"></div>
-                <p style="margin-top: 25px !important; font-size: 14px !important; font-weight: 800 !important; color: #000000 !important; font-family: 'Cairo', sans-serif !important;">جاري تحديث المفضلة...</p>
-            </div>`;
-    }
+    // مسح المحتوى القديم فوراً (سواء صورة فارغة أو منتجات) وإظهار لودر لسرعة الاستجابة
+    container.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;padding:100px 20px;width:100%;"><div class="wishlist-spinner-circle"></div></div>`;
 
     fetch('get-wishlist-items.php?v=' + Date.now())
-    .then(response => response.text())
-    .then(html => {
-        if (container) {
-            container.innerHTML = html;
-        }
-        
-        // إعادة تفعيل التفاعل بعد التحميل
-        if (overlay) overlay.style.setProperty('pointer-events', 'auto', 'important');
-        if (closeBtn) closeBtn.style.setProperty('pointer-events', 'auto', 'important');
-        
-        if (isAdding && typeof openWishlist === "function") {
-            openWishlist();
-        }
-    });
-};
-// متغير عالمي لحفظ التوكن وتحديثه
-let currentCsrfToken = '<?php echo $_SESSION["csrf_token"]; ?>';
-let isCartUpdating = false; // لمنع تداخل العمليات
-
-window.updateCart = function(productId, action, newQty = 1, variationId = 0, attributes = '') {
-    if (isCartUpdating) return; // منع النقر المتعدد السريع جداً
-    if (action === 'update' && newQty < 1) { action = 'remove'; }
-
-    isCartUpdating = true;
-    showCartLoading(); // تعطيل الأزرار فوراً
-
-    const params = new URLSearchParams();
-    params.append('action', action);
-    params.append('product_id', productId);
-    params.append('variation_id', variationId);
-    params.append('quantity', newQty);
-    params.append('attributes', attributes);
-    params.append('csrf_token', currentCsrfToken);
-
-    fetch('cart-api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
-    })
-    .then(r => r.json())
-    .then(res => {
-        if (res.new_csrf) currentCsrfToken = res.new_csrf;
-
-        if (res.status === 'success') {
-            // تحديث السلة برمجياً دون انتظار طلب HTML منفصل لزيادة السرعة
-            updateCartBadge(res.data.count);
-            window.currentCartForWhatsApp = res.data; 
-            // الآن نحدث الـ HTML ليبقى التصميم متزامناً
-            refreshCartUI();
-        } else {
-            alert(res.message || "فشلت العملية");
-            hideCartLoading();
-            isCartUpdating = false;
-        }
-    })
-    .catch(err => {
-        console.error('Cart Error:', err);
-        hideCartLoading();
-        isCartUpdating = false;
-    });
-};
-
-function updateTotalsFromAPI() {
-    const params = new URLSearchParams();
-    params.append('action', 'fetch');
-    params.append('csrf_token', currentCsrfToken);
-
-    fetch('cart-api.php', { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
-    })
-    .then(r => r.json())
-    .then(res => {
-        if (res.new_csrf) currentCsrfToken = res.new_csrf;
-        
-        if(res.status === 'success' && res.data) {
-            const total = parseFloat(res.data.total).toFixed(2);
-            document.getElementById('cart-total').innerText = total + ' د.م';
-            updateCartBadge(res.data.count);
-            window.currentCartForWhatsApp = res.data; 
-            
-            // تفعيل زر الواتساب فقط بعد اكتمال جلب البيانات والمجاميع
-            hideCartLoading();
-        }
-        isCartUpdating = false;
-    });
-}
-
-function refreshCartUI() {
-    fetch('get-cart-html.php?v=' + Date.now())
     .then(r => r.text())
-    .then(html => {
-        const container = document.getElementById('cart-products-container');
-        if (container) {
-            container.innerHTML = html;
-        }
-        updateTotalsFromAPI(); // جلب المجاميع وتفعيل الأزرار
+    .then(html => { 
+        container.innerHTML = html; 
     });
-}
-
-function showCartLoading() {
-    const waBtn = document.querySelector('.btn-whatsappp');
-    if(waBtn) {
-        waBtn.disabled = true;
-        waBtn.style.opacity = '0.5';
-        waBtn.innerHTML = '<span>جاري التحديث...</span>';
-    }
-}
-
-function hideCartLoading() {
-    const waBtn = document.querySelector('.btn-whatsappp');
-    if(waBtn) {
-        waBtn.disabled = false;
-        waBtn.style.opacity = '1';
-        waBtn.innerHTML = '<span style="font-weight:700;">اطلب عبر واتساب</span>';
-    }
-}
-
-function updateCartBadge(count) {
-    document.querySelectorAll('.cart-badge').forEach(b => {
-        const totalCount = parseInt(count) || 0;
-        b.innerText = totalCount;
-        b.style.display = totalCount > 0 ? 'flex' : 'none';
-    });
-}
-
-window.buyCartViaWhatsapp = function() {
-    const data = window.currentCartForWhatsApp;
-    if (!data || data.count === 0) return alert('السلة فارغة حالياً');
-    
-    let msg = `*طلب جديد من المتجر*\n\n`;
-    data.items_list.forEach((item, i) => {
-        let details = item.attr ? `\n   التفاصيل: ${item.attr}` : "";
-        let link = item.link ? `\n   الرابط: ${item.link}` : ""; // إضافة الرابط هنا
-        msg += `${i+1}. *${item.name}*${details}${link}\n   الكمية: ${item.qty} | السعر: ${item.price} د.م\n\n`;
-    });
-    msg += `--------------------------\n`;
-    msg += `*الإجمالي النهائي:* ${data.total} د.م`;
-    
-    const phoneNumber = "<?php echo $whatsapp_number; ?>";
-    window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`, '_blank');
 };
-
-document.addEventListener('DOMContentLoaded', refreshCartUI);
 window.addAllWishlistToCart = function() {
-    const btn = document.querySelector('.wishlist-sidebar .btn-professional'); 
-    if (!btn) return;
+    const btn = document.getElementById('add-all-wishlist-to-cart');
+    if (!btn || isRequestPending) return;
 
-    const originalContent = btn.innerHTML;
+    toggleUILock(true);
     btn.disabled = true;
-    btn.innerHTML = '<span>جاري النقل للسلة...</span>';
+    const originalHTML = btn.innerHTML;
+    btn.innerHTML = '<span>جاري النقل...</span>';
 
-    fetch('wishlist-to-cart-bulk.php', {
-        method: 'POST'
+    fetch('wishlist-to-cart-bulk.php', { 
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
     })
-    .then(response => response.json())
+    .then(r => r.json())
     .then(data => {
         if (data.status === 'success') {
             
-            // --- NEW: Reset all heart icons on the product grid ---
-            document.querySelectorAll('.wishlist-icon, .main-product-wishlist').forEach(icon => {
-                icon.classList.remove('active');
-            });
-
-            // 1. Update Wishlist Sidebar (will now show as empty)
-            if (typeof updateWishlistSidebar === "function") {
-                updateWishlistSidebar();
-            }
-
-            // 2. Refresh Cart UI (to show new items)
-            if (typeof refreshCartUI === "function") {
-                refreshCartUI();
-            }
-
-            // 3. Clear Wishlist Badges globally
+            // 1. تحديث العداد (Badge) في الهيدر فوراً
             document.querySelectorAll('.wishlist-badge').forEach(badge => {
                 badge.innerText = '0';
-                badge.style.display = 'none';
+                badge.style.display = 'none'; // إخفاء الدائرة الحمراء
             });
+
+            // 2. إزالة اللون الأحمر من جميع القلوب في الصفحة (الرئيسية أو الفلتر)
+            document.querySelectorAll('.wishlist-icon.active').forEach(heart => {
+                heart.classList.remove('active');
+            });
+
+            // 3. تحديث قائمة المفضلة الجانبية لتظهر فارغة
+            if (typeof updateWishlistSidebar === 'function') {
+                updateWishlistSidebar(false); 
+            }
             
-            // 4. Smooth transition: Close wishlist and open cart
+            // 4. تحديث سلة التسوق لتظهر المنتجات الجديدة
+            if (typeof refreshCartUI === 'function') {
+                refreshCartUI(false); 
+            }
+
+            // 5. إغلاق القوائم الجانبية
             setTimeout(() => {
-                closeAllMenus(); 
-                setTimeout(() => {
-                    if (typeof openCart === "function") openCart();
-                }, 400);
-            }, 500);
+                if (typeof closeAllMenus === 'function') closeAllMenus();
+            }, 600);
 
         } else if (data.status === 'empty') {
-            alert('قائمة المفضلة فارغة بالفعل');
+            alert('قائمة المفضلة فارغة بالفعل!');
         }
     })
-    .catch(err => {
-        console.error('Error:', err);
+    .catch(error => {
+        console.error('Error:', error);
     })
     .finally(() => {
+        toggleUILock(false);
         btn.disabled = false;
-        btn.innerHTML = originalContent;
+        btn.innerHTML = originalHTML;
     });
 };
+}
     </script>

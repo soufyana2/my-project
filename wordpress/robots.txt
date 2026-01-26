@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /vendor/
+Disallow: /apikeys.env
+Disallow: /keys.env
+
+Sitemap: https://abdelwahabaccessories.store/sitemap.xml

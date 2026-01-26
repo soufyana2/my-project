@@ -21,29 +21,26 @@ $config = include('config.php');
 require __DIR__ . '/vendor/autoload.php';
 
 use Dotenv\Dotenv;
+// --- تحميل متغيرات البيئة (keys.env) من المجلد الأب ---
+// نستخدم dirname(__DIR__) للوصول من مجلد wordpress إلى مجلد my-project
+$envPath = dirname(__DIR__); 
 
-// تحقق من وجود ملف keys.env
-if (!file_exists(__DIR__ . '/keys.env')) {
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        echo json_encode(['status' => 'error', 'message' => 'Technical error: keys missing']);
-        exit;
-    }
-    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => __DIR__]);
-    http_response_code(500);
-    exit("A technical error occurred.please try again later.");
+if (!file_exists($envPath . '/keys.env')) {
+    // إذا كان الملف غير موجود، قم بتسجيل خطأ فادح وأوقف التنفيذ
+    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => $envPath]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration file missing.");
 }
 
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'keys.env');
+    // نقوم بتمرير المسار الأب واسم الملف للمكتبة
+    $dotenv = Dotenv::createImmutable($envPath, 'keys.env');
     $dotenv->load();
 } catch (Exception $e) {
-    if (!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
-        echo json_encode(['status' => 'error', 'message' => 'Technical error: keys load failed']);
-        exit;
-    }
+    // إذا فشل تحميل الملف، قم بتسجيل الخطأ وأوقف التنفيذ
     getLogger('setup')->critical('Failed to load keys.env file.', ['error' => $e->getMessage()]);
-    http_response_code(500);
-    exit("A technical error occurred.please try again later.");
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration load failed.");
 }
 
 $session_timeout = 60 * 60;

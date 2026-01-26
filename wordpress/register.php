@@ -1,20 +1,19 @@
 <?php
 ob_start();
-session_start();
-
-
-
-ini_set('display_errors', 0);
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_set_cookie_params([
     'path' => '/',
     'domain' => '',
-    'secure' => true,
-    'httponly' => true,
+    'secure' => false,
+    'httponly' => false,
     'samesite' => 'lax'
 ]);
+
+session_start();
+
 
 include("db.php");
 require_once 'functions.php';
@@ -22,19 +21,26 @@ require_once 'functions.php';
 
 require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
+// --- تحميل متغيرات البيئة (keys.env) من المجلد الأب ---
+// نستخدم dirname(__DIR__) للوصول من مجلد wordpress إلى مجلد my-project
+$envPath = dirname(__DIR__); 
 
-// التحقق من ملف المفاتيح
-if (!file_exists(__DIR__ . '/keys.env')) {
-    if(is_ajax_request()) { echo json_encode(['status'=>'error', 'message'=>'Technical error: keys file missing']); exit; }
-    http_response_code(500); exit("A technical error occurred.");
+if (!file_exists($envPath . '/keys.env')) {
+    // إذا كان الملف غير موجود، قم بتسجيل خطأ فادح وأوقف التنفيذ
+    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => $envPath]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration file missing.");
 }
 
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'keys.env');
+    // نقوم بتمرير المسار الأب واسم الملف للمكتبة
+    $dotenv = Dotenv::createImmutable($envPath, 'keys.env');
     $dotenv->load();
 } catch (Exception $e) {
-    if(is_ajax_request()) { echo json_encode(['status'=>'error', 'message'=>'Technical error: keys load failed']); exit; }
-    http_response_code(500); exit("A technical error occurred.");
+    // إذا فشل تحميل الملف، قم بتسجيل الخطأ وأوقف التنفيذ
+    getLogger('setup')->critical('Failed to load keys.env file.', ['error' => $e->getMessage()]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration load failed.");
 }
 
 // الفحوصات الأمنية الأولية

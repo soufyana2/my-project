@@ -22,6 +22,99 @@ function secure_session_start() {
 // تشغيل الجلسة فوراً
 secure_session_start();
 
+// إعدادات الكاش
+if (!defined('CACHE_DIR')) define('CACHE_DIR', __DIR__ . '/cache/');
+if (!defined('CACHE_LIFETIME')) define('CACHE_LIFETIME', 3600);
+
+// دالة جلب البيانات من الكاش
+function getFromCache($key) {
+    $cacheFile = CACHE_DIR . md5($key) . '.json';
+    if (file_exists($cacheFile) && (filemtime($cacheFile) + CACHE_LIFETIME > time())) {
+        return json_decode(file_get_contents($cacheFile), true);
+    }
+    return null;
+}
+
+// دالة حفظ البيانات في الكاش
+function saveToCache($key, $data) {
+    global $log; 
+    if (!is_dir(CACHE_DIR)) {
+        if (!mkdir(CACHE_DIR, 0775, true)) return false;
+    }
+    $cacheFile = CACHE_DIR . md5($key) . '.json';
+    $json_data = json_encode($data);
+    if ($json_data === false) return false;
+    return file_put_contents($cacheFile, $json_data) !== false;
+}
+
+// دالة جلب معرف القسم باسمه
+function getCategoryId($woocommerce, $category_name) {
+    $cacheKey = 'category_id_' . md5($category_name);
+    $cachedData = getFromCache($cacheKey);
+    if ($cachedData !== null) return $cachedData['id'];
+
+    try {
+        $categories = $woocommerce->get('products/categories', ['search' => $category_name, 'per_page' => 1]);
+        if (!empty($categories) && isset($categories[0]->id)) {
+            $categoryId = $categories[0]->id;
+            saveToCache($cacheKey, ['id' => $categoryId]);
+            return $categoryId;
+        }
+        return null;
+    } catch (Exception $e) {
+        return null;
+    }
+}
+
+// دالة جلب المنتجات حسب القسم
+function fetchProducts($woocommerce, $category, $per_page, $offset = 0) {
+    $cacheKey = 'products_' . md5($category . '_' . $per_page . '_' . $offset);
+    $cachedData = getFromCache($cacheKey);
+    if ($cachedData !== null) return $cachedData;
+
+    try {
+        $category_id = getCategoryId($woocommerce, $category);
+        if (!$category_id) return [];
+
+        $params = [
+            'category' => $category_id,
+            'per_page' => $per_page,
+            'offset' => $offset,
+            'status' => 'publish',
+            'order' => 'desc',
+            'orderby' => 'date'
+        ];
+        $products = $woocommerce->get('products', $params);
+        $products_as_array = json_decode(json_encode($products), true);
+        saveToCache($cacheKey, $products_as_array);
+        return $products_as_array;
+    } catch (Exception $e) {
+        return [];
+    }
+}
+
+// دالة جلب المنتجات المميزة
+function fetchFeaturedProducts($woocommerce, $per_page) {
+    $cacheKey = 'featured_products_' . md5($per_page);
+    $cachedData = getFromCache($cacheKey);
+    if ($cachedData !== null) return $cachedData;
+
+    try {
+        $params = [
+            'featured' => true,
+            'per_page' => $per_page,
+            'status' => 'publish',
+            'order' => 'desc',
+            'orderby' => 'date'
+        ];
+        $products = $woocommerce->get('products', $params);
+        $products_as_array = json_decode(json_encode($products), true);
+        saveToCache($cacheKey, $products_as_array);
+        return $products_as_array;
+    } catch (Exception $e) {
+        return [];
+    }
+}
 function get_user_cache($key) {
     $user_id = $_SESSION['user_id'] ?? 'guest_' . session_id();
     $cache_file = __DIR__ . "/cache/user_{$user_id}_{$key}.json";
@@ -49,12 +142,12 @@ function validate_email($email, $pdo) {
     
     // التحقق من أن التنظيف لم يؤدِ إلى بريد غير صالح
     if (!$email || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        return $generic_error;
+        return "البريد الإلكتروني خاطئ";
     }
 
     // التحقق من الطول
     if (strlen($email) > 255) {
-        return $generic_error;
+        return "البريد الإلكتروني خاطئ";
     }
 
     // التحقق من النطاقات الممنوعة
@@ -73,11 +166,7 @@ function validate_email($email, $pdo) {
         return $generic_error;
     }
 
-    // فحص MX Records
-    list($user, $domain) = explode('@', $email, 2);
-    if (!checkdnsrr($domain, 'MX')) {
-        return $generic_error;
-    }
+
 
     try { // Monolog ADDED: أضفنا try-catch لتسجيل أخطاء قاعدة البيانات
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ? LIMIT 1");
@@ -85,7 +174,7 @@ function validate_email($email, $pdo) {
 
         if ($stmt->rowCount() > 0) {
             $authLogger->info('Email already exists.', ['email' => $email, 'ip' => getClientIP()]);
-            return $generic_error;
+            return "البريد الالكتروني مستخدم مسبقا";
         }
     } catch (PDOException $e) {
         $dbLogger = getLogger('database');
@@ -114,14 +203,14 @@ function validate_username($username, $pdo) {
     if (strlen($username) < 6 || strlen($username) > 20) {
                 $authLogger->notice( ' Username verification failed: Invalid length.', ['username_attempt' => $original_username]);
 
-        return $generic_error;
+        return "اسم المستخدم قصير جدا";
     }
 
 
     // السماح فقط بالحروف الصغيرة، الأرقام، _ - .
   if (!preg_match('/^[a-z0-9]+([._][a-z0-9]+)*$/', $username)) {
         $authLogger->notice( 'Username verification failed: Contains disallowed characters.', ['username_attempt' => $original_username, 'ip' => getClientIP()]);
-        return $generic_error;
+        return "اسم المستخدم خاطئ";
 }
 
     // قائمة الأسماء المحظورة
@@ -154,7 +243,7 @@ function validate_username($username, $pdo) {
     // التحقق من وجود الاسم في القائمة
     if (in_array($username, $forbidden_usernames)) {
         $securityLogger->warning('Attempted use of a banned username.', ['username_attempt' => $original_username, 'ip' => getClientIP()]);
-        return $generic_error;
+        return "اسم المستخدم ممنوع";
     }
       
      try {
@@ -165,7 +254,7 @@ function validate_username($username, $pdo) {
         if ($stmt->rowCount() > 0) {
             // هذا فشل تحقق عادي
             $authLogger->info('Verification failed: The username already exists.', ['username_attempt' => $original_username]);
-            return $generic_error;
+            return "اسم المستخدم مستخدم مسبقا";
         }
     } catch (PDOException $e) {
         // تسجيل أخطاء قاعدة البيانات في قناتها الخاصة
@@ -185,41 +274,27 @@ function validate_password($password) {
     $password = trim($password);
     $password_length = strlen($password);
 
-  if ($password_length < 8) {
+  if ($password_length < 5) {
         $securityLogger->notice(' Password verification failed: Too short..', ['length_provided' => $password_length]);
-        return $generic_error;
+        return "كلمة المرور  قصير جدا";
     }
     if ($password_length > 128) {
         $securityLogger->notice('Password verification failed: Too long.', ['length_provided' => $password_length]);
         return $generic_error;
     }
-    if (!preg_match('/[A-Z]/', $password)) {
-        $securityLogger->notice('Password verification failed: Does not contain an uppercase letter.');
-        return $generic_error;
-    }
+
     if (!preg_match('/[a-z]/', $password)) {
         $securityLogger->notice('Password verification failed: Does not contain a lowercase letter.');
-        return $generic_error;
+return "كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.";
     }
-    if (!preg_match('/[0-9]/', $password)) {
-        $securityLogger->notice('Password verification failed: Does not contain a number.');
-        return $generic_error;
-    }
-  
+
  // السماح فقط بالحروف الإنجليزية، الأرقام، والرموز المسموح بها
     if (!preg_match('/^[a-zA-Z0-9!@#$%^&*()\-_=+\[\]{};:,.<>?\/]+$/', $password)) {
         $securityLogger->warning('Password verification failed: Contains invalid or harmful characters.');
-        return $generic_error;
+return "كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.";
     }
 
-    // تحقق من وجود رمز خاص في الوسط فقط إذا كانت كلمة المرور قصيرة (<12)
-    if (strlen($password) < 12) {
-        $middle = substr($password, 1, -1);
-        if (!preg_match('/[!@#$%^&*()\-_=+\[\]{};:,.<>?\/]/', $middle)) {
-        $securityLogger->notice('Verification failed: The short password does not contain a special character in the middle.');
-        return $generic_error;
-        }
-    }
+  
     if (in_array(strtolower($password), array_map('strtolower', $common_passwords))) {
         $securityLogger->warning('Attempted use of a very common and weak password.');
         return $generic_error;
@@ -596,35 +671,35 @@ function lock_duration(int $attempts, string $action_type): int {
         return match ($action_type){
         // 🔐 Login
     'login' => match (true) {
-        $attempts >= 7 => 350, // ~6 دقائق
-        $attempts >= 6 => 150, // دقيقتان ونصف
-        $attempts >= 5 => 100, // دقيقة و40 ثانية
+        $attempts >= 12 => 350, // ~6 دقائق
+        $attempts >= 11 => 150, // دقيقتان ونصف
+        $attempts >= 10 => 100, // دقيقة و40 ثانية
         default        => 0,
     },
 
     // 📝 Signup
     'signup' => match (true) {
-        $attempts >= 5 => 300, // 5 دقائق
-        $attempts >= 4 => 120, // دقيقتان
-        $attempts >= 3 => 60,  // دقيقة
+        $attempts >= 12 => 300, // 5 دقائق
+        $attempts >= 11 => 120, // دقيقتان
+        $attempts >= 10 => 60,  // دقيقة
         default        => 0,
     },
         'forgot', 'reset' => match (true) {
             // الترتيب مهم: من الأعلى إلى الأدنى
-            $attempts >= 5 => 450,  // 5 دقائق (بعد 3 محاولات)
-            $attempts >= 4 => 150,  // 5 دقائق (بعد 3 محاولات)
-            $attempts >= 3 => 60,   // 1 دقيقة (بعد محاولتين)
+            $attempts >= 10 => 450,  // 5 دقائق (بعد 3 محاولات)
+            $attempts >= 9 => 150,  // 5 دقائق (بعد 3 محاولات)
+            $attempts >= 8 => 60,   // 1 دقيقة (بعد محاولتين)
             default        => 0,
         },
         'otp_resend' => match (true) {
-            $attempts >= 3 => 180,   // مثال: قفل بعد 4 محاولات
-            $attempts >= 2=> 80,
+            $attempts >= 8 => 180,   // مثال: قفل بعد 4 محاولات
+            $attempts >= 7=> 80,
             default        => 0,
         },
 
         'otp_verify' => match (true) {
-            $attempts >= 5 => 200,  // مثال: قفل بعد 6 محاولات
-            $attempts >= 3 => 80,
+            $attempts >= 11 => 200,  // مثال: قفل بعد 6 محاولات
+            $attempts >= 10 => 80,
             default        => 0,
         },
 
@@ -2321,53 +2396,67 @@ function rate_limit_reset_password(PDO $pdo, string $email): void {
     }
 }
 
-
 function renderProductCard($product, $is_skeleton = false) {
-    // 1. ضروري جداً جلب المتغير العالمي لكي يعرف الكرت إذا كان المنتج في المفضلة أم لا
     global $user_wishlist_ids; 
 
-    $image_src = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
-    $hover_image_src = $image_src;
-    $category_name = "غير مصنف";
-    $product_title = "";
-    $price = "";
-    $regular_price = "";
-    $skeleton_class = "skeleton-pending";
-    $product_link = "#";
-
-    if (!$is_skeleton && is_array($product)) {
-        $image_src = !empty($product['images'][0]['src']) ? $product['images'][0]['src'] : "";
-        $hover_image_src = (isset($product['images'][1]['src'])) ? $product['images'][1]['src'] : $image_src;
-        $category_name = !empty($product['categories'][0]['name']) ? $product['categories'][0]['name'] : "متجرنا";
-        $product_title = $product['name'];
-        $price = $product['price'] ? number_format($product['price'], 2) . ' د.م' : 'N/A';
-        $regular_price = (isset($product['regular_price']) && $product['regular_price'] > $product['price']) ? number_format($product['regular_price'], 2) . ' د.م' : '';
-        $product_link = 'product.php?id=' . $product['id'];
+    // --- حالة الـ Skeleton (المجسم الفارغ) ---
+     // --- حالة الـ Skeleton (المجسم الفارغ) ---
+    if ($is_skeleton) {
+        echo '
+        <div class="product-card cursor-default">
+            <div class="relative flex-grow flex flex-col">
+                <!-- هيكل الصورة (موجود مسبقاً) -->
+                <div class="image-container skeleton-active"></div>
+                
+                <!-- هيكل المعلومات (تم تحديثه لإظهار أسطر النصوص) -->
+                <div class="mt-auto w-full info-part flex flex-col items-end gap-2">
+                    <!-- هيكل التصنيف (سطر قصير) -->
+                    <div class="skeleton-text h-3 w-1/4"></div>
+                    
+                    <!-- هيكل العنوان (سطرين لمحاكاة العنوان الحقيقي) -->
+                    <div class="skeleton-text h-4 w-full mt-1"></div>
+                    <div class="skeleton-text h-4 w-3/4"></div>
+                    
+                    <!-- هيكل السعر والسعر القديم -->
+                    <div class="flex flex-row-reverse gap-3 mt-2">
+                        <!-- السعر الحالي -->
+                        <div class="skeleton-text h-5 w-16"></div>
+                        <!-- السعر القديم (أصغر قليلاً) -->
+                        <div class="skeleton-text h-5 w-16 self-end"></div>
+                    </div>
+                </div>
+            </div>
+        </div>';
+        return; 
     }
 
-    // 2. التحقق من حالة المنتج (نشط أم لا)
+    // --- حالة المنتج الحقيقي (البيانات الفعلية) ---
+    $image_src = !empty($product['images'][0]['src']) ? $product['images'][0]['src'] : "";
+    $hover_image_src = (isset($product['images'][1]['src'])) ? $product['images'][1]['src'] : $image_src;
+    $category_name = !empty($product['categories'][0]['name']) ? $product['categories'][0]['name'] : "متجرنا";
+    $product_title = $product['name'];
+    $price = $product['price'] ? number_format($product['price'], 2) . ' د.م' : 'N/A';
+    $regular_price = (isset($product['regular_price']) && $product['regular_price'] > $product['price']) ? number_format($product['regular_price'], 2) . ' د.م' : '';
+    $product_link = 'product.php?id=' . $product['id'];
     $is_active = (isset($product['id']) && is_array($user_wishlist_ids) && in_array($product['id'], $user_wishlist_ids)) ? 'active' : '';
 
     echo '
-    <div class="product-card cursor-pointer group card-load-animation" style="--card-bg-color: var(--card-one-bg);">
+    <div class="product-card cursor-pointer group card-load-animation">
         <div class="relative flex-grow flex flex-col">
             <a href="' . $product_link . '" class="block">
-                <div class="image-container ' . $skeleton_class . '" data-main-image-src="' . $image_src . '" data-hover-image-src="' . $hover_image_src . '">
-                    <img loading="lazy" src="' . $image_src . '" alt="' . htmlspecialchars($product_title) . '" class="skeleton-image main-product-image">
-                    <img loading="lazy" src="' . $hover_image_src . '" alt="Hover" class="skeleton-image hover-product-image">
+                <div class="image-container skeleton-active" data-main-image-src="' . $image_src . '" data-hover-image-src="' . $hover_image_src . '">
+                    <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="' . htmlspecialchars($product_title) . '" class="skeleton-image main-product-image">
+                    <img loading="lazy" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="Hover" class="skeleton-image hover-product-image">
                     
-<button class="wishlist-icon is-hidden ' . $is_active . '" 
-        onclick="toggleWishlist(this, event)" 
-        data-product-id="' . $product['id'] . '">
-    <i class="fa-regular fa-heart icon-empty"></i>
-    <i class="fa-solid fa-heart icon-filled"></i>
-</button>
+                    <button class="wishlist-icon is-hidden ' . $is_active . '" onclick="toggleWishlist(this, event)" data-product-id="' . $product['id'] . '">
+                        <i class="fa-regular fa-heart icon-empty"></i>
+                        <i class="fa-solid fa-heart icon-filled"></i>
+                    </button>
                 </div>
             </a>
             <div class="mt-auto w-full info-part flex flex-col items-end">
                 <p class="text-xs font-bold underline category-gold-beige category-text arabic-font">' . htmlspecialchars($category_name) . '</p>
                 <h3 class="product-title text-sm font-bold text-text-dark mt-1 arabic-font">' . htmlspecialchars($product_title) . '</h3>
-
                 <div class="product-price-small">
                     <p class="text-sm price-value arabic-font">' . $price . '</p>';
                     if ($regular_price) {
@@ -2378,8 +2467,6 @@ function renderProductCard($product, $is_skeleton = false) {
         </div>
     </div>';
 }
-
-
 
 
 

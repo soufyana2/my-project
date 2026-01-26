@@ -16,21 +16,26 @@ use Dotenv\Dotenv;
 // استدعاء الدوال الأساسية
 redirectIfBlocked($pdo, getClientIP());
 manage_csrf_token(); 
+// نستخدم dirname(__DIR__) للوصول من مجلد wordpress إلى مجلد my-project
+$envPath = dirname(__DIR__); 
 
-if (file_exists(__DIR__ . '/keys.env')) {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'keys.env');
-    $dotenv->load();
-} else {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        ob_clean();
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'ملف الإعدادات مفقود.']);
-        exit;
-    }
-    http_response_code(500);
-    exit("Technical Error.");
+if (!file_exists($envPath . '/keys.env')) {
+    // إذا كان الملف غير موجود، قم بتسجيل خطأ فادح وأوقف التنفيذ
+    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => $envPath]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration file missing.");
 }
 
+try {
+    // نقوم بتمرير المسار الأب واسم الملف للمكتبة
+    $dotenv = Dotenv::createImmutable($envPath, 'keys.env');
+    $dotenv->load();
+} catch (Exception $e) {
+    // إذا فشل تحميل الملف، قم بتسجيل الخطأ وأوقف التنفيذ
+    getLogger('setup')->critical('Failed to load keys.env file.', ['error' => $e->getMessage()]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration load failed.");
+}
 $error_message = '';
 $is_blocked = false;
 $lock_remaining_time = 0; 

@@ -5,6 +5,7 @@ ini_set('display_errors', 0);
 error_reporting(E_ALL);
 
 session_start();
+
 include("db.php");
 require_once 'functions.php';
 
@@ -12,11 +13,24 @@ require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 use Automattic\WooCommerce\Client;
 
-try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
-    $dotenv->load();
-} catch (Exception $e) { exit("Error loading API keys"); }
 
+try {
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
+
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+    if (file_exists($root . '/.env')) {
+        $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists($root . '/apikeys.env')) {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
+        $dotenv->load();
+    }
+} catch (Exception $e) {
+    // خطأ في تحميل ملف البيئة
+}
 $woocommerce = new Client(
     $_ENV['wordpress_url'],
     $_ENV['consumer_key'],
@@ -91,6 +105,15 @@ $static_volumes = [
 if (!isset($_SESSION['csrf_token'])) {
     $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
 }
+
+
+// --- إعداد بيانات SEO الديناميكية ---
+$seo_category_name = ($found_in_list && !empty($target_name)) ? $target_name : 'المنتجات';
+$page_title = $seo_category_name . " - abdelwahab-accessories";
+
+// وصف ديناميكي للميتا
+$meta_description = "تصفح تشكيلة مميزة من " . $seo_category_name . " في متجر abdelwahab-accessories. جودة عالية وأفضل الأسعار في المغرب مع خدمة التوصيل.";
+$current_url = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 ?>
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
@@ -99,8 +122,21 @@ if (!isset($_SESSION['csrf_token'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>المنتجات | تصفية وتسوق</title>
-    
+<title><?php echo $page_title; ?></title>
+<meta name="description" content="<?php echo $meta_description; ?>">
+
+<!-- SEO للشبكات الاجتماعية (Open Graph) -->
+<meta property="og:title" content="<?php echo $page_title; ?>">
+<meta property="og:description" content="<?php echo $meta_description; ?>">
+<meta property="og:type" content="website">
+<meta property="og:url" content="<?php echo $current_url; ?>">
+<meta property="og:image" content="https://res.cloudinary.com/dmakzfsc4/image/upload/v1768252470/contact_logo_tx3liw.png">
+
+<!-- Canonical Link لمنع التكرار -->
+<link rel="canonical" href="<?php echo $current_url; ?>">
+
+<!-- لدعم الأرشفة في محركات البحث -->
+<meta name="robots" content="index, follow">    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -369,7 +405,7 @@ if (!isset($_SESSION['csrf_token'])) {
     
     .filter-group .custom-checkbox .arabic-font { color: #000000 !important; font-weight: 600; }
     
-    .mobile-filter-toggle { display: none; position: fixed; bottom: 30px; left: 0; z-index: 9990; background: #212121; color: #C8A95A; border: 1px solid #C8A95A; padding: 12px 25px; border-radius: 0 30px 30px 0; box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2); font-family: 'Cairo', sans-serif; transform: translateX(-100%); transition: transform 0.4s ease-out; }
+    .mobile-filter-toggle { display: none; position: fixed; bottom: 30px; left: 0; z-index: 999; background: #212121; color: #C8A95A; border: 1px solid #C8A95A; padding: 12px 25px; border-radius: 0 30px 30px 0; box-shadow: 0 4px 15px rgba(200, 169, 90, 0.2); font-family: 'Cairo', sans-serif; transform: translateX(-100%); transition: transform 0.4s ease-out; }
     .mobile-filter-toggle.slide-in { transform: translateX(0); }
     @media (max-width: 763px) { .mobile-filter-toggle { display: flex; align-items: center; gap: 8px; } }
 
@@ -728,7 +764,14 @@ if (!isset($_SESSION['csrf_token'])) {
         const grid = document.getElementById('products-grid');
         const countEl = document.getElementById('result-count');
         const loader = document.getElementById('loader');
-
+// تحديث العنوان في المتصفح ديناميكياً ليوافق الفلتر المختار
+const selectedCat = document.querySelector(`#${formId} input[name="categories[]"]:checked`);
+if (selectedCat && selectedCat.value !== 'all') {
+    const catName = selectedCat.closest('label').querySelector('.arabic-font').innerText;
+    document.title = catName + " - abdelwahab-accessories";
+} else {
+    document.title = "المنتجات - abdelwahab-accessories";
+}
         if(page === 1) grid.style.minHeight = 'auto';
 
         if (data.html) {
@@ -784,64 +827,6 @@ if (!isset($_SESSION['csrf_token'])) {
 
    
   
-window.toggleWishlist = function(btn, e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-
-    // فحص تسجيل الدخول فوراً قبل عمل أي شيء
-    // المتغير $isLoggedIn معرف مسبقاً في أعلى ملف header.php
-    const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
-
-    if (!isLoggedIn) {
-        // إذا كان المستخدم غير مسجل، نأخذه فوراً لصفحة التسجيل
-        window.location.href = 'register.php';
-        return; // نتوقف هنا ولا نفتح السايدبار
-    }
-
-    const productId = btn.getAttribute('data-product-id');
-    if (!productId) return;
-
-    // بما أنه وصل هنا فهو مسجل دخول.. الآن نفتح القائمة الجانبية
-    if (typeof openWishlist === "function") openWishlist();
-
-    // تحديث الحالة البصرية للقلب فوراً (أنيميشن)
-    const isCurrentlyActive = btn.classList.contains('active');
-    const allHearts = document.querySelectorAll(`.wishlist-icon[data-product-id="${productId}"], .main-product-wishlist[data-product-id="${productId}"]`);    
-    allHearts.forEach(heart => {
-        if (isCurrentlyActive) {
-            heart.classList.remove('active');
-        } else {
-            heart.classList.add('active');
-            // إذا كنت في صفحة المنتج، شغل الفتات
-            if (typeof createParticles === 'function' && e) createParticles(e.clientX, e.clientY);
-        }
-    });
-
-    // إرسال البيانات للسيرفر (URLSearchParams يبقى هنا لأنه ضروري للإرسال)
-    const params = new URLSearchParams();
-    params.append('product_id', productId);
-
-    fetch('wishlist-api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success' || data.status === 'added' || data.status === 'removed') {
-            // تحديث العداد في الهيدر
-            document.querySelectorAll('.wishlist-badge').forEach(badge => {
-                badge.innerText = data.count;
-                badge.style.display = data.count > 0 ? 'flex' : 'none';
-            });
-
-            // تحديث محتوى القائمة الجانبية
-            if (typeof updateWishlistSidebar === "function") {
-                updateWishlistSidebar();
-            }
-        }
-    })
-    .catch(err => console.error('Error:', err));
-};
     function createParticles(x, y) {
         const colors = ['#ff4b4b', '#C8A95A', '#FFD700', '#ffb6b6'];
         for (let i = 0; i < 10; i++) {

@@ -18,18 +18,26 @@ use Dotenv\Dotenv;
 redirectIfBlocked($pdo, getClientIP());
 manage_csrf_token(); // ينشئ التوكن أو يتحقق منه
 
-if (file_exists(__DIR__ . '/keys.env')) {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'keys.env');
+// --- تحميل متغيرات البيئة (keys.env) من المجلد الأب ---
+// نستخدم dirname(__DIR__) للوصول من مجلد wordpress إلى مجلد my-project
+$envPath = dirname(__DIR__); 
+
+if (!file_exists($envPath . '/keys.env')) {
+    // إذا كان الملف غير موجود، قم بتسجيل خطأ فادح وأوقف التنفيذ
+    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => $envPath]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration file missing.");
+}
+
+try {
+    // نقوم بتمرير المسار الأب واسم الملف للمكتبة
+    $dotenv = Dotenv::createImmutable($envPath, 'keys.env');
     $dotenv->load();
-} else {
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        ob_clean();
-        header('Content-Type: application/json');
-        echo json_encode(['status' => 'error', 'message' => 'ملف الإعدادات مفقود.']);
-        exit;
-    }
-    http_response_code(500);
-    exit("Technical Error.");
+} catch (Exception $e) {
+    // إذا فشل تحميل الملف، قم بتسجيل الخطأ وأوقف التنفيذ
+    getLogger('setup')->critical('Failed to load keys.env file.', ['error' => $e->getMessage()]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration load failed.");
 }
 
 $error_message = '';
@@ -102,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->isHTML(true);
                     $mail->Subject = 'استعادة كلمة المرور - Abdolwahab Accessories';
                     
-                    $reset_link = "http://localhost:8088/myproject/wordpress/reset_password.php?token=" . urlencode($token);
+                    $reset_link = "http://localhost:8088/my-project/wordpress/reset_password.php?token=" . urlencode($token);
                     $year = date('Y');
 
                     // --- تصميم الإيميل الجديد (Abdolwahab/Vynix) ---

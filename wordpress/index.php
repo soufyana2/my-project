@@ -55,54 +55,6 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-// NEW: Caching Configuration
-define('CACHE_DIR', __DIR__ . '/cache/');
-define('CACHE_LIFETIME', 3600); // 1 hour in seconds (for production, consider 6-24 hours)
-
-// NEW: Function to get data from cache
-function getFromCache($key) {
-    $cacheFile = CACHE_DIR . md5($key) . '.json';
-    if (file_exists($cacheFile) && (filemtime($cacheFile) + CACHE_LIFETIME > time())) {
-        // Log for debugging: Cache hit
-        // error_log("Cache HIT for key: " . $key);
-        return json_decode(file_get_contents($cacheFile), true); // Return as associative array
-    }
-    // Log for debugging: Cache miss or expired
-    // error_log("Cache MISS/EXPIRED for key: " . $key);
-    return null;
-}
-
-// NEW: Function to save data to cache
-function saveToCache($key, $data) {
-        global $log; // استدعاء Monolog
-
-    if (!is_dir(CACHE_DIR)) {
-        // Attempt to create cache directory. Log error if fails.
-        if (!mkdir(CACHE_DIR, 0775, true)) { // 0775 allows owner/group full access, others read/execute
-           // تسجيل خطأ حرج: فشل إنشاء المجلد
-            $log->critical("Failed to create cache directory: " . CACHE_DIR);
-            return false;
-        }
-    }
-
-    $cacheFile = CACHE_DIR . md5($key) . '.json';
-        $json_data = json_encode($data);
-
-    if ($json_data === false) {
-         $log->error("JSON Encode Error for key: " . $key . ". Error: " . json_last_error_msg());
-        return false;
-    }
-
-    // Attempt to write to file. Log error if fails.
-    if (file_put_contents($cacheFile, $json_data) === false) {
-       $log->error("Failed to write to cache file: " . $cacheFile);
-        return false;
-    }
-    // Log for debugging: Cache saved
-    // error_log("Cache SAVED for key: " . $key);
-    return true; // Indicate success
-}
-
 // NEW: Function to clear specific cache entry
 function clearCache($key) {
     $cacheFile = CACHE_DIR . md5($key) . '.json';
@@ -125,18 +77,27 @@ function clearAllCache() {
 }
 
 // تحقق من وجود ملف keys.env
-if (!file_exists(__DIR__ . '/apikeys.env')) {
-    http_response_code(500);
+if (!file_exists(dirname(__DIR__) . '/apikeys.env')) {
+        http_response_code(500);
     exit("A technical error occurred. Please try again later. (API keys not found)");
 }
 
-// تحميل ملف keys.env
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
-    $dotenv->load();
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
+
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+if (!file_exists(dirname(__DIR__) . '/apikeys.env')) {
+            $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists(dirname(__DIR__) . '/apikeys.env'))  {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
+        $dotenv->load();
+    }
 } catch (Exception $e) {
-    http_response_code(500);
-    exit("A technical error occurred. Please try again later. (Error loading API keys: " . $e->getMessage() . ")");
+    // خطأ في تحميل ملف البيئة
 }
 // إعداد Monolog (ضعه قبل تعريف الدوال)
 // تعريف مجلد السجلات
@@ -174,132 +135,17 @@ if (!$consumer_key || !$consumer_secret || !$store_url) {
 }
 
 
-// Initialize WooCommerce Client
-$woocommerce = new Client(
-    $store_url,
-    $consumer_key,
-    $consumer_secret,
-    [
-        'version' => 'wc/v3',
-        'verify_ssl' => false, // Set to false for localhost (consider true for production with valid SSL)
-        'timeout' => 30,       // زيادة المهلة إلى 30 ثانية
-        'connect_timeout' => 10, // مهلة اتصال أولي إلى 10 ثوانٍ
-    ]
-);
 
-// Function to fetch products with specific parameters
-function fetchProducts($woocommerce, $category, $per_page, $offset = 0) {
-    $cacheKey = 'products_' . md5($category . '_' . $per_page . '_' . $offset);
-    $cachedData = getFromCache($cacheKey);
 
-    if ($cachedData !== null) {
-        return $cachedData; // Return from cache (as associative array)
-    }
-
-    try {
-        $category_id = getCategoryId($woocommerce, $category); // This function now also uses cache
-        if (!$category_id) {
-            error_log('Category not found: ' . $category);
-            return [];
-        }
-
-        $params = [
-            'category' => $category_id,
-            'per_page' => $per_page,
-            'offset' => $offset,
-            'status' => 'publish',
-            'order' => 'desc',
-            'orderby' => 'date'
-        ];
-        $products = $woocommerce->get('products', $params);
-        // Convert objects to associative arrays before saving to cache for consistency
-        $products_as_array = json_decode(json_encode($products), true);
-        saveToCache($cacheKey, $products_as_array);
-        return $products_as_array; // Return as associative array
-    } catch (HttpClientException $e) {
-          global $log; // استدعاء Monolog
-        // تسجيل خطأ الاتصال بالـ API مع ذكر الفئة والرسالة
-        $log->error('WooCommerce API Error (HTTP) fetching ' . $category . ': ' . $e->getMessage());
-        return [];
-    } catch (Exception $e) {
-         global $log; // استدعاء Monolog
-        // تسجيل الأخطاء العامة
-        $log->critical('General Error fetching ' . $category . ': ' . $e->getMessage());
-        return [];
-    }
-}
-
-// Function to get category ID by name
-function getCategoryId($woocommerce, $category_name) {
-    $cacheKey = 'category_id_' . md5($category_name);
-    $cachedData = getFromCache($cacheKey);
-
-    if ($cachedData !== null) {
-        return $cachedData['id']; // Return from cache (as associative array)
-    }
-
-    try {
-        $categories = $woocommerce->get('products/categories', ['search' => $category_name, 'per_page' => 1]);
-        if (!empty($categories) && isset($categories[0]->id)) {
-            $categoryId = $categories[0]->id;
-            saveToCache($cacheKey, ['id' => $categoryId]); // Save to cache (as associative array)
-            return $categoryId;
-        }
-        return null;
-    } catch (HttpClientException $e) {
-        global $log;
-        $log->warning('Could not retrieve ID for category: ' . $category_name . '. Error: ' . $e->getMessage());
-        return null;
-    } catch (Exception $e) {
-         global $log;
-        $log->warning('Could not retrieve ID for category: ' . $category_name . '. Error: ' . $e->getMessage());
-        return null;
-    }
-}
-
-// Function to fetch featured products
-function fetchFeaturedProducts($woocommerce, $per_page) {
-    $cacheKey = 'featured_products_' . md5($per_page);
-    $cachedData = getFromCache($cacheKey);
-
-    if ($cachedData !== null) {
-        return $cachedData; // Return from cache (as associative array)
-    }
-
-    try {
-        $params = [
-            'featured' => true,
-            'per_page' => $per_page,
-            'status' => 'publish',
-            'order' => 'desc',
-            'orderby' => 'date'
-        ];
-        $products = $woocommerce->get('products', $params);
-        // Convert objects to associative arrays before saving to cache for consistency
-        $products_as_array = json_decode(json_encode($products), true);
-        saveToCache($cacheKey, $products_as_array);
-        return $products_as_array; // Return as associative array
-    } catch (HttpClientException $e) {
-         global $log; // استدعاء Monolog
-        // تسجيل خطأ الاتصال بالـ API مع ذكر الفئة والرسالة
-$log->error('WooCommerce API Error (HTTP) fetching Featured Products: ' . $e->getMessage());
-        return [];
-    } catch (Exception $e) {
-          global $log; // استدعاء Monolog
-        // تسجيل الأخطاء العامة
-        $log->critical('General Error fetching '  . ': ' . $e->getMessage());
-        return [];
-    }
-}
 
 // Fetch products for "أفضل المنتجات" section - Page 1 (Parfums)
-$parfums_products = fetchProducts($woocommerce, 'عطور', 4);
+//$parfums_products = fetchProducts($woocommerce, 'عطور', 4);
 
 // Fetch products for "أفضل المنتجات" section - Page 2 (Watches)
-$watches_products = fetchProducts($woocommerce, 'ساعات', 4);
+//$watches_products = fetchProducts($woocommerce, 'ساعات', 4);
 
 // Fetch products for "منتجات مميزة" section (8 mixed featured products)
-$featured_products = fetchFeaturedProducts($woocommerce, 8);
+//$featured_products = fetchFeaturedProducts($woocommerce, 8);
 
 
 // Helper function to render a product card
@@ -998,7 +844,13 @@ include 'header.php';
     z-index: 9999;
     opacity: 0;
 }
-        
+     /* ستايل أسطر النصوص للهيكل المؤقت */
+.skeleton-text {
+    background: linear-gradient(-90deg, #e2e8f0 0%, #cbd5e1 50%, #e2e8f0 100%);
+    background-size: 400% 400%;
+    animation: skeleton-pulse 1.5s ease-in-out infinite;
+    border-radius: 0px;
+}   
     </style>
 </head>
 <body dir="rtl"> <!-- Added dir="rtl" for overall right-to-left flow -->
@@ -1008,7 +860,7 @@ include 'header.php';
 
 <main>
 <!-- Existing "أفضل المنتجات" section -->
-<section id="best-products-section" class="relative overflow-hidden bg-section-bg-transparent py-8 lazy-load-section" data-first-load="true">
+<section id="best-products-section" class="relative overflow-hidden bg-section-bg-transparent py-8 lazy-load-section">
     <div class="relative max-w-7xl mx-auto mt-8 px-4 sm:px-8 z-20">
         <div class="flex justify-center items-center mb-10 mx-auto">
           <h2 class="text-4xl font-bold text-text-dark">أفضل المنتجات</h2>
@@ -1018,42 +870,19 @@ include 'header.php';
         <input type="radio" name="page" id="page-radio-2" class="page-radio">
 
         <div class="card-pages-wrapper grid grid-cols-1 grid-rows-1">
-            <div id="page-1" class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6">
-                <?php
-                if (!empty($parfums_products)) {
-                    foreach ($parfums_products as $product) {
-                        renderProductCard($product);
-                    }
-                } else {
-echo '
-    <!-- أضفنا col-span-2 هنا -->
-    <div class="w-full col-span-2 flex justify-center items-center py-10">
-        <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
-        </p>
-    </div>';
-                        }
-                ?>
+            <!-- الصفحة 1: عطور -->
+            <div id="page-1" class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6" 
+                 data-api-url="fetch_products_api.php?category=عطور&per_page=4">
+                <?php renderSkeletonCards(4); ?>
             </div>
 
-            <div id="page-2" class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6">
-                <?php
-                if (!empty($watches_products)) {
-                    foreach ($watches_products as $product) {
-                        renderProductCard($product);
-                    }
-                } else {
-echo '
-    <!-- أضفنا col-span-2 هنا -->
-    <div class="w-full col-span-2 flex justify-center items-center py-10">
-        <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
-        </p>
-    </div>';
-                        }
-                ?>
+            <!-- الصفحة 2: ساعات -->
+            <div id="page-2" class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6" 
+                 data-api-url="fetch_products_api.php?category=ساعات&per_page=4">
+                <?php renderSkeletonCards(4); ?>
             </div>
         </div>
+        <!-- التنقيط -->
         <div class="pagination-dots flex justify-center items-center gap-3 mt-8">
             <label for="page-radio-1" class="pagination-dot"></label>
             <label for="page-radio-2" class="pagination-dot"></label>
@@ -1064,32 +893,18 @@ echo '
 
  <?php include 'history.html';?>
 <!-- NEW "منتجات مميزة" (Featured Products) section -->
-<section id="featured-products-section" class="relative overflow-hidden bg-transparent py-8 lazy-load-section" data-first-load="true">
-<div class="relative max-w-7xl mx-auto mt-8 px-4 sm:px-8 z-20">
-            <div class="flex justify-center items-center mb-10 mx-auto">
-          <h2 class="text-4xl font-bold text-text-dark">منتجات مميزة</h2>
+<section id="featured-products-section" class="relative overflow-hidden bg-transparent py-8 lazy-load-section">
+    <div class="relative max-w-7xl mx-auto mt-8 px-4 sm:px-8 z-20">
+        <div class="flex justify-center items-center mb-10 mx-auto">
+            <h2 class="text-4xl font-bold text-text-dark">منتجات مميزة</h2>
         </div>
-
-<!-- بهذا (نفس منطق Top Products) -->
-<div class="card-pages-wrapper grid grid-cols-1 grid-rows-1">
-    <div class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6">
-                   <?php
-             if (!empty($featured_products)) {
-                 foreach ($featured_products as $product) {
-                     renderProductCard($product);
-                 }
-             } else {
-echo '
-    <!-- أضفنا col-span-2 هنا -->
-    <div class="w-full col-span-2 flex justify-center items-center py-10">
-        <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
-        </p>
-    </div>';
-                     }
-             ?>
+        <div class="card-pages-wrapper grid grid-cols-1 grid-rows-1">
+            <div id="featured-container" class="page grid grid-cols-2 lg:flex justify-center gap-4 lg:gap-6" 
+                 data-api-url="fetch_products_api.php?type=featured&per_page=8">
+                <?php renderSkeletonCards(8); ?>
+            </div>
+        </div>
     </div>
-</div>    </div>
 </section>
  <?php include 'subscribe.html';?>
     <?php include 'ads3.html';?>
@@ -1100,202 +915,104 @@ echo '
     <?php include 'footer.php';?>
 </main>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const MIN_SKELETON_DISPLAY_TIME = 800; // وقت أدنى لعرض الـ Skeleton (حتى لو حملت الصور بسرعة)
+document.addEventListener('DOMContentLoaded', function() {
+    // 1. وظيفة معالجة الصور (التحميل التدريجي) داخل حاوية معينة
+    function initializeImagesInContainer(container) {
+        const imageContainers = container.querySelectorAll('.image-container');
+        imageContainers.forEach(imgCont => {
+            const mainImg = imgCont.querySelector('.main-product-image');
+            const hoverImg = imgCont.querySelector('.hover-product-image');
+            const heartBtn = imgCont.querySelector('.wishlist-icon');
+            
+            const mainSrc = imgCont.getAttribute('data-main-image-src');
+            const hoverSrc = imgCont.getAttribute('data-hover-image-src');
 
-        // === دالة تحميل الصور مع Skeleton + أنيميشن (مرة واحدة فقط) ===
-        function activateSectionPermanently(section) {
-            // إذا تم التحميل من قبل → لا نفعل شيئًا (حتى لو رجعت)
-            if (section.classList.contains('permanently-loaded')) {
-                return;
-            }
-
-            section.classList.add('permanently-loaded', 'is-visible');
-
-            const imageContainers = section.querySelectorAll('.image-container');
-            const wishlistIcons = section.querySelectorAll('.wishlist-icon');
-            const cards = section.querySelectorAll('.card-load-animation');
-
-            let imagesLoaded = 0;
-            const totalImages = imageContainers.length * 2; // main + hover
-            let minTimePassed = false;
-
-            // تفعيل Skeleton
-            imageContainers.forEach(container => {
-                container.classList.remove('skeleton-pending');
-                container.classList.add('skeleton-active');
-            });
-
-            // إخفاء أيقونة القلب أولاً
-            wishlistIcons.forEach(icon => icon.classList.add('is-hidden'));
-
-            // وظيفة عند تحميل أي صورة
-            const imageLoaded = () => {
-                imagesLoaded++;
-                if (imagesLoaded >= totalImages && minTimePassed) {
-                    finishLoading();
-                }
-            };
-
-            // إنهاء التحميل
-            const finishLoading = () => {
-                imageContainers.forEach(container => {
-                    container.classList.remove('skeleton-active');
-                    const mainImg = container.querySelector('.main-product-image');
-                    const hoverImg = container.querySelector('.hover-product-image');
-                    mainImg.classList.add('loaded');
-                    hoverImg.classList.add('loaded');
-                });
-                wishlistIcons.forEach(icon => icon.classList.remove('is-hidden'));
-
-                // أنيميشن البطاقات (مرة واحدة)
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.style.opacity = '1';
-                        card.style.transform = 'translateY(0)';
-                    }, index * 200);
-                });
-            };
-
-            // تحميل الصور
-            imageContainers.forEach(container => {
-                const mainSrc = container.getAttribute('data-main-image-src');
-                const hoverSrc = container.getAttribute('data-hover-image-src');
-                const mainImg = container.querySelector('.main-product-image');
-                const hoverImg = container.querySelector('.hover-product-image');
-
-                const loadImg = (src, img) => {
-                    const temp = new Image();
-                    temp.onload = temp.onerror = () => {
-                        img.src = src;
-                        imageLoaded();
-                    };
-                    temp.src = src;
+            const loadImage = (src, imgElement) => {
+                if (!src || !imgElement) return;
+                const tempImg = new Image();
+                tempImg.src = src;
+                tempImg.onload = () => {
+                    imgElement.src = src;
+                    imgElement.classList.add('loaded');
+                    imgCont.classList.remove('skeleton-active');
+                    if (heartBtn) heartBtn.classList.remove('is-hidden');
                 };
+            };
 
-                loadImg(mainSrc, mainImg);
-                loadImg(hoverSrc, hoverImg);
-            });
-
-            // ضمان عرض Skeleton لمدة لا تقل عن 800ms
-            setTimeout(() => {
-                minTimePassed = true;
-                if (imagesLoaded >= totalImages) {
-                    finishLoading();
-                }
-            }, MIN_SKELETON_DISPLAY_TIME);
-        }
-
-        // === تبديل الصفحات تلقائيًا ===
-        let currentPage = 1;
-        const totalPages = 2;
-        function autoChangePage() {
-            currentPage = (currentPage % totalPages) + 1;
-            document.getElementById(`page-radio-${currentPage}`).checked = true;
-        }
-        setInterval(autoChangePage, 12000);
-
-        // === Intersection Observer: تحميل عند أول ظهور فقط ===
-        const lazyLoadSections = document.querySelectorAll('.lazy-load-section');
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    activateSectionPermanently(entry.target);
-                    observer.unobserve(entry.target); // لا نراقب بعدها أبدًا
-                }
-            });
-        }, {
-            rootMargin: '0px 0px -10% 0px',
-            threshold: 0.1
+            loadImage(mainSrc, mainImg);
+            loadImage(hoverSrc, hoverImg);
         });
-
-        lazyLoadSections.forEach(section => {
-            observer.observe(section);
-        });
-    });
-
-
-  
-
-window.toggleWishlist = function(btn, e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
-
-    // فحص تسجيل الدخول فوراً قبل عمل أي شيء
-    // المتغير $isLoggedIn معرف مسبقاً في أعلى ملف header.php
-    const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
-
-    if (!isLoggedIn) {
-        // إذا كان المستخدم غير مسجل، نأخذه فوراً لصفحة التسجيل
-        window.location.href = 'register.php';
-        return; // نتوقف هنا ولا نفتح السايدبار
     }
 
-    const productId = btn.getAttribute('data-product-id');
-    if (!productId) return;
+    // 2. وظيفة جلب البيانات من الـ API وحقنها في الـ Skeleton
+    async function loadProductsFromAPI(container) {
+        const url = container.getAttribute('data-api-url');
+        if (!url || container.getAttribute('data-loaded') === 'true') return;
 
-    // بما أنه وصل هنا فهو مسجل دخول.. الآن نفتح القائمة الجانبية
-    if (typeof openWishlist === "function") openWishlist();
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Network response was not ok');
+            const html = await response.text();
+            
+            // حقن المنتجات الحقيقية مكان الـ Skeletons
+            container.innerHTML = html;
+            container.setAttribute('data-loaded', 'true');
 
-    // تحديث الحالة البصرية للقلب فوراً (أنيميشن)
-    const isCurrentlyActive = btn.classList.contains('active');
-    const allHearts = document.querySelectorAll(`.wishlist-icon[data-product-id="${productId}"], .main-product-wishlist[data-product-id="${productId}"]`);    
-    allHearts.forEach(heart => {
-        if (isCurrentlyActive) {
-            heart.classList.remove('active');
-        } else {
-            heart.classList.add('active');
-            // إذا كنت في صفحة المنتج، شغل الفتات
-            if (typeof createParticles === 'function' && e) createParticles(e.clientX, e.clientY);
+            // بعد الحقن، نبدأ بتحميل الصور لتلك المنتجات
+            initializeImagesInContainer(container);
+            
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            container.innerHTML = '<p class="text-center w-full py-4">فشل تحميل المنتجات. يرجى التحديث.</p>';
         }
-    });
+    }
 
-    // إرسال البيانات للسيرفر (URLSearchParams يبقى هنا لأنه ضروري للإرسال)
-    const params = new URLSearchParams();
-    params.append('product_id', productId);
+    // 3. مراقب الظهور (Intersection Observer)
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+                // إضافة أنيميشن الظهور للسكشن
+                section.classList.add('is-visible');
 
-    fetch('wishlist-api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success' || data.status === 'added' || data.status === 'removed') {
-            // تحديث العداد في الهيدر
-            document.querySelectorAll('.wishlist-badge').forEach(badge => {
-                badge.innerText = data.count;
-                badge.style.display = data.count > 0 ? 'flex' : 'none';
-            });
+                // البحث عن الحاويات التي تطلب API داخل هذا السكشن
+                const containers = section.querySelectorAll('.page[data-api-url]');
+                containers.forEach(container => {
+                    loadProductsFromAPI(container); 
+                });
 
-            // تحديث محتوى القائمة الجانبية
-            if (typeof updateWishlistSidebar === "function") {
-                updateWishlistSidebar();
+                observer.unobserve(section); // التوقف عن مراقبة السكشن بعد تحميله
             }
-        }
-    })
-    .catch(err => console.error('Error:', err));
-};
-// دالة إنشاء الفتات (كما هي في كودك المميز)
+        });
+    }, { rootMargin: '0px 0px 300px 0px', threshold: 0.05 });
+
+    // تفعيل المراقب على الأقسام المطلوبة
+    document.querySelectorAll('.lazy-load-section').forEach(section => observer.observe(section));
+
+    // 4. نظام تغيير الصفحات التلقائي (الذي كان لديك)
+    let currentPage = 1;
+    setInterval(() => {
+        currentPage = (currentPage % 2) + 1;
+        const radio = document.getElementById(`page-radio-${currentPage}`);
+        if(radio) radio.checked = true;
+    }, 12000);
+});
+
+// دالة الفتات (Particles) تبقى خارج الـ DOMContentLoaded إذا كانت تُستدعى من الـ HTML
 function createParticles(x, y) {
     const colors = ['#ff4b4b', '#C8A95A', '#FFD700', '#ffb6b6'];
     const particleCount = 12;
-
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
         document.body.appendChild(particle);
-
         const color = colors[Math.floor(Math.random() * colors.length)];
         particle.style.backgroundColor = color;
-        
         particle.style.left = x + 'px';
         particle.style.top = y + 'px';
         particle.style.opacity = '1';
-
         const destinationX = (Math.random() - 0.5) * 100;
         const destinationY = (Math.random() - 0.5) * 100;
-
         const animation = particle.animate([
             { transform: `translate(0, 0)`, opacity: 1 },
             { transform: `translate(${destinationX}px, ${destinationY}px)`, opacity: 0 }
@@ -1304,13 +1021,9 @@ function createParticles(x, y) {
             easing: 'cubic-bezier(0, .9, .57, 1)',
             fill: 'forwards'
         });
-
-        animation.onfinish = () => {
-            particle.remove();
-        };
+        animation.onfinish = () => particle.remove();
     }
 }
-
 </script>
 </body>
 </html>

@@ -2,20 +2,7 @@
 require_once 'db.php';        
 require_once 'functions.php'; 
 
-// تحميل متغيرات البيئة (اختياري حسب إعدادك)
-if (file_exists(__DIR__ . '/keys.env')) {
-    $lines = file(__DIR__ . '/keys.env', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        if (strpos(trim($line), '#') === 0) continue;
-        $parts = explode('=', $line, 2);
-        if (count($parts) === 2) {
-            $key = trim($parts[0]);
-            $value = trim($parts[1], " \t\n\r\0\x0B\"'");
-            $_ENV[$key] = $value;
-            putenv("$key=$value");
-        }
-    }
-}
+
 
 // فحص حالة الاشتراك المسبق للـ IP
 if(isset($pdo) && !isset($_SESSION['has_subscribed'])){
@@ -73,17 +60,16 @@ if (!isset($_SESSION['csrf_token'])) {
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">روابط سريعة</h4>
                 <ul class="space-y-2 font-cairo text-sm w-full">
-                    <li><a href="index.php?categurie=index" class="footer-link">الرئيسية</a></li>
-                    <li><a href="filter.php?categurie=filter" class="footer-link">منتجاتنا</a></li>
-                    <li><a href="about-us.html" class="footer-link">من نحن</a></li>
+                    <li><a href="/my-project/wordpress/index.php?categurie=index" class="footer-link">الرئيسية</a></li>
+                    <li><a href="/my-project/wordpress/filter.php?categurie=filter" class="footer-link">منتجاتنا</a></li>
                 </ul>
             </div>
 
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">المساعدة والسياسات</h4>
                 <ul class="space-y-2 font-cairo text-sm w-full">
-                    <li><a href="privacy.php" class="footer-link">سياسة الخصوصية</a></li>
-                    <li><a href="contact.php" class="footer-link">الأسئلة الشائعة</a></li>
+                    <li><a href="/my-project/wordpress/contact/privacy.php" class="footer-link">سياسة الخصوصية</a></li>
+                    <li><a href="/my-project/wordpress/contact/contact.php" class="footer-link">اتصل بنا</a></li>
                 </ul>
             </div>
 
@@ -91,25 +77,20 @@ if (!isset($_SESSION['csrf_token'])) {
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">النشرة البريدية</h4>
                 <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">اشترك الآن للحصول على آخر العروض والأخبار الحصرية.</p>
                 
-                <form id="subscribeForm" class="flex flex-col items-center md:items-start w-full">
-                    <!-- حقل التوكن المخفي -->
-                    <input type="hidden" name="csrf_token" id="footer_csrf" value="<?php echo $csrf_token; ?>">
-                    
-                    <div style="display: none;"><input type="text" name="website_trap"></div>
+   <!-- الجزء الخاص بالفورم في الفوتر -->
+<form id="subscribeForm" class="flex flex-col items-center md:items-start w-full">
+    <input type="hidden" name="csrf_token" id="footer_csrf" value="<?php echo $csrf_token; ?>">
+    <div style="display: none;"><input type="text" name="website_trap"></div>
 
-                    <input type="email" id="sub_email" name="email" placeholder="أدخل بريدك الإلكتروني" 
-                           class="footer-input font-cairo mb-2" required>
-                    
-                    <div class="cf-turnstile" 
-                         data-sitekey="0x4AAAAAAB6EwGuBkcNho5N1" 
-                         data-size="invisible" 
-                         data-callback="onTurnstileSuccess"></div>
+    <input type="email" id="sub_email" name="email" placeholder="أدخل بريدك الإلكتروني" 
+           class="footer-input font-cairo mb-2" required>
 
-                    <button type="submit" id="sub_btn" class="btn-footer w-full md:w-auto">
-                        <span id="btnText">اشترك</span>
-                    </button>
-                    <div id="sub_msg" class="text-sm mt-2 font-cairo"></div>
-                </form>
+    <button type="submit" id="sub_btn" class="btn-footer w-full md:w-auto">
+        <span id="btnText">اشترك</span>
+    </button>
+    <div id="sub_msg" class="text-sm mt-2 font-cairo"></div>
+</form>
+
             </div>
         </div>
 
@@ -126,19 +107,21 @@ if (!isset($_SESSION['csrf_token'])) {
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
-let manualTrigger = false;
-
-function onTurnstileSuccess(token) {
-    if (!manualTrigger) return;
-
+document.getElementById('subscribeForm')?.addEventListener('submit', function(e) {
+    e.preventDefault(); // منع تحديث الصفحة تماماً
+    
+    const btn = document.getElementById('sub_btn');
     const btnText = document.getElementById('btnText');
-    const form = document.getElementById('subscribeForm');
     const msgDiv = document.getElementById('sub_msg');
     const csrfInput = document.getElementById('footer_csrf');
     const emailInput = document.getElementById('sub_email');
-    
+    const form = e.target;
+
+    // تعطيل الزر ومنع التكرار
+    btn.disabled = true;
     btnText.innerText = 'جاري المعالجة...';
-    
+    msgDiv.innerText = '';
+
     const formData = new FormData(form);
 
     fetch('subscribe_process.php', {
@@ -148,7 +131,7 @@ function onTurnstileSuccess(token) {
     })
     .then(response => response.json())
     .then(data => {
-        // تحديث التوكن فوراً لأي عملية قادمة لمنع Session Expired
+        // تحديث التوكن للعملية القادمة
         if (data.new_token) {
             csrfInput.value = data.new_token;
         }
@@ -156,49 +139,20 @@ function onTurnstileSuccess(token) {
         if (data.status === 'success') {
             msgDiv.style.color = '#C8A95A';
             msgDiv.innerText = data.message;
-            emailInput.value = ''; // مسح الحقل للنجاح
+            emailInput.value = ''; 
         } else {
             msgDiv.style.color = '#ef4444';
             msgDiv.innerText = data.message;
         }
-        
-        // إعادة تهيئة الزر والكابتشا فوراً
-        resetFooterBtn();
     })
     .catch(error => {
         msgDiv.style.color = '#ef4444';
         msgDiv.innerText = 'حدث خطأ في الاتصال، حاول مجدداً.';
-        resetFooterBtn();
+    })
+    .finally(() => {
+        // إعادة الزر لحالته الطبيعية
+        btn.disabled = false;
+        btnText.innerText = 'اشترك';
     });
-}
-
-function resetFooterBtn() {
-    manualTrigger = false; 
-    const btn = document.getElementById('sub_btn');
-    const btnText = document.getElementById('btnText');
-    btn.disabled = false;
-    btnText.innerText = 'اشترك';
-    // تصفير الكابتشا إلزامي لكي تعمل المحاولة الثانية
-    if (typeof turnstile !== 'undefined') {
-        turnstile.reset(); 
-    }
-}
-
-document.getElementById('subscribeForm')?.addEventListener('submit', function(e) {
-    e.preventDefault();
-    manualTrigger = true; 
-    
-    const btn = document.getElementById('sub_btn');
-    const btnText = document.getElementById('btnText');
-    
-    btn.disabled = true;
-    btnText.innerText = 'جاري التحقق...';
-
-    if (typeof turnstile !== 'undefined') {
-        turnstile.execute(); // استدعاء الكابتشا يدوياً
-    } else {
-        resetFooterBtn();
-        alert('حدث خطأ في نظام الحماية، يرجى تحديث الصفحة.');
-    }
 });
 </script>

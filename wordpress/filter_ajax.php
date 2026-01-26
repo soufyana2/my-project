@@ -18,11 +18,24 @@ require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 use Automattic\WooCommerce\Client;
 
-try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
-    $dotenv->load();
-} catch (Exception $e) { exit(); }
 
+try {
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
+
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+    if (file_exists($root . '/.env')) {
+        $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists($root . '/apikeys.env')) {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
+        $dotenv->load();
+    }
+} catch (Exception $e) {
+    // خطأ في تحميل ملف البيئة
+}
 $woocommerce = new Client(
     $_ENV['wordpress_url'],
     $_ENV['consumer_key'],
@@ -206,8 +219,8 @@ foreach($selected_volumes as $sv) {
                     // 1. فحص الألوان
                     // نبحث عن أي سمة اسمها "اللون" أو "color" أو "pa_color"
                     if (!empty($selected_colors)) {
-                        if ($slug_raw == 'اللون' || $slug_raw == 'pa_color' || $name_raw == 'اللون') {
-                            if(!empty(array_intersect($search_colors, $attr->options))) {
+if (in_array($name_raw, ['اللون', 'الألوان', 'ألوان']) || in_array($slug_raw, ['اللون', 'الألوان', 'ألوان', 'pa_color'])) {
+                                if(!empty(array_intersect($search_colors, $attr->options))) {
                                 $pass_color = true;
                             }
                         }

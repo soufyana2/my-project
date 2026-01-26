@@ -1,6 +1,6 @@
 <?php
-ini_set('display_errors', 0); // فعّل مؤقتًا للتصحيح
-ini_set('display_startup_errors', 0);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 session_start();
@@ -20,22 +20,26 @@ require __DIR__ . '/vendor/autoload.php';
 use Dotenv\Dotenv;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+// --- تحميل متغيرات البيئة (keys.env) من المجلد الأب ---
+// نستخدم dirname(__DIR__) للوصول من مجلد wordpress إلى مجلد my-project
+$envPath = dirname(__DIR__); 
 
-// تحقق من وجود ملف keys.env
-if (!file_exists(__DIR__ . '/keys.env')) {
-    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => __DIR__]);
-    http_response_code(500);
-    exit("A technical error occurred. please try again later.");
+if (!file_exists($envPath . '/keys.env')) {
+    // إذا كان الملف غير موجود، قم بتسجيل خطأ فادح وأوقف التنفيذ
+    getLogger('setup')->critical('FATAL ERROR: keys.env file not found.', ['path' => $envPath]);
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration file missing.");
 }
 
-// تحميل ملف keys.env
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'keys.env');
+    // نقوم بتمرير المسار الأب واسم الملف للمكتبة
+    $dotenv = Dotenv::createImmutable($envPath, 'keys.env');
     $dotenv->load();
 } catch (Exception $e) {
+    // إذا فشل تحميل الملف، قم بتسجيل الخطأ وأوقف التنفيذ
     getLogger('setup')->critical('Failed to load keys.env file.', ['error' => $e->getMessage()]);
-    http_response_code(500);
-    exit("A technical error occurred. please try again later.");
+    http_response_code(503); // Service Unavailable
+    exit("Technical error: Configuration load failed.");
 }
 
 $ip = getClientIP();

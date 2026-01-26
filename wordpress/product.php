@@ -27,17 +27,24 @@ if (isset($_SESSION['user_id'])) {
 
 
 
-// تحميل ملف keys.env
-try {
-    if (!file_exists(__DIR__ . '/apikeys.env')) {
-        throw new Exception("API keys file not found.");
-    }
-    $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
-    $dotenv->load();
-} catch (Exception $e) {
-    die("Configuration Error: " . $e->getMessage());
-}
 
+try {
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
+
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+    if (file_exists($root . '/.env')) {
+        $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists($root . '/apikeys.env')) {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
+        $dotenv->load();
+    }
+} catch (Exception $e) {
+    // خطأ في تحميل ملف البيئة
+}
 // جلب رقم الواتساب من البيئة (أو وضع افتراضي إذا لم يوجد)
 $whatsapp_number = $_ENV['whatsapp_number'] ?? '212000000000';
 
@@ -154,7 +161,6 @@ if (!$data) {
             $log->error("Product not found via API: ID $product_id - " . $e->getMessage());
             die('<div style="text-align:center; padding:50px;">Product Not Found.</div>');
         }
-
         $extracted = [];
         $extracted['id'] = $product->id;
         $extracted['name'] = $product->name;
@@ -1045,20 +1051,14 @@ function get_color_hex($color_name) {
                 <div class="cat-stock-row">
                     <!-- 1. Wishlist -->
 <?php $main_is_active = in_array($product_id, $user_wishlist_ids) ? 'active' : ''; ?>
-<!-- أضفنا wishlist-icon هنا -->
-<!-- زر المفضلة المحدث ليطابق نظام الهيدر -->
 <button id="wishlistBtn" 
-        class="main-product-wishlist wishlist-inline-btn <?php echo in_array($product_id, $user_wishlist_ids) ? 'active' : ''; ?>" 
+        class="main-product-wishlist wishlist-icon wishlist-inline-btn <?php echo in_array($product_id, $user_wishlist_ids) ? 'active' : ''; ?>" 
+        style="display: flex !important; visibility: visible !important; opacity: 1 !important; position: relative !important; background: transparent !important; border: none !important;"
         data-product-id="<?php echo $product_id; ?>" 
         onclick="toggleWishlist(this, event)">
-     
-    <!-- أيقونة القلب الفارغ (تظهر عندما لا يكون مضافاً) -->
-    <i class="ph ph-heart icon-empty" style="font-size:26px; color:black;"></i> 
-    
-    <!-- أيقونة القلب الممتلئ (تظهر عند الإضافة) -->
-    <i class="ph-fill ph-heart icon-filled" style="font-size:26px; color:#ff4b4b;"></i>
+    <i class="ph ph-heart icon-empty" style="font-size:26px; color:black; display: block;margin-bottom: 29px;"></i> 
+    <i class="ph-fill ph-heart icon-filled" style="font-size:26px; color:#ff4b4b; display: none;margin-bottom: 29px;"></i>
 </button>
-
                     <!-- 2. Category -->
                     <div class="cat-text">
                         <span>التصنيف:</span> 
@@ -1159,7 +1159,9 @@ function get_color_hex($color_name) {
                 </div>
 
                 <div class="actions-row">
-                    <a href="#" class="btn-cart" onclick="return false;"><i class="fa-solid fa-cart-shopping"></i>إضافة للسلة</a>
+<button type="button" class="btn-cart" onclick="handleAddToCart()">
+    <i class="fa-solid fa-cart-shopping"></i> إضافة للسلة
+</butto>
                    <button class="btn-whatsapp" onclick="buyViaWhatsapp()">
     <i class="fa-brands fa-whatsapp" style="font-size: 1.2rem;"></i>
     شراء عبر واتساب 
@@ -1495,64 +1497,7 @@ function get_color_hex($color_name) {
             document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
             if (!isOpen) item.classList.add('open');
         }
-window.toggleWishlist = function(btn, e) {
-    if (e) { e.preventDefault(); e.stopPropagation(); }
 
-    // فحص تسجيل الدخول فوراً قبل عمل أي شيء
-    // المتغير $isLoggedIn معرف مسبقاً في أعلى ملف header.php
-    const isLoggedIn = <?php echo $isLoggedIn ? 'true' : 'false'; ?>;
-
-    if (!isLoggedIn) {
-        // إذا كان المستخدم غير مسجل، نأخذه فوراً لصفحة التسجيل
-        window.location.href = 'register.php';
-        return; // نتوقف هنا ولا نفتح السايدبار
-    }
-
-    const productId = btn.getAttribute('data-product-id');
-    if (!productId) return;
-
-    // بما أنه وصل هنا فهو مسجل دخول.. الآن نفتح القائمة الجانبية
-    if (typeof openWishlist === "function") openWishlist();
-
-    // تحديث الحالة البصرية للقلب فوراً (أنيميشن)
-    const isCurrentlyActive = btn.classList.contains('active');
-    const allHearts = document.querySelectorAll(`.wishlist-icon[data-product-id="${productId}"], .main-product-wishlist[data-product-id="${productId}"]`);    
-    allHearts.forEach(heart => {
-        if (isCurrentlyActive) {
-            heart.classList.remove('active');
-        } else {
-            heart.classList.add('active');
-            // إذا كنت في صفحة المنتج، شغل الفتات
-            if (typeof createParticles === 'function' && e) createParticles(e.clientX, e.clientY);
-        }
-    });
-
-    // إرسال البيانات للسيرفر (URLSearchParams يبقى هنا لأنه ضروري للإرسال)
-    const params = new URLSearchParams();
-    params.append('product_id', productId);
-
-    fetch('wishlist-api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: params
-    })
-    .then(response => response.json())
-    .then(data => {
-        if (data.status === 'success' || data.status === 'added' || data.status === 'removed') {
-            // تحديث العداد في الهيدر
-            document.querySelectorAll('.wishlist-badge').forEach(badge => {
-                badge.innerText = data.count;
-                badge.style.display = data.count > 0 ? 'flex' : 'none';
-            });
-
-            // تحديث محتوى القائمة الجانبية
-            if (typeof updateWishlistSidebar === "function") {
-                updateWishlistSidebar();
-            }
-        }
-    })
-    .catch(err => console.error('Error:', err));
-};
 function createParticles(x, y) {
     const colors = ['#ff4b4b', '#C8A95A', '#FFD700', '#ffb6b6'];
     const particleCount = 12; // عدد الفتات
@@ -1592,84 +1537,66 @@ function createParticles(x, y) {
     }
 }
 
-
 function buyViaWhatsapp() {
-    // 1. جمع البيانات
-    // اسم المتجر (يمكنك تغييره هنا أو جلبه من PHP)
-    const storeName = "Abodlwahab Accessories"; 
-    
-    // رابط الصفحة الحالي
+    const storeName = "Abdelwahab Accessories"; 
     const productUrl = window.location.href;
-    
-    // اسم المنتج (من عنوان الصفحة أو عنصر H1)
     const productName = document.querySelector('.product-title').innerText.trim();
-    
-    // السعر الحالي الظاهر
     const price = document.querySelector('#displayPrice').innerText.trim();
     
-    // المقاس المختار
-    let size = "غير محدد";
     const selectedSizeEl = document.querySelector('.size-box.selected');
-    if(selectedSizeEl) {
-        size = selectedSizeEl.getAttribute('data-size');
-    }
+    let size = selectedSizeEl ? selectedSizeEl.getAttribute('data-size') : "none";
 
-    // اللون المختار (نأخذه من الـ input المخفي الذي قمت بعمله في الكود السابق)
-    let color = document.getElementById('selectedColorInput').value;
-    if(!color) color = "الافتراضي";
+    const colorInput = document.getElementById('selectedColorInput');
+    let color = (colorInput && colorInput.value) ? colorInput.value : "none";
 
-    // 2. تجهيز الرسالة
-    // ملاحظة: \n تعني سطر جديد
-    const message = `مرحبا ${storeName} انا مهتم بهاد المنتج :
-رابط المنتج: ${productUrl}
-اسم المنتج: ${productName}
-سعر المنتج: ${price}
-مقاس المنتج: ${size}
-لون المنتج: ${color}`;
+    const message = `
+Bonjour,
 
-    // 3. تشفير الرسالة لتناسب الرابط
-    const encodedMessage = encodeURIComponent(message);
+Je souhaite vous contacter concernant l’achat du produit suivant auprès de ${storeName}.
+Je vous remercie par avance pour votre professionnalisme et la qualité de vos articles.
 
-    // 4. رقم الهاتف (ضعه بمفتاح الدولة بدون + أو 00)
-    // مثال: 212xxxxxxxxx
-const phoneNumber = "<?php echo $whatsapp_number; ?>";
-    // 5. فتح الواتساب
-    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
-    window.open(whatsappUrl, '_blank');
+────────────────────
+🛍️ Détails du produit :
+────────────────────
+▪ Produit : ${productName}
+▪ Prix : ${price}
+▪ Taille : ${size}
+▪ Couleur : ${color}
+
+────────────────────
+🔗 Lien du produit :
+${productUrl}
+────────────────────
+
+Cordialement,
+Merci pour votre attention.
+`;
+
+    window.open(`https://wa.me/<?php echo $whatsapp_number; ?>?text=${encodeURIComponent(message)}`, '_blank');
 }
-document.addEventListener('click', function(e) {
-    if (e.target.closest('.btn-cart')) {
-        e.preventDefault();
-        
-        const pId = new URLSearchParams(window.location.search).get('id');
-        const qty = document.getElementById('qInput')?.value || 1;
-        
-        // جلب اللون والمقاس المختارين
-        const selectedSize = document.querySelector('.size-box.selected')?.getAttribute('data-size') || '';
-        const selectedColor = document.getElementById('selectedColorInput')?.value || '';
-        
-        let vId = 0;
-        let attrString = "";
 
-        // البحث عن الـ Variation ID بناءً على الاختيار
-        // ملاحظة: variationsData هو الكائن الذي قمت بتعريفه أنت في PHP
-        if (typeof variationsData !== 'undefined') {
-            // نحاول إيجاد الـ Variation بالمقاس أو اللون
-            const variation = variationsData[selectedSize] || variationsData[selectedColor];
-            if (variation) {
-                // ملاحظة: يجب التأكد أن PHP يرسل الـ ID داخل مصفوفة variations_map
-                // إذا لم يكن موجوداً، سنرسل المنتج كمنتج بسيط
-                vId = variation.id || 0; 
-            }
-        }
+function handleAddToCart() {
+    const productId = <?php echo $product_id; ?>;
+    const qty = document.getElementById('qInput').value;
+    
+    // جلب المقاس (إن وجد)
+    const selectedSizeEl = document.querySelector('.size-box.selected');
+    const size = selectedSizeEl ? selectedSizeEl.getAttribute('data-size') : "";
 
-        if (selectedSize) attrString += "المقاس: " + selectedSize + " ";
-        if (selectedColor) attrString += "اللون: " + selectedColor;
-
-        updateCart(pId, 'add', qty, vId, attrString);
-        if(typeof openCart === 'function') openCart();
+    // جلب اللون (إن وجد)
+    const colorInput = document.getElementById('selectedColorInput');
+    const color = colorInput ? colorInput.value : "";
+    
+    // جلب الـ Variation ID (إن وجد)
+    let variationId = 0;
+    const key = size || color; 
+    if (key && typeof variationsData !== 'undefined' && variationsData[key]) {
+        variationId = variationsData[key].id;
     }
-});
+
+    // الإضافة للسلة ستعمل الآن حتى لو القيم فارغة (للمنتج العادي)
+    addToCart(productId, variationId, qty, size, color);
+}
     </script>
 </body>
 </html>

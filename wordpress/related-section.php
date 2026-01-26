@@ -8,44 +8,7 @@ use Automattic\WooCommerce\HttpClient\HttpClientException;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
-// NEW: Caching Configuration
-define('CACHE_DIR', __DIR__ . '/cache/');
-define('CACHE_LIFETIME', 3600); // 1 hour in seconds
 
-// NEW: Function to get data from cache
-function getFromCache($key) {
-    $cacheFile = CACHE_DIR . md5($key) . '.json';
-    if (file_exists($cacheFile) && (filemtime($cacheFile) + CACHE_LIFETIME > time())) {
-        return json_decode(file_get_contents($cacheFile), true);
-    }
-    return null;
-}
-
-// NEW: Function to save data to cache
-function saveToCache($key, $data) {
-    global $log;
-
-    if (!is_dir(CACHE_DIR)) {
-        if (!mkdir(CACHE_DIR, 0775, true)) {
-            $log->critical("Failed to create cache directory: " . CACHE_DIR);
-            return false;
-        }
-    }
-
-    $cacheFile = CACHE_DIR . md5($key) . '.json';
-    $json_data = json_encode($data);
-
-    if ($json_data === false) {
-         $log->error("JSON Encode Error for key: " . $key . ". Error: " . json_last_error_msg());
-        return false;
-    }
-
-    if (file_put_contents($cacheFile, $json_data) === false) {
-       $log->error("Failed to write to cache file: " . $cacheFile);
-        return false;
-    }
-    return true;
-}
 
 // NEW: Function to clear specific cache entry
 function clearCache($key) {
@@ -65,21 +28,23 @@ function clearAllCache() {
     }
 }
 
-// تحقق من وجود ملف keys.env
-if (!file_exists(__DIR__ . '/apikeys.env')) {
-    http_response_code(500);
-    exit("A technical error occurred. Please try again later. (API keys not found)");
-}
-
-// تحميل ملف keys.env
 try {
-    $dotenv = Dotenv::createImmutable(__DIR__, 'apikeys.env');
-    $dotenv->load();
-} catch (Exception $e) {
-    http_response_code(500);
-    exit("A technical error occurred. Please try again later. (Error loading API keys: " . $e->getMessage() . ")");
-}
+    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
+    $root = dirname(__DIR__); 
 
+    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
+    if (file_exists($root . '/.env')) {
+        $dotenv = Dotenv::createImmutable($root);
+        $dotenv->load();
+    } 
+    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
+    elseif (file_exists($root . '/apikeys.env')) {
+        $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
+        $dotenv->load();
+    }
+} catch (Exception $e) {
+    // خطأ في تحميل ملف البيئة
+}
 // إعداد Monolog
 define('LOGS_DIR', __DIR__ . '/logs/');
 if (!is_dir(LOGS_DIR)) {
@@ -1001,53 +966,7 @@ function renderSkeletonCards($count) {
     });
 
 
-   function toggleWishlist(btn, e) {
-    e.preventDefault();
-    e.stopPropagation();
 
-    const productId = btn.getAttribute('data-product-id');
-
-    fetch('wishlist-api.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: 'product_id=' + productId
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.status === 'need_login') {
-            window.location.href = 'register.php';
-            return;
-        }
-        
-        if (data.status === 'success') {
-            // 1. تحديث شكل القلب
-            if (data.action === 'added') {
-                btn.classList.add('active');
-                if(typeof createParticles === 'function') createParticles(e.clientX, e.clientY);
-                openWishlist();
-            } else {
-                btn.classList.remove('active');
-            }
-
-            // 2. تحديث الرقم في الهيدر (Badge)
-            const badge = document.querySelector('.wishlist-badge');
-            if (badge) {
-                badge.textContent = data.count;
-                badge.style.display = data.count > 0 ? 'flex' : 'none';
-            }
-
-            // 3. تحديث محتوى السايدبار (إعادة تحميل الجزء فقط)
-            // يفضل عمل دالة هنا تجلب HTML الكروت وتضعها في container
-            refreshWishlistSidebar(); 
-        }
-    });
-}
-
-// دالة لتحديث محتوى السايدبار بدون ريفريش كامل
-function refreshWishlistSidebar() {
-    // يمكنك هنا عمل fetch لملف يعيد فقط HTML المنتجات المضافة
-    // حالياً لإبقاء الكود نظيفاً، سيظهر التحديث عند أول ريفريش أو يمكنك إضافة fetch بسيط هنا.
-}
 // دالة إنشاء الفتات (كما هي في كودك المميز)
 function createParticles(x, y) {
     const colors = ['#ff4b4b', '#C8A95A', '#FFD700', '#ffb6b6'];
