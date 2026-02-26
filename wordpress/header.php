@@ -1,37 +1,39 @@
 <?php
-use Dotenv\Dotenv;
-require_once 'db.php';
+// 1. تحميل الملحقات أولاً (ضروري لـ Dotenv)
 if (file_exists(__DIR__ . '/vendor/autoload.php')) {
     require_once __DIR__ . '/vendor/autoload.php';
 }
-// 2. تحميل ملف apikeys.env (نحتاجها لتعريف WooCommerce Client)
 
+use Dotenv\Dotenv;
+
+// 2. تحميل ملفات البيئة (.env) فوراً قبل أي شيء آخر
 try {
-    // التصحيح هنا: نخرج مستوى واحد فقط من wordpress إلى my-project
     $root = dirname(__DIR__); 
-
-    // التأكد من اسم الملف، إذا كان اسمه .env نستخدم الحالة الأولى
     if (file_exists($root . '/.env')) {
         $dotenv = Dotenv::createImmutable($root);
         $dotenv->load();
-    } 
-    // إذا كان اسمه apikeys.env نستخدم هذه الحالة
-    elseif (file_exists($root . '/apikeys.env')) {
+    } elseif (file_exists($root . '/apikeys.env')) {
         $dotenv = Dotenv::createImmutable($root, 'apikeys.env');
         $dotenv->load();
     }
+    // ملاحظة: تأكد أن ملف keys.env يُحمل أيضاً إذا كنت تضع معلومات القاعدة فيه
+    if (file_exists($root . '/keys.env')) {
+        $dotenvKeys = Dotenv::createImmutable($root, 'keys.env');
+        $dotenvKeys->load();
+    }
 } catch (Exception $e) {
-    // خطأ في تحميل ملف البيئة
+    // خطأ تحميل الإعدادات
 }
-require_once 'functions.php'; // هذا الملف يحتوي على secure_session_start() التي تشغل الـ Remember me
-manage_csrf_token();
-$whatsapp_number = $_ENV['whatsapp_number'] ?? '212634229259';
 
-// الآن بعد تشغيل الوظائف، نتحقق من تسجيل الدخول
+// 3. الآن فقط نقوم باستدعاء ملف الداتابيز بعد أن أصبحت الإعدادات جاهزة
+require_once 'db.php';
+
+// 4. استدعاء الوظائف الأخرى
+require_once 'functions.php'; 
+manage_csrf_token();
+
 $isLoggedIn = isset($_SESSION['user_id']);
-if (file_exists(__DIR__ . '/vendor/autoload.php')) {
-    require_once __DIR__ . '/vendor/autoload.php';
-}
+$whatsapp_number = $_ENV['whatsapp_number'] ?? '212634229259';
 
 
 // 3. تعريف الروابط النشطة (كودك الحالي)
@@ -53,7 +55,12 @@ elseif ($currentScript == 'filter.php') {
 $wishlistProductsData = [];
 $wishlistCount = 0;
 $user_wishlist_ids = []; // توحيد الاسم تماماً
+global $pdo; // أضف هذا السطر لضمان أن الكود يرى المتغير المعرف في db.php
 
+// صمام أمان: إذا كان pdo لا يزال null رغم الاستدعاء، قم بإعادة تحميل الملف يدوياً
+if ($pdo === null) {
+    require __DIR__ . '/db.php'; 
+}
 if ($isLoggedIn) {
     // جلب المعرفات من الداتابيز
     $stmt = $pdo->prepare("SELECT product_id FROM user_wishlist WHERE user_id = ? ORDER BY id DESC");

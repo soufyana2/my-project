@@ -1,0 +1,2 @@
+[2026-02-02 04:51:45] security.INFO: CSRF token regenerated. {"reason":"expired","ip":"127.0.0.1"} {"uid":"65fe315","url":"/my-project/wordpress/profile.php","ip":"::1","http_method":"GET","server":"localhost","referrer":null}
+[2026-02-02 16:13:01] security.INFO: CSRF token regenerated. {"reason":"expired","ip":"127.0.0.1"} {"uid":"7ab8c6a","url":"/my-project/wordpress/profile.php","ip":"::1","http_method":"GET","server":"localhost","referrer":null}

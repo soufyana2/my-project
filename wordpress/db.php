@@ -40,28 +40,19 @@ $options = [
     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
     PDO::ATTR_EMULATE_PREPARES => false,
 ];
-
 // --- إنشاء اتصال PDO ---
 try {
-    // إنشاء الاتصال
+    global $pdo; 
     $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8mb4", $username, $password, $options);
-    
-    // ✅ (اختياري لكن احترافي) تسجيل نجاح الاتصال على مستوى DEBUG إذا أردت
-   // getLogger('database')->debug('Database connection established successfully.');
-
 } catch (PDOException $e) {
-    // ✅ الخطوة 2: التعامل مع فشل الاتصال بشكل آمن واحترافي
-    
-    // 1. تسجيل الخطأ الحقيقي والتفصيلي للمطورين فقط باستخدام Monolog
     $dbLogger = getLogger('database');
     $dbLogger->critical('DATABASE CONNECTION FAILED.', [
         'error_code' => $e->getCode(),
         'error_message' => $e->getMessage() 
-        // ملاحظة: لا تقم بتسجيل كلمة المرور أو معلومات الاتصال الكاملة هنا
     ]);
 
-    // 2. عرض رسالة عامة وآمنة للمستخدم وإيقاف التنفيذ
-    http_response_code(503); // 503 Service Unavailable هو الرمز الأنسب
-    // يمكنك هنا عرض صفحة HTML كاملة للأخطاء
+    http_response_code(503);
+    // السطر الناقص هو السطر التالي لإيقاف تنفيذ الموقع تماماً عند فشل الاتصال
+    die("Technical error: Database connection failed. Please check the logs."); 
 }
 ?>

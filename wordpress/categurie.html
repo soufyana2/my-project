@@ -14,7 +14,7 @@
 </script>
 
 <style>
-    /* Animation classes */
+    /* Animation classes - لا تغيير هنا */
     .cat-card-hidden {
         opacity: 0;
         transform: translateY(40px);
@@ -27,7 +27,6 @@
         transform: translateY(0);
     }
 
-    /* Hide scrollbar */
     .no-scrollbar::-webkit-scrollbar {
         display: none;
     }
@@ -44,32 +43,17 @@
         التصنيفات
     </h2>
 
-    <!-- 
-       Container: 
-       1. justify-center: Centers items on mobile and desktop
-       2. flex-wrap (optional on mobile if you want rows, but keep overflow-x-auto if you want scroll safe)
-          Since you have 4 items, they likely fit centered. 
-    -->
     <div class="flex justify-center flex-wrap md:flex-wrap gap-4 md:gap-10 w-full max-w-5xl px-4 pb-4">
 
         <!-- Card 1: Perfumes -->
         <a href="filter.php?category=عطور" 
            class="cat-card-hidden group flex flex-col items-center cursor-pointer">
-            <!-- 
-                Outer Circle:
-                1. border-gray-300: Professional grey border
-                2. p-1: Adds padding so image is smaller inside
-                3. w-16 h-16: Small size
-            -->
             <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
-                <!-- 
-                   Inner Image:
-                   1. rounded-full: Ensures image shape follows container
-                   2. Zoom effect on hover
-                -->
-                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out lg:group-hover:scale-110"
-                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/download_1_tw7vsv.jpg');">
-                </div>
+                <!-- تم تغيير الرابط ليكون w_200 واستخدام img -->
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/w_200,h_200,c_fill,f_auto,q_auto/v1765043616/download_1_tw7vsv.jpg" 
+                     alt="عطور"
+                     loading="eager"
+                     class="w-full h-full rounded-full object-cover transition-transform duration-500 ease-in-out lg:group-hover:scale-110">
             </div>
             <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">عطور</span>
         </a>
@@ -78,9 +62,10 @@
         <a href="filter.php?category=الإكسسوارات" 
            class="cat-card-hidden group flex flex-col items-center cursor-pointer">
             <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
-                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out lg:group-hover:scale-110"
-                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/couple_rings_accessories_jewelry_siyu1e.jpg');">
-                </div>
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/w_200,h_200,c_fill,f_auto,q_auto/v1765043616/couple_rings_accessories_jewelry_siyu1e.jpg" 
+                     alt="إكسسوارات"
+                     loading="eager"
+                     class="w-full h-full rounded-full object-cover transition-transform duration-500 ease-in-out lg:group-hover:scale-110">
             </div>
             <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">إكسسوارات</span>
         </a>
@@ -89,9 +74,10 @@
         <a href="filter.php?category=ساعات" 
            class="cat-card-hidden group flex flex-col items-center cursor-pointer">
             <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
-                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out lg:group-hover:scale-110"
-                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/Rolex_rvn3as.jpg');">
-                </div>
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/w_200,h_200,c_fill,f_auto,q_auto/v1765043616/Rolex_rvn3as.jpg" 
+                     alt="ساعات"
+                     loading="eager"
+                     class="w-full h-full rounded-full object-cover transition-transform duration-500 ease-in-out lg:group-hover:scale-110">
             </div>
             <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">ساعات</span>
         </a>
@@ -100,9 +86,10 @@
         <a href="filter.php?category=باقات وعروض" 
            class="cat-card-hidden group flex flex-col items-center cursor-pointer">
             <div class="w-16 h-16 md:w-28 md:h-28 rounded-full border border-gray-300 bg-white p-1 overflow-hidden relative shadow-sm">
-                <div class="w-full h-full rounded-full bg-cover bg-center bg-no-repeat transition-transform duration-500 ease-in-out lg:group-hover:scale-110"
-                     style="background-image: url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/Black_Friday_Poster_with_Shiny_Balloons_and_Confetti_on_White_Background_vector_illustration_smeagorl_8584397___Stockfresh_y0v5up.jpg');">
-                </div>
+                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/w_200,h_200,c_fill,f_auto,q_auto/v1765043616/Black_Friday_Poster_with_Shiny_Balloons_and_Confetti_on_White_Background_vector_illustration_smeagorl_8584397___Stockfresh_y0v5up.jpg" 
+                     alt="عروض"
+                     loading="eager"
+                     class="w-full h-full rounded-full object-cover transition-transform duration-500 ease-in-out lg:group-hover:scale-110">
             </div>
             <span class="mt-2 text-gray-800 font-bold text-[11px] md:text-sm text-center">عُروض</span>
         </a>
@@ -110,24 +97,24 @@
     </div>
 </section>
 
-<!-- Script for Animation on Scroll -->
+<!-- Script محسن للأداء -->
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const hiddenElements = entry.target.querySelectorAll('.cat-card-hidden');
-                    hiddenElements.forEach((el, index) => {
-                        setTimeout(() => {
-                            el.classList.add('cat-card-visible');
-                        }, index * 150);
-                    });
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.2 });
-
+    (function() {
         const section = document.getElementById('categories-section');
-        if (section) observer.observe(section);
-    });
+        if (!section) return;
+
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                const hiddenElements = section.querySelectorAll('.cat-card-hidden');
+                hiddenElements.forEach((el, index) => {
+                    setTimeout(() => {
+                        el.classList.add('cat-card-visible');
+                    }, index * 100); // جعلنا الفرق 100ms ليكون أسرع قليلاً
+                });
+                observer.unobserve(section);
+            }
+        }, { threshold: 0.1 });
+
+        observer.observe(section);
+    })();
 </script>

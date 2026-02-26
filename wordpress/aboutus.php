@@ -110,7 +110,7 @@ session_start();
   <!-- Hero Section (تم زيادة padding-top هنا كحل إضافي) -->
   <header class="ms-section-transparent pt-16 pb-12 ms-reveal">
     <div class="container mx-auto px-4 text-center">
-      <h1 class="text-xl md:text-2xl font-black text-black mb-3">من هو <span style="color:var(--ms-gold) !important;">اكسسوارات عبدالوهاب؟</span></h1>
+      <h1 class="text-3xl md:text-4xl font-black text-black mb-4">من هو <span style="color:var(--ms-gold) !important;">اكسسوارات عبدالوهاب؟</span></h1>
       <div class="w-24 h-1 bg-black mx-auto"></div>
     </div>
   </header>
