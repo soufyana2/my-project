@@ -1,0 +1,3 @@
+# Runtime/application logs
+wordpress/logs/*.log
+
