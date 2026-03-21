@@ -229,6 +229,17 @@ function fetchProducts($woocommerce, $category, $per_page, $offset = 0) {
     }
 }
 
+// Try multiple category names and return the first non-empty result.
+function fetchProductsWithFallbackCategories($woocommerce, $categories, $per_page, $offset = 0) {
+    foreach ($categories as $categoryName) {
+        $products = fetchProducts($woocommerce, $categoryName, $per_page, $offset);
+        if (!empty($products)) {
+            return $products;
+        }
+    }
+    return [];
+}
+
 // Function to get category ID by name
 function getCategoryId($woocommerce, $category_name) {
     $cacheKey = 'category_id_' . md5($category_name);
@@ -292,11 +303,11 @@ $log->error('WooCommerce API Error (HTTP) fetching Featured Products: ' . $e->ge
     }
 }
 
-// Fetch products for "أفضل المنتجات" section - Page 1 (Parfums)
-$parfums_products = fetchProducts($woocommerce, 'عطور', 4);
+// Fetch products for "أفضل المنتجات" section - Page 1 (Shirts)
+$parfums_products = fetchProductsWithFallbackCategories($woocommerce, ['جاكيت', 'جاكيتات'], 4);
 
-// Fetch products for "أفضل المنتجات" section - Page 2 (Watches)
-$watches_products = fetchProducts($woocommerce, 'ساعات', 4);
+// Fetch products for "أفضل المنتجات" section - Page 2 (Jackets)
+$watches_products = fetchProductsWithFallbackCategories($woocommerce, ['ملابس صيفية', 'قمصان'], 4);
 
 // Fetch products for "منتجات مميزة" section (8 mixed featured products)
 $featured_products = fetchFeaturedProducts($woocommerce, 8);
@@ -320,13 +331,13 @@ function renderSkeletonCards($count) {
     
     <!-- 1. العنوان المحسن: يحتوي على اسم المتجر + الكلمات المفتاحية الرئيسية -->
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>عبد الوهاب للعطور والإكسسوارات | تسوق أفضل العطور والساعات في المغرب</title>
+  <title>عبد الوهاب للملابس الرجالية | تسوق أفضل القمصان والجاكيتات في المغرب</title>
     
     <!-- 2. وصف دقيق وجذاب يحتوي كلمات بحثية -->
-    <meta name="description" content="تسوق أونلاين من عبد الوهاب للإكسسوارات والعطور. اكتشف تشكيلة واسعة من العطور الفاخرة، الساعات الأنيقة، والهدايا المميزة بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
+    <meta name="description" content="تسوق أونلاين من عبد الوهاب للملابس الرجالية. اكتشف تشكيلة واسعة من القمصان الفاخرة، الجاكيتات الأنيقة، والبناطيل العملية بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
     
     <!-- 3. الكلمات المفتاحية (اختياري لكن مفيد لمحركات البحث الأخرى) -->
-    <meta name="keywords" content="عطور, ساعات, إكسسوارات, تسوق أونلاين, المغرب, هدايا, عبد الوهاب">
+    <meta name="keywords" content="قمصان, جاكيتات, بناطيل, تسوق أونلاين, المغرب, هدايا, عبد الوهاب">
     
     <!-- 4. Canonical URL (مهم جداً لمنع تكرار المحتوى) -->
     <!-- استبدل الرابط أدناه برابط موقعك الحقيقي -->
@@ -335,8 +346,8 @@ function renderSkeletonCards($count) {
     <!-- 5. Favicon -->
 <!-- 6. Open Graph (للظهور باحترافية على فيسبوك، واتساب، وتويتر) -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="عبد الوهاب للعطور والإكسسوارات - فخامة وأناقة" />
-    <meta property="og:description" content="اكتشف مجموعتنا الحصرية من العطور والساعات. جودة عالية وأسعار تنافسية." />
+    <meta property="og:title" content="عبد الوهاب للملابس الرجالية - فخامة وأناقة" />
+    <meta property="og:description" content="اكتشف مجموعتنا الحصرية من القمصان والجاكيتات. جودة عالية وأسعار تنافسية." />
     <meta property="og:url" content="https://your-domain.com/" />
     <meta property="og:site_name" content="Bdolwahab Store" />
     <meta property="og:image" content="https://your-domain.com/images/lgicon.png" /> <!-- ضع رابط صورة شعار المتجر أو صورة دعائية -->
@@ -347,10 +358,10 @@ function renderSkeletonCards($count) {
     {
       "@context": "https://schema.org",
       "@type": "Store",
-      "name": "عبد الوهاب للإكسسوارات والعطور",
+      "name": "عبد الوهاب للملابس الرجالية",
       "url": "https://your-domain.com/",
       "logo": "https://your-domain.com/images/lgicon.png",
-      "description": "متجر متخصص في بيع العطور والساعات والإكسسوارات الفاخرة في المغرب.",
+      "description": "متجر متخصص في بيع القمصان والجاكيتات والبناطيل الفاخرة في المغرب.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "MA"
@@ -1060,8 +1071,6 @@ echo '
         </div>
     </div>
 </section>
-  <?php include 'ads2.html';?>
-
  <?php include 'history.html';?>
 <!-- NEW "منتجات مميزة" (Featured Products) section -->
 <section id="featured-products-section" class="relative overflow-hidden bg-transparent py-8 lazy-load-section" data-first-load="true">
@@ -1314,3 +1323,5 @@ function createParticles(x, y) {
 </script>
 </body>
 </html>
+
+

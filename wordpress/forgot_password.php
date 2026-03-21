@@ -97,10 +97,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $mail->Port = (int)$_ENV['SMTP_PORT'];
                     $mail->CharSet = 'UTF-8';
 
-                    $mail->setFrom($_ENV['SMTP_USERNAME'], 'Abdolwahab Accessories');
+                    $mail->setFrom($_ENV['SMTP_USERNAME'], store_brand('full_ar'));
                     $mail->addAddress($email);
                     $mail->isHTML(true);
-                    $mail->Subject = 'استعادة كلمة المرور - Abdolwahab Accessories';
+                    $mail->Subject = 'استعادة كلمة المرور - ' . store_brand('full_ar');
                     
                     $reset_link = "http://localhost:8088/myproject/wordpress/reset_password.php?token=" . urlencode($token);
                     $year = date('Y');
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Header -->
                             <div style='background-color: #000000; padding: 30px; text-align: center;'>
                                 <h1 style='color: #ffffff; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-                                <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>Parfums & Accessories</p>
+                                <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس رجالية</p>
                             </div>
 
                             <!-- Body -->
@@ -131,7 +131,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <!-- Footer -->
                             <div style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
-                                <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; $year Abdolwahab Accessories. جميع الحقوق محفوظة.</p>
+                                <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; $year عبدالوهاب للملابس الرجالية. جميع الحقوق محفوظة.</p>
                                 <div style='margin-top: 15px; font-size: 11px; color: #aaa;'>
                 <a href='https://www.primestore.ma' style='color: #C8A95A; text-decoration: none; font-weight: bold;'>Primestore</a>
                                 </div>
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>";
 
-                    $mail->Body = $email_template;
+                    $mail->Body = store_brand_replace($email_template);
                     $mail->AltBody = "الرابط: $reset_link";
 
                     $mail->send();
@@ -175,7 +175,7 @@ ob_end_flush();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>استعادة كلمة المرور - Abdolwahab Accessories</title>
+  <title>استعادة كلمة المرور - عبدالوهاب للملابس الرجالية</title>
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -304,10 +304,10 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للعطور" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">Accessories & Parfums</span>
+                <span class="logo-sub">ملابس رجالية</span>
             </div>
         </div>
     </header>
@@ -514,3 +514,5 @@ function renderMessage(type, text) {
     </script>
 </body>
 </html>
+
+

@@ -235,14 +235,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="تسجيل الدخول إلى حسابك بأمان. انضم إلينا اليوم للوصول إلى أفضل العطور والإكسسوارات.">
+    <meta name="description" content="تسجيل الدخول إلى حسابك بأمان. انضم إلينا اليوم للوصول إلى أفضل الملابس الرجالية.">
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>Abdolwahab Accssories & Parfums - login </title>
+  <title>عبدالوهاب للملابس الرجالية - login </title>
 <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
@@ -252,15 +252,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 <!-- Open Graph / Facebook & WhatsApp -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.abdolwahabaccessories.com/register.php">
-<meta property="og:title" content="تسجيل الدخول - عبدالوهاب للعطور والإكسسوارات">
-<meta property="og:description" content="سجل دخولك الآن للوصول إلى أفخم العطور والإكسسوارات الحصرية.">
+<meta property="og:title" content="تسجيل الدخول - عبدالوهاب للملابس الرجالية">
+<meta property="og:description" content="سجل دخولك الآن للوصول إلى أفخم الملابس الرجالية الحصرية.">
 <meta property="og:image" content="https://www.abdolwahabaccessories.com/register.php"> <!-- صورة بمقاس 1200x630 -->
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://www.abdolwahabaccessories.com/register.php">
-<meta name="twitter:title" content="تسجيل الدخول - عبدالوهاب للعطور والإكسسوارات">
-<meta name="twitter:description" content="سجل دخولك الآن للوصول إلى أفخم العطور والإكسسوارات الحصرية.">
+<meta name="twitter:title" content="تسجيل الدخول - عبدالوهاب للملابس الرجالية">
+<meta name="twitter:description" content="سجل دخولك الآن للوصول إلى أفخم الملابس الرجالية الحصرية.">
 <meta name="twitter:image" content="https://www.abdolwahabaccessories.com/register.php">
 
 <script type="application/ld+json">
@@ -268,11 +268,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
   "@context": "https://schema.org",
   "@type": "AccountPage",
   "name": "تسجيل الدخول وإنشاء حساب",
-  "description": "صفحة الدخول الآمن لعملاء متجر عبدالوهاب للعطور والإكسسوارات",
+  "description": "صفحة الدخول الآمن لعملاء متجر عبدالوهاب للملابس الرجالية",
   "url": "https://www.abdolwahabaccessories.com/register.php",
   "mainEntity": {
     "@type": "Organization",
-    "name": "Abdolwahab Accssories & Parfums",
+    "name": "عبدالوهاب للملابس الرجالية",
     "logo": "https://www.your-domain.com/images/lgicon.png",
     "url": "https://www.abdolwahabaccessories.com/register.php/"
   },
@@ -595,10 +595,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للعطور - Abdolwahab Parfums Logo" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">Accessories & Parfums</span>
+                <span class="logo-sub">ملابس رجالية</span>
             </div>
         </div>
     </header>
@@ -959,3 +959,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 </script>
 </body>
 </html>
+
+

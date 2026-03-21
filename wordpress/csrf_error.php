@@ -1,4 +1,6 @@
 <?php
+require_once __DIR__ . '/store_brand.php';
+store_brand_enable_auto_replace();
 http_response_code(403);
 ?>
 <!DOCTYPE html>

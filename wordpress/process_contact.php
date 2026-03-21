@@ -4,6 +4,8 @@ ob_start();
 session_start();
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
+require_once __DIR__ . '/store_brand.php';
+store_brand_enable_auto_replace();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Content-Type: text/html; charset=UTF-8');
@@ -89,7 +91,7 @@ try {
     $mail->Port       = (int)$_ENV['SMTP_PORT'];
     $mail->CharSet    = 'UTF-8';
 
-    $mail->setFrom($_ENV['SMTP_USERNAME'], 'Abdelwahab Accessories');
+    $mail->setFrom($_ENV['SMTP_USERNAME'], store_brand('full_ar'));
     $mail->addAddress($_ENV['SMTP_USERNAME']);
     $mail->addReplyTo($email, $f_name);
 
@@ -110,3 +112,4 @@ try {
     ob_clean();
     echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
 }
+

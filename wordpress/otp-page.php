@@ -435,10 +435,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Header: Logo on the LEFT (via justify-content: flex-end in RTL) -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للعطور" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">Accessories & Parfums</span>
+                <span class="logo-sub">ملابس رجالية</span>
             </div>
         </div>
     </header>
@@ -702,3 +702,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </script>
 </body>
 </html>
+
+

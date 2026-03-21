@@ -102,7 +102,7 @@ try {
         getLogger('mail_debug')->debug("PHPMailer", ['level' => $level, 'message' => $str]);
     };
 
-    $mail->setFrom($_ENV['SMTP_USERNAME'], 'رمز التحقق - Abdolwahab Accessories ');
+    $mail->setFrom($_ENV['SMTP_USERNAME'], 'رمز التحقق - ' . store_brand('full_ar'));
     $mail->addAddress($email, $username);
     $mail->CharSet = 'UTF-8';
     $mail->isHTML(true);
@@ -115,7 +115,7 @@ try {
         <!-- Header -->
         <div style='background-color: #000000; padding: 30px; text-align: center;'>
             <h1 style='color: #ffffff; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-            <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>Parfums & Accessories</p>
+            <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس رجالية</p>
         </div>
 
         <!-- Body -->
@@ -158,7 +158,7 @@ try {
 
         <!-- Footer -->
         <div style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
-            <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; " . date('Y') . " Abdolwahab Accessories. جميع الحقوق محفوظة.</p>
+            <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; " . date('Y') . " عبدالوهاب للملابس الرجالية. جميع الحقوق محفوظة.</p>
             <div style='margin-top: 15px; font-size: 11px; color: #aaa;'>
                 Dev & Design by 
                 <a href='https://www.primestore.ma' style='color: #C8A95A; text-decoration: none; font-weight: bold;'>Primestore</a>
@@ -168,6 +168,7 @@ try {
     </div>
 </div>
 ";
+    $mail->Body = store_brand_replace($mail->Body);
 
     $mail->AltBody = "مرحبًا " .  "،\n\nرمز التحقق الخاص بك هو: " . htmlspecialchars($otp, ENT_QUOTES, 'UTF-8') . "\n\nهذا الرمز صالح لمدة 5 دقائق. الرجاء إدخاله في صفحة التحقق لإكمال التسجيل.\n\nإذا لم تطلب هذا الرمز، يرجى تجاهل هذا البريد.\n\nشكرًا،\nفريق التطبيق";
 

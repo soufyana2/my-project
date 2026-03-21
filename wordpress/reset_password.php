@@ -183,7 +183,7 @@ ob_end_flush();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>تعيين كلمة المرور - Abdolwahab Accessories</title>
+  <title>تعيين كلمة المرور - عبدالوهاب للملابس الرجالية</title>
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -343,10 +343,10 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للعطور" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">Accessories & Parfums</span>
+                <span class="logo-sub">ملابس رجالية</span>
             </div>
         </div>
     </header>
@@ -605,3 +605,5 @@ ob_end_flush();
     </script>
 </body>
 </html>
+
+

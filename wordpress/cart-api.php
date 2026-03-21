@@ -1,6 +1,6 @@
 <?php
 /**
- * Abdolwahab Accessories & Parfums - Cart API v2.1
+ * عبدالوهاب للملابس الرجالية - Cart API v2.1
  * Fixes: Speed optimization, Product Links for WhatsApp, CSRF Consistency
  */
 

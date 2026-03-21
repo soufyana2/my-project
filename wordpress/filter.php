@@ -48,13 +48,28 @@ $categories = getCachedData($woocommerce, 'products/categories', 'cats');
 $raw_url = $_GET['category'] ?? $_GET['categurie'] ?? ''; 
 $target_name = trim(urldecode($raw_url)); 
 
+// Normalize category aliases so nav/cards keep working with old/new category naming.
+$ar = static fn(string $unicode) => json_decode('"' . $unicode . '"');
+$category_aliases = [
+    $ar('\u062c\u0627\u0643\u064a\u062a') => [$ar('\u062c\u0627\u0643\u064a\u062a'), $ar('\u062c\u0627\u0643\u064a\u062a\u0627\u062a')],
+    $ar('\u062c\u0627\u0643\u064a\u062a\u0627\u062a') => [$ar('\u062c\u0627\u0643\u064a\u062a\u0627\u062a'), $ar('\u062c\u0627\u0643\u064a\u062a')],
+    $ar('\u0645\u0644\u0627\u0628\u0633 \u0635\u064a\u0641\u064a\u0629') => [$ar('\u0645\u0644\u0627\u0628\u0633 \u0635\u064a\u0641\u064a\u0629'), $ar('\u0642\u0645\u0635\u0627\u0646')],
+    $ar('\u0642\u0645\u0635\u0627\u0646') => [$ar('\u0642\u0645\u0635\u0627\u0646'), $ar('\u0645\u0644\u0627\u0628\u0633 \u0635\u064a\u0641\u064a\u0629')],
+    $ar('\u0633\u0631\u0627\u0648\u064a\u0644') => [$ar('\u0633\u0631\u0627\u0648\u064a\u0644'), $ar('\u0627\u0644\u0628\u0646\u0627\u0637\u064a\u0644')],
+    $ar('\u0627\u0644\u0628\u0646\u0627\u0637\u064a\u0644') => [$ar('\u0627\u0644\u0628\u0646\u0627\u0637\u064a\u0644'), $ar('\u0633\u0631\u0627\u0648\u064a\u0644')],
+    $ar('\u0623\u062d\u062f\u064a\u0629') => [$ar('\u0623\u062d\u062f\u064a\u0629'), $ar('\u0623\u062d\u0630\u064a\u0629')],
+    $ar('\u0623\u062d\u0630\u064a\u0629') => [$ar('\u0623\u062d\u0630\u064a\u0629'), $ar('\u0623\u062d\u062f\u064a\u0629')],
+    $ar('\u0627\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629') => [$ar('\u0627\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629'), $ar('\u0625\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629')],
+    $ar('\u0625\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629') => [$ar('\u0625\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629'), $ar('\u0627\u0643\u0633\u0633\u0648\u0627\u0631\u0627\u062a \u0631\u062c\u0627\u0644\u064a\u0629')],
+];
+$target_candidates = $category_aliases[$target_name] ?? [$target_name];
 $selected_id = null;
 $found_in_list = false;
 
 if (!empty($target_name) && is_array($categories)) {
     foreach ($categories as $cat) {
         // المقارنة بالاسم العربي أو الـ slug (حساس جداً للعربي)
-        if ($cat['name'] == $target_name || $cat['slug'] == $target_name) {
+        if (in_array($cat['name'], $target_candidates, true) || in_array($cat['slug'], $target_candidates, true)) {
             $selected_id = $cat['id'];
             $found_in_list = true;
             break;
@@ -138,7 +153,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
     .breadcrumb-header {
         width: 100%;
-        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764797982/da03ca5e2169685ac4867c812a4f0d4c_g8wpob.jpg') center/cover no-repeat;
+        background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('<?php echo htmlspecialchars(store_brand_asset("breadcrumb_bg"), ENT_QUOTES, "UTF-8"); ?>') center/cover no-repeat;
         padding: 40px 0; color: #fff;
         margin-bottom: 20px;
         margin-top: 100px;

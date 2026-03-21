@@ -194,9 +194,9 @@ if (!$data) {
         }
         $extracted['cat_string'] = !empty($extracted['categories']) ? implode('، ', $extracted['categories']) : 'غير متوفر';
 
-        $cats_hide_sizes = ['ساعات', 'Watches', 'تكنولوجيا', 'Technology', 'اكسسوارات', 'Accessories', 'مكياج', 'Makeup', 'ديكورات', 'Decor'];
+        $cats_hide_sizes = ['جاكيت', 'جاكيتات', 'Jackets', 'سراويل', 'البناطيل', 'Pants', 'اكسسوارات رجالية', 'إكسسوارات رجالية', 'تكنولوجيا', 'Technology', 'مكياج', 'Makeup', 'ديكورات', 'Decor'];
         $cats_hide_colors = ['ديكورات', 'Decor'];
-$cats_ml_sizes = ['عطور', 'Parfums', 'Perfumes']; // يمكنك إضافة أي تصنيف جديد هنا مستقبلاً
+$cats_ml_sizes = ['قمصان', 'ملابس صيفية', 'Shirts']; // يمكنك إضافة أي تصنيف جديد هنا مستقبلاً
 $is_ml_category = false;
         $show_sizes = true;
         $show_colors = true;
@@ -225,8 +225,8 @@ $is_ml_category = false;
         $variations_map = [];
         $available_sizes_list = [];
 if ($is_ml_category) {
-    // هذه هي المقاسات التي ستظهر إذا كان التصنيف عطور
-    $standard_sizes_list = ['30ml', '50ml', '100ml', '150ml', '200ml'];
+    // هذه هي المقاسات التي ستظهر إذا كان التصنيف قمصان
+    $standard_sizes_list = ['S', 'M', 'L', 'XL', 'XXL'];
 } else {
     // المقاسات الافتراضية للملابس وغيرها
     $standard_sizes_list = ['XS', 'S', 'M', 'L', 'XL', 'XXL'];
@@ -249,7 +249,7 @@ if ($is_ml_category) {
                     if (strcasecmp($attr->name, 'Size') == 0 || strpos($attr->name, 'المقاس') !== false) {
 // إذا كان المقاس يحتوي على "ml" نتركه كما هو، وإذا كان حروف (S, M) نحوله لكبير
 // حذف المسافات وتحويل الكل لحروف صغيرة لضمان المطابقة
-// إذا كان عطر يحوله لصغير، وإذا ملابس يحوله لكبير.. مع حذف المسافات في الحالتين
+// إذا كان تصنيف قمصان يحوله لصغير، وإذا كان ملابس عامة يحوله لكبير.. مع حذف المسافات في الحالتين
 $clean_option = str_replace(' ', '', $attr->option);
 $key = $is_ml_category ? strtolower($clean_option) : strtoupper($clean_option);                     $type = 'size';
                         break;
@@ -470,7 +470,7 @@ function get_color_hex($color_name) {
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title> <?php echo htmlspecialchars($data['name']);?> - Abodlwahab Accssories & Parfums </title>
+  <title> <?php echo htmlspecialchars($data['name']);?> - عبدالوهاب للملابس الرجالية </title>
 <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -511,7 +511,7 @@ function get_color_hex($color_name) {
         /* BREADCRUMB */
         .breadcrumb-header {
             width: 100%;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1764797982/da03ca5e2169685ac4867c812a4f0d4c_g8wpob.jpg') center/cover no-repeat;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('<?php echo htmlspecialchars(store_brand_asset("breadcrumb_bg"), ENT_QUOTES, "UTF-8"); ?>') center/cover no-repeat;
             padding: 40px 0;
             color: #fff;
             margin-bottom: 20px;
@@ -969,7 +969,7 @@ function get_color_hex($color_name) {
 <meta property="og:image" content="<?php echo $data['active_image']; ?>" />
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" />
 <meta property="og:type" content="product" />
-<meta property="og:site_name" content="Abodlwahab Accessories" />
+<meta property="og:site_name" content="عبدالوهاب للملابس الرجالية" />
 <meta property="og:locale" content="ar_MA" />
 
 <!-- Twitter Card -->
@@ -1596,7 +1596,7 @@ function createParticles(x, y) {
 function buyViaWhatsapp() {
     // 1. جمع البيانات
     // اسم المتجر (يمكنك تغييره هنا أو جلبه من PHP)
-    const storeName = "Abodlwahab Accessories"; 
+    const storeName = "عبدالوهاب للملابس الرجالية"; 
     
     // رابط الصفحة الحالي
     const productUrl = window.location.href;
@@ -1673,3 +1673,4 @@ document.addEventListener('click', function(e) {
     </script>
 </body>
 </html>
+

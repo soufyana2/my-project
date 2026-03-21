@@ -25,17 +25,20 @@ if (file_exists(__DIR__ . '/vendor/autoload.php')) {
 
 // 3. تعريف الروابط النشطة (كودك الحالي)
 $currentScript = basename($_SERVER['PHP_SELF']);
-$urlCategory = isset($_GET['categurie']) ? $_GET['categurie'] : '';
+$urlCategory = $_GET['categurie'] ?? $_GET['category'] ?? '';
 $activeCategory = ''; 
 
 if ($currentScript == 'index.php') { $activeCategory = 'index'; } 
 elseif ($currentScript == 'filter.php') {
     if (empty($urlCategory)) { $activeCategory = 'filter'; } 
     else {
-        if ($urlCategory == 'عطور') $activeCategory = 'parfums';
-        elseif ($urlCategory == 'الإكسسوارات') $activeCategory = 'accessories';
-        elseif ($urlCategory == 'ساعات') $activeCategory = 'watches';
+        if ($urlCategory == 'جاكيت' || $urlCategory == 'جاكيتات') $activeCategory = 'jacket';
+        elseif ($urlCategory == 'ملابس صيفية') $activeCategory = 'summer';
+        elseif ($urlCategory == 'سراويل' || $urlCategory == 'البناطيل') $activeCategory = 'trousers';
+        elseif ($urlCategory == 'أحدية' || $urlCategory == 'أحذية') $activeCategory = 'shoes';
+        elseif ($urlCategory == 'اكسسوارات رجالية' || $urlCategory == 'إكسسوارات رجالية') $activeCategory = 'mens_accessories';
         elseif ($urlCategory == 'باقات وعروض') $activeCategory = 'pack';
+        elseif ($urlCategory == 'قمصان') $activeCategory = 'shirts';
     }
 }
 
@@ -408,7 +411,7 @@ border-bottom: 1px solid #f1f5f9 !important;
             /* التعديلات الخاصة بالتمرير */
             overflow-y: auto !important; /* إجبار التمرير العمودي */
             -webkit-overflow-scrolling: touch !important; /* نعومة اللمس */
-            padding-bottom: 90px !important; /* مسافة كبيرة في الأسفل لرفع آخر رابط (ساعات) للأعلى */
+            padding-bottom: 90px !important; /* مسافة كبيرة في الأسفل لرفع آخر رابط (جاكيتات) للأعلى */
         }
 
         .mobile-menu.active {
@@ -858,9 +861,9 @@ border-bottom: 1px solid #f1f5f9 !important;
             }
 
     /* تعديل النصوص للروابط المحددة */
-    .nav-link-parfums-mens::before { content: "عطور"; }
-    .nav-link-parfums-womens::before { content: "إكسسوارات"; }
-    .nav-link-accessories-mens::before { content: "ساعات"; }
+    .nav-link-parfums-mens::before { content: "قمصان"; }
+    .nav-link-parfums-womens::before { content: "بناطيل"; }
+    .nav-link-accessories-mens::before { content: "جاكيتات"; }
     .nav-link-accessories-womens::before { content: ""; }
 
     /* إخفاء النص الأصلي للروابط وتعديل العرض لجعلها تظهر في سطر واحد */
@@ -1236,11 +1239,11 @@ border-bottom: 1px solid #f1f5f9 !important;
                 <div class="absolute left-1/2 -translate-x-1/2 flex items-center space-x-3 z-0" style="direction: ltr;">
                                   <!-- logo 1-->
 
-                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="STORE Logo" class="h-12 w-auto object-contain">
+                <img src="<?php echo htmlspecialchars(store_brand_asset('logo_main')); ?>" alt="<?php echo htmlspecialchars(store_brand('name_en') . ' Logo'); ?>" class="h-12 w-auto object-contain">
                     <div class="hidden sm:block">
                         <a href="index.php">
-                        <div class="logo-text">Abdelwahab</div>
-                        <div class="logo-subtitle">ACCESSORIES & PARFUMS</div>
+                        <div class="logo-text"><?php echo htmlspecialchars(store_brand('name_en')); ?></div>
+                        <div class="logo-subtitle"><?php echo htmlspecialchars(store_brand('business_ar')); ?></div>
                     </div></a>
                 </div>
 
@@ -1329,22 +1332,25 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 <span>الباقات الجديدة</span>
             </a>
 
-            <!-- العطور: ستختفي في التابلت (md) وتظهر في الكمبيوتر (lg) -->
-           <!-- رابط العطور -->
-<a href="filter.php?categurie=عطور" class="nav-link md:!hidden lg:!flex <?php echo ($activeCategory == 'parfums') ? 'active' : ''; ?>">
-    <span>العطور</span>
-</a>
-
-
-
-            <a href="filter.php?categurie=الإكسسوارات" class="nav-link <?php echo ($activeCategory == 'accessories') ? 'active' : ''; ?>">
-                <span>الإكسسوارات</span>
+            <a href="filter.php?categurie=جاكيت" class="nav-link <?php echo ($activeCategory == 'jacket') ? 'active' : ''; ?>">
+                <span>جاكيت</span>
             </a>
 
-          <!-- رابط الساعات -->
-<a href="filter.php?categurie=ساعات" class="nav-link md:!hidden lg:!flex <?php echo ($activeCategory == 'watches') ? 'active' : ''; ?>">
-    <span>الساعات</span>
-</a>
+            <a href="filter.php?categurie=ملابس صيفية" class="nav-link <?php echo ($activeCategory == 'summer') ? 'active' : ''; ?>">
+                <span>ملابس صيفية</span>
+            </a>
+
+            <a href="filter.php?categurie=سراويل" class="nav-link <?php echo ($activeCategory == 'trousers') ? 'active' : ''; ?>">
+                <span>سراويل</span>
+            </a>
+
+            <a href="filter.php?categurie=أحدية" class="nav-link <?php echo ($activeCategory == 'shoes') ? 'active' : ''; ?>">
+                <span>أحدية</span>
+            </a>
+
+            <a href="filter.php?categurie=اكسسوارات رجالية" class="nav-link <?php echo ($activeCategory == 'mens_accessories') ? 'active' : ''; ?>">
+                <span>اكسسوارات رجالية</span>
+            </a>
 
         </div>
     </div>
@@ -1372,11 +1378,11 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 <div class="flex items-center space-x-3">
                             <!-- logo 2 -->
 
-                    <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-10 w-auto object-contain">
+                    <img src="<?php echo htmlspecialchars(store_brand_asset('logo_main')); ?>" alt="<?php echo htmlspecialchars(store_brand('name_en') . ' Logo'); ?>" class="h-10 w-auto object-contain">
                     <div>
                         <a href="index.php">
-                        <div class="logo-text text-lg">Abdolwahab</div>
-                        <div class="logo-subtitle" style="font-size: bold;color:#C8A95A;">ACCESSORIES & Watches</div>
+                        <div class="logo-text text-lg"><?php echo htmlspecialchars(store_brand('name_en')); ?></div>
+                        <div class="logo-subtitle" style="font-size: bold;color:#C8A95A;"><?php echo htmlspecialchars(store_brand('business_ar')); ?></div>
                     </div></a>
                 </div>
                 <button id="close-mobile-menu" aria-label="فتح القائمة" class="icon-button w-9 h-9 flex items-center justify-center">
@@ -1408,11 +1414,13 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
         <!-- Mobile Navigation -->
         <nav class="py-4" style="direction: rtl;">
             <a href="index.php" class="mobile-nav-link">الصفحة الرئيسية</a>
-             <a href="filter.php?" class="mobile-nav-link">صفحة المنتجات </a>
-            <a href="filter.php?categurie=باقات وعروض" class="mobile-nav-link">الباقاة الجديدة</a>
-            <a href="filter.php?categurie=عطور" class="mobile-nav-link">العطور</a>
-            <a href="filter.php?categurie=الإكسسوارات" class="mobile-nav-link">الإكسسوارات</a>
-            <a href="filter.php?categurie=ساعات" class="mobile-nav-link">الساعات</a>
+            <a href="filter.php" class="mobile-nav-link">صفحة المنتجات</a>
+            <a href="filter.php?categurie=باقات وعروض" class="mobile-nav-link">الباقات الجديدة</a>
+            <a href="filter.php?categurie=جاكيت" class="mobile-nav-link">جاكيت</a>
+            <a href="filter.php?categurie=ملابس صيفية" class="mobile-nav-link">ملابس صيفية</a>
+            <a href="filter.php?categurie=سراويل" class="mobile-nav-link">سراويل</a>
+            <a href="filter.php?categurie=أحدية" class="mobile-nav-link">أحدية</a>
+            <a href="filter.php?categurie=اكسسوارات رجالية" class="mobile-nav-link">اكسسوارات رجالية</a>
         </nav>
     </div>
 <!-- ===== WISHLIST SIDEBAR ===== -->
@@ -1423,9 +1431,9 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
       <div class="flex items-center">
         <!-- logo 3 -->
 
-          <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
+          <img src="<?php echo htmlspecialchars(store_brand_asset('logo_main')); ?>" alt="<?php echo htmlspecialchars(store_brand('name_en') . ' Logo'); ?>" class="h-12 w-auto object-contain mr-4">
           <div>
-              <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
+              <h2 class="font-playfair font-bold text-lg gradient-text"><?php echo htmlspecialchars(store_brand('name_en')); ?></h2>
               <p class="text-xs text-text-muted font-medium tracking-wide">MY WISHLIST</p>
           </div>
       </div>
@@ -1522,9 +1530,9 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             class="flex items-center justify-between p-8 border-b border-border  from-surface-elevated to-surface flex-shrink-0" style="direction: ltr;background: #ffffff !important;">
             <div class="flex items-center">
                 <!-- logo 4 -->
-                <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="DJELLABTI Logo" class="h-12 w-auto object-contain mr-4">
+                <img src="<?php echo htmlspecialchars(store_brand_asset('logo_main')); ?>" alt="<?php echo htmlspecialchars(store_brand('name_en') . ' Logo'); ?>" class="h-12 w-auto object-contain mr-4">
                 <div>
-                    <h2 class="font-playfair font-bold text-lg gradient-text">NEW BRAND</h2>
+                    <h2 class="font-playfair font-bold text-lg gradient-text"><?php echo htmlspecialchars(store_brand('name_en')); ?></h2>
                     <p class="text-xs text-text-muted font-medium tracking-wide">SHOPPING CART</p>
                 </div>
             </div>
@@ -2319,3 +2327,4 @@ window.addAllWishlistToCart = function() {
     });
 };
     </script>
+

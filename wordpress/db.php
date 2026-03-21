@@ -1,5 +1,8 @@
 <?php
 
+require_once __DIR__ . '/store_brand.php';
+store_brand_enable_auto_replace();
+
 // الخطوة 1: استدعاء إعدادات Monolog أولاً وقبل كل شيء
 require_once __DIR__ . '/logger_setup.php';
 require_once __DIR__ . '/vendor/autoload.php';
