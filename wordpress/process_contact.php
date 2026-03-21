@@ -5,6 +5,8 @@ session_start();
 ini_set('display_errors', 0);
 error_reporting(E_ALL);
 require_once __DIR__ . '/store_brand.php';
+require_once __DIR__ . '/store_rebrand_theme.php';
+store_theme_enable_auto_replace();
 store_brand_enable_auto_replace();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {

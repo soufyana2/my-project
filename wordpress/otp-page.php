@@ -435,10 +435,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <!-- Header: Logo on the LEFT (via justify-content: flex-end in RTL) -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم المتجر للملابس النسائية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">ملابس رجالية</span>
+                <span class="logo-sub">ملابس نسائية</span>
             </div>
         </div>
     </header>
@@ -446,8 +446,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="w-full max-w-md container mt-10">
         <form id="otpForm" action="otp-page.php" method="POST">
             <div class="text-center p-6 pb-4">
-                <h1 class="text-3xl font-bold text-gray-900 mb-2 font-cairo">تحقق من حسابك</h1>
-                <p class="text-gray-600 text-sm">أدخل الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني</p>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2 font-cairo">تحققي من حسابك</h1>
+                <p class="text-gray-600 text-sm">أدخلي الرمز المكون من 6 أرقام الذي تم إرساله إلى بريدك الإلكتروني</p>
             </div>
 
             <div class="px-6 pb-4 space-y-4">
@@ -486,7 +486,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <!-- Resend Link: RTL Flow -->
                 <div class="text-center">
                     <p class="text-sm text-gray-600">
-                       لم تستلم الرمز؟
+                       لم تستلمي الرمز؟
                         <button 
                             type="button" 
                             name="resend_otp" 
@@ -510,7 +510,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <?php if ($verify_remaining > 0) echo 'disabled'; ?>
                         disabled
                         >
-                    تحقق الآن
+                    تحققي الآن
                 </button>
             </div>
         </form> 

@@ -1037,3 +1037,612 @@
 [Sat Mar 21 12:00:30 2026] [::1]:62499 Accepted
 [Sat Mar 21 12:00:31 2026] [::1]:62499 [200]: GET /undefined
 [Sat Mar 21 12:00:31 2026] [::1]:62499 Closing
+[Sat Mar 21 12:15:14 2026] [::1]:61467 Accepted
+[Sat Mar 21 12:15:14 2026] [::1]:62831 Accepted
+[Sat Mar 21 12:15:17 2026] [::1]:61467 [200]: GET /index.php
+[Sat Mar 21 12:15:17 2026] [::1]:61467 Closing
+[Sat Mar 21 12:15:19 2026] [::1]:62831 [200]: GET /get-cart-html.php?v=1774095319076
+[Sat Mar 21 12:15:19 2026] [::1]:62831 Closing
+[Sat Mar 21 12:15:19 2026] [::1]:59908 Accepted
+[Sat Mar 21 12:15:19 2026] [::1]:59908 [200]: POST /cart-api.php
+[Sat Mar 21 12:15:19 2026] [::1]:59908 Closing
+[Sat Mar 21 12:15:19 2026] [::1]:55153 Accepted
+[Sat Mar 21 12:15:19 2026] [::1]:55153 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 12:15:19 2026] [::1]:55153 Closing
+[Sat Mar 21 12:15:24 2026] [::1]:62624 Accepted
+[Sat Mar 21 12:15:25 2026] [::1]:62624 [200]: GET /undefined
+[Sat Mar 21 12:15:26 2026] [::1]:62624 Closing
+[Sat Mar 21 12:16:02 2026] [::1]:55718 Accepted
+[Sat Mar 21 12:16:02 2026] [::1]:50586 Accepted
+[Sat Mar 21 12:16:02 2026] [::1]:55718 [302]: GET /register.php
+[Sat Mar 21 12:16:02 2026] [::1]:55718 Closing
+[Sat Mar 21 12:16:02 2026] [::1]:50586 [200]: GET /register.php?timeout=1
+[Sat Mar 21 12:16:02 2026] [::1]:50586 Closing
+[Sat Mar 21 12:16:13 2026] [::1]:60163 Accepted
+[Sat Mar 21 12:16:13 2026] [::1]:62307 Accepted
+[Sat Mar 21 12:16:15 2026] [::1]:60163 [200]: GET /index.php
+[Sat Mar 21 12:16:15 2026] [::1]:60163 Closing
+[Sat Mar 21 12:16:16 2026] [::1]:62307 [200]: GET /get-cart-html.php?v=1774095376838
+[Sat Mar 21 12:16:16 2026] [::1]:62307 Closing
+[Sat Mar 21 12:16:16 2026] [::1]:53961 Accepted
+[Sat Mar 21 12:16:16 2026] [::1]:53961 [200]: POST /cart-api.php
+[Sat Mar 21 12:16:17 2026] [::1]:53961 Closing
+[Sat Mar 21 12:16:21 2026] [::1]:50676 Accepted
+[Sat Mar 21 12:16:23 2026] [::1]:50676 [200]: GET /undefined
+[Sat Mar 21 12:16:23 2026] [::1]:50676 Closing
+[Sat Mar 21 12:19:45 2026] [::1]:53973 Accepted
+[Sat Mar 21 12:19:46 2026] [::1]:53973 [200]: GET /filter.php?categurie=%D8%A8%D8%A7%D9%82%D8%A7%D8%AA%20%D9%88%D8%B9%D8%B1%D9%88%D8%B6
+[Sat Mar 21 12:19:46 2026] [::1]:53973 Closing
+[Sat Mar 21 12:19:46 2026] [::1]:49669 Accepted
+[Sat Mar 21 12:19:47 2026] [::1]:49669 [200]: GET /get-cart-html.php?v=1774095586980
+[Sat Mar 21 12:19:47 2026] [::1]:49669 Closing
+[Sat Mar 21 12:19:47 2026] [::1]:55773 Accepted
+[Sat Mar 21 12:19:47 2026] [::1]:55773 [200]: POST /filter_ajax.php
+[Sat Mar 21 12:19:47 2026] [::1]:55773 Closing
+[Sat Mar 21 12:19:47 2026] [::1]:61503 Accepted
+[Sat Mar 21 12:19:47 2026] [::1]:61503 [200]: POST /cart-api.php
+[Sat Mar 21 12:19:47 2026] [::1]:61503 Closing
+[Sat Mar 21 12:19:55 2026] [::1]:58564 Accepted
+[Sat Mar 21 12:19:57 2026] [::1]:58564 [200]: GET /index.php
+[Sat Mar 21 12:19:57 2026] [::1]:58564 Closing
+[Sat Mar 21 12:19:57 2026] [::1]:54427 Accepted
+[Sat Mar 21 12:19:58 2026] [::1]:54427 [200]: GET /get-cart-html.php?v=1774095598205
+[Sat Mar 21 12:19:58 2026] [::1]:54427 Closing
+[Sat Mar 21 12:19:58 2026] [::1]:63553 Accepted
+[Sat Mar 21 12:19:58 2026] [::1]:63553 [200]: POST /cart-api.php
+[Sat Mar 21 12:19:58 2026] [::1]:63553 Closing
+[Sat Mar 21 12:26:03 2026] [::1]:58543 Accepted
+[Sat Mar 21 12:26:03 2026] [::1]:62756 Accepted
+[Sat Mar 21 12:26:05 2026] [::1]:62756 [200]: GET /index.php
+[Sat Mar 21 12:26:05 2026] [::1]:62756 Closing
+[Sat Mar 21 12:26:07 2026] [::1]:58543 [200]: GET /get-cart-html.php?v=1774095967192
+[Sat Mar 21 12:26:07 2026] [::1]:58543 Closing
+[Sat Mar 21 12:26:07 2026] [::1]:60747 Accepted
+[Sat Mar 21 12:26:07 2026] [::1]:60747 [200]: POST /cart-api.php
+[Sat Mar 21 12:26:07 2026] [::1]:60747 Closing
+[Sat Mar 21 12:26:08 2026] [::1]:64426 Accepted
+[Sat Mar 21 12:26:08 2026] [::1]:64426 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 12:26:08 2026] [::1]:64426 Closing
+[Sat Mar 21 12:26:19 2026] [::1]:54071 Accepted
+[Sat Mar 21 12:26:21 2026] [::1]:54071 [200]: GET /undefined
+[Sat Mar 21 12:26:21 2026] [::1]:54071 Closing
+[Sat Mar 21 12:26:28 2026] [::1]:49669 Accepted
+[Sat Mar 21 12:26:29 2026] [::1]:49669 [200]: GET /undefined
+[Sat Mar 21 12:26:30 2026] [::1]:49669 Closing
+[Sat Mar 21 12:26:41 2026] [::1]:58596 Accepted
+[Sat Mar 21 12:26:41 2026] [::1]:63887 Accepted
+[Sat Mar 21 12:26:41 2026] [::1]:58596 [200]: GET /filter.php
+[Sat Mar 21 12:26:41 2026] [::1]:58596 Closing
+[Sat Mar 21 12:26:42 2026] [::1]:63887 [200]: GET /get-cart-html.php?v=1774096002277
+[Sat Mar 21 12:26:42 2026] [::1]:63887 Closing
+[Sat Mar 21 12:26:42 2026] [::1]:52086 Accepted
+[Sat Mar 21 12:26:42 2026] [::1]:52086 [200]: POST /filter_ajax.php
+[Sat Mar 21 12:26:42 2026] [::1]:52086 Closing
+[Sat Mar 21 12:26:42 2026] [::1]:51009 Accepted
+[Sat Mar 21 12:26:43 2026] [::1]:51009 [200]: POST /cart-api.php
+[Sat Mar 21 12:26:43 2026] [::1]:51009 Closing
+[Sat Mar 21 12:26:51 2026] [::1]:58716 Accepted
+[Sat Mar 21 12:26:51 2026] [::1]:58716 [200]: POST /filter_ajax.php
+[Sat Mar 21 12:26:51 2026] [::1]:58716 Closing
+[Sat Mar 21 12:26:52 2026] [::1]:53470 Accepted
+[Sat Mar 21 12:26:52 2026] [::1]:53470 [200]: POST /filter_ajax.php
+[Sat Mar 21 12:26:52 2026] [::1]:53470 Closing
+[Sat Mar 21 12:26:56 2026] [::1]:62077 Accepted
+[Sat Mar 21 12:26:56 2026] [::1]:54193 Accepted
+[Sat Mar 21 12:26:57 2026] [::1]:62077 [200]: GET /filter.php?categurie=%D8%A7%D9%83%D8%B3%D8%B3%D9%88%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%B1%D8%AC%D8%A7%D9%84%D9%8A%D8%A9
+[Sat Mar 21 12:26:57 2026] [::1]:62077 Closing
+[Sat Mar 21 12:26:58 2026] [::1]:54193 [200]: GET /get-cart-html.php?v=1774096017943
+[Sat Mar 21 12:26:58 2026] [::1]:54193 Closing
+[Sat Mar 21 12:26:58 2026] [::1]:59865 Accepted
+[Sat Mar 21 12:26:58 2026] [::1]:59865 [200]: POST /filter_ajax.php
+[Sat Mar 21 12:26:58 2026] [::1]:59865 Closing
+[Sat Mar 21 12:26:58 2026] [::1]:54094 Accepted
+[Sat Mar 21 12:26:59 2026] [::1]:54094 [200]: POST /cart-api.php
+[Sat Mar 21 12:26:59 2026] [::1]:54094 Closing
+[Sat Mar 21 12:27:10 2026] [::1]:56679 Accepted
+[Sat Mar 21 12:27:11 2026] [::1]:56679 [200]: GET /index.php
+[Sat Mar 21 12:27:11 2026] [::1]:56679 Closing
+[Sat Mar 21 12:27:11 2026] [::1]:63672 Accepted
+[Sat Mar 21 12:27:13 2026] [::1]:63672 [200]: GET /get-cart-html.php?v=1774096033293
+[Sat Mar 21 12:27:13 2026] [::1]:63672 Closing
+[Sat Mar 21 12:27:13 2026] [::1]:62365 Accepted
+[Sat Mar 21 12:27:13 2026] [::1]:62365 [200]: POST /cart-api.php
+[Sat Mar 21 12:27:13 2026] [::1]:62365 Closing
+[Sat Mar 21 12:32:41 2026] [::1]:53200 Accepted
+[Sat Mar 21 12:34:14 2026] [::1]:53200 Closed without sending a request; it was probably just an unused speculative preconnection
+[Sat Mar 21 12:34:14 2026] [::1]:53200 Closing
+[Sat Mar 21 12:40:17 2026] [::1]:64511 Accepted
+[Sat Mar 21 12:40:17 2026] [::1]:58591 Accepted
+[Sat Mar 21 12:40:29 2026] [::1]:64511 [200]: GET /index.php
+[Sat Mar 21 12:40:29 2026] [::1]:64511 Closing
+[Sat Mar 21 12:40:31 2026] [::1]:58591 [200]: GET /get-cart-html.php?v=1774096830947
+[Sat Mar 21 12:40:31 2026] [::1]:58591 Closing
+[Sat Mar 21 12:40:31 2026] [::1]:61410 Accepted
+[Sat Mar 21 12:40:31 2026] [::1]:61410 [200]: POST /cart-api.php
+[Sat Mar 21 12:40:31 2026] [::1]:61410 Closing
+[Sat Mar 21 12:40:31 2026] [::1]:52289 Accepted
+[Sat Mar 21 12:40:31 2026] [::1]:52289 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 12:40:31 2026] [::1]:52289 Closing
+[Sat Mar 21 12:40:48 2026] [::1]:61389 Accepted
+[Sat Mar 21 12:40:50 2026] [::1]:61389 [200]: GET /undefined
+[Sat Mar 21 12:40:50 2026] [::1]:61389 Closing
+[Sat Mar 21 12:45:51 2026] [::1]:53193 Accepted
+[Sat Mar 21 12:45:51 2026] [::1]:58314 Accepted
+[Sat Mar 21 12:45:53 2026] [::1]:53193 [200]: GET /index.php
+[Sat Mar 21 12:45:53 2026] [::1]:53193 Closing
+[Sat Mar 21 12:45:55 2026] [::1]:58314 [200]: GET /get-cart-html.php?v=1774097154982
+[Sat Mar 21 12:45:55 2026] [::1]:58314 Closing
+[Sat Mar 21 12:45:55 2026] [::1]:50937 Accepted
+[Sat Mar 21 12:45:55 2026] [::1]:50937 [200]: POST /cart-api.php
+[Sat Mar 21 12:45:55 2026] [::1]:50937 Closing
+[Sat Mar 21 12:45:55 2026] [::1]:62119 Accepted
+[Sat Mar 21 12:45:56 2026] [::1]:62119 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 12:45:56 2026] [::1]:62119 Closing
+[Sat Mar 21 12:59:07 2026] [::1]:53244 Accepted
+[Sat Mar 21 12:59:07 2026] [::1]:62162 Accepted
+[Sat Mar 21 12:59:08 2026] [::1]:53244 [200]: GET /index.php
+[Sat Mar 21 12:59:08 2026] [::1]:53244 Closing
+[Sat Mar 21 12:59:10 2026] [::1]:62162 [200]: GET /get-cart-html.php?v=1774097950117
+[Sat Mar 21 12:59:10 2026] [::1]:62162 Closing
+[Sat Mar 21 12:59:10 2026] [::1]:60642 Accepted
+[Sat Mar 21 12:59:10 2026] [::1]:60642 [200]: POST /cart-api.php
+[Sat Mar 21 12:59:10 2026] [::1]:60642 Closing
+[Sat Mar 21 12:59:10 2026] [::1]:51094 Accepted
+[Sat Mar 21 12:59:10 2026] [::1]:51094 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 12:59:10 2026] [::1]:51094 Closing
+[Sat Mar 21 12:59:13 2026] [::1]:65391 Accepted
+[Sat Mar 21 12:59:14 2026] [::1]:65391 [200]: GET /undefined
+[Sat Mar 21 12:59:14 2026] [::1]:65391 Closing
+[Sat Mar 21 12:59:15 2026] [::1]:55086 Accepted
+[Sat Mar 21 12:59:16 2026] [::1]:55086 [200]: GET /undefined
+[Sat Mar 21 12:59:17 2026] [::1]:55086 Closing
+[Sat Mar 21 13:00:19 2026] [::1]:56616 Accepted
+[Sat Mar 21 13:00:19 2026] [::1]:57579 Accepted
+[Sat Mar 21 13:00:20 2026] [::1]:56616 [200]: GET /index.php
+[Sat Mar 21 13:00:21 2026] [::1]:56616 Closing
+[Sat Mar 21 13:00:22 2026] [::1]:57579 [200]: GET /get-cart-html.php?v=1774098022362
+[Sat Mar 21 13:00:22 2026] [::1]:57579 Closing
+[Sat Mar 21 13:00:22 2026] [::1]:55160 Accepted
+[Sat Mar 21 13:00:22 2026] [::1]:55160 [200]: POST /cart-api.php
+[Sat Mar 21 13:00:22 2026] [::1]:55160 Closing
+[Sat Mar 21 13:00:22 2026] [::1]:50146 Accepted
+[Sat Mar 21 13:00:22 2026] [::1]:50146 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 13:00:22 2026] [::1]:50146 Closing
+[Sat Mar 21 13:00:40 2026] [::1]:50515 Accepted
+[Sat Mar 21 13:00:41 2026] [::1]:50515 [200]: GET /undefined
+[Sat Mar 21 13:00:41 2026] [::1]:50515 Closing
+[Sat Mar 21 13:00:50 2026] [::1]:65506 Accepted
+[Sat Mar 21 13:00:53 2026] [::1]:65506 [200]: GET /undefined
+[Sat Mar 21 13:00:54 2026] [::1]:65506 Closing
+[Sat Mar 21 13:16:06 2026] [::1]:59391 Accepted
+[Sat Mar 21 13:16:06 2026] [::1]:56187 Accepted
+[Sat Mar 21 13:16:07 2026] [::1]:59391 [200]: GET /index.php
+[Sat Mar 21 13:16:08 2026] [::1]:59391 Closing
+[Sat Mar 21 13:16:09 2026] [::1]:56187 [200]: GET /get-cart-html.php?v=1774098969877
+[Sat Mar 21 13:16:09 2026] [::1]:56187 Closing
+[Sat Mar 21 13:16:09 2026] [::1]:52031 Accepted
+[Sat Mar 21 13:16:10 2026] [::1]:52031 [200]: POST /cart-api.php
+[Sat Mar 21 13:16:10 2026] [::1]:52031 Closing
+[Sat Mar 21 13:16:10 2026] [::1]:57634 Accepted
+[Sat Mar 21 13:16:10 2026] [::1]:57634 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 13:16:10 2026] [::1]:57634 Closing
+[Sat Mar 21 13:16:22 2026] [::1]:60490 Accepted
+[Sat Mar 21 13:16:24 2026] [::1]:60490 [200]: GET /undefined
+[Sat Mar 21 13:16:25 2026] [::1]:60490 Closing
+[Sat Mar 21 13:28:51 2026] [::1]:57909 Accepted
+[Sat Mar 21 13:28:51 2026] [::1]:62269 Accepted
+[Sat Mar 21 13:28:52 2026] [::1]:57909 [200]: GET /index.php
+[Sat Mar 21 13:28:52 2026] [::1]:57909 Closing
+[Sat Mar 21 13:28:53 2026] [::1]:62269 [200]: GET /get-cart-html.php?v=1774099733695
+[Sat Mar 21 13:28:53 2026] [::1]:62269 Closing
+[Sat Mar 21 13:28:53 2026] [::1]:60702 Accepted
+[Sat Mar 21 13:28:53 2026] [::1]:60702 [200]: POST /cart-api.php
+[Sat Mar 21 13:28:53 2026] [::1]:60702 Closing
+[Sat Mar 21 13:28:54 2026] [::1]:62752 Accepted
+[Sat Mar 21 13:28:54 2026] [::1]:62752 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 13:28:54 2026] [::1]:62752 Closing
+[Sat Mar 21 13:28:58 2026] [::1]:49828 Accepted
+[Sat Mar 21 13:28:59 2026] [::1]:49828 [200]: GET /undefined
+[Sat Mar 21 13:29:00 2026] [::1]:49828 Closing
+[Sat Mar 21 13:39:58 2026] [::1]:62015 Accepted
+[Sat Mar 21 13:39:58 2026] [::1]:61552 Accepted
+[Sat Mar 21 13:39:59 2026] [::1]:62015 [200]: GET /index.php
+[Sat Mar 21 13:39:59 2026] [::1]:62015 Closing
+[Sat Mar 21 13:40:01 2026] [::1]:61552 [200]: GET /get-cart-html.php?v=1774100401052
+[Sat Mar 21 13:40:01 2026] [::1]:61552 Closing
+[Sat Mar 21 13:40:01 2026] [::1]:51354 Accepted
+[Sat Mar 21 13:40:01 2026] [::1]:51354 [200]: POST /cart-api.php
+[Sat Mar 21 13:40:01 2026] [::1]:51354 Closing
+[Sat Mar 21 13:40:01 2026] [::1]:60436 Accepted
+[Sat Mar 21 13:40:01 2026] [::1]:60436 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 13:40:01 2026] [::1]:60436 Closing
+[Sat Mar 21 13:40:21 2026] [::1]:54353 Accepted
+[Sat Mar 21 13:40:22 2026] [::1]:54353 [200]: GET /undefined
+[Sat Mar 21 13:40:23 2026] [::1]:54353 Closing
+[Sat Mar 21 13:42:24 2026] [::1]:50155 Accepted
+[Sat Mar 21 13:42:25 2026] [::1]:50155 [200]: GET /undefined
+[Sat Mar 21 13:42:25 2026] [::1]:50155 Closing
+[Sat Mar 21 13:42:26 2026] [::1]:56507 Accepted
+[Sat Mar 21 13:42:26 2026] [::1]:63272 Accepted
+[Sat Mar 21 13:42:26 2026] [::1]:56507 [200]: GET /filter.php
+[Sat Mar 21 13:42:26 2026] [::1]:56507 Closing
+[Sat Mar 21 13:42:27 2026] [::1]:63272 [200]: GET /get-cart-html.php?v=1774100547434
+[Sat Mar 21 13:42:27 2026] [::1]:63272 Closing
+[Sat Mar 21 13:42:27 2026] [::1]:56862 Accepted
+[Sat Mar 21 13:42:27 2026] [::1]:56862 [200]: POST /filter_ajax.php
+[Sat Mar 21 13:42:27 2026] [::1]:56862 Closing
+[Sat Mar 21 13:42:27 2026] [::1]:49669 Accepted
+[Sat Mar 21 13:42:27 2026] [::1]:49669 [200]: POST /cart-api.php
+[Sat Mar 21 13:42:27 2026] [::1]:49669 Closing
+[Sat Mar 21 13:42:34 2026] [::1]:58770 Accepted
+[Sat Mar 21 13:42:34 2026] [::1]:51352 Accepted
+[Sat Mar 21 13:42:34 2026] [::1]:58770 [200]: GET /filter.php?categurie=%D8%A8%D8%A7%D9%82%D8%A7%D8%AA%20%D9%88%D8%B9%D8%B1%D9%88%D8%B6
+[Sat Mar 21 13:42:34 2026] [::1]:58770 Closing
+[Sat Mar 21 13:42:35 2026] [::1]:51352 [200]: GET /get-cart-html.php?v=1774100555097
+[Sat Mar 21 13:42:35 2026] [::1]:51352 Closing
+[Sat Mar 21 13:42:35 2026] [::1]:59225 Accepted
+[Sat Mar 21 13:42:35 2026] [::1]:59225 [200]: POST /filter_ajax.php
+[Sat Mar 21 13:42:35 2026] [::1]:59225 Closing
+[Sat Mar 21 13:42:35 2026] [::1]:55032 Accepted
+[Sat Mar 21 13:42:35 2026] [::1]:55032 [200]: POST /cart-api.php
+[Sat Mar 21 13:42:35 2026] [::1]:55032 Closing
+[Sat Mar 21 13:42:37 2026] [::1]:53070 Accepted
+[Sat Mar 21 13:42:37 2026] [::1]:65378 Accepted
+[Sat Mar 21 13:42:38 2026] [::1]:53070 [200]: GET /filter.php?categurie=%D8%AC%D8%A7%D9%83%D9%8A%D8%AA
+[Sat Mar 21 13:42:38 2026] [::1]:53070 Closing
+[Sat Mar 21 13:42:38 2026] [::1]:65378 [200]: GET /get-cart-html.php?v=1774100558511
+[Sat Mar 21 13:42:38 2026] [::1]:65378 Closing
+[Sat Mar 21 13:42:38 2026] [::1]:50181 Accepted
+[Sat Mar 21 13:42:38 2026] [::1]:50181 [200]: POST /filter_ajax.php
+[Sat Mar 21 13:42:38 2026] [::1]:50181 Closing
+[Sat Mar 21 13:42:38 2026] [::1]:57745 Accepted
+[Sat Mar 21 13:42:38 2026] [::1]:57745 [200]: POST /cart-api.php
+[Sat Mar 21 13:42:38 2026] [::1]:57745 Closing
+[Sat Mar 21 13:42:42 2026] [::1]:61902 Accepted
+[Sat Mar 21 13:42:42 2026] [::1]:55394 Accepted
+[Sat Mar 21 13:42:43 2026] [::1]:61902 [200]: GET /filter.php?categurie=%D8%B3%D8%B1%D8%A7%D9%88%D9%8A%D9%84
+[Sat Mar 21 13:42:43 2026] [::1]:61902 Closing
+[Sat Mar 21 13:42:43 2026] [::1]:55394 [200]: GET /get-cart-html.php?v=1774100563351
+[Sat Mar 21 13:42:43 2026] [::1]:55394 Closing
+[Sat Mar 21 13:42:43 2026] [::1]:55503 Accepted
+[Sat Mar 21 13:42:43 2026] [::1]:55503 [200]: POST /filter_ajax.php
+[Sat Mar 21 13:42:43 2026] [::1]:55503 Closing
+[Sat Mar 21 13:42:43 2026] [::1]:50297 Accepted
+[Sat Mar 21 13:42:43 2026] [::1]:50297 [200]: POST /cart-api.php
+[Sat Mar 21 13:42:43 2026] [::1]:50297 Closing
+[Sat Mar 21 13:42:59 2026] [::1]:56616 Accepted
+[Sat Mar 21 13:42:59 2026] [::1]:64167 Accepted
+[Sat Mar 21 13:43:00 2026] [::1]:56616 [302]: GET /register.php
+[Sat Mar 21 13:43:00 2026] [::1]:56616 Closing
+[Sat Mar 21 13:43:00 2026] [::1]:64167 [200]: GET /register.php?timeout=1
+[Sat Mar 21 13:43:00 2026] [::1]:64167 Closing
+[Sat Mar 21 13:43:11 2026] [::1]:52685 Accepted
+[Sat Mar 21 13:43:11 2026] [::1]:52250 Accepted
+[Sat Mar 21 13:43:11 2026] [::1]:52685 [200]: GET /filter.php?categurie=%D8%B3%D8%B1%D8%A7%D9%88%D9%8A%D9%84
+[Sat Mar 21 13:43:12 2026] [::1]:52685 Closing
+[Sat Mar 21 13:43:12 2026] [::1]:52250 [200]: GET /get-cart-html.php?v=1774100592240
+[Sat Mar 21 13:43:12 2026] [::1]:52250 Closing
+[Sat Mar 21 13:43:12 2026] [::1]:50991 Accepted
+[Sat Mar 21 13:43:12 2026] [::1]:50991 [200]: POST /filter_ajax.php
+[Sat Mar 21 13:43:12 2026] [::1]:50991 Closing
+[Sat Mar 21 13:43:12 2026] [::1]:60159 Accepted
+[Sat Mar 21 13:43:12 2026] [::1]:60159 [200]: POST /cart-api.php
+[Sat Mar 21 13:43:12 2026] [::1]:60159 Closing
+[Sat Mar 21 13:51:45 2026] [::1]:63606 Accepted
+[Sat Mar 21 13:51:45 2026] [::1]:52693 Accepted
+[Sat Mar 21 13:51:46 2026] [::1]:63606 [200]: GET /index.php
+[Sat Mar 21 13:51:46 2026] [::1]:63606 Closing
+[Sat Mar 21 13:51:48 2026] [::1]:52693 [200]: GET /get-cart-html.php?v=1774101108086
+[Sat Mar 21 13:51:48 2026] [::1]:52693 Closing
+[Sat Mar 21 13:51:48 2026] [::1]:55200 Accepted
+[Sat Mar 21 13:51:48 2026] [::1]:55200 [200]: POST /cart-api.php
+[Sat Mar 21 13:51:48 2026] [::1]:55200 Closing
+[Sat Mar 21 13:51:51 2026] [::1]:60854 Accepted
+[Sat Mar 21 13:51:53 2026] [::1]:60854 [200]: GET /undefined
+[Sat Mar 21 13:51:53 2026] [::1]:60854 Closing
+[Sat Mar 21 13:52:40 2026] [::1]:62119 Accepted
+[Sat Mar 21 13:52:40 2026] [::1]:57694 Accepted
+[Sat Mar 21 13:52:40 2026] [::1]:62119 [200]: GET /register.php
+[Sat Mar 21 13:52:40 2026] [::1]:62119 Closing
+[Sat Mar 21 13:53:01 2026] [::1]:63242 Accepted
+[Sat Mar 21 13:53:01 2026] [::1]:57694 [200]: GET /forgot_password.php
+[Sat Mar 21 13:53:01 2026] [::1]:57694 Closing
+[Sat Mar 21 13:53:05 2026] [::1]:49785 Accepted
+[Sat Mar 21 13:53:05 2026] [::1]:63242 [200]: GET /register.php
+[Sat Mar 21 13:53:05 2026] [::1]:63242 Closing
+[Sat Mar 21 13:53:32 2026] [::1]:49785 [200]: GET /forgot_password.php
+[Sat Mar 21 13:53:32 2026] [::1]:49785 Closing
+[Sat Mar 21 13:53:32 2026] [::1]:49992 Accepted
+[Sat Mar 21 13:53:33 2026] [::1]:49992 [200]: GET /register.php
+[Sat Mar 21 13:53:33 2026] [::1]:49992 Closing
+[Sat Mar 21 13:53:33 2026] [::1]:51952 Accepted
+[Sat Mar 21 13:53:35 2026] [::1]:51952 [200]: GET /index.php
+[Sat Mar 21 13:53:36 2026] [::1]:51952 Closing
+[Sat Mar 21 13:53:36 2026] [::1]:63442 Accepted
+[Sat Mar 21 13:53:37 2026] [::1]:63442 [200]: GET /get-cart-html.php?v=1774101217250
+[Sat Mar 21 13:53:37 2026] [::1]:63442 Closing
+[Sat Mar 21 13:53:37 2026] [::1]:64767 Accepted
+[Sat Mar 21 13:53:37 2026] [::1]:64767 [200]: POST /cart-api.php
+[Sat Mar 21 13:53:37 2026] [::1]:64767 Closing
+[Sat Mar 21 13:54:03 2026] [::1]:50060 Accepted
+[Sat Mar 21 13:54:05 2026] [::1]:50060 [200]: GET /undefined
+[Sat Mar 21 13:54:05 2026] [::1]:50060 Closing
+[Sat Mar 21 13:55:23 2026] [::1]:51197 Accepted
+[Sat Mar 21 13:55:23 2026] [::1]:51952 Accepted
+[Sat Mar 21 13:55:23 2026] [::1]:51197 [200]: GET /register.php
+[Sat Mar 21 13:55:23 2026] [::1]:51197 Closing
+[Sat Mar 21 13:55:49 2026] [::1]:60990 Accepted
+[Sat Mar 21 13:55:49 2026] [::1]:51952 [200]: GET /index.php
+[Sat Mar 21 13:55:50 2026] [::1]:51952 Closing
+[Sat Mar 21 13:55:50 2026] [::1]:60990 [200]: GET /get-cart-html.php?v=1774101350813
+[Sat Mar 21 13:55:50 2026] [::1]:60990 Closing
+[Sat Mar 21 13:55:50 2026] [::1]:55717 Accepted
+[Sat Mar 21 13:55:50 2026] [::1]:55717 [200]: POST /cart-api.php
+[Sat Mar 21 13:55:50 2026] [::1]:55717 Closing
+[Sat Mar 21 14:02:47 2026] [::1]:55851 Accepted
+[Sat Mar 21 14:02:47 2026] [::1]:50540 Accepted
+[Sat Mar 21 14:02:52 2026] [::1]:55851 [200]: GET /index.php
+[Sat Mar 21 14:02:52 2026] [::1]:55851 Closing
+[Sat Mar 21 14:02:53 2026] [::1]:50540 [200]: GET /get-cart-html.php?v=1774101773940
+[Sat Mar 21 14:02:53 2026] [::1]:50540 Closing
+[Sat Mar 21 14:02:53 2026] [::1]:61017 Accepted
+[Sat Mar 21 14:02:54 2026] [::1]:61017 [200]: POST /cart-api.php
+[Sat Mar 21 14:02:54 2026] [::1]:61017 Closing
+[Sat Mar 21 14:02:54 2026] [::1]:63208 Accepted
+[Sat Mar 21 14:02:54 2026] [::1]:63208 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:02:54 2026] [::1]:63208 Closing
+[Sat Mar 21 14:02:58 2026] [::1]:55739 Accepted
+[Sat Mar 21 14:02:59 2026] [::1]:55739 [200]: GET /undefined
+[Sat Mar 21 14:02:59 2026] [::1]:55739 Closing
+[Sat Mar 21 14:03:04 2026] [::1]:62114 Accepted
+[Sat Mar 21 14:03:05 2026] [::1]:62114 [200]: GET /undefined
+[Sat Mar 21 14:03:05 2026] [::1]:62114 Closing
+[Sat Mar 21 14:03:18 2026] [::1]:51953 Accepted
+[Sat Mar 21 14:03:18 2026] [::1]:49360 Accepted
+[Sat Mar 21 14:03:18 2026] [::1]:51953 [200]: GET /register.php
+[Sat Mar 21 14:03:19 2026] [::1]:51953 Closing
+[Sat Mar 21 14:03:27 2026] [::1]:49360 [200]: GET /index.php
+[Sat Mar 21 14:03:28 2026] [::1]:49360 Closing
+[Sat Mar 21 14:03:28 2026] [::1]:59167 Accepted
+[Sat Mar 21 14:03:28 2026] [::1]:59167 [200]: GET /get-cart-html.php?v=1774101808732
+[Sat Mar 21 14:03:28 2026] [::1]:59167 Closing
+[Sat Mar 21 14:03:28 2026] [::1]:59856 Accepted
+[Sat Mar 21 14:03:28 2026] [::1]:59856 [200]: POST /cart-api.php
+[Sat Mar 21 14:03:28 2026] [::1]:59856 Closing
+[Sat Mar 21 14:14:17 2026] [::1]:53827 Accepted
+[Sat Mar 21 14:14:19 2026] [::1]:53827 [200]: GET /undefined
+[Sat Mar 21 14:14:19 2026] [::1]:53827 Closing
+[Sat Mar 21 14:14:50 2026] [::1]:64900 Accepted
+[Sat Mar 21 14:14:50 2026] [::1]:62013 Accepted
+[Sat Mar 21 14:14:52 2026] [::1]:64900 [200]: GET /index.php
+[Sat Mar 21 14:14:52 2026] [::1]:64900 Closing
+[Sat Mar 21 14:14:53 2026] [::1]:62013 [200]: GET /get-cart-html.php?v=1774102493418
+[Sat Mar 21 14:14:53 2026] [::1]:62013 Closing
+[Sat Mar 21 14:14:53 2026] [::1]:60287 Accepted
+[Sat Mar 21 14:14:53 2026] [::1]:60287 [200]: POST /cart-api.php
+[Sat Mar 21 14:14:53 2026] [::1]:60287 Closing
+[Sat Mar 21 14:14:54 2026] [::1]:53989 Accepted
+[Sat Mar 21 14:14:54 2026] [::1]:53989 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:14:54 2026] [::1]:53989 Closing
+[Sat Mar 21 14:14:56 2026] [::1]:58128 Accepted
+[Sat Mar 21 14:14:57 2026] [::1]:58128 [200]: GET /undefined
+[Sat Mar 21 14:14:57 2026] [::1]:58128 Closing
+[Sat Mar 21 14:14:58 2026] [::1]:55135 Accepted
+[Sat Mar 21 14:14:59 2026] [::1]:55135 [200]: GET /undefined
+[Sat Mar 21 14:14:59 2026] [::1]:55135 Closing
+[Sat Mar 21 14:27:23 2026] [::1]:49216 Accepted
+[Sat Mar 21 14:27:25 2026] [::1]:49216 [200]: GET /index.php
+[Sat Mar 21 14:27:25 2026] [::1]:49216 Closing
+[Sat Mar 21 14:27:25 2026] [::1]:63069 Accepted
+[Sat Mar 21 14:27:26 2026] [::1]:63069 [200]: GET /get-cart-html.php?v=1774103246642
+[Sat Mar 21 14:27:26 2026] [::1]:63069 Closing
+[Sat Mar 21 14:27:26 2026] [::1]:60433 Accepted
+[Sat Mar 21 14:27:26 2026] [::1]:60433 [200]: POST /cart-api.php
+[Sat Mar 21 14:27:26 2026] [::1]:60433 Closing
+[Sat Mar 21 14:27:27 2026] [::1]:56187 Accepted
+[Sat Mar 21 14:27:27 2026] [::1]:56187 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:27:27 2026] [::1]:56187 Closing
+[Sat Mar 21 14:27:29 2026] [::1]:63433 Accepted
+[Sat Mar 21 14:27:30 2026] [::1]:63433 [200]: GET /undefined
+[Sat Mar 21 14:27:30 2026] [::1]:63433 Closing
+[Sat Mar 21 14:27:31 2026] [::1]:61055 Accepted
+[Sat Mar 21 14:27:32 2026] [::1]:61055 [200]: GET /undefined
+[Sat Mar 21 14:27:32 2026] [::1]:61055 Closing
+[Sat Mar 21 14:28:01 2026] [::1]:62745 Accepted
+[Sat Mar 21 14:28:02 2026] [::1]:62745 [200]: GET /index.php
+[Sat Mar 21 14:28:03 2026] [::1]:62745 Closing
+[Sat Mar 21 14:28:03 2026] [::1]:61998 Accepted
+[Sat Mar 21 14:28:03 2026] [::1]:61998 [200]: GET /get-cart-html.php?v=1774103283755
+[Sat Mar 21 14:28:03 2026] [::1]:61998 Closing
+[Sat Mar 21 14:28:03 2026] [::1]:60717 Accepted
+[Sat Mar 21 14:28:03 2026] [::1]:60717 [200]: POST /cart-api.php
+[Sat Mar 21 14:28:03 2026] [::1]:60717 Closing
+[Sat Mar 21 14:28:04 2026] [::1]:54859 Accepted
+[Sat Mar 21 14:28:04 2026] [::1]:54859 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:28:04 2026] [::1]:54859 Closing
+[Sat Mar 21 14:28:09 2026] [::1]:50829 Accepted
+[Sat Mar 21 14:28:10 2026] [::1]:50829 [200]: GET /undefined
+[Sat Mar 21 14:28:10 2026] [::1]:50829 Closing
+[Sat Mar 21 14:39:56 2026] [::1]:56616 Accepted
+[Sat Mar 21 14:39:56 2026] [::1]:60926 Accepted
+[Sat Mar 21 14:39:58 2026] [::1]:56616 [200]: GET /index.php
+[Sat Mar 21 14:39:58 2026] [::1]:56616 Closing
+[Sat Mar 21 14:39:59 2026] [::1]:60926 [200]: GET /get-cart-html.php?v=1774103999150
+[Sat Mar 21 14:39:59 2026] [::1]:60926 Closing
+[Sat Mar 21 14:39:59 2026] [::1]:59250 Accepted
+[Sat Mar 21 14:39:59 2026] [::1]:59250 [200]: POST /cart-api.php
+[Sat Mar 21 14:39:59 2026] [::1]:59250 Closing
+[Sat Mar 21 14:39:59 2026] [::1]:52031 Accepted
+[Sat Mar 21 14:39:59 2026] [::1]:52031 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:39:59 2026] [::1]:52031 Closing
+[Sat Mar 21 14:40:03 2026] [::1]:59993 Accepted
+[Sat Mar 21 14:40:04 2026] [::1]:59993 [200]: GET /undefined
+[Sat Mar 21 14:40:04 2026] [::1]:59993 Closing
+[Sat Mar 21 14:40:24 2026] [::1]:61886 Accepted
+[Sat Mar 21 14:40:25 2026] [::1]:61886 [200]: GET /undefined
+[Sat Mar 21 14:40:25 2026] [::1]:61886 Closing
+[Sat Mar 21 14:47:42 2026] [::1]:63105 Accepted
+[Sat Mar 21 14:47:42 2026] [::1]:61101 Accepted
+[Sat Mar 21 14:47:44 2026] [::1]:61101 [200]: GET /index.php
+[Sat Mar 21 14:47:44 2026] [::1]:61101 Closing
+[Sat Mar 21 14:47:45 2026] [::1]:63105 [200]: GET /get-cart-html.php?v=1774104465187
+[Sat Mar 21 14:47:45 2026] [::1]:63105 Closing
+[Sat Mar 21 14:47:45 2026] [::1]:55408 Accepted
+[Sat Mar 21 14:47:45 2026] [::1]:55408 [200]: POST /cart-api.php
+[Sat Mar 21 14:47:45 2026] [::1]:55408 Closing
+[Sat Mar 21 14:47:45 2026] [::1]:57722 Accepted
+[Sat Mar 21 14:47:45 2026] [::1]:57722 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:47:45 2026] [::1]:57722 Closing
+[Sat Mar 21 14:47:50 2026] [::1]:63935 Accepted
+[Sat Mar 21 14:47:51 2026] [::1]:63935 [200]: GET /undefined
+[Sat Mar 21 14:47:51 2026] [::1]:63935 Closing
+[Sat Mar 21 14:47:53 2026] [::1]:59038 Accepted
+[Sat Mar 21 14:47:55 2026] [::1]:59038 [200]: GET /undefined
+[Sat Mar 21 14:47:55 2026] [::1]:59038 Closing
+[Sat Mar 21 14:48:32 2026] [::1]:50541 Accepted
+[Sat Mar 21 14:48:32 2026] [::1]:62825 Accepted
+[Sat Mar 21 14:48:33 2026] [::1]:50541 [200]: GET /index.php
+[Sat Mar 21 14:48:33 2026] [::1]:50541 Closing
+[Sat Mar 21 14:48:34 2026] [::1]:62825 [200]: GET /get-cart-html.php?v=1774104514267
+[Sat Mar 21 14:48:34 2026] [::1]:62825 Closing
+[Sat Mar 21 14:48:34 2026] [::1]:62982 Accepted
+[Sat Mar 21 14:48:34 2026] [::1]:62982 [200]: POST /cart-api.php
+[Sat Mar 21 14:48:34 2026] [::1]:62982 Closing
+[Sat Mar 21 14:48:34 2026] [::1]:50181 Accepted
+[Sat Mar 21 14:48:34 2026] [::1]:50181 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:48:34 2026] [::1]:50181 Closing
+[Sat Mar 21 14:48:38 2026] [::1]:56380 Accepted
+[Sat Mar 21 14:48:39 2026] [::1]:56380 [200]: GET /undefined
+[Sat Mar 21 14:48:40 2026] [::1]:56380 Closing
+[Sat Mar 21 14:48:43 2026] [::1]:49668 Accepted
+[Sat Mar 21 14:48:44 2026] [::1]:49668 [200]: GET /undefined
+[Sat Mar 21 14:48:44 2026] [::1]:49668 Closing
+[Sat Mar 21 14:49:14 2026] [::1]:54167 Accepted
+[Sat Mar 21 14:49:14 2026] [::1]:62765 Accepted
+[Sat Mar 21 14:49:15 2026] [::1]:62765 [200]: GET /index.php
+[Sat Mar 21 14:49:15 2026] [::1]:62765 Closing
+[Sat Mar 21 14:49:16 2026] [::1]:54167 [200]: GET /get-cart-html.php?v=1774104556818
+[Sat Mar 21 14:49:16 2026] [::1]:54167 Closing
+[Sat Mar 21 14:49:16 2026] [::1]:54287 Accepted
+[Sat Mar 21 14:49:16 2026] [::1]:54287 [200]: POST /cart-api.php
+[Sat Mar 21 14:49:16 2026] [::1]:54287 Closing
+[Sat Mar 21 14:49:17 2026] [::1]:59814 Accepted
+[Sat Mar 21 14:49:17 2026] [::1]:59814 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 14:49:17 2026] [::1]:59814 Closing
+[Sat Mar 21 14:49:22 2026] [::1]:49668 Accepted
+[Sat Mar 21 14:49:23 2026] [::1]:49668 [200]: GET /undefined
+[Sat Mar 21 14:49:24 2026] [::1]:49668 Closing
+[Sat Mar 21 15:03:54 2026] [::1]:58446 Accepted
+[Sat Mar 21 15:03:54 2026] [::1]:60033 Accepted
+[Sat Mar 21 15:03:55 2026] [::1]:58446 [200]: GET /index.php
+[Sat Mar 21 15:03:55 2026] [::1]:58446 Closing
+[Sat Mar 21 15:03:56 2026] [::1]:60033 [200]: GET /get-cart-html.php?v=1774105436575
+[Sat Mar 21 15:03:56 2026] [::1]:60033 Closing
+[Sat Mar 21 15:03:56 2026] [::1]:60943 Accepted
+[Sat Mar 21 15:03:56 2026] [::1]:60943 [200]: POST /cart-api.php
+[Sat Mar 21 15:03:56 2026] [::1]:60943 Closing
+[Sat Mar 21 15:03:57 2026] [::1]:62422 Accepted
+[Sat Mar 21 15:03:57 2026] [::1]:62422 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:03:57 2026] [::1]:62422 Closing
+[Sat Mar 21 15:03:59 2026] [::1]:56199 Accepted
+[Sat Mar 21 15:04:00 2026] [::1]:56199 [200]: GET /undefined
+[Sat Mar 21 15:04:01 2026] [::1]:56199 Closing
+[Sat Mar 21 15:20:43 2026] [::1]:58100 Accepted
+[Sat Mar 21 15:20:43 2026] [::1]:65227 Accepted
+[Sat Mar 21 15:20:45 2026] [::1]:58100 [200]: GET /index.php
+[Sat Mar 21 15:20:45 2026] [::1]:58100 Closing
+[Sat Mar 21 15:20:46 2026] [::1]:65227 [200]: GET /get-cart-html.php?v=1774106446831
+[Sat Mar 21 15:20:46 2026] [::1]:65227 Closing
+[Sat Mar 21 15:20:47 2026] [::1]:51080 Accepted
+[Sat Mar 21 15:20:47 2026] [::1]:51080 [200]: POST /cart-api.php
+[Sat Mar 21 15:20:47 2026] [::1]:51080 Closing
+[Sat Mar 21 15:20:47 2026] [::1]:59823 Accepted
+[Sat Mar 21 15:20:47 2026] [::1]:59823 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:20:47 2026] [::1]:59823 Closing
+[Sat Mar 21 15:20:50 2026] [::1]:57865 Accepted
+[Sat Mar 21 15:20:52 2026] [::1]:57865 [200]: GET /undefined
+[Sat Mar 21 15:20:53 2026] [::1]:57865 Closing
+[Sat Mar 21 15:23:48 2026] [::1]:62391 Accepted
+[Sat Mar 21 15:23:48 2026] [::1]:53691 Accepted
+[Sat Mar 21 15:23:59 2026] [::1]:62391 [200]: GET /index.php
+[Sat Mar 21 15:24:00 2026] [::1]:62391 Closing
+[Sat Mar 21 15:24:03 2026] [::1]:53691 [200]: GET /get-cart-html.php?v=1774106643462
+[Sat Mar 21 15:24:03 2026] [::1]:53691 Closing
+[Sat Mar 21 15:24:03 2026] [::1]:58409 Accepted
+[Sat Mar 21 15:24:04 2026] [::1]:58409 [200]: POST /cart-api.php
+[Sat Mar 21 15:24:04 2026] [::1]:58409 Closing
+[Sat Mar 21 15:24:06 2026] [::1]:55972 Accepted
+[Sat Mar 21 15:24:17 2026] [::1]:55972 [200]: GET /undefined
+[Sat Mar 21 15:24:17 2026] [::1]:55972 Closing
+[Sat Mar 21 15:24:20 2026] [::1]:52198 Accepted
+[Sat Mar 21 15:24:20 2026] [::1]:52198 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:24:20 2026] [::1]:52198 Closing
+[Sat Mar 21 15:27:32 2026] [::1]:65274 Accepted
+[Sat Mar 21 15:27:32 2026] [::1]:64767 Accepted
+[Sat Mar 21 15:27:34 2026] [::1]:65274 [200]: GET /index.php
+[Sat Mar 21 15:27:34 2026] [::1]:65274 Closing
+[Sat Mar 21 15:27:37 2026] [::1]:64767 [200]: GET /get-cart-html.php?v=1774106857033
+[Sat Mar 21 15:27:37 2026] [::1]:64767 Closing
+[Sat Mar 21 15:27:37 2026] [::1]:56220 Accepted
+[Sat Mar 21 15:27:37 2026] [::1]:56220 [200]: POST /cart-api.php
+[Sat Mar 21 15:27:37 2026] [::1]:56220 Closing
+[Sat Mar 21 15:27:39 2026] [::1]:51512 Accepted
+[Sat Mar 21 15:27:39 2026] [::1]:51512 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:27:39 2026] [::1]:51512 Closing
+[Sat Mar 21 15:37:09 2026] [::1]:54407 Accepted
+[Sat Mar 21 15:37:09 2026] [::1]:52305 Accepted
+[Sat Mar 21 15:37:12 2026] [::1]:54407 [200]: GET /index.php
+[Sat Mar 21 15:37:12 2026] [::1]:54407 Closing
+[Sat Mar 21 15:37:13 2026] [::1]:52305 [200]: GET /get-cart-html.php?v=1774107433640
+[Sat Mar 21 15:37:13 2026] [::1]:52305 Closing
+[Sat Mar 21 15:37:13 2026] [::1]:49810 Accepted
+[Sat Mar 21 15:37:13 2026] [::1]:49810 [200]: POST /cart-api.php
+[Sat Mar 21 15:37:13 2026] [::1]:49810 Closing
+[Sat Mar 21 15:37:14 2026] [::1]:59801 Accepted
+[Sat Mar 21 15:37:14 2026] [::1]:59801 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:37:14 2026] [::1]:59801 Closing
+[Sat Mar 21 15:37:16 2026] [::1]:58063 Accepted
+[Sat Mar 21 15:37:18 2026] [::1]:58063 [200]: GET /undefined
+[Sat Mar 21 15:37:18 2026] [::1]:58063 Closing
+[Sat Mar 21 15:37:34 2026] [::1]:50357 Accepted
+[Sat Mar 21 15:37:34 2026] [::1]:50357 [200]: GET /filter.php
+[Sat Mar 21 15:37:34 2026] [::1]:50357 Closing
+[Sat Mar 21 15:37:34 2026] [::1]:50584 Accepted
+[Sat Mar 21 15:37:35 2026] [::1]:50584 [200]: GET /get-cart-html.php?v=1774107455130
+[Sat Mar 21 15:37:35 2026] [::1]:50584 Closing
+[Sat Mar 21 15:37:35 2026] [::1]:55474 Accepted
+[Sat Mar 21 15:37:35 2026] [::1]:55474 [200]: POST /filter_ajax.php
+[Sat Mar 21 15:37:35 2026] [::1]:55474 Closing
+[Sat Mar 21 15:37:35 2026] [::1]:55272 Accepted
+[Sat Mar 21 15:37:35 2026] [::1]:55272 [200]: POST /cart-api.php
+[Sat Mar 21 15:37:35 2026] [::1]:55272 Closing
+[Sat Mar 21 15:49:00 2026] [::1]:58640 Accepted
+[Sat Mar 21 15:49:00 2026] [::1]:50478 Accepted
+[Sat Mar 21 15:49:01 2026] [::1]:58640 [200]: GET /filter.php
+[Sat Mar 21 15:49:01 2026] [::1]:58640 Closing
+[Sat Mar 21 15:49:02 2026] [::1]:50478 [200]: GET /get-cart-html.php?v=1774108142033
+[Sat Mar 21 15:49:02 2026] [::1]:50478 Closing
+[Sat Mar 21 15:49:02 2026] [::1]:54567 Accepted
+[Sat Mar 21 15:49:02 2026] [::1]:54567 [200]: POST /filter_ajax.php
+[Sat Mar 21 15:49:02 2026] [::1]:54567 Closing
+[Sat Mar 21 15:49:02 2026] [::1]:62515 Accepted
+[Sat Mar 21 15:49:02 2026] [::1]:62515 [200]: POST /cart-api.php
+[Sat Mar 21 15:49:02 2026] [::1]:62515 Closing
+[Sat Mar 21 15:49:02 2026] [::1]:54699 Accepted
+[Sat Mar 21 15:49:02 2026] [::1]:54699 [200]: GET /public/images/favicon.svg
+[Sat Mar 21 15:49:02 2026] [::1]:54699 Closing
+[Sat Mar 21 15:49:04 2026] [::1]:58540 Accepted
+[Sat Mar 21 15:49:05 2026] [::1]:58540 [200]: GET /index.php
+[Sat Mar 21 15:49:05 2026] [::1]:58540 Closing
+[Sat Mar 21 15:49:05 2026] [::1]:57033 Accepted
+[Sat Mar 21 15:49:06 2026] [::1]:57033 [200]: GET /get-cart-html.php?v=1774108146930
+[Sat Mar 21 15:49:06 2026] [::1]:57033 Closing
+[Sat Mar 21 15:49:06 2026] [::1]:50847 Accepted
+[Sat Mar 21 15:49:07 2026] [::1]:50847 [200]: POST /cart-api.php
+[Sat Mar 21 15:49:07 2026] [::1]:50847 Closing
+[Sat Mar 21 15:49:14 2026] [::1]:52508 Accepted
+[Sat Mar 21 15:49:16 2026] [::1]:52508 [200]: GET /undefined
+[Sat Mar 21 15:49:16 2026] [::1]:52508 Closing
+[Sat Mar 21 15:49:21 2026] [::1]:64861 Accepted
+[Sat Mar 21 15:49:22 2026] [::1]:64861 [200]: GET /undefined
+[Sat Mar 21 15:49:22 2026] [::1]:64861 Closing

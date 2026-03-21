@@ -115,7 +115,7 @@ try {
         <!-- Header -->
         <div style='background-color: #000000; padding: 30px; text-align: center;'>
             <h1 style='color: #ffffff; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-            <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس رجالية</p>
+            <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس نسائية</p>
         </div>
 
         <!-- Body -->
@@ -158,7 +158,7 @@ try {
 
         <!-- Footer -->
         <div style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
-            <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; " . date('Y') . " عبدالوهاب للملابس الرجالية. جميع الحقوق محفوظة.</p>
+            <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; " . date('Y') . " اسم المتجر للملابس النسائية. جميع الحقوق محفوظة.</p>
             <div style='margin-top: 15px; font-size: 11px; color: #aaa;'>
                 Dev & Design by 
                 <a href='https://www.primestore.ma' style='color: #C8A95A; text-decoration: none; font-weight: bold;'>Primestore</a>

@@ -1,6 +1,8 @@
 <?php
 session_start();
 require_once __DIR__ . '/store_brand.php';
+require_once __DIR__ . '/store_rebrand_theme.php';
+store_theme_enable_auto_replace();
 store_brand_enable_auto_replace();
 // توليد توكن الأمان CSRF
 if (empty($_SESSION['csrf_token'])) {
@@ -18,8 +20,8 @@ if (empty($_SESSION['csrf_token'])) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>اتصل بنا | عبدالوهاب للملابس الرجالية</title>
-  <meta name="description" content="تواصل مع عبدالوهاب للملابس الرجالية لاستفساراتكم حول القمصان، البناطيل، والجاكيتات.">
+  <title>اتصل بنا | اسم المتجر للملابس النسائية</title>
+  <meta name="description" content="تواصل مع اسم المتجر للملابس النسائية لاستفساراتكم حول القمصان، البناطيل، والجاكيتات.">
 
   <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -215,7 +217,7 @@ if (empty($_SESSION['csrf_token'])) {
             <div class="space-y-3">
               <div class="flex items-center gap-3">
                 <div class="ms-dot-black"></div>
-                <span class="text-gray-700 text-sm md:text-base">تصاميم رجالية عصرية بخامات عالية</span>
+                <span class="text-gray-700 text-sm md:text-base">تصاميم نسائية عصرية بخامات عالية</span>
               </div>
               <div class="flex items-center gap-3">
                 <div class="ms-dot-black"></div>

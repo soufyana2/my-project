@@ -66,7 +66,7 @@ if (!isset($_SESSION['csrf_token'])) {
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">نبذة عنا</h4>
                 <p class="font-cairo text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-                    نقدم أرقى الملابس الرجالية العصرية التي تعكس ذوقك الرفيع. الجودة والأصالة هما عنواننا الدائم.
+                    نقدم أرقى الملابس النسائية العصرية التي تعكس ذوقك الرفيع. الجودة والأصالة هما عنواننا الدائم.
                 </p>
             </div>
 
@@ -89,7 +89,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">النشرة البريدية</h4>
-                <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">اشترك الآن للحصول على آخر العروض والأخبار الحصرية.</p>
+                <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">اشتركي الآن للحصول على آخر العروض والأخبار الحصرية.</p>
                 
                 <form id="subscribeForm" class="flex flex-col items-center md:items-start w-full">
                     <!-- حقل التوكن المخفي -->
@@ -97,7 +97,7 @@ if (!isset($_SESSION['csrf_token'])) {
                     
                     <div style="display: none;"><input type="text" name="website_trap"></div>
 
-                    <input type="email" id="sub_email" name="email" placeholder="أدخل بريدك الإلكتروني" 
+                    <input type="email" id="sub_email" name="email" placeholder="أدخلي بريدك الإلكتروني" 
                            class="footer-input font-cairo mb-2" required>
                     
                     <div class="cf-turnstile" 
@@ -106,7 +106,7 @@ if (!isset($_SESSION['csrf_token'])) {
                          data-callback="onTurnstileSuccess"></div>
 
                     <button type="submit" id="sub_btn" class="btn-footer w-full md:w-auto">
-                        <span id="btnText">اشترك</span>
+                        <span id="btnText">اشتركي</span>
                     </button>
                     <div id="sub_msg" class="text-sm mt-2 font-cairo"></div>
                 </form>
@@ -115,7 +115,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
         <div class="border-t border-gray-900 w-full mb-8"></div>
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-            <p class="font-cairo text-gray-500 text-sm order-2 md:order-1 text-right">عبدالوهاب للملابس الرجالية © جميع الحقوق محفوظة</p>
+            <p class="font-cairo text-gray-500 text-sm order-2 md:order-1 text-right">اسم المتجر للملابس النسائية © جميع الحقوق محفوظة</p>
             <div class="font-playfair text-white text-sm order-1 md:order-2" dir="ltr">
                 Designed by : <a href="https://www.primestore.ma" class="studio-link">Primestore.ma</a>
             </div>
@@ -177,7 +177,7 @@ function resetFooterBtn() {
     const btn = document.getElementById('sub_btn');
     const btnText = document.getElementById('btnText');
     btn.disabled = false;
-    btnText.innerText = 'اشترك';
+    btnText.innerText = 'اشتركي';
     // تصفير الكابتشا إلزامي لكي تعمل المحاولة الثانية
     if (typeof turnstile !== 'undefined') {
         turnstile.reset(); 

@@ -1,5 +1,7 @@
 <?php
 require_once __DIR__ . '/store_brand.php';
+require_once __DIR__ . '/store_rebrand_theme.php';
+store_theme_enable_auto_replace();
 store_brand_enable_auto_replace();
 ?>
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ store_brand_enable_auto_replace();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>يرجى الانتظار | عبدالوهاب للملابس الرجالية</title>
+  <title>يرجى الانتظار | اسم المتجر للملابس النسائية</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
