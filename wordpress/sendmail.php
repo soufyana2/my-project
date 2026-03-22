@@ -108,26 +108,30 @@ try {
     $mail->isHTML(true);
 
     $mail->Subject = $is_resend ? 'إعادة إرسال رمز التحقق' : 'رمز التحقق الخاص بك';
-  $mail->Body = "
-<div style='font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f8f8f8; padding: 40px 0;'>
-    <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e5e5e5;'>
+
+    // EMAIL TEMPLATE CONTROL SECTION:
+    // Uses __STORE_EMAIL_* tokens from store_rebrand_theme.php
+    // to keep OTP email colors globally configurable.
+    $mail->Body = "
+<div style='font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: __STORE_EMAIL_BG__; padding: 40px 0;'>
+    <div style='max-width: 600px; margin: 0 auto; background-color: __STORE_EMAIL_CARD_BG__; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid __STORE_EMAIL_BORDER__;'>
 
         <!-- Header -->
-        <div style='background-color: #000000; padding: 30px; text-align: center;'>
-            <h1 style='color: #ffffff; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-            <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس نسائية</p>
+        <div style='background-color: __STORE_EMAIL_HEADER_BG__; padding: 30px; text-align: center;'>
+            <h1 style='color: __STORE_EMAIL_HEADER_TEXT__; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
+            <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس أطفال</p>
         </div>
 
         <!-- Body -->
-        <div style='padding: 40px 30px; color: #333333;'>
+        <div style='padding: 40px 30px; color: __STORE_EMAIL_TITLE__;'>
             
-            <h2 style='font-size: 20px; color: #000; margin-bottom: 20px; text-align:center;'>رمز التحقق الخاص بك</h2>
+            <h2 style='font-size: 20px; color: __STORE_EMAIL_TITLE__; margin-bottom: 20px; text-align:center;'>رمز التحقق الخاص بك</h2>
 
-            <p style='font-size: 15px; line-height: 1.8; color: #555;'>
+            <p style='font-size: 15px; line-height: 1.8; color: __STORE_EMAIL_TEXT__;'>
                 مرحبًا 
             </p>
 
-            <p style='font-size: 16px; color: #333;'>
+            <p style='font-size: 16px; color: __STORE_EMAIL_TITLE__;'>
                 رمز التحقق الخاص بك هو:
             </p>
 
@@ -137,38 +141,39 @@ try {
                     padding: 14px 30px;
                     font-size: 22px;
                     font-weight: bold;
-                    background-color: #000000;
-                    color: #C8A95A;
+                    background-color: __STORE_EMAIL_BUTTON_BG__;
+                    color: __STORE_EMAIL_BUTTON_TEXT__;
                     border-radius: 50px;
-                    border: 1px solid #C8A95A;
+                    border: 1px solid __STORE_EMAIL_BUTTON_BORDER__;
                     letter-spacing: 4px;
                 '>" . htmlspecialchars($otp, ENT_QUOTES, "UTF-8") . "</span>
             </div>
 
-            <p style='font-size: 14px; color: #555; line-height: 1.8;'>
+            <p style='font-size: 14px; color: __STORE_EMAIL_TEXT__; line-height: 1.8;'>
                 هذا الرمز صالح لمدة <strong>5 دقائق</strong>.<br>
                 الرجاء إدخاله في صفحة التحقق لإكمال عملية التسجيل.
             </p>
 
-            <p style='font-size: 14px; color: #999;'>
+            <p style='font-size: 14px; color: __STORE_EMAIL_MUTED__;'>
                 إذا لم تطلب هذا الرمز، يرجى تجاهل هذا البريد الإلكتروني.
             </p>
 
         </div>
 
         <!-- Footer -->
-        <div style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
-            <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; " . date('Y') . " اسم المتجر للملابس النسائية. جميع الحقوق محفوظة.</p>
-            <div style='margin-top: 15px; font-size: 11px; color: #aaa;'>
+        <div style='background-color: __STORE_EMAIL_BG__; padding: 20px; text-align: center; border-top: 1px solid __STORE_EMAIL_BORDER__;'>
+            <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; " . date('Y') . " اسم متجر ملابس الأطفال. جميع الحقوق محفوظة.</p>
+            <div style='margin-top: 15px; font-size: 11px; color: __STORE_EMAIL_MUTED__;'>
                 Dev & Design by 
-                <a href='https://www.primestore.ma' style='color: #C8A95A; text-decoration: none; font-weight: bold;'>Primestore</a>
+                <a href='https://www.primestore.ma' style='color: __STORE_EMAIL_LINK__; text-decoration: none; font-weight: bold;'>Primestore</a>
             </div>
         </div>
 
     </div>
 </div>
 ";
-    $mail->Body = store_brand_replace($mail->Body);
+    // Apply both text branding + email theme token replacements.
+    $mail->Body = store_theme_replace(store_brand_replace($mail->Body));
 
     $mail->AltBody = "مرحبًا " .  "،\n\nرمز التحقق الخاص بك هو: " . htmlspecialchars($otp, ENT_QUOTES, 'UTF-8') . "\n\nهذا الرمز صالح لمدة 5 دقائق. الرجاء إدخاله في صفحة التحقق لإكمال التسجيل.\n\nإذا لم تطلب هذا الرمز، يرجى تجاهل هذا البريد.\n\nشكرًا،\nفريق التطبيق";
 

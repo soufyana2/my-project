@@ -183,7 +183,7 @@ ob_end_flush();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>تعيين كلمة المرور - اسم المتجر للملابس النسائية</title>
+  <title>تعيين كلمة المرور - اسم متجر ملابس الأطفال</title>
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -301,7 +301,7 @@ ob_end_flush();
             width: 100%;
             padding: 1rem 1.5rem;
             border-radius: 9999px;
-            background-color: #000000;
+            background-color: #FF6B9D;
             color: #ffffff;
             font-weight: 700;
             font-size: 0.95rem;
@@ -325,7 +325,7 @@ ob_end_flush();
         }
 
         @media (hover: hover) and (min-width: 1024px) {
-            .btn-primary-pro:not(:disabled):hover { background-color: #000; }
+            .btn-primary-pro:not(:disabled):hover { background-color: #AC2A5D; }
             .btn-primary-pro:not(:disabled):hover::after { animation: shine 0.75s ease-in-out forwards; }
         }
         @keyframes shine { 100% { left: 150%; } }
@@ -343,10 +343,10 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم المتجر للملابس النسائية" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم متجر ملابس الأطفال" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">ملابس نسائية</span>
+                <span class="logo-sub">ملابس أطفال</span>
             </div>
         </div>
     </header>

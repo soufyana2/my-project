@@ -20,8 +20,8 @@ if (empty($_SESSION['csrf_token'])) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>اتصل بنا | اسم المتجر للملابس النسائية</title>
-  <meta name="description" content="تواصل مع اسم المتجر للملابس النسائية لاستفساراتكم حول القمصان، البناطيل، والجاكيتات.">
+  <title>اتصل بنا | اسم متجر ملابس الأطفال</title>
+  <meta name="description" content="تواصل مع اسم متجر ملابس الأطفال لاستفساراتكم حول القمصان، البناطيل، والجاكيتات.">
 
   <!-- Tailwind & Fonts -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -217,7 +217,7 @@ if (empty($_SESSION['csrf_token'])) {
             <div class="space-y-3">
               <div class="flex items-center gap-3">
                 <div class="ms-dot-black"></div>
-                <span class="text-gray-700 text-sm md:text-base">تصاميم نسائية عصرية بخامات عالية</span>
+                <span class="text-gray-700 text-sm md:text-base">تصاميم أطفال عصرية بخامات عالية</span>
               </div>
               <div class="flex items-center gap-3">
                 <div class="ms-dot-black"></div>

@@ -2384,3 +2384,4 @@ function renderProductCard($product, $is_skeleton = false) {
 
 
 ?>
+

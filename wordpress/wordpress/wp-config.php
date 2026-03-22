@@ -6,6 +6,14 @@ define('DB_HOST', 'localhost');
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
 
+// Keep admin URL generation stable for local Woo dashboard.
+define('WP_HOME', 'http://localhost:8001');
+define('WP_SITEURL', 'http://localhost:8001');
+define('COOKIEPATH', '/');
+define('SITECOOKIEPATH', '/');
+define('ADMIN_COOKIE_PATH', '/');
+define('PLUGINS_COOKIE_PATH', '/');
+
 $table_prefix = 'wp_';
 
 define('WP_DEBUG', false);

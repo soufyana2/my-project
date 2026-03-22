@@ -1,6 +1,6 @@
 <?php
 /**
- * اسم المتجر للملابس النسائية - Cart API v2.1
+ * اسم متجر ملابس الأطفال - Cart API v2.1
  * Fixes: Speed optimization, Product Links for WhatsApp, CSRF Consistency
  */
 
