@@ -331,13 +331,13 @@ function renderSkeletonCards($count) {
     
     <!-- 1. العنوان المحسن: يحتوي على اسم المتجر + الكلمات المفتاحية الرئيسية -->
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>اسم المتجر للملابس النسائية | تسوقي أفضل القمصان والجاكيتات في المغرب</title>
+  <title>عبد الوهاب للملابس الرجالية | تسوق أفضل القمصان والجاكيتات في المغرب</title>
     
     <!-- 2. وصف دقيق وجذاب يحتوي كلمات بحثية -->
-    <meta name="description" content="تسوقي أونلاين من اسم المتجر للملابس النسائية. اكتشفي تشكيلة واسعة من الملابس الصيفية الراقية، الجاكيتات الأنيقة، والسراويل العملية بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
+    <meta name="description" content="تسوق أونلاين من عبد الوهاب للملابس الرجالية. اكتشف تشكيلة واسعة من القمصان الفاخرة، الجاكيتات الأنيقة، والبناطيل العملية بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
     
     <!-- 3. الكلمات المفتاحية (اختياري لكن مفيد لمحركات البحث الأخرى) -->
-    <meta name="keywords" content="قمصان, جاكيتات, بناطيل, تسوقي أونلاين, المغرب, هدايا, عبد الوهاب">
+    <meta name="keywords" content="قمصان, جاكيتات, بناطيل, تسوق أونلاين, المغرب, هدايا, عبد الوهاب">
     
     <!-- 4. Canonical URL (مهم جداً لمنع تكرار المحتوى) -->
     <!-- استبدل الرابط أدناه برابط موقعك الحقيقي -->
@@ -346,8 +346,8 @@ function renderSkeletonCards($count) {
     <!-- 5. Favicon -->
 <!-- 6. Open Graph (للظهور باحترافية على فيسبوك، واتساب، وتويتر) -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="اسم المتجر للملابس النسائية - فخامة وأناقة" />
-    <meta property="og:description" content="اكتشفي مجموعتنا الحصرية من الملابس الصيفية والجاكيتات. جودة عالية وأسعار تنافسية." />
+    <meta property="og:title" content="عبد الوهاب للملابس الرجالية - فخامة وأناقة" />
+    <meta property="og:description" content="اكتشف مجموعتنا الحصرية من القمصان والجاكيتات. جودة عالية وأسعار تنافسية." />
     <meta property="og:url" content="https://your-domain.com/" />
     <meta property="og:site_name" content="Bdolwahab Store" />
     <meta property="og:image" content="https://your-domain.com/images/lgicon.png" /> <!-- ضع رابط صورة شعار المتجر أو صورة دعائية -->
@@ -358,7 +358,7 @@ function renderSkeletonCards($count) {
     {
       "@context": "https://schema.org",
       "@type": "Store",
-      "name": "اسم المتجر للملابس النسائية",
+      "name": "عبد الوهاب للملابس الرجالية",
       "url": "https://your-domain.com/",
       "logo": "https://your-domain.com/images/lgicon.png",
       "description": "متجر متخصص في بيع القمصان والجاكيتات والبناطيل الفاخرة في المغرب.",

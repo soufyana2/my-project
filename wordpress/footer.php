@@ -40,22 +40,22 @@ if (!isset($_SESSION['csrf_token'])) {
 <style>
     /* --- تم الحفاظ على الستايلات الخاصة بك 100% --- */
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&family=Playfair+Display:wght@400;700&display=swap');
-    .text-gold { color: #C9A67A; }
-    .border-gold { border-color: #C9A67A; }
-    .bg-black-footer { background-color: #2A1D26; }
+    .text-gold { color: #C8A95A; }
+    .border-gold { border-color: #C8A95A; }
+    .bg-black-footer { background-color: #000000; }
     .font-cairo { font-family: 'Cairo', sans-serif; }
     .font-playfair { font-family: 'Playfair Display', serif; }
     .footer-link { color: #d1d5db; transition: all 0.3s ease; display: inline-block; text-decoration: none; }
     @media (min-width: 1024px) {
-        .footer-link:hover { color: #B76E79; transform: translateX(-5px); }
+        .footer-link:hover { color: #C8A95A; transform: translateX(-5px); }
     }
-    .footer-input { background-color: transparent; border: none; border-bottom: 1px solid #5E4A56; color: white; width: 100%; max-width: 300px; padding: 10px 0; outline: none; transition: border-color 0.3s ease; text-align: center; }
-    .footer-input:focus { border-color: #B76E79; }
-    .footer-input::placeholder { color: #8F7A87; }
+    .footer-input { background-color: transparent; border: none; border-bottom: 1px solid #4b5563; color: white; width: 100%; max-width: 300px; padding: 10px 0; outline: none; transition: border-color 0.3s ease; text-align: center; }
+    .footer-input:focus { border-color: #C8A95A; }
+    .footer-input::placeholder { color: #6b7280; }
     @media (min-width: 768px) { .footer-input { text-align: right; } }
     .btn-footer { font-family: 'Cairo', sans-serif; background-color: transparent; border: 1px solid #ffffff; color: #ffffff; padding: 0.6rem 1.5rem; font-weight: bold; transition: all 0.3s ease; cursor: pointer; margin-top: 1rem; font-size: 0.9rem; }
-    @media (hover: hover) and (min-width: 1024px) { .btn-footer:hover { border-color: #B76E79; color: #B76E79; background-color: rgba(183, 110, 121, 0.14); } }
-    .studio-link { color: #C9A67A; text-decoration: none; font-weight: bold; transition: all 0.3s ease; }
+    @media (hover: hover) and (min-width: 1024px) { .btn-footer:hover { border-color: #C8A95A; color: #C8A95A; background-color: rgba(200, 169, 90, 0.1); } }
+    .studio-link { color: #C8A95A; text-decoration: none; font-weight: bold; transition: all 0.3s ease; }
     @media (min-width: 1024px) { .studio-link:hover { text-decoration: underline; } }
 </style>
 
@@ -66,7 +66,7 @@ if (!isset($_SESSION['csrf_token'])) {
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">نبذة عنا</h4>
                 <p class="font-cairo text-gray-400 text-sm leading-relaxed max-w-xs mx-auto md:mx-0">
-                    نقدم أرقى الملابس النسائية العصرية التي تعكس ذوقك الرفيع. الجودة والأصالة هما عنواننا الدائم.
+                    نقدم أرقى الملابس الرجالية العصرية التي تعكس ذوقك الرفيع. الجودة والأصالة هما عنواننا الدائم.
                 </p>
             </div>
 
@@ -89,7 +89,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
             <div class="flex flex-col items-center md:items-start space-y-4">
                 <h4 class="text-lg font-bold font-cairo text-gold mb-2 md:border-r-4 md:border-gold md:pr-3">النشرة البريدية</h4>
-                <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">اشتركي الآن للحصول على آخر العروض والأخبار الحصرية.</p>
+                <p class="font-cairo text-gray-400 text-sm max-w-xs mx-auto md:mx-0">اشترك الآن للحصول على آخر العروض والأخبار الحصرية.</p>
                 
                 <form id="subscribeForm" class="flex flex-col items-center md:items-start w-full">
                     <!-- حقل التوكن المخفي -->
@@ -97,7 +97,7 @@ if (!isset($_SESSION['csrf_token'])) {
                     
                     <div style="display: none;"><input type="text" name="website_trap"></div>
 
-                    <input type="email" id="sub_email" name="email" placeholder="أدخلي بريدك الإلكتروني" 
+                    <input type="email" id="sub_email" name="email" placeholder="أدخل بريدك الإلكتروني" 
                            class="footer-input font-cairo mb-2" required>
                     
                     <div class="cf-turnstile" 
@@ -106,7 +106,7 @@ if (!isset($_SESSION['csrf_token'])) {
                          data-callback="onTurnstileSuccess"></div>
 
                     <button type="submit" id="sub_btn" class="btn-footer w-full md:w-auto">
-                        <span id="btnText">اشتركي</span>
+                        <span id="btnText">اشترك</span>
                     </button>
                     <div id="sub_msg" class="text-sm mt-2 font-cairo"></div>
                 </form>
@@ -115,7 +115,7 @@ if (!isset($_SESSION['csrf_token'])) {
 
         <div class="border-t border-gray-900 w-full mb-8"></div>
         <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-center">
-            <p class="font-cairo text-gray-500 text-sm order-2 md:order-1 text-right">اسم المتجر للملابس النسائية © جميع الحقوق محفوظة</p>
+            <p class="font-cairo text-gray-500 text-sm order-2 md:order-1 text-right">عبدالوهاب للملابس الرجالية © جميع الحقوق محفوظة</p>
             <div class="font-playfair text-white text-sm order-1 md:order-2" dir="ltr">
                 Designed by : <a href="https://www.primestore.ma" class="studio-link">Primestore.ma</a>
             </div>
@@ -154,7 +154,7 @@ function onTurnstileSuccess(token) {
         }
 
         if (data.status === 'success') {
-            msgDiv.style.color = '#B76E79';
+            msgDiv.style.color = '#C8A95A';
             msgDiv.innerText = data.message;
             emailInput.value = ''; // مسح الحقل للنجاح
         } else {
@@ -177,7 +177,7 @@ function resetFooterBtn() {
     const btn = document.getElementById('sub_btn');
     const btnText = document.getElementById('btnText');
     btn.disabled = false;
-    btnText.innerText = 'اشتركي';
+    btnText.innerText = 'اشترك';
     // تصفير الكابتشا إلزامي لكي تعمل المحاولة الثانية
     if (typeof turnstile !== 'undefined') {
         turnstile.reset(); 

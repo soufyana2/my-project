@@ -36,12 +36,7 @@ elseif ($currentScript == 'filter.php') {
         elseif ($urlCategory == 'ملابس صيفية') $activeCategory = 'summer';
         elseif ($urlCategory == 'سراويل' || $urlCategory == 'البناطيل') $activeCategory = 'trousers';
         elseif ($urlCategory == 'أحدية' || $urlCategory == 'أحذية') $activeCategory = 'shoes';
-        elseif (
-            $urlCategory == 'اكسسوارات نسائية' ||
-            $urlCategory == 'إكسسوارات نسائية' ||
-            $urlCategory == 'اكسسوارات رجالية' ||
-            $urlCategory == 'إكسسوارات رجالية'
-        ) $activeCategory = 'womens_accessories';
+        elseif ($urlCategory == 'اكسسوارات رجالية' || $urlCategory == 'إكسسوارات رجالية') $activeCategory = 'mens_accessories';
         elseif ($urlCategory == 'باقات وعروض') $activeCategory = 'pack';
         elseif ($urlCategory == 'قمصان') $activeCategory = 'shirts';
     }
@@ -865,13 +860,27 @@ border-bottom: 1px solid #f1f5f9 !important;
                 white-space: nowrap;
             }
 
-    /* Keep navbar labels from HTML spans (single source of truth). */
-    .nav-menu .nav-link span {
-        display: inline-block;
+    /* تعديل النصوص للروابط المحددة */
+    .nav-link-parfums-mens::before { content: "قمصان"; }
+    .nav-link-parfums-womens::before { content: "بناطيل"; }
+    .nav-link-accessories-mens::before { content: "جاكيتات"; }
+    .nav-link-accessories-womens::before { content: ""; }
+
+    /* إخفاء النص الأصلي للروابط وتعديل العرض لجعلها تظهر في سطر واحد */
+    .nav-menu .nav-link:not(.nav-link-home):not(.nav-link-packs) span {
+        display: none;
     }
-    .nav-menu .nav-link::before {
-        content: none !important;
-        display: none !important;
+
+    .nav-menu .nav-link:not(.nav-link-home):not(.nav-link-packs) {
+        position: relative;
+    }
+    .nav-menu .nav-link:not(.nav-link-home):not(.nav-link-packs)::before {
+        display: block;
+    }
+
+    /* تعديل خاص لـ ACCESSORIES لجعله يظهر مرة واحدة */
+    .nav-link-accessories-womens {
+        display: none; /* إخفاء رابط ACCESSORIES WOMENS لمنع التكرار */
     }
 
   /* 2. Fix scrolling: Enable touch swipe & Add padding so last link is seen */
@@ -1339,8 +1348,8 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                 <span>أحدية</span>
             </a>
 
-            <a href="filter.php?categurie=اكسسوارات نسائية" class="nav-link <?php echo ($activeCategory == 'womens_accessories') ? 'active' : ''; ?>">
-                <span>اكسسوارات نسائية</span>
+            <a href="filter.php?categurie=اكسسوارات رجالية" class="nav-link <?php echo ($activeCategory == 'mens_accessories') ? 'active' : ''; ?>">
+                <span>اكسسوارات رجالية</span>
             </a>
 
         </div>
@@ -1411,7 +1420,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <a href="filter.php?categurie=ملابس صيفية" class="mobile-nav-link">ملابس صيفية</a>
             <a href="filter.php?categurie=سراويل" class="mobile-nav-link">سراويل</a>
             <a href="filter.php?categurie=أحدية" class="mobile-nav-link">أحدية</a>
-            <a href="filter.php?categurie=اكسسوارات نسائية" class="mobile-nav-link">اكسسوارات نسائية</a>
+            <a href="filter.php?categurie=اكسسوارات رجالية" class="mobile-nav-link">اكسسوارات رجالية</a>
         </nav>
     </div>
 <!-- ===== WISHLIST SIDEBAR ===== -->
@@ -1446,7 +1455,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <div class="mb-6">
                 <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
                 <h3 class="font-playfair font-bold text-xl text-text-primary mb-2">قائمة المفضلة فارغة</h3>
-                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضيفي منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
+                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضف منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
             </div>
             <div class="space-y-3 w-full max-w-xs font-sans">
                 <a href="register.php" class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2 group">

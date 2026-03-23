@@ -105,44 +105,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $reset_link = "http://localhost:8088/myproject/wordpress/reset_password.php?token=" . urlencode($token);
                     $year = date('Y');
 
-                    // EMAIL TEMPLATE CONTROL SECTION:
-                    // Uses __STORE_EMAIL_* tokens from store_rebrand_theme.php
-                    // to keep reset email colors globally configurable.
+                    // --- تصميم الإيميل الجديد (Abdolwahab/Vynix) ---
                     $email_template = "
-                    <div style='font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: __STORE_EMAIL_BG__; padding: 40px 0;'>
-                        <div style='max-width: 600px; margin: 0 auto; background-color: __STORE_EMAIL_CARD_BG__; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid __STORE_EMAIL_BORDER__;'>
+                    <div style='font-family: Arial, sans-serif; direction: rtl; text-align: right; background-color: #f8f8f8; padding: 40px 0;'>
+                        <div style='max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #e5e5e5;'>
                             
                             <!-- Header -->
-                            <div style='background-color: __STORE_EMAIL_HEADER_BG__; padding: 30px; text-align: center;'>
-                                <h1 style='color: __STORE_EMAIL_HEADER_TEXT__; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-                                <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس نسائية</p>
+                            <div style='background-color: #000000; padding: 30px; text-align: center;'>
+                                <h1 style='color: #ffffff; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
+                                <p style='color: #C8A95A; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس رجالية</p>
                             </div>
 
                             <!-- Body -->
-                            <div style='padding: 40px 30px; color: __STORE_EMAIL_TITLE__;'>
-                                <h2 style='font-size: 20px; color: __STORE_EMAIL_TITLE__; margin-bottom: 20px;'>مرحباً بكِ،</h2>
-                                <p style='font-size: 15px; line-height: 1.8; color: __STORE_EMAIL_TEXT__;'>لقد تلقينا طلباً لإعادة تعيين كلمة المرور الخاصة بحسابكِ في متجر اسم المتجر. لإكمال العملية، يرجى الضغط على الزر أدناه:</p>
+                            <div style='padding: 40px 30px; color: #333333;'>
+                                <h2 style='font-size: 20px; color: #000; margin-bottom: 20px;'>مرحباً بك،</h2>
+                                <p style='font-size: 15px; line-height: 1.8; color: #555;'>لقد تلقينا طلباً لإعادة تعيين كلمة المرور الخاصة بحسابك في متجر عبدالوهاب. لإكمال العملية، يرجى الضغط على الزر أدناه:</p>
                                 
                                 <div style='text-align: center; margin: 35px 0;'>
-                                    <a href='$reset_link' style='background-color: __STORE_EMAIL_BUTTON_BG__; color: __STORE_EMAIL_BUTTON_TEXT__; padding: 14px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block; border: 1px solid __STORE_EMAIL_BUTTON_BORDER__;'>إعادة تعيين كلمة المرور</a>
+                                    <a href='$reset_link' style='background-color: #000000; color: #C8A95A; padding: 14px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block; border: 1px solid #C8A95A;'>إعادة تعيين كلمة المرور</a>
                                 </div>
                                 
-                                <p style='font-size: 13px; color: __STORE_EMAIL_TEXT__; margin-top: 30px;'>أو يمكنك نسخ الرابط التالي ولصقه في المتصفح:</p>
-                                <p style='font-size: 12px; color: __STORE_EMAIL_TITLE__; word-break: break-all; background: __STORE_EMAIL_SURFACE_SOFT__; padding: 10px; border-radius: 4px;'>$reset_link</p>
+                                <p style='font-size: 13px; color: #777; margin-top: 30px;'>أو يمكنك نسخ الرابط التالي ولصقه في المتصفح:</p>
+                                <p style='font-size: 12px; color: #000; word-break: break-all; background: #f4f4f4; padding: 10px; border-radius: 4px;'>$reset_link</p>
                             </div>
 
                             <!-- Footer -->
-                            <div style='background-color: __STORE_EMAIL_BG__; padding: 20px; text-align: center; border-top: 1px solid __STORE_EMAIL_BORDER__;'>
-                                <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; $year اسم المتجر للملابس النسائية. جميع الحقوق محفوظة.</p>
-                                <div style='margin-top: 15px; font-size: 11px; color: __STORE_EMAIL_MUTED__;'>
-                <a href='https://www.primestore.ma' style='color: __STORE_EMAIL_LINK__; text-decoration: none; font-weight: bold;'>Primestore</a>
+                            <div style='background-color: #f9f9f9; padding: 20px; text-align: center; border-top: 1px solid #eeeeee;'>
+                                <p style='font-size: 12px; color: #999; margin: 0 0 10px;'>&copy; $year عبدالوهاب للملابس الرجالية. جميع الحقوق محفوظة.</p>
+                                <div style='margin-top: 15px; font-size: 11px; color: #aaa;'>
+                <a href='https://www.primestore.ma' style='color: #C8A95A; text-decoration: none; font-weight: bold;'>Primestore</a>
                                 </div>
                             </div>
                         </div>
                     </div>";
 
-                    // Apply both text branding + email theme token replacements.
-                    $mail->Body = store_theme_replace(store_brand_replace($email_template));
+                    $mail->Body = store_brand_replace($email_template);
                     $mail->AltBody = "الرابط: $reset_link";
 
                     $mail->send();
@@ -178,7 +175,7 @@ ob_end_flush();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>استعادة كلمة المرور - اسم المتجر للملابس النسائية</title>
+  <title>استعادة كلمة المرور - عبدالوهاب للملابس الرجالية</title>
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -264,7 +261,7 @@ ob_end_flush();
             width: 100%;
             padding: 1rem 1.5rem;
             border-radius: 9999px;
-            background-color: #FF6B9D;
+            background-color: #000000;
             color: #ffffff;
             font-weight: 700;
             font-size: 0.95rem;
@@ -288,7 +285,7 @@ ob_end_flush();
         }
 
         @media (hover: hover) and (min-width: 1024px) {
-            .btn-primary-pro:not(:disabled):hover { background-color: #AC2A5D; }
+            .btn-primary-pro:not(:disabled):hover { background-color: #000; }
             .btn-primary-pro:not(:disabled):hover::after { animation: shine 0.75s ease-in-out forwards; }
         }
         @keyframes shine { 100% { left: 150%; } }
@@ -307,10 +304,10 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم المتجر للملابس النسائية" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار عبدالوهاب للملابس الرجالية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">ملابس نسائية</span>
+                <span class="logo-sub">ملابس رجالية</span>
             </div>
         </div>
     </header>

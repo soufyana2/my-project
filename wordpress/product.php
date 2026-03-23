@@ -194,7 +194,7 @@ if (!$data) {
         }
         $extracted['cat_string'] = !empty($extracted['categories']) ? implode('، ', $extracted['categories']) : 'غير متوفر';
 
-        $cats_hide_sizes = ['جاكيت', 'جاكيتات', 'Jackets', 'سراويل', 'البناطيل', 'Pants', 'اكسسوارات نسائية', 'إكسسوارات نسائية', 'اكسسوارات رجالية', 'إكسسوارات رجالية', 'تكنولوجيا', 'Technology', 'مكياج', 'Makeup', 'ديكورات', 'Decor'];
+        $cats_hide_sizes = ['جاكيت', 'جاكيتات', 'Jackets', 'سراويل', 'البناطيل', 'Pants', 'اكسسوارات رجالية', 'إكسسوارات رجالية', 'تكنولوجيا', 'Technology', 'مكياج', 'Makeup', 'ديكورات', 'Decor'];
         $cats_hide_colors = ['ديكورات', 'Decor'];
 $cats_ml_sizes = ['قمصان', 'ملابس صيفية', 'Shirts']; // يمكنك إضافة أي تصنيف جديد هنا مستقبلاً
 $is_ml_category = false;
@@ -470,7 +470,7 @@ function get_color_hex($color_name) {
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title> <?php echo htmlspecialchars($data['name']);?> - اسم المتجر للملابس النسائية </title>
+  <title> <?php echo htmlspecialchars($data['name']);?> - عبدالوهاب للملابس الرجالية </title>
 <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -687,11 +687,11 @@ function get_color_hex($color_name) {
         .tag-item { background-color: #f3f4f6; color: #222; padding: 3px 8px; font-weight: 600; border: 1px solid #eee; }
 
         .actions-row { display: flex; flex-direction: row; gap: 10px; width: 100%; margin-bottom: 12px; }
-        .btn-cart { background-color: #FF6B9D; color: #fff; width: 100%; padding: 16px; border: 2px solid #FF6B9D; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 0; flex: 1; }
+        .btn-cart { background-color: #000; color: white; width: 100%; padding: 16px; border: 2px solid #000; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: all 0.3s ease; display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 0; flex: 1; }
         .btn-whatsapp { background-color: #25D366; color: white; width: 100%; padding: 15px; border: none; font-weight: 700; font-size: 1.05rem; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; gap: 10px; flex: 1; }
         
         @media (min-width: 1024px) { .actions-row { max-width: 480px; } }
-        @media (hover: hover) and (min-width: 1024px) { .btn-cart:hover { background-color: #AC2A5D; border-color: #AC2A5D; color: #fff; } .btn-whatsapp:hover { background-color: #128C7E; } }
+        @media (hover: hover) and (min-width: 1024px) { .btn-cart:hover { color: #C8A95A; } .btn-whatsapp:hover { background-color: #128C7E; } }
 
       /* Trust Badges Row (has background) */
 .trust-badges-row {
@@ -969,7 +969,7 @@ function get_color_hex($color_name) {
 <meta property="og:image" content="<?php echo $data['active_image']; ?>" />
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" />
 <meta property="og:type" content="product" />
-<meta property="og:site_name" content="اسم المتجر للملابس النسائية" />
+<meta property="og:site_name" content="عبدالوهاب للملابس الرجالية" />
 <meta property="og:locale" content="ar_MA" />
 
 <!-- Twitter Card -->
@@ -1596,7 +1596,7 @@ function createParticles(x, y) {
 function buyViaWhatsapp() {
     // 1. جمع البيانات
     // اسم المتجر (يمكنك تغييره هنا أو جلبه من PHP)
-    const storeName = "اسم المتجر للملابس النسائية"; 
+    const storeName = "عبدالوهاب للملابس الرجالية"; 
     
     // رابط الصفحة الحالي
     const productUrl = window.location.href;

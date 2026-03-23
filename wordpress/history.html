@@ -45,8 +45,8 @@
             position: relative;
             font-family: 'Playfair Display', serif;
             background-color: transparent;
-            border: 2px solid #006A65;
-            color: #006A65;
+            border: 2px solid black;
+            color: black;
             padding: 0.8rem 1.8rem;
             font-weight: bold;
             overflow: hidden;
@@ -63,7 +63,7 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: #006A65;
+                background-color: transparent; /* Dark blue background on hover */
                 z-index: -1;
                 transform: scale(0); /* Start hidden, scale from center */
                 transform-origin: center;
@@ -84,9 +84,9 @@
                 z-index: -1;
             }
             .btn-discover:hover {
-                color: #ffffff;
-                border-color: #006A65;
-                background-color: transparent;
+                color: #C8A95A;
+                border-color: #C8A95A; /* Keep dark blue border on hover */
+                background-color: transparent; /* Background handled by ::before */
             }
             .btn-discover:hover::before {
                 transform: scale(1); /* Reveal dark blue background */
@@ -287,20 +287,20 @@
             <!-- Text Content and Button -->
             <div class="history-content text-gray-700 relative z-10 mt-8 md:mt-0 md:mr-8 md:order-2"> <!-- Text remains second for RTL layout on desktop -->
  <p class="attractive-text mb-8">
-    <span style="color:#C8A95A;">اسم المتجر للملابس النسائية</span>
+    <span style="color:#C8A95A;">عبدالوهاب للملابس الرجالية</span>
     <br><br>
-    نحن متجر متخصص في الملابس النسائية الراقية، نقدم تجربة شراء أنيقة تجمع بين الجودة، الذوق الرفيع، والخدمة الموثوقة.
+    نحن متجر متخصص في الملابس الرجالية الراقية، نقدم تجربة تسوق تجمع بين الجودة، الذوق الرفيع، والخدمة الموثوقة.
     <br><br>
     نحرص على اختيار أفضل المنتجات والتصاميم لتناسب جميع الأذواق والمناسبات، مع توفير تجربة شراء سهلة وآمنة وخدمة عملاء مميزة.
     <br><br>
-    ثقتكِ هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل لكِ.
+    ثقتكم هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل.
 </p>
 
 
                 <div class="text-right w-full flex justify-center md:justify-center"> <!-- Button justified right -->
                    <a href="contact-us.html">
                     <button class="btn-discover text-lg">
-                        اتصلي الآن
+                        اتصل الآن
                     </button></a>
                 </div>
             </div>

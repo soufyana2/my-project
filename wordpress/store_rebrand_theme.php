@@ -21,47 +21,47 @@
  */
 if (!defined('STORE_THEME_ACCENT')) {
     // Primary brand accent for highlights/CTAs.
-    define('STORE_THEME_ACCENT', '#B76E79');
+    define('STORE_THEME_ACCENT', '#C8A95A');
 }
 
 if (!defined('STORE_THEME_ACCENT_SOFT')) {
     // Secondary accent for softer highlighted areas.
-    define('STORE_THEME_ACCENT_SOFT', '#7A3E52');
+    define('STORE_THEME_ACCENT_SOFT', '#D4B882');
 }
 
 if (!defined('STORE_THEME_ACCENT_ALT')) {
     // Alternative accent for badges/section accents.
-    define('STORE_THEME_ACCENT_ALT', '#C9A67A');
+    define('STORE_THEME_ACCENT_ALT', '#43A047');
 }
 
 if (!defined('STORE_THEME_ACCENT_STRONG')) {
     // Strong accent used for active states/buttons.
-    define('STORE_THEME_ACCENT_STRONG', '#5A2135');
+    define('STORE_THEME_ACCENT_STRONG', '#000000');
 }
 
 if (!defined('STORE_THEME_TEXT_PRIMARY')) {
     // Main heading/high-contrast text color.
-    define('STORE_THEME_TEXT_PRIMARY', '#2A1D26');
+    define('STORE_THEME_TEXT_PRIMARY', '#000000');
 }
 
 if (!defined('STORE_THEME_TEXT_SECONDARY')) {
     // Body and secondary text color.
-    define('STORE_THEME_TEXT_SECONDARY', '#5E4A56');
+    define('STORE_THEME_TEXT_SECONDARY', '#475569');
 }
 
 if (!defined('STORE_THEME_BG_BASE')) {
     // Base page background.
-    define('STORE_THEME_BG_BASE', '#FDF8FB');
+    define('STORE_THEME_BG_BASE', '#FFFFFF');
 }
 
 if (!defined('STORE_THEME_BG_SOFT')) {
     // Soft backgrounds for sections/cards.
-    define('STORE_THEME_BG_SOFT', '#F6EEF3');
+    define('STORE_THEME_BG_SOFT', '#F8FAFC');
 }
 
 if (!defined('STORE_THEME_BORDER')) {
     // Border/divider color.
-    define('STORE_THEME_BORDER', '#DECED8');
+    define('STORE_THEME_BORDER', '#E2E8F0');
 }
 
 /**
@@ -288,7 +288,7 @@ if (!function_exists('store_theme_replacements')) {
             '#6B6B6B' => STORE_THEME_TEXT_SECONDARY,
             '#6b6b6b' => STORE_THEME_TEXT_SECONDARY,
 
-            // Hover overlay normalization to the women palette accent
+            // Hover overlay normalization to the active brand accent
             'rgba(200, 169, 90,' => 'rgba(183, 110, 121,',
             'rgba(200,169,90,' => 'rgba(183,110,121,',
             'rgba(217, 151, 143,' => 'rgba(183, 110, 121,',
