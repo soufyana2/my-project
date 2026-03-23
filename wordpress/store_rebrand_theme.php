@@ -21,47 +21,47 @@
  */
 if (!defined('STORE_THEME_ACCENT')) {
     // Primary brand accent for highlights/CTAs.
-    define('STORE_THEME_ACCENT', '#FF6B9D');
+    define('STORE_THEME_ACCENT', '#B76E79');
 }
 
 if (!defined('STORE_THEME_ACCENT_SOFT')) {
     // Secondary accent for softer highlighted areas.
-    define('STORE_THEME_ACCENT_SOFT', '#AC2A5D');
+    define('STORE_THEME_ACCENT_SOFT', '#7A3E52');
 }
 
 if (!defined('STORE_THEME_ACCENT_ALT')) {
     // Alternative accent for badges/section accents.
-    define('STORE_THEME_ACCENT_ALT', '#A3B18A');
+    define('STORE_THEME_ACCENT_ALT', '#C9A67A');
 }
 
 if (!defined('STORE_THEME_ACCENT_STRONG')) {
     // Strong accent used for active states/buttons.
-    define('STORE_THEME_ACCENT_STRONG', '#006A65');
+    define('STORE_THEME_ACCENT_STRONG', '#5A2135');
 }
 
 if (!defined('STORE_THEME_TEXT_PRIMARY')) {
     // Main heading/high-contrast text color.
-    define('STORE_THEME_TEXT_PRIMARY', '#18181B');
+    define('STORE_THEME_TEXT_PRIMARY', '#2A1D26');
 }
 
 if (!defined('STORE_THEME_TEXT_SECONDARY')) {
     // Body and secondary text color.
-    define('STORE_THEME_TEXT_SECONDARY', '#52525B');
+    define('STORE_THEME_TEXT_SECONDARY', '#5E4A56');
 }
 
 if (!defined('STORE_THEME_BG_BASE')) {
     // Base page background.
-    define('STORE_THEME_BG_BASE', '#FFF9FC');
+    define('STORE_THEME_BG_BASE', '#FDF8FB');
 }
 
 if (!defined('STORE_THEME_BG_SOFT')) {
     // Soft backgrounds for sections/cards.
-    define('STORE_THEME_BG_SOFT', '#F5F8F2');
+    define('STORE_THEME_BG_SOFT', '#F6EEF3');
 }
 
 if (!defined('STORE_THEME_BORDER')) {
     // Border/divider color.
-    define('STORE_THEME_BORDER', '#D8DECC');
+    define('STORE_THEME_BORDER', '#DECED8');
 }
 
 /**
@@ -124,7 +124,7 @@ if (!defined('STORE_THEME_EMAIL_LINK')) {
 }
 
 if (!defined('STORE_THEME_EMAIL_SURFACE_SOFT')) {
-    define('STORE_THEME_EMAIL_SURFACE_SOFT', '#EEF7F6');
+    define('STORE_THEME_EMAIL_SURFACE_SOFT', '#F7F0F4');
 }
 
 if (!defined('STORE_THEME_EMAIL_BORDER')) {
@@ -227,6 +227,20 @@ if (!function_exists('store_theme_replacements')) {
             '#3a3a3a' => strtolower(STORE_THEME_ACCENT_ALT),
             '#43A047' => STORE_THEME_ACCENT_ALT,
             '#43a047' => strtolower(STORE_THEME_ACCENT_ALT),
+            '#FF6B9D' => STORE_THEME_ACCENT,
+            '#ff6b9d' => strtolower(STORE_THEME_ACCENT),
+            '#AC2A5D' => STORE_THEME_ACCENT_SOFT,
+            '#ac2a5d' => strtolower(STORE_THEME_ACCENT_SOFT),
+            '#A3B18A' => STORE_THEME_ACCENT_ALT,
+            '#a3b18a' => strtolower(STORE_THEME_ACCENT_ALT),
+            '#006A65' => STORE_THEME_ACCENT_STRONG,
+            '#006a65' => strtolower(STORE_THEME_ACCENT_STRONG),
+            '#18181B' => STORE_THEME_TEXT_PRIMARY,
+            '#18181b' => strtolower(STORE_THEME_TEXT_PRIMARY),
+            '#52525B' => STORE_THEME_TEXT_SECONDARY,
+            '#52525b' => strtolower(STORE_THEME_TEXT_SECONDARY),
+            '#D8DECC' => STORE_THEME_BORDER,
+            '#d8decc' => strtolower(STORE_THEME_BORDER),
 
             // Base and soft backgrounds
             '#ffffff' => STORE_THEME_BG_BASE,
@@ -274,11 +288,13 @@ if (!function_exists('store_theme_replacements')) {
             '#6B6B6B' => STORE_THEME_TEXT_SECONDARY,
             '#6b6b6b' => STORE_THEME_TEXT_SECONDARY,
 
-            // Gold-ish rgba hover overlays to TinyTrove accent pink
-            'rgba(200, 169, 90,' => 'rgba(255, 107, 157,',
-            'rgba(200,169,90,' => 'rgba(255,107,157,',
-            'rgba(217, 151, 143,' => 'rgba(255, 107, 157,',
-            'rgba(217,151,143,' => 'rgba(255,107,157,',
+            // Hover overlay normalization to the women palette accent
+            'rgba(200, 169, 90,' => 'rgba(183, 110, 121,',
+            'rgba(200,169,90,' => 'rgba(183,110,121,',
+            'rgba(217, 151, 143,' => 'rgba(183, 110, 121,',
+            'rgba(217,151,143,' => 'rgba(183,110,121,',
+            'rgba(255, 107, 157,' => 'rgba(183, 110, 121,',
+            'rgba(255,107,157,' => 'rgba(183,110,121,',
         ], store_theme_email_replacements());
     }
 }

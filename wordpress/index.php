@@ -331,13 +331,13 @@ function renderSkeletonCards($count) {
     
     <!-- 1. العنوان المحسن: يحتوي على اسم المتجر + الكلمات المفتاحية الرئيسية -->
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>اسم متجر ملابس الأطفال | متجر الأطفال العملي للآباء في المغرب</title>
+  <title>اسم المتجر للملابس النسائية | تسوقي أفضل القمصان والجاكيتات في المغرب</title>
     
     <!-- 2. وصف دقيق وجذاب يحتوي كلمات بحثية -->
-    <meta name="description" content="متجر أطفال يساعد الآباء على اختيار ملابس يومية مريحة للمدرسة واللعب: جاكيتات، سراويل، أحذية، وباقات توفير مع توصيل سريع داخل المغرب.">
+    <meta name="description" content="تسوقي أونلاين من اسم المتجر للملابس النسائية. اكتشفي تشكيلة واسعة من الملابس الصيفية الراقية، الجاكيتات الأنيقة، والسراويل العملية بأفضل الأسعار في المغرب. توصيل سريع ودفع عند الاستلام.">
     
     <!-- 3. الكلمات المفتاحية (اختياري لكن مفيد لمحركات البحث الأخرى) -->
-    <meta name="keywords" content="متجر أطفال, ملابس أطفال للآباء, ملابس مدرسة للأطفال, سراويل أطفال, أحذية أطفال, باقات توفير, المغرب">
+    <meta name="keywords" content="قمصان, جاكيتات, بناطيل, تسوقي أونلاين, المغرب, هدايا, عبد الوهاب">
     
     <!-- 4. Canonical URL (مهم جداً لمنع تكرار المحتوى) -->
     <!-- استبدل الرابط أدناه برابط موقعك الحقيقي -->
@@ -346,8 +346,8 @@ function renderSkeletonCards($count) {
     <!-- 5. Favicon -->
 <!-- 6. Open Graph (للظهور باحترافية على فيسبوك، واتساب، وتويتر) -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="اسم متجر ملابس الأطفال - تجهيز يومي سهل للآباء" />
-    <meta property="og:description" content="ملابس أطفال عملية تتحمل اليوم الكامل: جودة موثوقة، أسعار مناسبة، وتوصيل سريع داخل المغرب." />
+    <meta property="og:title" content="اسم المتجر للملابس النسائية - فخامة وأناقة" />
+    <meta property="og:description" content="اكتشفي مجموعتنا الحصرية من الملابس الصيفية والجاكيتات. جودة عالية وأسعار تنافسية." />
     <meta property="og:url" content="https://your-domain.com/" />
     <meta property="og:site_name" content="Bdolwahab Store" />
     <meta property="og:image" content="https://your-domain.com/images/lgicon.png" /> <!-- ضع رابط صورة شعار المتجر أو صورة دعائية -->
@@ -358,10 +358,10 @@ function renderSkeletonCards($count) {
     {
       "@context": "https://schema.org",
       "@type": "Store",
-      "name": "اسم متجر ملابس الأطفال",
+      "name": "اسم المتجر للملابس النسائية",
       "url": "https://your-domain.com/",
       "logo": "https://your-domain.com/images/lgicon.png",
-      "description": "متجر أطفال عملي للآباء في المغرب يوفر ملابس مريحة للمدرسة واللعب مع تجربة شراء سهلة.",
+      "description": "متجر متخصص في بيع القمصان والجاكيتات والبناطيل الفاخرة في المغرب.",
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "MA"
@@ -1022,7 +1022,7 @@ include 'header.php';
 <section id="best-products-section" class="relative overflow-hidden bg-section-bg-transparent py-8 lazy-load-section" data-first-load="true">
     <div class="relative max-w-7xl mx-auto mt-8 px-4 sm:px-8 z-20">
         <div class="flex justify-center items-center mb-10 mx-auto">
-          <h2 class="text-4xl font-bold text-text-dark">الأكثر طلباً من الآباء</h2>
+          <h2 class="text-4xl font-bold text-text-dark">أفضل المنتجات</h2>
         </div>
 
         <input type="radio" name="page" id="page-radio-1" class="page-radio" checked>
@@ -1040,7 +1040,7 @@ echo '
     <!-- أضفنا col-span-2 هنا -->
     <div class="w-full col-span-2 flex justify-center items-center py-10">
         <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            لا توجد منتجات متاحة حالياً في هذا القسم. جرّب تصنيفاً آخر.
+            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
         </p>
     </div>';
                         }
@@ -1058,7 +1058,7 @@ echo '
     <!-- أضفنا col-span-2 هنا -->
     <div class="w-full col-span-2 flex justify-center items-center py-10">
         <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            لا توجد منتجات متاحة حالياً في هذا القسم. جرّب تصنيفاً آخر.
+            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
         </p>
     </div>';
                         }
@@ -1076,7 +1076,7 @@ echo '
 <section id="featured-products-section" class="relative overflow-hidden bg-transparent py-8 lazy-load-section" data-first-load="true">
 <div class="relative max-w-7xl mx-auto mt-8 px-4 sm:px-8 z-20">
             <div class="flex justify-center items-center mb-10 mx-auto">
-          <h2 class="text-4xl font-bold text-text-dark">اختيارات موصى بها للآباء</h2>
+          <h2 class="text-4xl font-bold text-text-dark">منتجات مميزة</h2>
         </div>
 
 <!-- بهذا (نفس منطق Top Products) -->
@@ -1092,7 +1092,7 @@ echo '
     <!-- أضفنا col-span-2 هنا -->
     <div class="w-full col-span-2 flex justify-center items-center py-10">
         <p class="force-center text-center text-xl lg:text-2xl font-semibold text-gray-600 leading-relaxed">
-            لا توجد منتجات متاحة حالياً في هذا القسم. جرّب تصنيفاً آخر.
+            نأسف لعدم توفر أي منتجات حالياً في هذا القسم.  
         </p>
     </div>';
                      }

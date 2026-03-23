@@ -235,14 +235,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="تسجيل الدخول إلى حسابك بأمان. انضم إلينا اليوم للوصول إلى أفضل ملابس الأطفال.">
+    <meta name="description" content="تسجيل الدخول إلى حسابك بأمان. انضمي إلينا اليوم للوصول إلى أفضل الملابس النسائية.">
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>اسم متجر ملابس الأطفال - login </title>
+  <title>اسم المتجر للملابس النسائية - login </title>
 <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
@@ -252,15 +252,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 <!-- Open Graph / Facebook & WhatsApp -->
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://www.abdolwahabaccessories.com/register.php">
-<meta property="og:title" content="تسجيل الدخول - اسم متجر ملابس الأطفال">
-<meta property="og:description" content="سجل دخولك الآن للوصول إلى أفخم ملابس الأطفال الحصرية.">
+<meta property="og:title" content="تسجيل الدخول - اسم المتجر للملابس النسائية">
+<meta property="og:description" content="سجلي دخولك الآن للوصول إلى أفخم الملابس النسائية الحصرية.">
 <meta property="og:image" content="https://www.abdolwahabaccessories.com/register.php"> <!-- صورة بمقاس 1200x630 -->
 
 <!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:url" content="https://www.abdolwahabaccessories.com/register.php">
-<meta name="twitter:title" content="تسجيل الدخول - اسم متجر ملابس الأطفال">
-<meta name="twitter:description" content="سجل دخولك الآن للوصول إلى أفخم ملابس الأطفال الحصرية.">
+<meta name="twitter:title" content="تسجيل الدخول - اسم المتجر للملابس النسائية">
+<meta name="twitter:description" content="سجلي دخولك الآن للوصول إلى أفخم الملابس النسائية الحصرية.">
 <meta name="twitter:image" content="https://www.abdolwahabaccessories.com/register.php">
 
 <script type="application/ld+json">
@@ -268,11 +268,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
   "@context": "https://schema.org",
   "@type": "AccountPage",
   "name": "تسجيل الدخول وإنشاء حساب",
-  "description": "صفحة الدخول الآمن لعملاء متجر اسم متجر ملابس الأطفال",
+  "description": "صفحة الدخول الآمن لعملاء متجر اسم المتجر للملابس النسائية",
   "url": "https://www.abdolwahabaccessories.com/register.php",
   "mainEntity": {
     "@type": "Organization",
-    "name": "اسم متجر ملابس الأطفال",
+    "name": "اسم المتجر للملابس النسائية",
     "logo": "https://www.your-domain.com/images/lgicon.png",
     "url": "https://www.abdolwahabaccessories.com/register.php/"
   },
@@ -490,7 +490,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
        @media (hover: hover) and (min-width: 1024px) {
     
     .btn-visitor:hover {
-        background-color: #006A65;
+        background-color: #006A65; 
         color: #ffffff;
     }
     
@@ -503,7 +503,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     }
 
     .btn-primary-pro:not(:disabled):hover {
-        /* تأثيرات الهوفر للزر الرئيسي */
         background-color: #AC2A5D;
     }
 
@@ -595,10 +594,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم متجر ملابس الأطفال" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم المتجر للملابس النسائية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">ملابس أطفال</span>
+                <span class="logo-sub">ملابس نسائية</span>
             </div>
         </div>
     </header>
@@ -620,7 +619,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
             </div>
    <a href="index.php?v=visitor" class="btn-visitor mb-6" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 9999;">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-    <span>الدخول كزائر</span>
+    <span>الدخول كزائرة</span>
 </a>
             <form class="space-y-6" method="POST" id="form-login">
                 <input type="hidden" name="login" value="1">
@@ -665,7 +664,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                         <input type="checkbox" name="remember_me" class="gold-checkbox transition"> 
                         <span class="text-base text-gray-700 lg:hover:text-black transition-colors font-medium">تذكرني</span>
                     </label>
-                    <a href="forgot_password.php" class="text-base text-gray-700 lg:hover:text-black transition-colors font-medium">نسيت كلمة المرور؟</a>
+                    <a href="forgot_password.php" class="text-base text-gray-700 lg:hover:text-black transition-colors font-medium">نسيتِ كلمة المرور؟</a>
                 </div>
 
                 <input type="hidden" name="cf-turnstile-response" class="turnstile-response-input" value="">
@@ -678,7 +677,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                 </button>
 
                 <p class="text-center text-base text-gray-700 mt-8">
-                    ليس لديك حساب؟ 
+                    ليس لديكِ حساب؟ 
                     <a href="#" onclick="switchAuth('loginForm', 'signupForm'); return false;" class="font-bold lg:hover:underline transition-all" style="color:#C8A95A;">إنشاء حساب جديد</a>
                 </p>
             </form>
@@ -697,7 +696,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
 <!-- نموذج مستقل خاص بالزائر فقط لا علاقة له بالجافا سكريبت -->
 <a href="index.php?v=visitor" class="btn-visitor mb-6" style="text-decoration: none; display: flex; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 9999;">
     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-    <span>الدخول كزائر</span>
+    <span>الدخول كزائرة</span>
 </a>
             <form class="space-y-6" method="POST" id="form-signup">
                 <input type="hidden" name="sign-up" value="1">
@@ -750,7 +749,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && is_ajax_request()) {
                 </button>
 
                 <p class="text-center text-base text-gray-700 mt-8">
-                    لديك حساب بالفعل؟ 
+                    لديكِ حساب بالفعل؟ 
                     <a href="#" onclick="switchAuth('signupForm', 'loginForm'); return false;" class="font-bold lg:hover:underline transition-all" style="color:#C8A95A;">تسجيل الدخول</a>
                 </p>
             </form>

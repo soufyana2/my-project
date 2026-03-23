@@ -470,7 +470,7 @@ function get_color_hex($color_name) {
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title> <?php echo htmlspecialchars($data['name']);?> - اسم متجر ملابس الأطفال </title>
+  <title> <?php echo htmlspecialchars($data['name']);?> - اسم المتجر للملابس النسائية </title>
 <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -969,7 +969,7 @@ function get_color_hex($color_name) {
 <meta property="og:image" content="<?php echo $data['active_image']; ?>" />
 <meta property="og:url" content="<?php echo "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; ?>" />
 <meta property="og:type" content="product" />
-<meta property="og:site_name" content="اسم متجر ملابس الأطفال" />
+<meta property="og:site_name" content="اسم المتجر للملابس النسائية" />
 <meta property="og:locale" content="ar_MA" />
 
 <!-- Twitter Card -->
@@ -1596,7 +1596,7 @@ function createParticles(x, y) {
 function buyViaWhatsapp() {
     // 1. جمع البيانات
     // اسم المتجر (يمكنك تغييره هنا أو جلبه من PHP)
-    const storeName = "اسم متجر ملابس الأطفال"; 
+    const storeName = "اسم المتجر للملابس النسائية"; 
     
     // رابط الصفحة الحالي
     const productUrl = window.location.href;

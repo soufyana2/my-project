@@ -108,7 +108,6 @@ try {
     $mail->isHTML(true);
 
     $mail->Subject = $is_resend ? 'إعادة إرسال رمز التحقق' : 'رمز التحقق الخاص بك';
-
     // EMAIL TEMPLATE CONTROL SECTION:
     // Uses __STORE_EMAIL_* tokens from store_rebrand_theme.php
     // to keep OTP email colors globally configurable.
@@ -119,7 +118,7 @@ try {
         <!-- Header -->
         <div style='background-color: __STORE_EMAIL_HEADER_BG__; padding: 30px; text-align: center;'>
             <h1 style='color: __STORE_EMAIL_HEADER_TEXT__; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-            <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس أطفال</p>
+            <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس نسائية</p>
         </div>
 
         <!-- Body -->
@@ -162,7 +161,7 @@ try {
 
         <!-- Footer -->
         <div style='background-color: __STORE_EMAIL_BG__; padding: 20px; text-align: center; border-top: 1px solid __STORE_EMAIL_BORDER__;'>
-            <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; " . date('Y') . " اسم متجر ملابس الأطفال. جميع الحقوق محفوظة.</p>
+            <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; " . date('Y') . " اسم المتجر للملابس النسائية. جميع الحقوق محفوظة.</p>
             <div style='margin-top: 15px; font-size: 11px; color: __STORE_EMAIL_MUTED__;'>
                 Dev & Design by 
                 <a href='https://www.primestore.ma' style='color: __STORE_EMAIL_LINK__; text-decoration: none; font-weight: bold;'>Primestore</a>

@@ -24,7 +24,7 @@ if (!defined('STORE_NAME_AR')) {
 }
 
 if (!defined('STORE_BUSINESS_AR')) {
-    define('STORE_BUSINESS_AR', 'لملابس الأطفال');
+    define('STORE_BUSINESS_AR', 'للملابس النسائية');
 }
 
 if (!defined('STORE_NAME_FULL_AR')) {
@@ -32,7 +32,7 @@ if (!defined('STORE_NAME_FULL_AR')) {
 }
 
 if (!defined('STORE_NAME_EN')) {
-    define('STORE_NAME_EN', 'TinyTrove');
+    define('STORE_NAME_EN', 'Store Name');
 }
 
 if (!defined('STORE_SITE_NAME_EN')) {
@@ -72,44 +72,43 @@ if (!defined('STORE_FAVICON_URL')) {
  * - Breadcrumb backgrounds (inner pages)
  */
 if (!defined('STORE_HERO_VIDEO_URL')) {
-    define('STORE_HERO_VIDEO_URL', 'https://res.cloudinary.com/dhqavjbx6/video/upload/v1774120322/Monte_Carlo_Kids_Fashion_Film_2022___Summer_Collection_4K_HD_y2qfer.webm');
+    define('STORE_HERO_VIDEO_URL', 'https://res.cloudinary.com/dhqavjbx6/video/upload/v1774107994/CLOTHING_BOUTIQUE_PROMO_VIDEO_BRISBANE_1080P_HD_sflshz.mp4');
 }
 
 if (!defined('STORE_ADS_BANNER_PRIMARY_URL')) {
-    define('STORE_ADS_BANNER_PRIMARY_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774120781/Gemini_Generated_Image_nw33hwnw33hwnw33-ezremove_sskwik.png');
+    define('STORE_ADS_BANNER_PRIMARY_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774103970/AI_Eraser_image_2_z6p96t.png');
 }
 
 if (!defined('STORE_ADS_BANNER_SECONDARY_URL')) {
-    define('STORE_ADS_BANNER_SECONDARY_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774121028/ChatGPT_Image_Mar_21_2026_07_23_28_PM_ksflal.png');
+    define('STORE_ADS_BANNER_SECONDARY_URL', 'https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1766465668/Jewelry_Brand_-_Artboard_2_gfie26.jpg');
 }
 
 if (!defined('STORE_ADS_BANNER_TERTIARY_URL')) {
-    define('STORE_ADS_BANNER_TERTIARY_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774121873/Gemini_Generated_Image_4hjplg4hjplg4hjp_tkm1jn.png');
+    define('STORE_ADS_BANNER_TERTIARY_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774102356/AI_Eraser_image_er1iah.png');
 }
 
 if (!defined('STORE_ONE_TOUCH_BEFORE_URL')) {
-    define('STORE_ONE_TOUCH_BEFORE_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774122808/before_jxaldc.png');
+    define('STORE_ONE_TOUCH_BEFORE_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774105371/before_ykjmtw.png');
 }
 
 if (!defined('STORE_ONE_TOUCH_AFTER_URL')) {
-    define('STORE_ONE_TOUCH_AFTER_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774122806/after_xodudz.png');
+    define('STORE_ONE_TOUCH_AFTER_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774105370/after_h1xjda.png');
 }
 
 if (!defined('STORE_REVIEWS_IMAGE_1_URL')) {
-    define('STORE_REVIEWS_IMAGE_1_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774122180/Screenshot_2026-03-21_194138_ivq38o.png');
+    define('STORE_REVIEWS_IMAGE_1_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774106370/Screenshot_2026-03-21_151903_o2tzsh.png');
 }
 
 if (!defined('STORE_REVIEWS_IMAGE_2_URL')) {
-    define('STORE_REVIEWS_IMAGE_2_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774122112/17733307454a5ade02470fc6c8d17a59e6f69d11c5_thumbnail_999x999_ird2qk.jpg');
+    define('STORE_REVIEWS_IMAGE_2_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774106415/1768534942096d28b4354ebaa87b43868ab8d32ba9_thumbnail_999x999_qp3a7a.jpg');
 }
 
 if (!defined('STORE_HISTORY_SECTION_IMAGE_URL')) {
-    // Home "about us" image: keep it tied to secondary banner so one URL update works for both.
-    define('STORE_HISTORY_SECTION_IMAGE_URL', STORE_ADS_BANNER_SECONDARY_URL);
+    define('STORE_HISTORY_SECTION_IMAGE_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774104290/AI_Eraser_image_3_mvhpg4.png');
 }
 
 if (!defined('STORE_BREADCRUMB_BG_URL')) {
-    define('STORE_BREADCRUMB_BG_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774123014/ChatGPT_Image_Mar_21_2026_07_56_44_PM_ge3tqg.png');
+    define('STORE_BREADCRUMB_BG_URL', 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774108097/da03ca5e2169685ac4867c812a4f0d4c_g8wpob_s2jnsr.webp');
 }
 
 /**
@@ -137,31 +136,31 @@ if (!function_exists('store_brand_home_categories')) {
             [
                 'category_url' => 'filter.php?category=%D8%AC%D8%A7%D9%83%D9%8A%D8%AA',
                 'label' => 'جاكيت',
-                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774126243/5100034B-5450_zoom_9_jccnei.jpg',
+                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774107248/l_20261-s6kt66z8-cvl-80-62-91-176_5_xcil6i.webp',
             ],
             [
                 'category_url' => 'filter.php?category=%D9%85%D9%84%D8%A7%D8%A8%D8%B3%20%D8%B5%D9%8A%D9%81%D9%8A%D8%A9',
-                'label' => 'مدرسة',
-                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774126324/hand-drawn-school-uniform-element-collection_23-2149847005_pnlqse.avif',
+                'label' => 'ملابس صيفية',
+                'image_url' => 'https://images.pexels.com/photos/4458519/pexels-photo-4458519.jpeg?auto=compress&cs=tinysrgb&w=600&h=600&fit=crop',
             ],
             [
                 'category_url' => 'filter.php?category=%D8%B3%D8%B1%D8%A7%D9%88%D9%8A%D9%84',
                 'label' => 'سراويل',
-                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774126571/boys-jeans-bl0611242-lightblue-4_k2jq64.webp',
+                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774107182/f70a007d538ded96cf932b8f73d0d6ea.jpg_960x960q80.jpg__qpn0kh.webp',
             ],
             [
                 'category_url' => 'filter.php?category=%D8%A3%D8%AD%D8%AF%D9%8A%D8%A9',
                 'label' => 'أحذية',
-                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774126397/6c0eafddc18ee6693e923a2c74cdf024ab696e23_750x_xmixic.webp',
+                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774107077/e2d8eedd-8ee3-46ed-b8b3-13a557527fb2_tm7qqp.webp',
             ],
             [
-                'category_url' => 'filter.php?category=%D8%A7%D9%83%D8%B3%D8%B3%D9%88%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A3%D8%B7%D9%81%D8%A7%D9%84',
-                'label' => 'اكسسوارات أطفال',
-                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774126499/15-Best-Baby-Sunglasses-For-2019-2-1_xa1j2i.webp',
+                'category_url' => 'filter.php?category=%D8%A7%D9%83%D8%B3%D8%B3%D9%88%D8%A7%D8%B1%D8%A7%D8%AA%20%D9%86%D8%B3%D8%A7%D8%A6%D9%8A%D8%A9',
+                'label' => 'اكسسوارات نسائية',
+                'image_url' => 'https://res.cloudinary.com/dhqavjbx6/image/upload/v1774106986/Velvetine_White_Rosegod_mesh_3414fc8c-7eb3-4815-8f32-a4cf2e5987ef_1024x1024_vwblov.webp',
             ],
             [
                 'category_url' => 'filter.php?category=%D8%A8%D8%A7%D9%82%D8%A7%D8%AA%20%D9%88%D8%B9%D8%B1%D9%88%D8%B6',
-                'label' => 'باقات وعروض',
+                'label' => 'عروض',
                 'image_url' => 'https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1765043616/Black_Friday_Poster_with_Shiny_Balloons_and_Confetti_on_White_Background_vector_illustration_smeagorl_8584397___Stockfresh_y0v5up.jpg',
             ],
         ];
@@ -359,73 +358,72 @@ if (!function_exists('store_brand_replacements')) {
             // Arabic variants
             'عبدالوهاب للملابس الرجالية' => STORE_NAME_FULL_AR,
             'عبد الوهاب للملابس الرجالية' => STORE_NAME_FULL_AR,
-            'عبدالوهاب لملابس الأطفال' => STORE_NAME_FULL_AR,
-            'عبد الوهاب لملابس الأطفال' => STORE_NAME_FULL_AR,
+            'عبدالوهاب للملابس النسائية' => STORE_NAME_FULL_AR,
+            'عبد الوهاب للملابس النسائية' => STORE_NAME_FULL_AR,
             'عبدالوهاب' => STORE_NAME_AR,
             'عبد الوهاب' => STORE_NAME_AR,
 
-            // Arabic brand/content normalization for kids store
+            // Arabic brand/content normalization for women's store
             'عبدالوهاب للملابس الرجالية' => STORE_NAME_FULL_AR,
             'عبد الوهاب للملابس الرجالية' => STORE_NAME_FULL_AR,
             'عبدالوهاب للملابس النسائية' => STORE_NAME_FULL_AR,
             'عبد الوهاب للملابس النسائية' => STORE_NAME_FULL_AR,
-            'عبدالوهاب لملابس الأطفال' => STORE_NAME_FULL_AR,
-            'عبد الوهاب لملابس الأطفال' => STORE_NAME_FULL_AR,
             'للملابس الرجالية' => STORE_BUSINESS_AR,
-            'للملابس النسائية' => STORE_BUSINESS_AR,
-            'لملابس الأطفال' => STORE_BUSINESS_AR,
-            'ملابس رجالية' => 'ملابس أطفال',
-            'الملابس الرجالية' => 'ملابس الأطفال',
-            'الأزياء الرجالية' => 'أزياء الأطفال',
-            'ازياء رجالية' => 'أزياء أطفال',
-            'ملابس نسائية' => 'ملابس أطفال',
-            'الملابس النسائية' => 'ملابس الأطفال',
-            'الأزياء النسائية' => 'أزياء الأطفال',
-            'ازياء نسائية' => 'أزياء أطفال',
+            'ملابس رجالية' => 'ملابس نسائية',
+            'الملابس الرجالية' => 'الملابس النسائية',
+            'الأزياء الرجالية' => 'الأزياء النسائية',
+            'ازياء رجالية' => 'ازياء نسائية',
+            'رجالية' => 'نسائية',
+            'رجالي' => 'نسائي',
             'قمصان' => 'ملابس صيفية',
             'قميص' => 'قطعة صيفية',
             'البناطيل' => 'السراويل',
             'بناطيل' => 'سراويل',
             'أحذية' => 'أحدية',
             'احذية' => 'احدية',
-            'اكسسوارات رجالية' => 'اكسسوارات أطفال',
-            'إكسسوارات رجالية' => 'اكسسوارات أطفال',
-            'تصاميم رجالية' => 'تصاميم أطفال',
-            'تصاميم نسائية' => 'تصاميم أطفال',
-            'أسلوبك الرجالي' => 'أسلوب أطفال عصري',
-            'أسلوبك النسائي' => 'أسلوب أطفال عصري',
+            'اكسسوارات رجالية' => 'اكسسوارات نسائية',
+            'إكسسوارات رجالية' => 'اكسسوارات نسائية',
+            'تصاميم رجالية' => 'تصاميم نسائية',
+            'أسلوبك الرجالي' => 'أسلوبك النسائي',
 
-            // Arabic neutral grammar normalization (remove feminine tone)
-            'تسوقي الآن' => 'تسوق الآن',
-            'تسوقي أونلاين' => 'تسوق أونلاين',
-            'تسوقي أفضل' => 'تسوق أفضل',
-            'تصفية وتسوقي' => 'تصفية وتسوق',
-            'استكشفي' => 'استكشف',
-            'اكتشفي' => 'اكتشف',
-            'غوصي' => 'استكشف',
-            'تصفحي الآن' => 'تصفح الآن',
-            'انضمي إلينا' => 'انضم إلينا',
-            'سجلي دخولك الآن' => 'سجل دخولك الآن',
-            'تعرفي علينا الآن' => 'تعرف علينا الآن',
-            'اتصلي الآن' => 'اتصل الآن',
-            'تحققي من حسابك' => 'تحقق من حسابك',
-            'تحققي الآن' => 'تحقق الآن',
-            'لم تستلمي الرمز؟' => 'لم تستلم الرمز؟',
-            'ليس لديكِ حساب؟' => 'ليس لديك حساب؟',
-            'لديكِ حساب بالفعل؟' => 'لديك حساب بالفعل؟',
-            'حصولكِ على هذا الخصم قبل انتهائه، اضغطي على الزر أدناه واطلبيه الآن!' => 'احصل على هذا الخصم قبل انتهائه، اضغط على الزر أدناه واطلبه الآن!',
-            'ثقتكِ هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل لكِ.' => 'ثقتكم هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل.',
-            'مرحباً بكِ،' => 'مرحباً بك،',
-            'بحسابكِ' => 'بحسابك',
-            'عميلة سعيدة' => 'عميل سعيد',
-            'عميلة' => 'عميل',
-            'كزائرة' => 'كزائر',
+            // Arabic feminine tone normalization (CTA and copy voice)
+            'تسوق الآن' => 'تسوقي الآن',
+            'تسوق أونلاين' => 'تسوقي أونلاين',
+            'تسوق أفضل' => 'تسوقي أفضل',
+            'تصفية وتسوق' => 'تصفية وتسوقي',
+            'استكشفوا' => 'استكشفي',
+            'اكتشفوا' => 'اكتشفي',
+            'غوصوا' => 'غوصي',
+            'تصفح الآن' => 'تصفحي الآن',
+            'انضم إلينا' => 'انضمي إلينا',
+            'سجل دخولك الآن' => 'سجلي دخولك الآن',
+            'تعرف علينا الآن' => 'تعرفي علينا الآن',
+            'اتصل الآن' => 'اتصلي الآن',
+            'تحقق من حسابك' => 'تحققي من حسابك',
+            'تحقق الآن' => 'تحققي الآن',
+            'لم تستلم الرمز؟' => 'لم تستلمي الرمز؟',
+            'ليس لديك حساب؟' => 'ليس لديكِ حساب؟',
+            'لديك حساب بالفعل؟' => 'لديكِ حساب بالفعل؟',
+            'حصولك على هذا الخصم قبل انتهائه، اضغط على الزر أدناه واطلبه الآن!' => 'حصولكِ على هذا الخصم قبل انتهائه، اضغطي على الزر أدناه واطلبيه الآن!',
+            'ثقتكم هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل.' => 'ثقتكِ هي أساس نجاحنا، ونسعى دائمًا لتقديم الأفضل لكِ.',
+            'مرحباً بك،' => 'مرحباً بكِ،',
+            'بحسابك' => 'بحسابكِ',
+            'عميل سعيد' => 'عميلة سعيدة',
+            'عميله' => 'عميلة',
 
             // English/legacy variants
             'Abdolwahab' => STORE_NAME_EN,
             'Abodlwahab' => STORE_NAME_EN,
             'Bdolwahab Store' => STORE_SITE_NAME_EN,
             'Abdolwahab Logo' => STORE_NAME_EN . ' Logo',
+            'PARFUMS & ACCESSORIES' => 'WOMEN CLOTHING',
+            'Parfums & Accessories' => 'Women Clothing',
+            'Accessories' => 'Women Clothing',
+            'accessories' => 'women clothing',
+            'mens accessories' => 'womens accessories',
+            'Mens Accessories' => 'Womens Accessories',
+            'Men Accessories' => 'Women Accessories',
+            "Men's Accessories" => "Women's Accessories",
         ];
     }
 }
@@ -438,13 +436,17 @@ if (!function_exists('store_brand_replace')) {
     {
         $text = strtr($text, store_brand_replacements());
 
+        if (function_exists('store_brand_feminine_regex_replace')) {
+            $text = store_brand_feminine_regex_replace($text);
+        }
+
         // Normalize accidental duplicated suffixes from legacy replacements.
         $text = strtr($text, [
-            'استكشفيي' => 'استكشف',
-            'اكتشفي' => 'اكتشف',
-            'كزائرة' => 'كزائر',
-            'عميلة' => 'عميل',
-            'بحسابكِ' => 'بحسابك',
+            'استكشفيي' => 'استكشفي',
+            'اكتشفيي' => 'اكتشفي',
+            'كزائرةة' => 'كزائرة',
+            'عميلةة' => 'عميلة',
+            'بحسابكِِ' => 'بحسابكِ',
         ]);
 
         return $text;
@@ -452,14 +454,32 @@ if (!function_exists('store_brand_replace')) {
 }
 
 if (!function_exists('store_brand_feminine_regex_replace')) {
-    /**
-     * Legacy compatibility hook.
-     * Kept intentionally to avoid breaking older calls.
-     */
     function store_brand_feminine_regex_replace(string $text): string
     {
-        // Legacy helper kept for backward compatibility; no feminine rewriting now.
-        return $text;
+        $patterns = [
+            '/(?<!\p{L})تسوق(?!ي)(?!\p{L})/u' => 'تسوقي',
+            '/(?<!\p{L})اكتشف(?!ي)(?!\p{L})/u' => 'اكتشفي',
+            '/(?<!\p{L})استكشف(?!ي)(?!\p{L})/u' => 'استكشفي',
+            '/(?<!\p{L})اشترك(?!ي)(?!\p{L})/u' => 'اشتركي',
+            '/(?<!\p{L})احصل(?!ي)(?!\p{L})/u' => 'احصلي',
+            '/(?<!\p{L})أدخل(?!ي)(?!\p{L})/u' => 'أدخلي',
+            '/(?<!\p{L})ادخل(?!ي)(?!\p{L})/u' => 'ادخلي',
+            '/(?<!\p{L})اتصل(?!ي)(?!\p{L})/u' => 'اتصلي',
+            '/(?<!\p{L})اضغط(?!ي)(?!\p{L})/u' => 'اضغطي',
+            '/(?<!\p{L})اطلبه(?!ي)(?!\p{L})/u' => 'اطلبيه',
+            '/(?<!\p{L})تحقق(?!ي)(?!\p{L})/u' => 'تحققي',
+            '/(?<!\p{L})سجل(?!ي)(?!\p{L})/u' => 'سجلي',
+            '/(?<!\p{L})كزائر(?!ة)(?!\p{L})/u' => 'كزائرة',
+            '/(?<!\p{L})عميل(?!ة)(?!\p{L})/u' => 'عميلة',
+            '/(?<!\p{L})عصري(?!ة)(?!\p{L})/u' => 'عصرية',
+            '/(?<!\p{L})أنيق(?!ة)(?!\p{L})/u' => 'أنيقة',
+            '/(?<!\p{L})انيق(?!ة)(?!\p{L})/u' => 'انيقة',
+            '/(?<!\p{L})مميز(?!ة)(?!\p{L})/u' => 'مميزة',
+            '/(?<!\p{L})متميز(?!ة)(?!\p{L})/u' => 'متميزة',
+        ];
+
+        $result = preg_replace(array_keys($patterns), array_values($patterns), $text);
+        return $result ?? $text;
     }
 }
 

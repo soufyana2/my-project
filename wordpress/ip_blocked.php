@@ -10,7 +10,7 @@ store_brand_enable_auto_replace();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>يرجى الانتظار | اسم متجر ملابس الأطفال</title>
+  <title>يرجى الانتظار | اسم المتجر للملابس النسائية</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -258,7 +258,7 @@ store_brand_enable_auto_replace();
             linkElement.classList.add('state-active');
             
             // 3. Update Text
-            linkText.textContent = "الدخول كزائر الآن";
+            linkText.textContent = "الدخول كزائرة الآن";
             
             // 4. Update Icon (Arrow/Door)
             iconSvg.classList.remove('animate-pulse'); // Stop pulsing

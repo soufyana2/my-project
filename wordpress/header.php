@@ -80,7 +80,7 @@ if ($isLoggedIn) {
 // --- أضف هذا بجانب منطق المفضلة في أعلى الملف ---
 $cartCount = 0;
 if ($isLoggedIn) {
-    // حساب عدد المنتجات في السلة للمسجلن
+    // حساب عدد المنتجات في السلة للمسجلين
     $stmtCart = $pdo->prepare("SELECT SUM(quantity) FROM user_cart WHERE user_id = ?");
     $stmtCart->execute([$_SESSION['user_id']]);
     $cartCount = (int)$stmtCart->fetchColumn();
@@ -1340,7 +1340,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             </a>
 
             <a href="filter.php?categurie=اكسسوارات نسائية" class="nav-link <?php echo ($activeCategory == 'womens_accessories') ? 'active' : ''; ?>">
-                <span>اكسسوارات أطفال</span>
+                <span>اكسسوارات نسائية</span>
             </a>
 
         </div>
@@ -1411,7 +1411,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <a href="filter.php?categurie=ملابس صيفية" class="mobile-nav-link">ملابس صيفية</a>
             <a href="filter.php?categurie=سراويل" class="mobile-nav-link">سراويل</a>
             <a href="filter.php?categurie=أحدية" class="mobile-nav-link">أحدية</a>
-            <a href="filter.php?categurie=اكسسوارات نسائية" class="mobile-nav-link">اكسسوارات أطفال</a>
+            <a href="filter.php?categurie=اكسسوارات نسائية" class="mobile-nav-link">اكسسوارات نسائية</a>
         </nav>
     </div>
 <!-- ===== WISHLIST SIDEBAR ===== -->
@@ -1446,7 +1446,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
             <div class="mb-6">
                 <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" alt="Empty" class="w-24 h-24 mx-auto opacity-90 mb-4 empty-menu-icon">        
                 <h3 class="font-playfair font-bold text-xl text-text-primary mb-2">قائمة المفضلة فارغة</h3>
-                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضف منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
+                <p class="text-text-secondary text-sm leading-relaxed mb-6 font-sans">أضيفي منتجاتك المفضلة الآن لتخزينها لوقت لاحق</p>
             </div>
             <div class="space-y-3 w-full max-w-xs font-sans">
                 <a href="register.php" class="w-full btn-professional text-white py-3 font-bold text-sm uppercase tracking-wide flex items-center justify-center gap-2 group">
@@ -1488,7 +1488,7 @@ class="absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl py-0 z-50 opacity
                     <?php endforeach; ?>
                 </div>
             <?php else: ?>
-                <!-- حالة القائمة فارغة للمسجلن -->
+                <!-- حالة القائمة فارغة للمسجلين -->
                 <div class="text-center py-20">
                     <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252544/empty_wishlist_ciqog9.png" class="w-20 mx-auto opacity-50 mb-4 empty-menu-icon">
                     <h3 class="text-gray-500 font-bold">مفضلتك فارغة حالياً</h3>

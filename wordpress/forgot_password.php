@@ -115,13 +115,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <!-- Header -->
                             <div style='background-color: __STORE_EMAIL_HEADER_BG__; padding: 30px; text-align: center;'>
                                 <h1 style='color: __STORE_EMAIL_HEADER_TEXT__; margin: 0; font-family: \"Playfair Display\", serif; letter-spacing: 1px; font-size: 24px;'>Abdolwahab</h1>
-                                <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس أطفال</p>
+                                <p style='color: __STORE_EMAIL_HEADER_SUBTEXT__; margin: 5px 0 0; font-size: 10px; text-transform: uppercase; letter-spacing: 2px;'>ملابس نسائية</p>
                             </div>
 
                             <!-- Body -->
                             <div style='padding: 40px 30px; color: __STORE_EMAIL_TITLE__;'>
-                                <h2 style='font-size: 20px; color: __STORE_EMAIL_TITLE__; margin-bottom: 20px;'>مرحباً بك،</h2>
-                                <p style='font-size: 15px; line-height: 1.8; color: __STORE_EMAIL_TEXT__;'>لقد تلقينا طلباً لإعادة تعيين كلمة المرور الخاصة بحسابك في متجر اسم المتجر. لإكمال العملية، يرجى الضغط على الزر أدناه:</p>
+                                <h2 style='font-size: 20px; color: __STORE_EMAIL_TITLE__; margin-bottom: 20px;'>مرحباً بكِ،</h2>
+                                <p style='font-size: 15px; line-height: 1.8; color: __STORE_EMAIL_TEXT__;'>لقد تلقينا طلباً لإعادة تعيين كلمة المرور الخاصة بحسابكِ في متجر اسم المتجر. لإكمال العملية، يرجى الضغط على الزر أدناه:</p>
                                 
                                 <div style='text-align: center; margin: 35px 0;'>
                                     <a href='$reset_link' style='background-color: __STORE_EMAIL_BUTTON_BG__; color: __STORE_EMAIL_BUTTON_TEXT__; padding: 14px 30px; text-decoration: none; border-radius: 50px; font-weight: bold; font-size: 16px; display: inline-block; border: 1px solid __STORE_EMAIL_BUTTON_BORDER__;'>إعادة تعيين كلمة المرور</a>
@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                             <!-- Footer -->
                             <div style='background-color: __STORE_EMAIL_BG__; padding: 20px; text-align: center; border-top: 1px solid __STORE_EMAIL_BORDER__;'>
-                                <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; $year اسم متجر ملابس الأطفال. جميع الحقوق محفوظة.</p>
+                                <p style='font-size: 12px; color: __STORE_EMAIL_MUTED__; margin: 0 0 10px;'>&copy; $year اسم المتجر للملابس النسائية. جميع الحقوق محفوظة.</p>
                                 <div style='margin-top: 15px; font-size: 11px; color: __STORE_EMAIL_MUTED__;'>
                 <a href='https://www.primestore.ma' style='color: __STORE_EMAIL_LINK__; text-decoration: none; font-weight: bold;'>Primestore</a>
                                 </div>
@@ -178,7 +178,7 @@ ob_end_flush();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="public/images/favicon.svg">
-  <title>استعادة كلمة المرور - اسم متجر ملابس الأطفال</title>
+  <title>استعادة كلمة المرور - اسم المتجر للملابس النسائية</title>
     
     <link rel="preconnect" href="https://cdn.tailwindcss.com">
     <link rel="preconnect" href="https://challenges.cloudflare.com">
@@ -307,10 +307,10 @@ ob_end_flush();
     <!-- Header -->
     <header class="page-header">
         <div class="logo-container">
-            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم متجر ملابس الأطفال" class="logo-img">
+            <img src="https://res.cloudinary.com/dmakzfsc4/image/upload/f_webp/v1768252470/logo_dw0woa.png" alt="شعار اسم المتجر للملابس النسائية" class="logo-img">
             <div class="logo-text-group font-logo">
                 <span class="logo-main">Abdolwahab</span>
-                <span class="logo-sub">ملابس أطفال</span>
+                <span class="logo-sub">ملابس نسائية</span>
             </div>
         </div>
     </header>
